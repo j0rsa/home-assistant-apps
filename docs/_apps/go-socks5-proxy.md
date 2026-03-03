@@ -1,7 +1,7 @@
 ---
 name: go-socks5-proxy
 title: Go SOCKS5 Proxy
-description: Simple, lightweight SOCKS5 proxy server
+description: "Lightweight SOCKS5 proxy server for Home Assistant written in Go. Supports authentication, IP allowlisting, and destination filtering via regex."
 category: Networking & Proxy
 version: 1.0.0
 architectures:

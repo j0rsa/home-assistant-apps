@@ -6,6 +6,14 @@ lang: en
 author: j0rsa
 email: red.avtovo@gmail.com
 
+# Social / Open Graph enrichment for jekyll-seo-tag
+twitter:
+  card: summary
+social:
+  name: J0rsa
+  links:
+    - https://github.com/j0rsa
+logo: /assets/images/logo.png
 
 # Theme configuration
 theme: jekyll-theme-architect

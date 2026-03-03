@@ -1,7 +1,7 @@
 ---
 name: sniproxy
 title: SNI Proxy - Traffic Router
-description: SNI-based proxy for routing HTTP/HTTPS traffic
+description: "Transparent SNI proxy for Home Assistant that routes HTTP and HTTPS traffic by hostname without decrypting SSL/TLS. Lightweight with SSL passthrough."
 category: Networking & Proxy
 version: latest
 architectures:

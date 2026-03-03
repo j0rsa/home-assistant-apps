@@ -1,7 +1,7 @@
 ---
 name: netmaker
 title: Netmaker Client - VPN Client
-description: WireGuard VPN client with SOCKS proxy support
+description: "WireGuard VPN client for Home Assistant with optional SOCKS proxy routing. Connect to Netmaker mesh networks with auto-restart and debug support."
 category: Networking & Proxy
 version: latest
 architectures:

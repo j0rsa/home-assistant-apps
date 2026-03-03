@@ -1,3 +1,18 @@
+<!-- Organization JSON-LD (site-wide) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "J0rsa",
+  "url": "{{ site.url }}",
+  "logo": "{{ site.url }}/assets/images/logo.png",
+  "sameAs": [
+    "https://github.com/j0rsa"
+  ],
+  "description": "{{ site.description }}"
+}
+</script>
+
 <!-- Breadcrumb JSON-LD Structured Data -->
 {% if page.url != "/" %}
 <script type="application/ld+json">
@@ -29,6 +44,54 @@
       "name": "{{ page.title }}",
       "item": "{{ site.url }}{{ page.url }}"
     }{% endif %}
+  ]
+}
+</script>
+{% endif %}
+
+<!-- SoftwareApplication JSON-LD (app pages only) -->
+{% if page.collection == "apps" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "{{ page.title }}",
+  "description": "{{ page.description }}",
+  "url": "{{ site.url }}{{ page.url }}",
+  "applicationCategory": "{{ page.category }}",
+  "operatingSystem": "Home Assistant OS",
+  "softwareVersion": "{{ page.version }}",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  },
+  "author": {
+    "@type": "Organization",
+    "name": "J0rsa",
+    "url": "https://github.com/j0rsa"
+  },
+  "installUrl": "https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fj0rsa%2Fhome-assistant-apps"
+}
+</script>
+{% endif %}
+
+<!-- FAQPage JSON-LD (pages with faq front matter) -->
+{% if page.faq %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {% for item in page.faq %}{
+      "@type": "Question",
+      "name": {{ item.q | jsonify }},
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": {{ item.a | jsonify }}
+      }
+    }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
   ]
 }
 </script>

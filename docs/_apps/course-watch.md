@@ -1,7 +1,7 @@
 ---
 name: course-watch
 title: Course Watch - Video Course Player
-description: Self-hosted video course player with WebDAV support for Home Assistant
+description: "Self-hosted video course player for Home Assistant with WebDAV support. Browse courses, stream videos with subtitles, and control playback via keyboard."
 category: Media
 version: latest
 architectures:

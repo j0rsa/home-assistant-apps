@@ -1,7 +1,7 @@
 ---
 name: hev-socks5-tproxy
 title: HevSocks5 TProxy
-description: Transparent SOCKS5 proxy client for routing traffic through a remote SOCKS5 server
+description: "Transparent SOCKS5 proxy client for Home Assistant. Intercepts TCP/UDP traffic at the network level and forwards it through a remote SOCKS5 server."
 category: Networking & Proxy
 version: 2.0.0
 architectures:

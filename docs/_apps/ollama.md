@@ -1,7 +1,7 @@
 ---
 name: ollama
 title: Ollama - Local LLM Runner
-description: Run Large Language Models locally on your Home Assistant
+description: "Run Large Language Models like Llama and Mistral locally on Home Assistant with full privacy. Free, offline AI with REST API and GPU support."
 category: AI & Machine Learning
 version: latest
 architectures: 
@@ -9,6 +9,13 @@ architectures:
   - aarch64
 ports:
   - 11434
+faq:
+  - q: "Why won't the Ollama app start?"
+    a: "Check the app logs for error messages, ensure sufficient RAM is available (8 GB minimum), and verify port 11434 is not in use by another service."
+  - q: "Why does an Ollama model download fail?"
+    a: "Verify your internet connectivity, ensure you have sufficient storage space (7B models need ~4 GB), and try downloading a smaller model first."
+  - q: "How do I fix slow Ollama performance on Home Assistant?"
+    a: "Consider using smaller models (7B instead of 13B), enable GPU acceleration if your hardware supports it, and close other resource-intensive apps."
 ---
 
 # Ollama App

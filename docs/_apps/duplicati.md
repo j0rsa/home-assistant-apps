@@ -1,7 +1,7 @@
 ---
 name: duplicati
 title: Duplicati - Backup Solution
-description: Free backup software with cloud storage support
+description: "Free encrypted backup software for Home Assistant. Supports Google Drive, S3, Dropbox and more with scheduling, versioning, and AES-256 encryption."
 category: Backup & Storage
 version: latest
 architectures:
@@ -9,6 +9,13 @@ architectures:
   - aarch64
 ports:
   - 8200
+faq:
+  - q: "Why does my Duplicati backup fail?"
+    a: "Check your storage provider credentials, verify internet connectivity, ensure you have enough storage space, and review the Duplicati logs for specific error messages."
+  - q: "Why are Duplicati backups slow?"
+    a: "The first backup is always the slowest because it's a full backup. Subsequent backups are incremental and much faster. Exclude large, rarely-changed files to improve speed."
+  - q: "How do I access the Duplicati web interface?"
+    a: "After starting the app, click 'Open Web UI' in the app panel for ingress access, or visit http://homeassistant.local:8200 directly."
 ---
 
 # Duplicati App

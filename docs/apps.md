@@ -77,7 +77,7 @@ Transparent SOCKS5 proxy client that intercepts TCP/UDP traffic and forwards it 
 
 **Version:** 1.0.0 | **Architectures:** `amd64`, `aarch64`
 
-### [SNI Socket Proxy](https://github.com/j0rsa/home-assistant-apps/tree/main/sni-socket)
+### [SNI Socket Proxy](/apps/sni-socket/)
 SNI proxy with SOCKS5 proxy support. Routes HTTP and HTTPS traffic through a SOCKS5 proxy based on hostname matching.
 
 **Version:** 1.0.0 | **Architectures:** `amd64`, `aarch64`

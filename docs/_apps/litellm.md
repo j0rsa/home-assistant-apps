@@ -1,7 +1,7 @@
 ---
 name: litellm
 title: LiteLLM - Unified LLM API Gateway
-description: OpenAI-compatible proxy supporting 100+ LLM providers with cost tracking and key management
+description: "OpenAI-compatible API gateway for Home Assistant supporting 100+ LLM providers. Features cost tracking, virtual API keys, and a web management UI."
 category: AI & Machine Learning
 version: latest
 architectures:
@@ -9,6 +9,11 @@ architectures:
   - aarch64
 ports:
   - 4000
+faq:
+  - q: "Why won't the LiteLLM app start?"
+    a: "Verify the database_url is correct and the PostgreSQL database is reachable. Also check that master_key and salt_key are non-empty strings in the configuration."
+  - q: "Why do LiteLLM model requests return errors?"
+    a: "Confirm the model name in your request matches an entry in litellm_config.yaml, and check that the provider API keys are valid and the provider is reachable."
 ---
 
 # LiteLLM Proxy Server

@@ -1,7 +1,7 @@
 ---
 name: xray-configurator
 title: Xray Configurator - Config Generator
-description: Web interface for converting proxy links to Xray configuration files
+description: "Web-based tool to convert VLESS and Shadowsocks proxy links into Xray configuration files. JSON and Base64 output with local browser-side processing."
 category: Networking & Proxy
 version: latest
 architectures:
