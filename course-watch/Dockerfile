@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-python:3.14-alpine3.21
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:3.21
 FROM ${BUILD_FROM}
 
 ARG BUILD_VERSION
@@ -6,9 +6,11 @@ ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
 
-RUN mkdir -p /app/www
+RUN apk add --no-cache nginx \
+    && mkdir -p /app/www /etc/nginx/templates /etc/nginx/conf.d /run/nginx
 
-COPY server.py /app/server.py
+COPY nginx.conf.template       /etc/nginx/templates/nginx.conf.template
+COPY media-proxy.conf.template /etc/nginx/templates/media-proxy.conf.template
 COPY www/ /app/www/
 COPY run.sh /
 RUN chmod a+x /run.sh

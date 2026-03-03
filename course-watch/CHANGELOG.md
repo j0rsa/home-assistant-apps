@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.0.0
+
+- Replace Python HTTP server with nginx
+- Add MP4 pseudo-streaming via ngx_http_mp4_module (moov atom / start key-frame)
+- Port WebDAV proxy logic to nginx location blocks with Range header forwarding
+- Switch base image from Python Alpine to plain Alpine (smaller image)
+- Generate nginx config at startup with envsubst for auth and media_url
+- Conditionally include relative-path proxy block only when media_url is set
+
 ## 1.1.0
 
 - Add loading spinner overlay when switching to a new video
