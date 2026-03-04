@@ -6,7 +6,7 @@ ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
 
-RUN apk add --no-cache nginx \
+RUN apk add --no-cache nginx gettext \
     && mkdir -p /app/www /etc/nginx/templates /etc/nginx/conf.d /run/nginx
 
 COPY nginx.conf.template       /etc/nginx/templates/nginx.conf.template

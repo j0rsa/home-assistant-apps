@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.1
+
+- Fix missing envsubst command by installing gettext package
+
 ## 2.0.0
 
 - Replace Python HTTP server with nginx
