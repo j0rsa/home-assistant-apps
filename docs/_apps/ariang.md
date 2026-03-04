@@ -1,7 +1,7 @@
 ---
 name: ariang
 title: AriaNg - Download Manager
-description: Modern web frontend for aria2 download utility
+description: "Modern web frontend for aria2 on Home Assistant. Manage HTTP, FTP, BitTorrent, and Metalink downloads with a responsive interface and real-time stats."
 category: Download Management
 version: latest
 architectures:

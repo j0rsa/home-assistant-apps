@@ -1,7 +1,7 @@
 ---
 name: open-webui
 title: Open WebUI - LLM Interface
-description: Feature-rich web interface for Ollama and other LLM backends
+description: "ChatGPT-like web interface for Ollama on Home Assistant. Chat with local LLMs privately with conversation history, markdown, and model switching."
 category: AI & Machine Learning
 version: latest
 architectures:
@@ -9,6 +9,11 @@ architectures:
   - aarch64
 ports:
   - 8080
+faq:
+  - q: "Why can't Open WebUI connect to Ollama?"
+    a: "Verify the Ollama app is running, check the Ollama API URL in Open WebUI settings (default: http://localhost:11434), and ensure both apps can communicate on the same network."
+  - q: "Why are Open WebUI responses slow?"
+    a: "Larger models require more resources. Try smaller models like 7B instead of 13B, and check system RAM usage. GPU acceleration in Ollama can significantly improve speed."
 ---
 
 # Open WebUI App

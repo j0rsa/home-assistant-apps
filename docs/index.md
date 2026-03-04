@@ -137,6 +137,24 @@ WireGuard VPN client with advanced networking features.
 
 **Architectures:** `aarch64` `amd64` `armv7`
 
+#### [SNI Socket Proxy](/apps/sni-socket/)
+SNI proxy with SOCKS5 support that routes HTTP and HTTPS traffic through a SOCKS5 proxy based on hostname matching.
+- SOCKS5 upstream routing
+- SNI and Host header matching
+- SSL passthrough without decryption
+- Works with [Go SOCKS5 Proxy](/apps/go-socks5-proxy/) and [Xray](/apps/xray/)
+
+**Architectures:** `aarch64` `amd64`
+
+#### [Go SOCKS5 Proxy](/apps/go-socks5-proxy/)
+Simple, lightweight SOCKS5 proxy server written in Go with authentication and access control.
+- Username/password authentication
+- IP allowlisting
+- Destination filtering via regex
+- Minimal resource usage
+
+**Architectures:** `aarch64` `amd64`
+
 #### [HevSocks5 TProxy](/apps/hev-socks5-tproxy/)
 Transparent SOCKS5 proxy client that intercepts TCP/UDP traffic and forwards it through a remote SOCKS5 server.
 - Transparent TCP/UDP proxying

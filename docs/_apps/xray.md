@@ -1,7 +1,7 @@
 ---
 name: xray
 title: Xray - Proxy Client
-description: High-performance proxy client supporting VLESS/VMess/Trojan protocols
+description: "High-performance Xray proxy client for Home Assistant with VLESS, VMess, and Trojan support. Creates local HTTP and SOCKS5 proxies for secure routing."
 category: Networking & Proxy
 version: latest
 architectures:
@@ -10,6 +10,11 @@ architectures:
 ports:
   - 8080
   - 1080
+faq:
+  - q: "How do I fix a 504 Gateway Timeout in Xray?"
+    a: "A 504 error means the server is unreachable or misconfigured. Double-check the server address, port, and UUID in your Xray configuration."
+  - q: "How do I fix DNS issues with Xray?"
+    a: "If Xray cannot resolve the server hostname, try using the server's IP address directly instead of a domain name in your configuration."
 ---
 
 # Xray App

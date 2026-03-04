@@ -1,7 +1,7 @@
 ---
 name: qdrant
 title: Qdrant - Vector Database
-description: High-performance vector database for AI applications
+description: "High-performance vector database for Home Assistant AI apps. REST and gRPC APIs for semantic search, RAG, and embeddings with a built-in web dashboard."
 category: AI & Machine Learning
 version: 1.0.14
 architectures: 
