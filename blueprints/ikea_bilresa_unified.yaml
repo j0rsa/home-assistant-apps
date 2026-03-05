@@ -1074,11 +1074,58 @@ trigger:
 condition: []
 
 action:
+  # Step 1: Resolve event entity IDs (needed for spurious-event detection in step 2)
+  - variables:
+      l1_left_entity: !input layer1_left_event
+      l1_center_entity: !input layer1_center_event
+      l1_right_entity: !input layer1_right_event
+      l2_left_entity: !input layer2_left_event
+      l2_center_entity: !input layer2_center_event
+      l2_right_entity: !input layer2_right_event
+      l3_left_entity: !input layer3_left_event
+      l3_center_entity: !input layer3_center_event
+      l3_right_entity: !input layer3_right_event
+
   - variables:
       event_type: "{{ state_attr(trigger.entity_id, 'event_type') }}"
       trigger_id: "{{ trigger.id }}"
       # Press count for scroll wheel support (number of ticks in one gesture)
       press_count: "{{ trigger.to_state.attributes.totalNumberOfPressesCounted | int(1) }}"
+      # Detect ghost "all buttons at once" bursts the remote occasionally emits.
+      # If all 3 sibling buttons in the same layer changed within 1 second of the
+      # triggering button, treat it as spurious and skip all actions.
+      is_spurious: >-
+        {% set trig_ts = as_timestamp(trigger.to_state.last_changed) %}
+        {% set tid = trigger.id %}
+        {% if tid == 'l1_left' %}
+          {% set s1 = as_timestamp(states[l1_center_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l1_right_entity].last_changed) %}
+        {% elif tid == 'l1_center' %}
+          {% set s1 = as_timestamp(states[l1_left_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l1_right_entity].last_changed) %}
+        {% elif tid == 'l1_right' %}
+          {% set s1 = as_timestamp(states[l1_left_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l1_center_entity].last_changed) %}
+        {% elif tid == 'l2_left' %}
+          {% set s1 = as_timestamp(states[l2_center_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l2_right_entity].last_changed) %}
+        {% elif tid == 'l2_center' %}
+          {% set s1 = as_timestamp(states[l2_left_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l2_right_entity].last_changed) %}
+        {% elif tid == 'l2_right' %}
+          {% set s1 = as_timestamp(states[l2_left_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l2_center_entity].last_changed) %}
+        {% elif tid == 'l3_left' %}
+          {% set s1 = as_timestamp(states[l3_center_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l3_right_entity].last_changed) %}
+        {% elif tid == 'l3_center' %}
+          {% set s1 = as_timestamp(states[l3_left_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l3_right_entity].last_changed) %}
+        {% else %}
+          {% set s1 = as_timestamp(states[l3_left_entity].last_changed) %}
+          {% set s2 = as_timestamp(states[l3_center_entity].last_changed) %}
+        {% endif %}
+        {{ ((trig_ts - s1) | abs < 1) and ((trig_ts - s2) | abs < 1) }}
 
       # Layer 1
       l1_light: !input layer1_light
@@ -1166,6 +1213,10 @@ action:
       l3_center_hold_cover_action: !input layer3_center_hold_cover_action
       l3_right_dir: !input layer3_right_direction
       l3_right_step: !input layer3_right_step
+
+  # Skip all actions when the remote fired a ghost burst (all buttons at once)
+  - condition: template
+    value_template: "{{ not is_spurious }}"
 
   # ╔══════════════════════════════════════════════════════════════════════════╗
   # ║                         LAYER 1 ACTIONS                                  ║
