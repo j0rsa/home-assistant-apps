@@ -48,7 +48,7 @@
 
     .app {
       display: grid;
-      grid-template-columns: var(--sidebar-width) 1fr;
+      grid-template-columns: var(--sidebar-width) 6px 1fr;
       height: 100vh;
       overflow: hidden;
     }
@@ -59,9 +59,32 @@
       display: flex;
       flex-direction: column;
       background: var(--sidebar-bg);
-      border-right: 1px solid var(--border);
       height: 100vh;
       overflow: hidden;
+    }
+
+    .resize-handle {
+      width: 6px;
+      cursor: col-resize;
+      background: transparent;
+      position: relative;
+      z-index: 10;
+    }
+    .resize-handle::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 1px;
+      background: var(--border);
+      transform: translateX(-50%);
+      transition: background 0.15s, width 0.15s;
+    }
+    .resize-handle:hover::after,
+    .resize-handle.dragging::after {
+      background: var(--accent);
+      width: 2px;
     }
 
     .sidebar-top {
@@ -389,6 +412,12 @@
     }
     .meta-crumb .sep { color: var(--text-muted); margin: 0 5px; }
 
+    .meta-title-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
     .meta-title {
       font-family: 'Cormorant Garamond', serif;
       font-size: 24px;
@@ -396,6 +425,19 @@
       color: var(--text);
       line-height: 1.2;
     }
+
+    .aim-btn {
+      flex-shrink: 0;
+      background: none;
+      border: none;
+      padding: 3px;
+      cursor: pointer;
+      color: var(--text-muted);
+      transition: color 0.15s;
+      line-height: 0;
+    }
+    .aim-btn:hover { color: var(--accent); }
+    .aim-btn svg { width: 16px; height: 16px; }
 
     /* ── Prev / Next ─────────────────────────────────────── */
 
@@ -506,6 +548,8 @@
     <nav class="sidebar-nav" id="sidebar-nav"></nav>
   </aside>
 
+  <div class="resize-handle" id="resize-handle"></div>
+
   <!-- ── Player ─────────────────────────────────────────── -->
   <main class="player-area">
     <div class="player-container">
@@ -516,7 +560,18 @@
 
     <div class="video-meta">
       <p class="meta-crumb" id="meta-crumb">&nbsp;</p>
-      <h1 class="meta-title" id="meta-title">Loading…</h1>
+      <div class="meta-title-row">
+        <h1 class="meta-title" id="meta-title">Loading…</h1>
+        <button class="aim-btn" id="btn-aim" title="Scroll to episode in sidebar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="8"/>
+            <line x1="12" y1="2" x2="12" y2="6"/>
+            <line x1="12" y1="18" x2="12" y2="22"/>
+            <line x1="2" y1="12" x2="6" y2="12"/>
+            <line x1="18" y1="12" x2="22" y2="12"/>
+          </svg>
+        </button>
+      </div>
     </div>
 
     <div class="nav-controls">
@@ -687,6 +742,30 @@
     nav.innerHTML = html;
   }
 
+  // ── Sidebar focus ────────────────────────────────────────────────────────
+
+  function focusActiveSidebarItem() {
+    if (currentFlat < 0) return;
+
+    // Collapse all other courses, keep active course's sections expanded
+    if (!document.getElementById('search').value.trim()) {
+      const activeCi = flatVideos[currentFlat].ci;
+      document.querySelectorAll('.section').forEach(sec => {
+        const m = sec.id.match(/^sec-(\d+)-/);
+        if (m && Number(m[1]) !== activeCi) {
+          sec.classList.add('collapsed');
+        } else {
+          sec.classList.remove('collapsed');
+        }
+      });
+    }
+
+    requestAnimationFrame(() => {
+      document.querySelector('[data-flat].active, .search-result.active')
+        ?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+    });
+  }
+
   // ── Player ───────────────────────────────────────────────────────────────
 
   const player = new Plyr('#player', {
@@ -725,11 +804,7 @@
     // Re-render sidebar with active state
     renderSidebar(document.getElementById('search').value);
 
-    // Scroll active item into view
-    requestAnimationFrame(() => {
-      document.querySelector('[data-flat].active, .search-result.active')
-        ?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
-    });
+    focusActiveSidebarItem();
 
     // Subtitles
     let vttUrl = null;
@@ -790,6 +865,51 @@
     }
   });
 
+  // ── Resize handle ────────────────────────────────────────────────────────
+
+  const appEl       = document.querySelector('.app');
+  const resizeHandle = document.getElementById('resize-handle');
+  const HANDLE_W    = 6;
+  const SIDEBAR_MIN = 180;
+  const SIDEBAR_MAX = 600;
+
+  function getSidebarWidth() {
+    return parseInt(getComputedStyle(appEl).gridTemplateColumns);
+  }
+  function setSidebarWidth(w) {
+    appEl.style.gridTemplateColumns = `${w}px ${HANDLE_W}px 1fr`;
+  }
+
+  const savedSidebarWidth = localStorage.getItem('sidebar-width');
+  if (savedSidebarWidth) setSidebarWidth(Number(savedSidebarWidth));
+
+  let isResizing = false, resizeStartX, resizeStartWidth;
+
+  resizeHandle.addEventListener('mousedown', e => {
+    isResizing = true;
+    resizeStartX = e.clientX;
+    resizeStartWidth = getSidebarWidth();
+    resizeHandle.classList.add('dragging');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!isResizing) return;
+    const w = Math.min(SIDEBAR_MAX, Math.max(SIDEBAR_MIN, resizeStartWidth + e.clientX - resizeStartX));
+    setSidebarWidth(w);
+  });
+
+  document.addEventListener('mouseup', () => {
+    if (!isResizing) return;
+    isResizing = false;
+    resizeHandle.classList.remove('dragging');
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+    localStorage.setItem('sidebar-width', getSidebarWidth());
+  });
+
   // ── Events ───────────────────────────────────────────────────────────────
 
   document.getElementById('sidebar-nav').addEventListener('click', e => {
@@ -802,6 +922,7 @@
     }
   });
 
+  document.getElementById('btn-aim').addEventListener('click', focusActiveSidebarItem);
   document.getElementById('btn-prev').addEventListener('click', () => loadVideo(currentFlat - 1));
   document.getElementById('btn-next').addEventListener('click', () => loadVideo(currentFlat + 1));
 

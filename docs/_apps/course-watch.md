@@ -23,6 +23,8 @@ authenticated proxy.
 - Automatic SRT/SUB → WebVTT subtitle conversion in the browser
 - Playback speed control via keyboard shortcuts with on-screen toast feedback
 - Previous / Next video navigation with position counter
+- Resizable sidebar with width saved across sessions
+- Auto-scroll and auto-focus to the active episode in the sidebar when opening a video; aim button in the video header triggers the same action
 - Home Assistant ingress support
 
 ## Installation

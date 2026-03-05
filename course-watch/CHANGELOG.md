@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.2.0
+
+- Add resizable sidebar with width persisted in localStorage
+- Add auto-collapse of other courses when a video is opened, keeping active course expanded
+- Add aim button next to episode title to scroll and focus the active episode in the sidebar
+
 ## 2.1.2
 
 - Fix eager video preloading by setting preload="none" on the video element
