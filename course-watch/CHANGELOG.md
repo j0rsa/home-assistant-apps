@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.2
+
+- Fix eager video preloading by setting preload="none" on the video element
+
 ## 2.1.1
 
 - Fix missing envsubst command by installing gettext package
