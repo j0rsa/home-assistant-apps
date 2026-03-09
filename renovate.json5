@@ -6,6 +6,10 @@
   "ignorePaths": [
     "duplicati/**"
   ],
+
+  "allowedPostUpgradeCommands": ["sed -i .*"],
+  "binarySource": "global",
+
   "packageRules": [
     {
       "matchUpdateTypes": ["patch"],
