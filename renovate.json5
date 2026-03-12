@@ -13,7 +13,7 @@
       "automergeType": "branch"
     },
     {
-      "matchFileNames": ["**/Dockerfile"],
+      "matchFileNames": ["**/Dockerfile", "**/build.{yaml,yml}"],
       "bumpVersions": [
         {
           "name": "Updating App version",
