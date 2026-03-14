@@ -1,4 +1,4 @@
-FROM ollama/ollama:0.17.7
+FROM ollama/ollama:0.18.0
 
 COPY run.sh /
 RUN chmod a+x /run.sh
