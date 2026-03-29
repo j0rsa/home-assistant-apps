@@ -1,0 +1,119 @@
+name: Verify addon version follows upstream image version
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+jobs:
+  version-sync-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Determine base ref
+        id: base
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${{ github.event_name }}" == "pull_request" ]]; then
+            echo "base=${{ github.event.pull_request.base.sha }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "base=${{ github.event.before }}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Verify changed addons
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA="${{ steps.base.outputs.base }}"
+          if [[ -z "$BASE_SHA" || "$BASE_SHA" == "0000000000000000000000000000000000000000" ]]; then
+            echo "No usable base SHA; skipping check."
+            exit 0
+          fi
+
+          python3 <<'PY'
+          import pathlib
+          import re
+          import subprocess
+          import sys
+
+          root = pathlib.Path('.').resolve()
+          base_sha = "${{ steps.base.outputs.base }}"
+
+          diff = subprocess.check_output([
+              'git', 'diff', '--name-only', f'{base_sha}...HEAD'
+          ], text=True).splitlines()
+
+          addon_dirs = sorted({p.split('/', 1)[0] for p in diff if '/' in p})
+          failures = []
+          checked = []
+
+          version_patterns = [
+              re.compile(r'^ARG\s+UPSTREAM_IMAGE=.*:v?(?P<version>[0-9][A-Za-z0-9._-]*)', re.MULTILINE),
+              re.compile(r'^FROM\s+[^\s:]+:v?(?P<version>[0-9][A-Za-z0-9._-]*)', re.MULTILINE),
+              re.compile(r'^ARG\s+[A-Z0-9_]*VERSION\s*=\s*"?v?(?P<version>[0-9][A-Za-z0-9._-]*)"?', re.MULTILINE),
+          ]
+          config_pattern = re.compile(r'^version:\s*"?(?P<version>[^"\s]+)"?', re.MULTILINE)
+
+          for addon in addon_dirs:
+              addon_path = root / addon
+              dockerfile = addon_path / 'Dockerfile'
+              config = addon_path / 'config.yaml'
+              if not dockerfile.exists() or not config.exists():
+                  continue
+
+              changed_files = [p for p in diff if p.startswith(f'{addon}/')]
+              if f'{addon}/Dockerfile' not in changed_files:
+                  continue
+
+              before_docker = subprocess.run(
+                  ['git', 'show', f'{base_sha}:{addon}/Dockerfile'],
+                  text=True,
+                  capture_output=True,
+                  check=False,
+              ).stdout
+              after_docker = dockerfile.read_text()
+
+              def extract_version(text):
+                  for pat in version_patterns:
+                      m = pat.search(text)
+                      if m:
+                          return m.group('version')
+                  return None
+
+              before_version = extract_version(before_docker) if before_docker else None
+              after_version = extract_version(after_docker)
+
+              if not after_version or before_version == after_version:
+                  continue
+
+              config_text = config.read_text()
+              m = config_pattern.search(config_text)
+              if not m:
+                  failures.append(f'{addon}: could not parse version from config.yaml')
+                  continue
+
+              addon_version = m.group('version')
+              checked.append((addon, after_version, addon_version))
+              if not addon_version.startswith(after_version):
+                  failures.append(
+                      f'{addon}: Docker/upstream version changed to {after_version}, but config.yaml version is {addon_version} (must start with {after_version})'
+                  )
+
+          if checked:
+              print('Checked addons:')
+              for addon, upstream, addon_version in checked:
+                  print(f' - {addon}: upstream={upstream}, config={addon_version}')
+          else:
+              print('No addon Docker/upstream version changes detected.')
+
+          if failures:
+              print('\nFailures:')
+              for failure in failures:
+                  print(f' - {failure}')
+              sys.exit(1)
+          PY
