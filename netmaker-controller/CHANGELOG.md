@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0.2
+
+- Fix enrollment token address: default SERVER_HOST to NM_DOMAIN so clients connect via domain/tunnel instead of raw public IP
+- Update translations to clarify domain vs server host override
+
 ## 1.5.0.1
 
 - Fix admin user creation: call POST /api/users/adm/createsuperadmin after server starts

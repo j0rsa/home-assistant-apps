@@ -82,10 +82,9 @@ export NETMAKER_BASE_DOMAIN="${NM_DOMAIN}"
 export SERVER_API_CONN_STRING="${NM_DOMAIN}:443"
 export MASTER_KEY
 
-# Server host (auto-detect if blank)
-if [[ -n "${SERVER_HOST}" ]]; then
-    export SERVER_HOST
-fi
+# SERVER_HOST is used in enrollment tokens — must be the domain, not the raw public IP.
+# If not explicitly overridden, default to NM_DOMAIN so clients connect via the tunnel.
+export SERVER_HOST="${SERVER_HOST:-${NM_DOMAIN}}"
 
 # MQTT client configuration (controller connects TO external MQ broker)
 export SERVER_BROKER_ENDPOINT="${MQ_BROKER_ENDPOINT}"

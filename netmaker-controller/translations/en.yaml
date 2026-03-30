@@ -2,14 +2,18 @@ configuration:
   nm_domain:
     name: Domain
     description: >-
-      Base domain for the Netmaker API and dashboard (e.g.,
-      'netmaker.example.com'). Used in client-facing URLs and API connection
-      strings.
+      Base domain for the Netmaker API (e.g., 'netm.example.com'). This is also
+      the default value embedded in enrollment tokens as the address clients use
+      to reach the controller. Must be publicly resolvable and routed to this
+      host (e.g., via Cloudflare Tunnel).
   server_host:
-    name: Server Host
+    name: Server Host Override
     description: >-
-      Public IP address of the Home Assistant host. Leave blank for
-      auto-detection. Override if behind a proxy or NAT.
+      Overrides the address embedded in enrollment tokens. When left blank,
+      defaults to the Domain value above — meaning clients will connect via your
+      domain (recommended for Cloudflare Tunnel setups). Set this only if you
+      need clients to connect to a specific IP or hostname different from the
+      domain.
   master_key:
     name: Master Key
     description: >-
