@@ -1,6 +1,6 @@
 ---
 name: Netmaker Controller
-version: 0.99.0
+version: 0.99.0.1
 slug: netmaker-controller
 description: |
   Netmaker Controller
@@ -33,11 +33,9 @@ options:
   master_key: ""
   admin_user: admin
   admin_password: ""
-  mq_host: mqtt.netmaker.example.com
-  mq_port: 1883
+  mq_broker_endpoint: "ws://mqtt.netmaker.example.com:1883"
   mq_username: netmaker
   mq_password: ""
-  mq_use_tls: false
   dns_mode: false
   verbosity: 1
   telemetry: true
@@ -47,11 +45,9 @@ schema:
   master_key: password?
   admin_user: str?
   admin_password: password?
-  mq_host: str
-  mq_port: "int(1,65535)"
+  mq_broker_endpoint: str
   mq_username: str
   mq_password: password?
-  mq_use_tls: bool?
   dns_mode: bool?
   verbosity: "int(1,3)?"
   telemetry: bool?

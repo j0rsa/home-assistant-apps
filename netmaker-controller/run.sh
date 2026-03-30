@@ -55,11 +55,9 @@ SERVER_HOST="$(bashio::config 'server_host')"
 MASTER_KEY="$(bashio::config 'master_key')"
 ADMIN_USER="$(bashio::config 'admin_user')"
 ADMIN_PASSWORD="$(bashio::config 'admin_password')"
-MQ_HOST="$(bashio::config 'mq_host')"
-MQ_PORT="$(bashio::config 'mq_port')"
+MQ_BROKER_ENDPOINT="$(bashio::config 'mq_broker_endpoint')"
 MQ_USERNAME="$(bashio::config 'mq_username')"
 MQ_PASSWORD="$(bashio::config 'mq_password')"
-MQ_USE_TLS="$(bashio::config 'mq_use_tls')"
 DNS_MODE="$(bashio::config 'dns_mode')"
 VERBOSITY="$(bashio::config 'verbosity')"
 TELEMETRY="$(bashio::config 'telemetry')"
@@ -92,13 +90,9 @@ if [[ -n "${SERVER_HOST}" ]]; then
 fi
 
 # MQTT client configuration (controller connects TO external MQ broker)
-export MQ_HOST
-export MQ_PORT
+export SERVER_BROKER_ENDPOINT="${MQ_BROKER_ENDPOINT}"
 export MQ_USERNAME="${MQ_USERNAME:-netmaker}"
 export MQ_PASSWORD
-if [[ "${MQ_USE_TLS}" == "true" ]]; then
-    export MQ_USE_TLS="true"
-fi
 
 # Database (always SQLite for HA)
 export DATABASE="sqlite"
@@ -130,7 +124,7 @@ export NODE_ID="ha-netmaker-controller"
 export DISABLE_REMOTE_IP_CHECK="off"
 
 bashio::log.info "Domain: ${NM_DOMAIN}"
-bashio::log.info "MQTT Broker (client connecting to): ${MQ_HOST}:${MQ_PORT}"
+bashio::log.info "MQ Broker (client connecting to): ${MQ_BROKER_ENDPOINT}"
 bashio::log.info "Database: SQLite at ${DB_PATH}"
 bashio::log.info "API port: ${API_PORT}, gRPC port: ${GRPC_PORT}"
 bashio::log.info "DNS mode: ${DNS_MODE}"

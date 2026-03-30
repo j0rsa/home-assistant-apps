@@ -24,11 +24,9 @@ WireGuard mesh network controller and orchestrator for Home Assistant. Runs as a
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `mq_host` | Hostname of external MQ broker | `mqtt.netmaker.example.com` |
-| `mq_port` | Port on MQ broker to connect to | `1883` |
+| `mq_broker_endpoint` | MQ broker endpoint URL (`ws://host:1883` or `wss://host:8883`) | `ws://mqtt.netmaker.example.com:1883` |
 | `mq_username` | Username for authenticating to MQ broker | `netmaker` |
 | `mq_password` | Password for authenticating to MQ broker (auto-generated if blank) | auto |
-| `mq_use_tls` | Use TLS when connecting to MQ broker | `false` |
 
 ### Optional Settings
 
@@ -46,11 +44,9 @@ WireGuard mesh network controller and orchestrator for Home Assistant. Runs as a
 
 ```yaml
 nm_domain: "netmaker.example.com"
-mq_host: "mqtt.netmaker.example.com"
-mq_port: 1883
+mq_broker_endpoint: "ws://mqtt.netmaker.example.com:1883"
 mq_username: "netmaker"
 mq_password: "your-mqtt-password"
-mq_use_tls: false
 master_key: "your-master-key"
 verbosity: 1
 ```

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.99.0.1
+
+- Fix MQ broker config: use SERVER_BROKER_ENDPOINT env var instead of MQ_HOST/MQ_PORT
+- Replace mq_host, mq_port, mq_use_tls options with single mq_broker_endpoint URL
+
 ## 0.24.2
 
 - Add Netmaker Controller add-on for Home Assistant
