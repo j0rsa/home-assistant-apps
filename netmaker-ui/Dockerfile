@@ -1,7 +1,7 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:3.23
 
 # Extract UI files and nginx config from upstream image
-FROM gravitl/netmaker-ui:v0.24.2 AS upstream
+FROM gravitl/netmaker-ui:v0.99.0 AS upstream
 
 FROM ${BUILD_FROM}
 
