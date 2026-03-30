@@ -29,11 +29,19 @@ configuration:
       Password for the initial super admin account. If left blank, a random
       password is auto-generated and persisted in /data.
   mq_broker_endpoint:
-    name: MQ Broker Endpoint
+    name: MQ Broker Endpoint (internal)
     description: >-
-      WebSocket URL of the external MQ broker that the controller connects to
-      for peer signaling. Use 'ws://host:port' for plain or 'wss://host:port'
-      for TLS. Example: 'ws://core-mosquitto:1884'.
+      WebSocket URL the controller uses to connect to the MQ broker internally
+      (server→broker). Use 'ws://host:port' for plain or 'wss://host:port' for
+      TLS. Example: 'ws://core-mosquitto:1884'. This address is never shared
+      with clients.
+  mq_public_endpoint:
+    name: MQ Broker Endpoint (public)
+    description: >-
+      WebSocket URL the controller sends to joining clients so they can connect
+      to the MQ broker directly. Must be publicly reachable from the client
+      machines. Example: 'wss://mqtt.example.com:8883'. If left blank, falls
+      back to the internal endpoint above.
   mq_username:
     name: MQ Username
     description: >-

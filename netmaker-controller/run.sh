@@ -56,6 +56,7 @@ MASTER_KEY="$(bashio::config 'master_key')"
 ADMIN_USER="$(bashio::config 'admin_user')"
 ADMIN_PASSWORD="$(bashio::config 'admin_password')"
 MQ_BROKER_ENDPOINT="$(bashio::config 'mq_broker_endpoint')"
+MQ_PUBLIC_ENDPOINT="$(bashio::config 'mq_public_endpoint')"
 MQ_USERNAME="$(bashio::config 'mq_username')"
 MQ_PASSWORD="$(bashio::config 'mq_password')"
 DNS_MODE="$(bashio::config 'dns_mode')"
@@ -82,12 +83,16 @@ export NETMAKER_BASE_DOMAIN="${NM_DOMAIN}"
 export SERVER_API_CONN_STRING="${NM_DOMAIN}:443"
 export MASTER_KEY
 
-# SERVER_HOST is used in enrollment tokens — must be the domain, not the raw public IP.
-# If not explicitly overridden, default to NM_DOMAIN so clients connect via the tunnel.
-export SERVER_HOST="${SERVER_HOST:-${NM_DOMAIN}}"
+# SERVER_HTTP_HOST overrides the auto-detected public IP for the APIHost field
+# returned to clients. Always set to NM_DOMAIN so clients connect via the tunnel.
+# SERVER_HOST is left for auto-detection (used internally by Netmaker).
+export SERVER_HTTP_HOST="${NM_DOMAIN}"
 
-# MQTT client configuration (controller connects TO external MQ broker)
+# MQTT configuration:
+# SERVER_BROKER_ENDPOINT = how the controller connects to the broker (internal)
+# BROKER_ENDPOINT = what the controller tells clients to use to reach the broker (public-facing)
 export SERVER_BROKER_ENDPOINT="${MQ_BROKER_ENDPOINT}"
+export BROKER_ENDPOINT="${MQ_PUBLIC_ENDPOINT:-${MQ_BROKER_ENDPOINT}}"
 export MQ_USERNAME="${MQ_USERNAME:-netmaker}"
 export MQ_PASSWORD
 
@@ -121,7 +126,8 @@ export NODE_ID="ha-netmaker-controller"
 export DISABLE_REMOTE_IP_CHECK="off"
 
 bashio::log.info "Domain: ${NM_DOMAIN}"
-bashio::log.info "MQ Broker (client connecting to): ${MQ_BROKER_ENDPOINT}"
+bashio::log.info "MQ Broker internal (server→broker): ${MQ_BROKER_ENDPOINT}"
+bashio::log.info "MQ Broker public (sent to clients): ${BROKER_ENDPOINT}"
 bashio::log.info "Database: SQLite at ${DB_PATH}"
 bashio::log.info "API port: ${API_PORT}, gRPC port: ${GRPC_PORT}"
 bashio::log.info "DNS mode: ${DNS_MODE}"

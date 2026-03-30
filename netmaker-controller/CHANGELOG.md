@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.5.0.3
+
+- Fix APIHost: set SERVER_HTTP_HOST to NM_DOMAIN, leave SERVER_HOST for auto-detection
+- Add mq_public_endpoint option for the broker address sent to joining clients (BROKER_ENDPOINT)
+- SERVER_BROKER_ENDPOINT remains the internal server-to-broker connection
+
 ## 1.5.0.2
 
 - Fix enrollment token address: default SERVER_HOST to NM_DOMAIN so clients connect via domain/tunnel instead of raw public IP

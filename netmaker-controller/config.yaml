@@ -1,6 +1,6 @@
 ---
 name: Netmaker Controller
-version: 1.5.0.2
+version: 1.5.0.3
 slug: netmaker-controller
 description: |
   Netmaker Controller
@@ -34,6 +34,7 @@ options:
   admin_user: admin
   admin_password: ""
   mq_broker_endpoint: "ws://core-mosquitto:1884"
+  mq_public_endpoint: ""
   mq_username: netmaker
   mq_password: ""
   dns_mode: false
@@ -46,6 +47,7 @@ schema:
   admin_user: str?
   admin_password: password?
   mq_broker_endpoint: str
+  mq_public_endpoint: str?
   mq_username: str
   mq_password: password?
   dns_mode: bool?
