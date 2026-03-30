@@ -33,7 +33,7 @@ options:
   master_key: ""
   admin_user: admin
   admin_password: ""
-  mq_broker_endpoint: "ws://mqtt.netmaker.example.com:1883"
+  mq_broker_endpoint: "ws://core-mosquitto:1884"
   mq_username: netmaker
   mq_password: ""
   dns_mode: false

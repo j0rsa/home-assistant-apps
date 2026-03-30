@@ -24,7 +24,7 @@ WireGuard mesh network controller and orchestrator for Home Assistant. Runs as a
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `mq_broker_endpoint` | MQ broker endpoint URL (`ws://host:1883` or `wss://host:8883`) | `ws://mqtt.netmaker.example.com:1883` |
+| `mq_broker_endpoint` | MQ broker endpoint URL (`ws://host:1883` or `wss://host:8883`) | `ws://core-mosquitto:1884` |
 | `mq_username` | Username for authenticating to MQ broker | `netmaker` |
 | `mq_password` | Password for authenticating to MQ broker (auto-generated if blank) | auto |
 
@@ -44,7 +44,7 @@ WireGuard mesh network controller and orchestrator for Home Assistant. Runs as a
 
 ```yaml
 nm_domain: "netmaker.example.com"
-mq_broker_endpoint: "ws://mqtt.netmaker.example.com:1883"
+mq_broker_endpoint: "ws://core-mosquitto:1884"
 mq_username: "netmaker"
 mq_password: "your-mqtt-password"
 master_key: "your-master-key"
