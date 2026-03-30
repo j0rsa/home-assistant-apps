@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0
+
+- Update Netmaker UI to v1.5.0
+
 ## 0.99.0.2
 
 - Add nginx reverse proxy for API requests to Netmaker Controller backend

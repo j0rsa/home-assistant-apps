@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.5.0
+
+- Update Netmaker server to v1.5.0
+
 ## 0.99.0.1
 
 - Fix MQ broker config: use SERVER_BROKER_ENDPOINT env var instead of MQ_HOST/MQ_PORT
