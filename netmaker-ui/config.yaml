@@ -17,7 +17,7 @@ codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-netmaker-ui-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
-webui: "http://[HOST]:[PORT:8082]/"
+webui: "http://[HOST]:[PORT:80]/"
 panel_icon: mdi:web
 ports:
   80/tcp: 8082
