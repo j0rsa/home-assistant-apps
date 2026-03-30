@@ -24,6 +24,6 @@ ports:
 ports_description:
   80/tcp: Netmaker Dashboard UI
 options:
-  backend_url: "https://d4005b6b-netmaker-controller:8081"
+  backend_url: "http://d4005b6b-netmaker-controller:8081"
 schema:
   backend_url: str?
