@@ -13,6 +13,10 @@
       "automergeType": "branch"
     },
     {
+      "matchUpdateTypes": ["minor"],
+      "automerge": true
+    },
+    {
       "matchFileNames": ["**/Dockerfile", "**/build.{yaml,yml}"],
       "bumpVersions": [
         {
