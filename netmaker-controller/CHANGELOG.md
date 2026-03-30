@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.5.0.1
+
+- Fix admin user creation: call POST /api/users/adm/createsuperadmin after server starts
+- Add curl to container for admin API setup
+
 ## 1.5.0
 
 - Update Netmaker server to v1.5.0

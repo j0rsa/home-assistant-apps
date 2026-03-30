@@ -1,0 +1,10 @@
+configuration:
+  backend_url:
+    name: Backend URL
+    description: >-
+      Full URL of the Netmaker Controller API that the dashboard calls for all
+      management operations. Example:
+      'http://d4005b6b-netmaker-controller:8081'. If left blank, the UI uses
+      its built-in default endpoint.
+network:
+  80/tcp: Netmaker Dashboard UI

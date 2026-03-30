@@ -81,8 +81,6 @@ export SERVER_NAME="${NM_DOMAIN}"
 export NETMAKER_BASE_DOMAIN="${NM_DOMAIN}"
 export SERVER_API_CONN_STRING="${NM_DOMAIN}:443"
 export MASTER_KEY
-export ADMIN_USER="${ADMIN_USER:-admin}"
-export ADMIN_PASSWORD
 
 # Server host (auto-detect if blank)
 if [[ -n "${SERVER_HOST}" ]]; then
@@ -130,5 +128,41 @@ bashio::log.info "API port: ${API_PORT}, gRPC port: ${GRPC_PORT}"
 bashio::log.info "DNS mode: ${DNS_MODE}"
 bashio::log.info "Verbosity: ${VERBOSITY}"
 
-# Start Netmaker server
+# Create super admin via API after server starts (runs in background)
+create_super_admin() {
+    local api_url="http://localhost:${API_PORT}"
+    local max_attempts=30
+
+    # Wait for the API to become available
+    for i in $(seq 1 ${max_attempts}); do
+        if curl -sf "${api_url}/api/users/adm/hassuperadmin" >/dev/null 2>&1; then
+            break
+        fi
+        sleep 2
+    done
+
+    # Check if super admin already exists
+    local has_admin
+    has_admin="$(curl -sf "${api_url}/api/users/adm/hassuperadmin" 2>/dev/null || echo "")"
+
+    if [[ "${has_admin}" == "false" ]]; then
+        bashio::log.info "Creating super admin user '${ADMIN_USER}'..."
+        local response
+        response="$(curl -sf -X POST "${api_url}/api/users/adm/createsuperadmin" \
+            -H "Content-Type: application/json" \
+            -d "{\"username\":\"${ADMIN_USER}\",\"password\":\"${ADMIN_PASSWORD}\"}" 2>&1)" || true
+
+        if [[ -n "${response}" ]]; then
+            bashio::log.info "Super admin user created successfully"
+        else
+            bashio::log.error "Failed to create super admin user"
+        fi
+    else
+        bashio::log.info "Super admin already exists, skipping creation"
+    fi
+}
+
+create_super_admin &
+
+# Start Netmaker server (foreground)
 exec netmaker

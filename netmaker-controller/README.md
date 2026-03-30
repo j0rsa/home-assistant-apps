@@ -37,7 +37,7 @@ WireGuard mesh network controller and orchestrator for Home Assistant. Runs as a
 | `admin_user` | Admin username | `admin` |
 | `admin_password` | Admin password (auto-generated if blank) | auto |
 | `dns_mode` | Enable DNS management | `false` |
-| `verbosity` | Log verbosity (1-3) | `1` |
+| `verbosity` | Log verbosity: 0=silent, 1=minimal, 2=standard, 3=debug, 4=trace | `1` |
 | `telemetry` | Send usage telemetry | `true` |
 
 ### Example Configuration

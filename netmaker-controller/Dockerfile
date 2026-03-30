@@ -5,6 +5,8 @@ FROM gravitl/netmaker:v1.5.0 AS upstream
 
 FROM ${BUILD_FROM}
 
+RUN apk add --no-cache curl
+
 COPY --from=upstream /root/netmaker /usr/local/bin/netmaker
 RUN chmod +x /usr/local/bin/netmaker
 

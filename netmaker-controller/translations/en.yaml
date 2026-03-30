@@ -1,0 +1,60 @@
+configuration:
+  nm_domain:
+    name: Domain
+    description: >-
+      Base domain for the Netmaker API and dashboard (e.g.,
+      'netmaker.example.com'). Used in client-facing URLs and API connection
+      strings.
+  server_host:
+    name: Server Host
+    description: >-
+      Public IP address of the Home Assistant host. Leave blank for
+      auto-detection. Override if behind a proxy or NAT.
+  master_key:
+    name: Master Key
+    description: >-
+      Admin API key for authenticating privileged API calls. If left blank, a
+      random 32-character key is auto-generated and persisted in /data.
+  admin_user:
+    name: Admin Username
+    description: >-
+      Username for the initial super admin account created on first startup.
+  admin_password:
+    name: Admin Password
+    description: >-
+      Password for the initial super admin account. If left blank, a random
+      password is auto-generated and persisted in /data.
+  mq_broker_endpoint:
+    name: MQ Broker Endpoint
+    description: >-
+      WebSocket URL of the external MQ broker that the controller connects to
+      for peer signaling. Use 'ws://host:port' for plain or 'wss://host:port'
+      for TLS. Example: 'ws://core-mosquitto:1884'.
+  mq_username:
+    name: MQ Username
+    description: >-
+      Username for authenticating to the MQ broker.
+  mq_password:
+    name: MQ Password
+    description: >-
+      Password for authenticating to the MQ broker. If left blank, a random
+      password is auto-generated and persisted in /data. Must match the
+      credentials configured on your broker.
+  dns_mode:
+    name: DNS Mode
+    description: >-
+      Enable Netmaker DNS management. Requires an external CoreDNS instance.
+      Leave disabled unless you have CoreDNS set up separately.
+  verbosity:
+    name: Log Verbosity
+    description: >-
+      Controls how much detail appears in the logs. 0 = silent, 1 = minimal,
+      2 = standard, 3 = debug, 4 = trace. Use 3 or 4 for troubleshooting.
+  telemetry:
+    name: Telemetry
+    description: >-
+      Send anonymous usage data to Netmaker. Disable if you prefer not to
+      share telemetry.
+network:
+  8081/tcp: Netmaker API (HTTP)
+  50051/tcp: Netmaker gRPC
