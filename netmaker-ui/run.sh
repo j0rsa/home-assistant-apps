@@ -23,8 +23,8 @@ fi
 # Ensure nginx directories exist
 mkdir -p /run/nginx /var/log/nginx
 
-# Write nginx config for serving the SPA
-cat > /etc/nginx/http.d/default.conf << 'NGINX'
+# Write nginx config for serving the SPA and proxying API to backend
+cat > /etc/nginx/http.d/default.conf << NGINX
 server {
     listen 80;
     server_name _;
@@ -32,12 +32,22 @@ server {
     root /usr/share/nginx/html;
     index index.html;
 
+    # Proxy API requests to the Netmaker Controller backend
+    location /api {
+        proxy_pass ${BACKEND_URL};
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+    }
+
+    # Serve static SPA files
     location / {
-        try_files $uri $uri/ /index.html;
+        try_files \$uri \$uri/ /index.html;
     }
 
     # Cache static assets
-    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)$ {
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg|woff|woff2|ttf|eot)\$ {
         expires 1y;
         add_header Cache-Control "public, immutable";
     }

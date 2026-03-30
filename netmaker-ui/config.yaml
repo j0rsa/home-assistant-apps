@@ -1,6 +1,6 @@
 ---
 name: Netmaker Dashboard UI
-version: 0.99.0.1
+version: 0.99.0.2
 slug: netmaker-ui
 description: |
   Netmaker Dashboard UI
@@ -18,8 +18,6 @@ image: "ghcr.io/j0rsa/haddon-netmaker-ui-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 webui: "http://[HOST]:[PORT:8082]/"
-ingress: true
-ingress_port: 80
 panel_icon: mdi:web
 ports:
   80/tcp: 8082

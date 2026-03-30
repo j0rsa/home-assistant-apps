@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.99.0.2
+
+- Add nginx reverse proxy for API requests to Netmaker Controller backend
+
 ## 0.99.0.1
 
 - Fix nginx config: generate SPA-compatible server block at runtime instead of copying upstream config
