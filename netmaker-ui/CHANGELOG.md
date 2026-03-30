@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.99.0.1
+
+- Fix nginx config: generate SPA-compatible server block at runtime instead of copying upstream config
+- Inject backend URL into served JS files when configured
+
 ## 0.24.2
 
 - Add Netmaker Dashboard UI add-on for Home Assistant

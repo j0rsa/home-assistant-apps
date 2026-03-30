@@ -1,6 +1,6 @@
 ---
 name: Netmaker Dashboard UI
-version: 0.99.0
+version: 0.99.0.1
 slug: netmaker-ui
 description: |
   Netmaker Dashboard UI
@@ -26,6 +26,6 @@ ports:
 ports_description:
   80/tcp: Netmaker Dashboard UI
 options:
-  backend_url: ""
+  backend_url: "https://d4005b6b-netmaker-controller:8081"
 schema:
   backend_url: str?

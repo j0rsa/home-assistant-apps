@@ -1,6 +1,6 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:3.23
 
-# Extract UI files and nginx config from upstream image
+# Extract UI static files from upstream image
 FROM gravitl/netmaker-ui:v0.99.0 AS upstream
 
 FROM ${BUILD_FROM}
@@ -8,7 +8,6 @@ FROM ${BUILD_FROM}
 RUN apk add --no-cache nginx
 
 COPY --from=upstream /usr/share/nginx/html /usr/share/nginx/html
-COPY --from=upstream /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 COPY run.sh /
 RUN chmod a+x /run.sh
