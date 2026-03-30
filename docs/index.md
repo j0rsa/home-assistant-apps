@@ -128,14 +128,32 @@ Web-based configuration generator for Xray. Simplify complex proxy setups.
 
 **Architectures:** `aarch64` `amd64`
 
-#### [Netmaker Client](/apps/netmaker/)
+#### [Netmaker Client](/apps/netmaker-client/)
 WireGuard VPN client with advanced networking features.
 - WireGuard VPN connectivity
 - SOCKS proxy support
 - Automatic reconnection
 - Network mesh support
 
-**Architectures:** `aarch64` `amd64` `armv7`
+**Architectures:** `aarch64` `amd64`
+
+#### [Netmaker Controller](/apps/netmaker-controller/)
+WireGuard mesh network controller and orchestrator. Control-plane-only service with persistent SQLite storage.
+- Zero WireGuard exposure on HA host
+- Persistent state via SQLite with HA backups
+- External MQ broker for real-time peer signaling
+- Designed for Cloudflare Tunnel deployment
+
+**Architectures:** `aarch64` `amd64`
+
+#### [Netmaker Dashboard UI](/apps/netmaker-ui/)
+Web dashboard for managing Netmaker mesh networks, nodes, users, and policies.
+- Network and node management
+- User and ACL configuration
+- HA sidebar integration via ingress
+- Stateless frontend — all state in Controller
+
+**Architectures:** `aarch64` `amd64`
 
 #### [SNI Socket Proxy](/apps/sni-socket/)
 SNI proxy with SOCKS5 support that routes HTTP and HTTPS traffic through a SOCKS5 proxy based on hostname matching.

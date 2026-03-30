@@ -1,5 +1,5 @@
 ---
-name: netmaker
+name: netmaker-client
 title: Netmaker Client - VPN Client
 description: "WireGuard VPN client for Home Assistant with optional SOCKS proxy routing. Connect to Netmaker mesh networks with auto-restart and debug support."
 category: Networking & Proxy
@@ -152,4 +152,4 @@ Set `debug_mode: true` for additional tools and logging.
 
 ---
 
-[← Back to Apps](/apps/) | [View on GitHub](https://github.com/j0rsa/home-assistant-apps/tree/main/netmaker)
+[← Back to Apps](/apps/) | [View on GitHub](https://github.com/j0rsa/home-assistant-apps/tree/main/netmaker-client)

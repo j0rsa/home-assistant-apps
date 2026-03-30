@@ -1,0 +1,31 @@
+---
+name: Netmaker Dashboard UI
+version: 0.24.2
+slug: netmaker-ui
+description: |
+  Netmaker Dashboard UI
+
+  Web dashboard for managing Netmaker mesh networks, nodes, users, and policies.
+  Stateless React SPA that communicates with the Netmaker Controller API.
+init: false
+startup: services
+arch:
+  - aarch64
+  - amd64
+boot: auto
+codenotary: red.avtovo@gmail.com
+image: "ghcr.io/j0rsa/haddon-netmaker-ui-{arch}"
+udev: false
+url: https://github.com/j0rsa/home-assistant-apps
+webui: "http://[HOST]:[PORT:8082]/"
+ingress: true
+ingress_port: 80
+panel_icon: mdi:web
+ports:
+  80/tcp: 8082
+ports_description:
+  80/tcp: Netmaker Dashboard UI
+options:
+  backend_url: ""
+schema:
+  backend_url: str?

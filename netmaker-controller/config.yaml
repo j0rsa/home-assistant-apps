@@ -1,0 +1,57 @@
+---
+name: Netmaker Controller
+version: 0.24.2
+slug: netmaker-controller
+description: |
+  Netmaker Controller
+
+  WireGuard mesh network controller and orchestrator. Runs as control plane only
+  behind Cloudflare Tunnel with no WireGuard endpoints on this host. Uses an
+  external MQ broker for peer signaling and stores state in persistent SQLite.
+init: false
+startup: services
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+boot: auto
+codenotary: red.avtovo@gmail.com
+image: "ghcr.io/j0rsa/haddon-netmaker-controller-{arch}"
+udev: false
+url: https://github.com/j0rsa/home-assistant-apps
+panel_icon: mdi:network
+ports:
+  8081/tcp: 8081
+  50051/tcp: 50051
+ports_description:
+  8081/tcp: Netmaker API (HTTP)
+  50051/tcp: Netmaker gRPC
+options:
+  nm_domain: netmaker.example.com
+  server_host: ""
+  master_key: ""
+  admin_user: admin
+  admin_password: ""
+  mq_host: mqtt.netmaker.example.com
+  mq_port: 1883
+  mq_username: netmaker
+  mq_password: ""
+  mq_use_tls: false
+  dns_mode: false
+  verbosity: 1
+  telemetry: true
+schema:
+  nm_domain: str
+  server_host: str?
+  master_key: password?
+  admin_user: str?
+  admin_password: password?
+  mq_host: str
+  mq_port: "int(1,65535)"
+  mq_username: str
+  mq_password: password?
+  mq_use_tls: bool?
+  dns_mode: bool?
+  verbosity: "int(1,3)?"
+  telemetry: bool?
