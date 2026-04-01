@@ -1,0 +1,35 @@
+---
+name: "Wyoming Hailo Whisper"
+version: 0.0.2
+slug: wyoming_hailo_whisper
+description: |
+  Hailo-accelerated Whisper STT service for Home Assistant via Wyoming.
+
+  Runs locally on Raspberry Pi 5 with Hailo-8/Hailo-8L and exposes a Wyoming
+  speech-to-text endpoint for Home Assistant voice integrations.
+init: false
+startup: services
+arch:
+  - aarch64
+boot: auto
+ports:
+  10600/tcp: 10600
+ports_description:
+  10600/tcp: Wyoming speech-to-text port
+devices:
+  - /dev/hailo0
+udev: true
+map:
+  - share:rw
+image: "ghcr.io/j0rsa/haddon-wyoming-hailo-whisper-{arch}"
+panel_icon: mdi:microphone-message
+codenotary: red.avtovo@gmail.com
+url: https://github.com/j0rsa/home-assistant-apps
+options:
+  variant: base
+  device: hailo8l
+  language: en
+schema:
+  variant: list(tiny|base)
+  device: list(hailo8|hailo8l)
+  language: list(en|ru)
