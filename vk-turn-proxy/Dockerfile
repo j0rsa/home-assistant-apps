@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-ubuntu:24.04
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-ubuntu:20.04
 ARG UPSTREAM_IMAGE=ghcr.io/cacggghp/vk-turn-proxy:v1.8.2
 
 FROM ${UPSTREAM_IMAGE} AS upstream
