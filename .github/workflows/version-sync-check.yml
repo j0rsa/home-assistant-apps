@@ -59,6 +59,13 @@ jobs:
           ]
           config_pattern = re.compile(r'^version:\s*"?(?P<version>[^"\s]+)"?', re.MULTILINE)
 
+          def normalize_version(raw: str) -> str:
+              """Compare core release only: strip optional v prefix and any -suffix (e.g. 1.83.7-stable -> 1.83.7)."""
+              s = raw.strip().strip('"').lstrip('vV')
+              if '-' in s:
+                  s = s.split('-', 1)[0]
+              return s
+
           for addon in addon_dirs:
               addon_path = root / addon
               dockerfile = addon_path / 'Dockerfile'
@@ -99,15 +106,20 @@ jobs:
 
               addon_version = m.group('version')
               checked.append((addon, after_version, addon_version))
-              if not addon_version.startswith(after_version):
+              norm_upstream = normalize_version(after_version)
+              norm_config = normalize_version(addon_version)
+              if norm_config != norm_upstream:
                   failures.append(
-                      f'{addon}: Docker/upstream version changed to {after_version}, but config.yaml version is {addon_version} (must start with {after_version})'
+                      f'{addon}: Docker/upstream tag is {after_version} (core {norm_upstream}), but config.yaml version is {addon_version} (core {norm_config}); cores must match'
                   )
 
           if checked:
               print('Checked addons:')
               for addon, upstream, addon_version in checked:
-                  print(f' - {addon}: upstream={upstream}, config={addon_version}')
+                  print(
+                      f' - {addon}: upstream={upstream} (core {normalize_version(upstream)}), '
+                      f'config={addon_version} (core {normalize_version(addon_version)})'
+                  )
           else:
               print('No addon Docker/upstream version changes detected.')
 
