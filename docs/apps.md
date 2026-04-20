@@ -43,6 +43,11 @@ High-performance vector database for AI applications. Essential for semantic sea
 
 **Version:** 1.0.14 | **Architectures:** `amd64`, `aarch64`
 
+### [Wyoming Hailo Whisper](/apps/wyoming-hailo-whisper/)
+Local Whisper STT over Wyoming using Hailo acceleration on Raspberry Pi 5.
+
+**Version:** 0.0.2 | **Architectures:** `aarch64`
+
 ---
 
 ## 🌐 Networking & Proxy
@@ -81,6 +86,11 @@ Transparent SOCKS5 proxy client that intercepts TCP/UDP traffic and forwards it 
 SNI proxy with SOCKS5 proxy support. Routes HTTP and HTTPS traffic through a SOCKS5 proxy based on hostname matching.
 
 **Version:** 1.0.0 | **Architectures:** `amd64`, `aarch64`
+
+### [VK TURN Proxy](/apps/vk-turn-proxy/)
+Server-side TURN-based proxy for tunneling traffic through VK calls.
+
+**Version:** 1.8.2 | **Architectures:** `amd64`, `aarch64`
 
 ---
 
