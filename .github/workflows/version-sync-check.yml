@@ -48,7 +48,10 @@ jobs:
               'git', 'diff', '--name-only', f'{base_sha}...HEAD'
           ], text=True).splitlines()
 
-          addon_dirs = sorted({p.split('/', 1)[0] for p in diff if '/' in p})
+          # Only apps whose Dockerfile changed in this range; ignore sibling apps (e.g. sniproxy/config.yaml only).
+          addon_dirs = sorted(
+              {p.split('/', 1)[0] for p in diff if p.endswith('/Dockerfile')}
+          )
           failures = []
           checked = []
 
@@ -71,10 +74,6 @@ jobs:
               dockerfile = addon_path / 'Dockerfile'
               config = addon_path / 'config.yaml'
               if not dockerfile.exists() or not config.exists():
-                  continue
-
-              changed_files = [p for p in diff if p.startswith(f'{addon}/')]
-              if f'{addon}/Dockerfile' not in changed_files:
                   continue
 
               before_docker = subprocess.run(
