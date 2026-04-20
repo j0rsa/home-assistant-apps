@@ -2,7 +2,7 @@
 name: vk-turn-proxy
 title: VK TURN Proxy
 description: "Server-side TURN-based proxy for tunneling traffic through VK calls."
-category: Networking
+category: Networking & Proxy
 version: 1.8.2
 architectures:
   - amd64
