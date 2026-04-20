@@ -1,0 +1,30 @@
+---
+name: VK TURN Proxy
+version: 1.8.2
+slug: vk-turn-proxy
+description: |
+  TURN-based UDP/TCP proxy for tunneling traffic through VK calls.
+
+  Wraps vk-turn-proxy for Home Assistant style deployment. Useful for forwarding
+  WireGuard or VLESS-style traffic through TURN infrastructure.
+options:
+  connect_addr: ""
+  vless_mode: false
+schema:
+  connect_addr: str
+  vless_mode: bool
+init: false
+startup: services
+arch:
+  - aarch64
+  - amd64
+boot: auto
+codenotary: red.avtovo@gmail.com
+image: "ghcr.io/j0rsa/haddon-vk-turn-proxy-{arch}"
+udev: false
+url: https://github.com/j0rsa/home-assistant-apps
+ports:
+  56000/udp: 56000
+ports_description:
+  56000/udp: VK TURN proxy UDP port
+panel_icon: mdi:swap-horizontal-network
