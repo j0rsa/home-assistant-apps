@@ -1,6 +1,6 @@
 ---
 name: "SniProxy"
-version: "3.23.4"
+version: "1.1.2"
 slug: "sni-proxy"
 description: |
   SNI proxy
