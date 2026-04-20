@@ -1,4 +1,4 @@
-ARG UPSTREAM_IMAGE=docker.litellm.ai/berriai/litellm:v1.83.3-stable
+ARG UPSTREAM_IMAGE=docker.litellm.ai/berriai/litellm:v1.83.7-stable
 ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0
 
 FROM ${UPSTREAM_IMAGE} AS upstream
