@@ -1,6 +1,6 @@
 ---
 name: "Wyoming Hailo Whisper"
-version: 0.0.2
+version: 0.1.0
 slug: wyoming_hailo_whisper
 description: |
   Hailo-accelerated Whisper STT service for Home Assistant via Wyoming.
