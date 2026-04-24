@@ -1,6 +1,6 @@
 ---
 name: VK TURN Proxy
-version: 1.8.2
+version: 1.8.3
 slug: vk-turn-proxy
 description: |
   TURN-based UDP/TCP proxy for tunneling traffic through VK calls.
