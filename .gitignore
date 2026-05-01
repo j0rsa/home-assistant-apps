@@ -87,3 +87,5 @@ docs/_site/
 docs/.jekyll-cache/
 
 CLAUDE.md
+
+*.pyc

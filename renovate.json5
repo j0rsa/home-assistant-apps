@@ -6,28 +6,25 @@
   "ignorePaths": [
     "duplicati/**"
   ],
+  // Self-hosted: allow commands globally, e.g. allowedCommands: ["^python3 scripts/addon_version_sync\\.py sync .+$"]
+  // Handlebars fills {{{packageFileDir}}} with the Dockerfile directory (addon slug).
   "packageRules": [
     {
       "matchUpdateTypes": ["patch"],
       "automerge": true,
-      "automergeType": "branch"
+      "automergeType": "pr"
     },
     {
       "matchUpdateTypes": ["minor"],
       "automerge": true
     },
     {
-      "matchFileNames": ["**/Dockerfile", "**/build.{yaml,yml}"],
-      "bumpVersions": [
-        {
-          "name": "Updating App version",
-          "filePatterns": ["{{packageFileDir}}/config.{yaml,yml}"],
-          // Capture the semantic version after "version:"
-          "matchStrings": ["version:\\s(?<version>[^\\s]+)"],
-          // Example: patch for patch updates, minor otherwise
-          "bumpType": "{{#if isPatch}}patch{{else}}minor{{/if}}"
-        }
-      ]
+      "matchManagers": ["dockerfile"],
+      "postUpgradeTasks": {
+        "commands": ["python3 scripts/addon_version_sync.py sync {{{packageFileDir}}}"],
+        "fileFilters": ["**/config.yaml"],
+        "executionMode": "update"
+      }
     }
   ]
 }

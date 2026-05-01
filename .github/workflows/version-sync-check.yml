@@ -5,6 +5,9 @@ on:
   push:
     branches: [ main ]
 
+permissions:
+  contents: read
+
 jobs:
   version-sync-check:
     runs-on: ubuntu-latest
@@ -13,6 +16,7 @@ jobs:
         uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
+          ref: ${{ github.event_name == 'pull_request' && github.event.pull_request.head.sha || github.ref }}
 
       - name: Determine base ref
         id: base
@@ -35,96 +39,4 @@ jobs:
             exit 0
           fi
 
-          python3 <<'PY'
-          import pathlib
-          import re
-          import subprocess
-          import sys
-
-          root = pathlib.Path('.').resolve()
-          base_sha = "${{ steps.base.outputs.base }}"
-
-          diff = subprocess.check_output([
-              'git', 'diff', '--name-only', f'{base_sha}...HEAD'
-          ], text=True).splitlines()
-
-          # Only apps whose Dockerfile changed in this range; ignore sibling apps (e.g. sniproxy/config.yaml only).
-          addon_dirs = sorted(
-              {p.split('/', 1)[0] for p in diff if p.endswith('/Dockerfile')}
-          )
-          failures = []
-          checked = []
-
-          version_patterns = [
-              re.compile(r'^ARG\s+UPSTREAM_IMAGE=.*:v?(?P<version>[0-9][A-Za-z0-9._-]*)', re.MULTILINE),
-              re.compile(r'^FROM\s+[^\s:]+:v?(?P<version>[0-9][A-Za-z0-9._-]*)', re.MULTILINE),
-              re.compile(r'^ARG\s+[A-Z0-9_]*VERSION\s*=\s*"?v?(?P<version>[0-9][A-Za-z0-9._-]*)"?', re.MULTILINE),
-          ]
-          config_pattern = re.compile(r'^version:\s*"?(?P<version>[^"\s]+)"?', re.MULTILINE)
-
-          def normalize_version(raw: str) -> str:
-              """Compare core release only: strip optional v prefix and any -suffix (e.g. 1.83.7-stable -> 1.83.7)."""
-              s = raw.strip().strip('"').lstrip('vV')
-              if '-' in s:
-                  s = s.split('-', 1)[0]
-              return s
-
-          for addon in addon_dirs:
-              addon_path = root / addon
-              dockerfile = addon_path / 'Dockerfile'
-              config = addon_path / 'config.yaml'
-              if not dockerfile.exists() or not config.exists():
-                  continue
-
-              before_docker = subprocess.run(
-                  ['git', 'show', f'{base_sha}:{addon}/Dockerfile'],
-                  text=True,
-                  capture_output=True,
-                  check=False,
-              ).stdout
-              after_docker = dockerfile.read_text()
-
-              def extract_version(text):
-                  for pat in version_patterns:
-                      m = pat.search(text)
-                      if m:
-                          return m.group('version')
-                  return None
-
-              before_version = extract_version(before_docker) if before_docker else None
-              after_version = extract_version(after_docker)
-
-              if not after_version or before_version == after_version:
-                  continue
-
-              config_text = config.read_text()
-              m = config_pattern.search(config_text)
-              if not m:
-                  failures.append(f'{addon}: could not parse version from config.yaml')
-                  continue
-
-              addon_version = m.group('version')
-              checked.append((addon, after_version, addon_version))
-              norm_upstream = normalize_version(after_version)
-              norm_config = normalize_version(addon_version)
-              if norm_config != norm_upstream:
-                  failures.append(
-                      f'{addon}: Docker/upstream tag is {after_version} (core {norm_upstream}), but config.yaml version is {addon_version} (core {norm_config}); cores must match'
-                  )
-
-          if checked:
-              print('Checked addons:')
-              for addon, upstream, addon_version in checked:
-                  print(
-                      f' - {addon}: upstream={upstream} (core {normalize_version(upstream)}), '
-                      f'config={addon_version} (core {normalize_version(addon_version)})'
-                  )
-          else:
-              print('No addon Docker/upstream version changes detected.')
-
-          if failures:
-              print('\nFailures:')
-              for failure in failures:
-                  print(f' - {failure}')
-              sys.exit(1)
-          PY
+          python3 scripts/addon_version_sync.py check --base-sha "$BASE_SHA"
