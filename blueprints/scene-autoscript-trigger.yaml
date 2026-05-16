@@ -1,6 +1,6 @@
 blueprint:
-  name: Run action when scene activates
-  description: Trigger a script or automation when a specific scene is turned on
+  name: Run script when scene activates
+  description: Runs a selected script when a selected scene is turned on
   domain: automation
   input:
     watched_scene:
@@ -8,21 +8,16 @@ blueprint:
       selector:
         entity:
           domain: scene
-    target_action:
-      name: Script or automation to run
+    target_script:
+      name: Script
       selector:
         entity:
-          domain:
-            - script
-            - automation
+          domain: script
 
 mode: single
 
-trigger_variables:
-  watched_scene: !input watched_scene
-
 trigger:
-  - platform: event
+  - trigger: event
     event_type: call_service
     event_data:
       domain: scene
@@ -31,18 +26,11 @@ trigger:
 condition:
   - condition: template
     value_template: >
-      {{ trigger.event.data.service_data.entity_id == watched_scene }}
+      {% set wanted = !input watched_scene %}
+      {% set called = trigger.event.data.service_data.entity_id %}
+      {{ called == wanted or (called is list and wanted in called) }}
 
 action:
-  - choose:
-      - conditions: >
-          {{ watched_scene is not none and states((!input target_action).split('.')[0] ~ '.' ~ (!input target_action).split('.')[1]) is not none }}
-        sequence: []
-  - service: >
-      {% if ( !input target_action ).split('.')[0] == 'script' %}
-        script.turn_on
-      {% else %}
-        automation.trigger
-      {% endif %}
+  - action: script.turn_on
     target:
-      entity_id: !input target_action
+      entity_id: !input target_script
