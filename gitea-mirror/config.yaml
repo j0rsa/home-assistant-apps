@@ -1,6 +1,6 @@
 ---
 name: Gitea Mirror
-version: 3.15.10
+version: 3.15.12
 slug: gitea_mirror
 description: |
   Gitea Mirror
