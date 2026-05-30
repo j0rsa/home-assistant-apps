@@ -46,13 +46,14 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Extract Python, Node.js, and litellm from upstream image.
-# Override Ubuntu's OpenSSL 3.0 with the upstream's OpenSSL 3.6 that Python was compiled against.
+# Keep the upstream's OpenSSL 3.6 (that Python was compiled against) in a private
+# directory instead of overwriting Ubuntu's system OpenSSL. Overwriting the system
+# libssl.so.3/libcrypto.so.3 breaks the base image's curl, which bashio/s6 use to
+# query the Supervisor API at boot (see run.sh for the LD_LIBRARY_PATH hand-off).
 COPY --from=upstream /upstream-payload.tar /tmp/
-RUN ARCH_LIB=/usr/lib/$(uname -m)-linux-gnu && \
+RUN mkdir -p /opt/litellm/lib && \
     tar xf /tmp/upstream-payload.tar -C / && \
-    cp -f /usr/lib/libcrypto.so.3 "${ARCH_LIB}/libcrypto.so.3" && \
-    cp -f /usr/lib/libssl.so.3 "${ARCH_LIB}/libssl.so.3" && \
-    cp -f /usr/lib/libgcc_s.so.1 "${ARCH_LIB}/libgcc_s.so.1" && \
+    mv -f /usr/lib/libcrypto.so.3 /usr/lib/libssl.so.3 /usr/lib/libgcc_s.so.1 /opt/litellm/lib/ && \
     ldconfig && \
     rm /tmp/upstream-payload.tar
 

@@ -57,4 +57,8 @@ EOF
 fi
 
 echo "Starting LiteLLM proxy on port 4000..."
+
+# Expose the upstream OpenSSL 3.6 (and friends) only to the LiteLLM process. The
+# system OpenSSL is left untouched so the base image's curl keeps working.
+export LD_LIBRARY_PATH="/opt/litellm/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 exec litellm --config "${LITELLM_CONFIG}" --port 4000 --host 0.0.0.0 --telemetry False
