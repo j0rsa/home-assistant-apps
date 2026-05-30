@@ -1,6 +1,10 @@
 # Changelog
 
-## 1.83.10-1
+## 1.83.14-2
+
+- Fix container exiting with `exec: litellm: not found`. Upstream now ships the CLI in a uv virtualenv (`/app/.venv/bin/litellm`); `run.sh` puts `/app/.venv/bin` on `PATH` so the entrypoint resolves. The binary and its deps were already bundled via `/app`.
+
+## 1.83.14-1
 
 - Fix container failing to start (`FATAL: Unknown log_level:`). The build no longer overwrites the base image's system OpenSSL, which had broken the `curl` that bashio/s6 use to reach the Supervisor API at boot. The upstream OpenSSL 3.6 is now isolated to the LiteLLM process via `LD_LIBRARY_PATH`.
 

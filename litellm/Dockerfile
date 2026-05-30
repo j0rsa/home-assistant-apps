@@ -5,8 +5,10 @@ FROM ${UPSTREAM_IMAGE} AS upstream
 
 # Bundle all runtime artifacts; resolves the versioned Python lib path dynamically
 # to avoid hardcoding the Python version (Wolfi installs packages to /usr/lib/python3.x/).
-# Wolfi places all pip console_scripts in /usr/bin/ (not /usr/local/bin/), so we find
-# them dynamically by shebang rather than enumerating each one explicitly.
+# LiteLLM itself lives in a uv virtualenv under /app (/app/.venv/bin/litellm, with the
+# source on /app/litellm), so copying /app brings the CLI and its deps along. We also
+# sweep /usr/bin for any python console_scripts by shebang. run.sh adds /app/.venv/bin
+# to PATH so the `litellm` entrypoint resolves at runtime.
 RUN PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')") && \
     { \
       echo /usr/local; \
