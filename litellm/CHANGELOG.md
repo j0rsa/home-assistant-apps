@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.83.14-3
+
+- Fix `aarch64` builds crashing with `import: command not found` / shell syntax errors. The upstream stage is now pinned with `FROM --platform=linux/${BUILD_ARCH}`, so the bundled Python matches the target architecture instead of defaulting to the build host's `amd64` (which the kernel can't exec, causing the `#!python` shebang to fall back to `/bin/sh`).
+
 ## 1.83.14-2
 
 - Fix container exiting with `exec: litellm: not found`. Upstream now ships the CLI in a uv virtualenv (`/app/.venv/bin/litellm`); `run.sh` puts `/app/.venv/bin` on `PATH` so the entrypoint resolves. The binary and its deps were already bundled via `/app`.
