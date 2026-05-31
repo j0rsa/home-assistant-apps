@@ -1,14 +1,14 @@
-ARG BUILD_ARCH=amd64
 ARG UPSTREAM_IMAGE=docker.litellm.ai/berriai/litellm:v1.83.14-stable
 ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0
 
-# Explicitly pin the upstream stage to the architecture being built. Otherwise an
-# unqualified `FROM ${UPSTREAM_IMAGE}` can resolve to the build host's arch (amd64),
-# baking amd64 Python into an aarch64 image. The kernel then can't exec it, so the
-# `#!/app/.venv/bin/python3` shebang falls back to /bin/sh and litellm dies with
-# `import: command not found` / shell syntax errors. BUILD_ARCH is always passed by
-# the HA builder; containerd normalizes `aarch64` -> `arm64`.
-FROM --platform=linux/${BUILD_ARCH} ${UPSTREAM_IMAGE} AS upstream
+# Explicitly pin the upstream stage to the platform being built. The HA builder runs
+# on amd64 runners, and a multi-arch `FROM` (litellm publishes amd64 + arm64) resolves
+# to the runner's arch, not the target. That bakes amd64 Python into the aarch64 image;
+# the kernel can't exec it, so the `#!/app/.venv/bin/python3` shebang falls back to
+# /bin/sh and litellm dies with `import: command not found` / shell syntax errors.
+# TARGETPLATFORM is set automatically by buildx from the builder's `--platform`
+# (canonical, e.g. linux/arm64), so it selects the matching upstream image.
+FROM --platform=${TARGETPLATFORM} ${UPSTREAM_IMAGE} AS upstream
 
 # Bundle all runtime artifacts; resolves the versioned Python lib path dynamically
 # to avoid hardcoding the Python version (Wolfi installs packages to /usr/lib/python3.x/).
