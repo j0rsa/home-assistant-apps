@@ -1,14 +1,14 @@
-ARG UPSTREAM_IMAGE=docker.litellm.ai/berriai/litellm:v1.83.14-stable
+# Use litellm's `main-stable` tag (their recommended production image), NOT the
+# versioned `vX.Y.Z-stable` tags: the latter publish a broken arm64 image whose
+# `linux/arm64` manifest entry actually contains amd64 binaries. Copying that into an
+# aarch64 add-on gives an amd64 Python the kernel can't exec, so the
+# `#!/app/.venv/bin/python3` shebang falls back to /bin/sh and litellm dies with
+# `import: command not found`. `main-stable` is genuinely multi-arch. Pinned by the
+# multi-arch index digest for reproducibility (Renovate updates the digest).
+ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:main-stable@sha256:cae1ac3492d6d0bea69c26f4485381624e073eb753f3534ae7703a4204a4ce6b
 ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0
 
-# Explicitly pin the upstream stage to the platform being built. The HA builder runs
-# on amd64 runners, and a multi-arch `FROM` (litellm publishes amd64 + arm64) resolves
-# to the runner's arch, not the target. That bakes amd64 Python into the aarch64 image;
-# the kernel can't exec it, so the `#!/app/.venv/bin/python3` shebang falls back to
-# /bin/sh and litellm dies with `import: command not found` / shell syntax errors.
-# TARGETPLATFORM is set automatically by buildx from the builder's `--platform`
-# (canonical, e.g. linux/arm64), so it selects the matching upstream image.
-FROM --platform=${TARGETPLATFORM} ${UPSTREAM_IMAGE} AS upstream
+FROM ${UPSTREAM_IMAGE} AS upstream
 
 # Bundle all runtime artifacts; resolves the versioned Python lib path dynamically
 # to avoid hardcoding the Python version (Wolfi installs packages to /usr/lib/python3.x/).

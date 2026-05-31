@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.86.14-5
+
+- Fix `aarch64` permanently and update LiteLLM to 1.86.2. Root cause of the earlier `import: command not found` crashes: litellm's versioned `vX.Y.Z-stable` images publish a broken `linux/arm64` variant whose manifest claims arm64 but contains amd64 binaries (verified on the registry), so the bundled Python could never run on aarch64 regardless of build-time platform pinning. Switched the upstream source to `ghcr.io/berriai/litellm:main-stable` (litellm's recommended, genuinely multi-arch image), pinned by its multi-arch index digest. The redundant `--platform` pin on the upstream stage was removed.
+
 ## 1.83.14-4
 
 - Actually fix the `aarch64` arch mismatch from `1.83.14-3`. Pinning the upstream stage with `linux/${BUILD_ARCH}` did not work (the `aarch64` arch string isn't the canonical `arm64`, so the build still pulled amd64 Python). Verified against the published `aarch64` image: base binaries were `arm64` but the bundled Python/OpenSSL were `amd64`. Now uses `FROM --platform=${TARGETPLATFORM}`, the canonical platform buildx derives from the HA builder's `--platform linux/arm64`.
