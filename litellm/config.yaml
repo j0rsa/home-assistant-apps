@@ -1,6 +1,6 @@
 ---
 name: LiteLLM
-version: 1.86.14-5
+version: 75543fa1d73989b7aefba49c910989f7886f63210520e30b39dbbc580a41826f
 slug: litellm
 description: |
   LiteLLM Proxy Server
