@@ -5,7 +5,7 @@
 # `#!/app/.venv/bin/python3` shebang falls back to /bin/sh and litellm dies with
 # `import: command not found`. `main-stable` is genuinely multi-arch. Pinned by the
 # multi-arch index digest for reproducibility (Renovate updates the digest).
-ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:main-stable@sha256:75543fa1d73989b7aefba49c910989f7886f63210520e30b39dbbc580a41826f
+ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:main-stable@sha256:9de33287d844a164f873479a04eebe065610e131d7e3aaf010f520fb5b4cfd7b
 ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0
 
 FROM ${UPSTREAM_IMAGE} AS upstream
