@@ -1,11 +1,4 @@
-# Use litellm's `main-stable` tag (their recommended production image), NOT the
-# versioned `vX.Y.Z-stable` tags: the latter publish a broken arm64 image whose
-# `linux/arm64` manifest entry actually contains amd64 binaries. Copying that into an
-# aarch64 add-on gives an amd64 Python the kernel can't exec, so the
-# `#!/app/.venv/bin/python3` shebang falls back to /bin/sh and litellm dies with
-# `import: command not found`. `main-stable` is genuinely multi-arch. Pinned by the
-# multi-arch index digest for reproducibility (Renovate updates the digest).
-ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:main-stable@sha256:9de33287d844a164f873479a04eebe065610e131d7e3aaf010f520fb5b4cfd7b
+ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:1.87.1
 ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0
 
 FROM ${UPSTREAM_IMAGE} AS upstream
