@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.5
+
+- Fix musl version conflict: run full apk upgrade before apk add (base image 13.1.3 has stale pinned packages)
+
 ## 0.1.4
 
 - Fix musl version conflict by upgrading musl before installing musl-dev (Alpine 3.19 repo drift)
