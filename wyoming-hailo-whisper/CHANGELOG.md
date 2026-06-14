@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.9
+
+- Detect Python version at runtime and validate wheel compatibility before install
+- Show correct cp-tag in error message (e.g. cp311) so the right wheel is downloaded
+
 ## 0.1.8
 
 - Improve missing Hailo wheel error with step-by-step download instructions

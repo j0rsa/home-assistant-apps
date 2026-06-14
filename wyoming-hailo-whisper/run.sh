@@ -22,17 +22,33 @@ if [ ! -e /dev/hailo0 ]; then
     exit 1
 fi
 
-if ! ls "${RUNTIME_DIR}"/*.whl >/dev/null 2>&1; then
-    bashio::log.error "Missing Hailo Python wheel in ${RUNTIME_DIR}"
+PYTHON_TAG="$("${APP_DIR}/.venv/bin/python" -c 'import sys; v=sys.version_info; print(f"cp{v.major}{v.minor}")')"
+
+_print_wheel_instructions() {
     bashio::log.error "To fix this:"
     bashio::log.error "  1. Register at https://developer.hailo.ai"
     bashio::log.error "  2. Go to Downloads -> Software -> HailoRT"
-    bashio::log.error "  3. Download the Python wheel for aarch64 (hailort-4.x.x-cp311-cp311-linux_aarch64.whl)"
-    bashio::log.error "     Match the version to your installed firmware: hailortcli fw-control identify"
+    bashio::log.error "  3. Download the Python wheel matching your setup:"
+    bashio::log.error "       Filename: hailort-4.x.x-${PYTHON_TAG}-${PYTHON_TAG}-linux_aarch64.whl"
+    bashio::log.error "       Match the version to your firmware: hailortcli fw-control identify"
     bashio::log.error "  4. Place the .whl file into ${RUNTIME_DIR}/"
     bashio::log.error "  5. Restart this app"
+}
+
+if ! ls "${RUNTIME_DIR}"/*.whl >/dev/null 2>&1; then
+    bashio::log.error "Missing Hailo Python wheel in ${RUNTIME_DIR}"
+    _print_wheel_instructions
     exit 1
 fi
+
+# Validate the wheel is compatible with the running Python before attempting install
+for whl in "${RUNTIME_DIR}"/*.whl; do
+    if [[ "$(basename "${whl}")" != *"${PYTHON_TAG}"* && "$(basename "${whl}")" != *"py3"* && "$(basename "${whl}")" != *"py2.py3"* ]]; then
+        bashio::log.error "Wheel $(basename "${whl}") is not compatible with Python ${PYTHON_TAG}"
+        _print_wheel_instructions
+        exit 1
+    fi
+done
 
 CURRENT_WHEEL_FINGERPRINT="$(ls -1 "${RUNTIME_DIR}"/*.whl | sort | sha256sum | awk '{print $1}')"
 INSTALLED_WHEEL_FINGERPRINT=""
