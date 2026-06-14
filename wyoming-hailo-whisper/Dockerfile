@@ -16,7 +16,6 @@ ENV LANG=C.UTF-8 \
 
 WORKDIR ${APP_DIR}
 
-COPY hailo_packages/ ./hailo_packages/
 COPY script/ ./script/
 COPY wyoming_hailo_whisper/ ./wyoming_hailo_whisper/
 COPY requirements.txt setup.py setup.cfg docker-entrypoint.sh start-hailo-example.sh ./
