@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.13
+
+- Detect HailoRT driver/library version mismatch at startup and exit with a clear error instead of a cryptic traceback
+
 ## 0.1.12
 
 - Fix model download failing with "mkdir: cannot create directory hefs: File exists" — symlinks were created before download, download script now writes directly to MODELS_DIR

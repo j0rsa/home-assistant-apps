@@ -39,6 +39,17 @@ if ! ldconfig -p | grep -q "libhailort.so"; then
     ldconfig
 fi
 
+# Verify driver and library versions match
+DRIVER_VERSION="$(cat /sys/module/hailo_pci/version 2>/dev/null || echo unknown)"
+LIB_VERSION="$(ldconfig -p | grep -oP 'libhailort\.so\.\K[0-9]+\.[0-9]+\.[0-9]+' | head -1 || echo unknown)"
+if [ "${DRIVER_VERSION}" != "unknown" ] && [ "${LIB_VERSION}" != "unknown" ] && [ "${DRIVER_VERSION}" != "${LIB_VERSION}" ]; then
+    bashio::log.error "HailoRT version mismatch: kernel driver is ${DRIVER_VERSION} but libhailort is ${LIB_VERSION}"
+    bashio::log.error "All three must match: kernel driver, .deb, and .whl"
+    bashio::log.error "Update your Pi's Hailo driver to ${LIB_VERSION}, or replace the files in ${RUNTIME_DIR}/ with version ${DRIVER_VERSION}"
+    bashio::log.error "See: https://github.com/hailo-ai/hailort-drivers"
+    exit 1
+fi
+
 _print_wheel_instructions() {
     bashio::log.error "To fix this:"
     bashio::log.error "  1. Register at https://developer.hailo.ai"
