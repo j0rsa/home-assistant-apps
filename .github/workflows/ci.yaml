@@ -41,6 +41,7 @@ jobs:
       packages: write
       id-token: write
     strategy:
+      fail-fast: false
       matrix: ${{ fromJson(needs.generate-matrix.outputs.matrix) }}
     steps:
       - name: Check out the repo
