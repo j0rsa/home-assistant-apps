@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.4
+
+- Fix musl version conflict by upgrading musl before installing musl-dev (Alpine 3.19 repo drift)
+
 ## 0.1.3
 
 - Revert build.yaml base image to 13.1.3 (18.0.0 causes musl version conflict); restore py3-pip/setuptools/wheel for Alpine 3.19
