@@ -25,23 +25,28 @@ fi
 PYTHON_TAG="$("${APP_DIR}/.venv/bin/python" -c 'import sys; v=sys.version_info; print(f"cp{v.major}{v.minor}")')"
 
 if ! ldconfig -p | grep -q "libhailort.so"; then
-    bashio::log.error "HailoRT native library (libhailort.so) is not installed on the host"
-    bashio::log.error "The Python wheel alone is not enough — you also need the HailoRT Debian package:"
-    bashio::log.error "  1. Download hailort_4.x.x_arm64.deb from https://developer.hailo.ai"
-    bashio::log.error "     (same version as your firmware: hailortcli fw-control identify)"
-    bashio::log.error "  2. Install it on the Raspberry Pi: sudo dpkg -i hailort_4.x.x_arm64.deb"
-    bashio::log.error "  3. Restart this app"
-    exit 1
+    if ! ls "${RUNTIME_DIR}"/*.deb >/dev/null 2>&1; then
+        bashio::log.error "HailoRT native library (libhailort.so) is not installed"
+        bashio::log.error "The Python wheel alone is not enough — you also need the HailoRT Debian package:"
+        bashio::log.error "  1. Download hailort_4.x.x_arm64.deb from https://developer.hailo.ai"
+        bashio::log.error "     (same version as your firmware: hailortcli fw-control identify)"
+        bashio::log.error "  2. Place the .deb file into ${RUNTIME_DIR}/"
+        bashio::log.error "  3. Restart this app"
+        exit 1
+    fi
+    bashio::log.info "Installing HailoRT Debian package..."
+    dpkg -i "${RUNTIME_DIR}"/*.deb
+    ldconfig
 fi
 
 _print_wheel_instructions() {
     bashio::log.error "To fix this:"
     bashio::log.error "  1. Register at https://developer.hailo.ai"
     bashio::log.error "  2. Go to Downloads -> Software -> HailoRT"
-    bashio::log.error "  3. Download the Python wheel matching your setup:"
-    bashio::log.error "       Filename: hailort-4.x.x-${PYTHON_TAG}-${PYTHON_TAG}-linux_aarch64.whl"
-    bashio::log.error "       Match the version to your firmware: hailortcli fw-control identify"
-    bashio::log.error "  4. Place the .whl file into ${RUNTIME_DIR}/"
+    bashio::log.error "  3. Download both files matching your firmware version (hailortcli fw-control identify):"
+    bashio::log.error "       hailort_4.x.x_arm64.deb"
+    bashio::log.error "       hailort-4.x.x-${PYTHON_TAG}-${PYTHON_TAG}-linux_aarch64.whl"
+    bashio::log.error "  4. Place both files into ${RUNTIME_DIR}/"
     bashio::log.error "  5. Restart this app"
 }
 

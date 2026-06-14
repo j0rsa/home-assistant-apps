@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.11
+
+- Auto-install HailoRT .deb from hailo_packages/ if libhailort.so is missing in the container
+- Update instructions to place both .deb and .whl into hailo_packages/
+
 ## 0.1.10
 
 - Fix download_resources.sh: mkdir -P (invalid flag) caused decoder_assets/tiny directories to not be created
