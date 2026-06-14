@@ -3,4 +3,4 @@ codenotary:
     signer: "red.avtovo@gmail.com"
 
 build_from:
-    aarch64: "ghcr.io/hassio-addons/base-python/aarch64:18.0.0"
+    aarch64: "ghcr.io/hassio-addons/base-python/aarch64:13.1.3"

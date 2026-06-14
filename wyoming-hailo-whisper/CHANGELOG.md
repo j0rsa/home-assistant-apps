@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3
+
+- Revert build.yaml base image to 13.1.3 (18.0.0 causes musl version conflict); restore py3-pip/setuptools/wheel for Alpine 3.19
+
 ## 0.1.2
 
 - Fix apk packages py3-pip/py3-setuptools/py3-wheel no longer available in Alpine 3.21 (base-python 18.0.0 already bundles them)
