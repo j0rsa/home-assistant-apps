@@ -24,7 +24,13 @@ fi
 
 if ! ls "${RUNTIME_DIR}"/*.whl >/dev/null 2>&1; then
     bashio::log.error "Missing Hailo Python wheel in ${RUNTIME_DIR}"
-    bashio::log.error "Please place the ARM64 HailoRT Python wheel into ${RUNTIME_DIR}"
+    bashio::log.error "To fix this:"
+    bashio::log.error "  1. Register at https://developer.hailo.ai"
+    bashio::log.error "  2. Go to Downloads -> Software -> HailoRT"
+    bashio::log.error "  3. Download the Python wheel for aarch64 (hailort-4.x.x-cp311-cp311-linux_aarch64.whl)"
+    bashio::log.error "     Match the version to your installed firmware: hailortcli fw-control identify"
+    bashio::log.error "  4. Place the .whl file into ${RUNTIME_DIR}/"
+    bashio::log.error "  5. Restart this app"
     exit 1
 fi
 

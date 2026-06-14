@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.8
+
+- Improve missing Hailo wheel error with step-by-step download instructions
+
 ## 0.1.7
 
 - Switch base image from Alpine (hassio-addons/base-python) to Debian bookworm to support PyTorch aarch64 wheels
