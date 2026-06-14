@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.14
+
+- Add privileged: true to config.yaml to allow full device access from the container
+- Detect hailortd socket and set HAILO_MONITOR_SOCKET_PATH so the library uses daemon mode when the daemon holds the device
+
 ## 0.1.13
 
 - Detect HailoRT driver/library version mismatch at startup and exit with a clear error instead of a cryptic traceback

@@ -22,6 +22,11 @@ if [ ! -e /dev/hailo0 ]; then
     exit 1
 fi
 
+if [ -S /var/run/hailort.sock ]; then
+    bashio::log.info "hailortd socket found — using daemon mode"
+    export HAILO_MONITOR_SOCKET_PATH=/var/run/hailort.sock
+fi
+
 PYTHON_TAG="$("${APP_DIR}/.venv/bin/python" -c 'import sys; v=sys.version_info; print(f"cp{v.major}{v.minor}")')"
 
 if ! ldconfig -p | grep -q "libhailort.so"; then
