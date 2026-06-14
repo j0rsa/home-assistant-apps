@@ -24,6 +24,16 @@ fi
 
 PYTHON_TAG="$("${APP_DIR}/.venv/bin/python" -c 'import sys; v=sys.version_info; print(f"cp{v.major}{v.minor}")')"
 
+if ! ldconfig -p | grep -q "libhailort.so"; then
+    bashio::log.error "HailoRT native library (libhailort.so) is not installed on the host"
+    bashio::log.error "The Python wheel alone is not enough — you also need the HailoRT Debian package:"
+    bashio::log.error "  1. Download hailort_4.x.x_arm64.deb from https://developer.hailo.ai"
+    bashio::log.error "     (same version as your firmware: hailortcli fw-control identify)"
+    bashio::log.error "  2. Install it on the Raspberry Pi: sudo dpkg -i hailort_4.x.x_arm64.deb"
+    bashio::log.error "  3. Restart this app"
+    exit 1
+fi
+
 _print_wheel_instructions() {
     bashio::log.error "To fix this:"
     bashio::log.error "  1. Register at https://developer.hailo.ai"

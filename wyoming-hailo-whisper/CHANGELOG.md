@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.10
+
+- Fix download_resources.sh: mkdir -P (invalid flag) caused decoder_assets/tiny directories to not be created
+- Add early check for libhailort.so with instructions to install the HailoRT Debian package
+
 ## 0.1.9
 
 - Detect Python version at runtime and validate wheel compatibility before install
