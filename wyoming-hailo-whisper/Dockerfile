@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base-python/aarch64:18.0.0
+ARG BUILD_FROM=ghcr.io/home-assistant/aarch64-base-debian:bookworm
 FROM ${BUILD_FROM}
 
 ARG BUILD_VERSION
@@ -21,24 +21,21 @@ COPY wyoming_hailo_whisper/ ./wyoming_hailo_whisper/
 COPY requirements.txt setup.py setup.cfg docker-entrypoint.sh start-hailo-example.sh ./
 COPY run.sh /run.sh
 
-RUN sed -i 's/^musl=.*/musl/' /etc/apk/world \
-    && apk upgrade --no-cache \
-    && apk add --no-cache \
-      bash \
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends \
       ffmpeg \
       g++ \
       gcc \
       git \
-      linux-headers \
+      linux-headers-generic \
       make \
-      musl-dev \
-      portaudio \
-      py3-pip \
-      py3-setuptools \
-      py3-wheel \
+      portaudio19-dev \
       python3 \
       python3-dev \
+      python3-pip \
+      python3-venv \
       wget \
+    && rm -rf /var/lib/apt/lists/* \
     && python3 -m venv ${VENV_DIR} \
     && ${VENV_DIR}/bin/pip install --upgrade pip setuptools wheel \
     && ${VENV_DIR}/bin/pip install --no-cache-dir -r requirements.txt \

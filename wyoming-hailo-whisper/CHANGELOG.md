@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.7
+
+- Switch base image from Alpine (hassio-addons/base-python) to Debian bookworm to support PyTorch aarch64 wheels
+
 ## 0.1.6
 
 - Fix musl exact-version pin in /etc/apk/world that blocked apk upgrade from updating musl
