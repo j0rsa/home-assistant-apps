@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.6
+
+- Fix musl exact-version pin in /etc/apk/world that blocked apk upgrade from updating musl
+
 ## 0.1.5
 
 - Fix musl version conflict: run full apk upgrade before apk add (base image 13.1.3 has stale pinned packages)

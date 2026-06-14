@@ -21,7 +21,8 @@ COPY wyoming_hailo_whisper/ ./wyoming_hailo_whisper/
 COPY requirements.txt setup.py setup.cfg docker-entrypoint.sh start-hailo-example.sh ./
 COPY run.sh /run.sh
 
-RUN apk upgrade --no-cache \
+RUN sed -i 's/^musl=.*/musl/' /etc/apk/world \
+    && apk upgrade --no-cache \
     && apk add --no-cache \
       bash \
       ffmpeg \
