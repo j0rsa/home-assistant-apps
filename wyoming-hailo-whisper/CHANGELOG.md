@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.12
+
+- Fix model download failing with "mkdir: cannot create directory hefs: File exists" — symlinks were created before download, download script now writes directly to MODELS_DIR
+- Symlinks are created after download completes
+
 ## 0.1.11
 
 - Auto-install HailoRT .deb from hailo_packages/ if libhailort.so is missing in the container

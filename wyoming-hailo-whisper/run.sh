@@ -77,6 +77,11 @@ if [ "${CURRENT_WHEEL_FINGERPRINT}" != "${INSTALLED_WHEEL_FINGERPRINT}" ]; then
     printf '%s' "${CURRENT_WHEEL_FINGERPRINT}" > "${APP_DIR}/.hailo-runtime-wheel.sha256"
 fi
 
+if [ ! -d "${MODELS_DIR}/hefs" ] || [ ! -d "${MODELS_DIR}/decoder_assets" ]; then
+    bashio::log.info "Whisper model resources not found in ${MODELS_DIR}; downloading them now"
+    (cd "${APP_RESOURCE_DIR}" && ./download_resources.sh "${MODELS_DIR}")
+fi
+
 if [ ! -L "${APP_RESOURCE_DIR}/hefs" ]; then
     rm -rf "${APP_RESOURCE_DIR}/hefs"
     ln -s "${MODELS_DIR}/hefs" "${APP_RESOURCE_DIR}/hefs"
@@ -85,11 +90,6 @@ fi
 if [ ! -L "${APP_RESOURCE_DIR}/decoder_assets" ]; then
     rm -rf "${APP_RESOURCE_DIR}/decoder_assets"
     ln -s "${MODELS_DIR}/decoder_assets" "${APP_RESOURCE_DIR}/decoder_assets"
-fi
-
-if [ ! -d "${MODELS_DIR}/hefs" ] || [ ! -d "${MODELS_DIR}/decoder_assets" ]; then
-    bashio::log.info "Whisper model resources not found in ${MODELS_DIR}; downloading them now"
-    (cd "${APP_RESOURCE_DIR}" && ./download_resources.sh)
 fi
 
 bashio::log.info "Launching Wyoming Hailo Whisper on 0.0.0.0:10600"
