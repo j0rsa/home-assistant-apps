@@ -22,9 +22,16 @@ if [ ! -e /dev/hailo0 ]; then
     exit 1
 fi
 
-if [ -S /var/run/hailort.sock ]; then
-    bashio::log.info "hailortd socket found — using daemon mode"
-    export HAILO_MONITOR_SOCKET_PATH=/var/run/hailort.sock
+HAILO_SOCKET="$(bashio::config 'hailo_socket')"
+if [ -n "${HAILO_SOCKET}" ]; then
+    if [ -S "${HAILO_SOCKET}" ]; then
+        bashio::log.info "Using hailortd socket: ${HAILO_SOCKET}"
+        export HAILO_SOCKET_PATH="${HAILO_SOCKET}"
+    else
+        bashio::log.error "Configured hailo_socket ${HAILO_SOCKET} does not exist or is not a socket"
+        bashio::log.error "Make sure the Hailo Daemon app is running"
+        exit 1
+    fi
 fi
 
 PYTHON_TAG="$("${APP_DIR}/.venv/bin/python" -c 'import sys; v=sys.version_info; print(f"cp{v.major}{v.minor}")')"

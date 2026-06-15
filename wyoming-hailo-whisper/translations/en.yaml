@@ -1,0 +1,26 @@
+configuration:
+  variant:
+    name: Model Variant
+    description: >-
+      Whisper model size to use for speech recognition.
+      'tiny' is faster and uses less memory; 'base' is more accurate.
+  device:
+    name: Hailo Device
+    description: >-
+      Hardware accelerator model installed in your Raspberry Pi 5.
+      'hailo8l' is the M.2 module shipped with the AI Kit; 'hailo8' is the
+      full-size Hailo-8 module.
+  language:
+    name: Language
+    description: >-
+      Language to recognize. Only the selected language will be transcribed.
+  hailo_socket:
+    name: Hailo Daemon Socket
+    description: >-
+      Path to the hailortd Unix socket for multiplexed device access.
+      Leave empty to access /dev/hailo0 directly (only one app can use the
+      device at a time). Set to '/share/hailo/hailo_rt_service.sock' when
+      the Hailo Daemon add-on is running to share the device with other apps
+      such as Frigate.
+network:
+  10600/tcp: Wyoming speech-to-text port

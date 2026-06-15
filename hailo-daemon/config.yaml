@@ -1,0 +1,23 @@
+---
+name: "Hailo Daemon"
+version: 0.0.1
+slug: hailo_daemon
+description: |
+  Runs hailortd to multiplex access to the Hailo-8/Hailo-8L AI accelerator.
+
+  Required when multiple apps (e.g. Frigate, Wyoming Hailo Whisper) need to share
+  the Hailo device simultaneously. Exposes the daemon socket at
+  /share/hailo/hailo_rt_service.sock for other containers to use.
+init: false
+startup: services
+arch:
+  - aarch64
+boot: auto
+full_access: true
+udev: true
+map:
+  - share:rw
+image: "ghcr.io/j0rsa/haddon-hailo-daemon-{arch}"
+panel_icon: mdi:chip
+codenotary: red.avtovo@gmail.com
+url: https://github.com/j0rsa/home-assistant-apps

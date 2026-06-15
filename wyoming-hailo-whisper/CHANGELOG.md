@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.16
+
+- Add hailo_socket option to use hailortd multiplexer (set to /share/hailo/hailo_rt_service.sock when Hailo Daemon add-on is running)
+- Add translations/en.yaml with descriptions for all configuration options
+
 ## 0.1.15
 
 - Fix app disappearing from HA: replace invalid `privileged: true` with `full_access: true` (correct bool field per HA docs)

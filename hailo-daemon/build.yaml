@@ -1,0 +1,6 @@
+---
+codenotary:
+    signer: "red.avtovo@gmail.com"
+
+build_from:
+    aarch64: "ghcr.io/home-assistant/aarch64-base-debian:bookworm"
