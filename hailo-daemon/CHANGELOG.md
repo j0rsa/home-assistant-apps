@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.5
+
+- Configure hailort_service socket path via /etc/default/hailort_service and HAILORT_SERVICE_ADDRESS env var so socket lands in /share/hailo/ accessible to other containers
+- Log config file contents to help diagnose if config key differs
+
 ## 0.0.4
 
 - Fix container exiting: hailort_service daemonizes itself so run it in foreground mode and monitor the socket instead of the PID

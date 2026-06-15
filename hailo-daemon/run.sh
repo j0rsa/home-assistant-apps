@@ -43,28 +43,49 @@ if [ ! -x "${HAILO_SERVICE_BIN}" ]; then
     exit 1
 fi
 
+HAILO_SOCKET="${SHARE_DIR}/hailo_rt_service.sock"
+
+# Configure hailort_service to create its socket at the shared path
+if [ -f /etc/default/hailort_service ]; then
+    bashio::log.info "Configuring hailort_service socket path..."
+    bashio::log.info "Contents of /etc/default/hailort_service:"
+    cat /etc/default/hailort_service
+    # Try to set the socket path if the config supports it
+    if grep -q "SOCKET" /etc/default/hailort_service; then
+        sed -i "s|.*SOCKET.*|HAILORT_SERVICE_ADDRESS=${HAILO_SOCKET}|" /etc/default/hailort_service
+    else
+        echo "HAILORT_SERVICE_ADDRESS=${HAILO_SOCKET}" >> /etc/default/hailort_service
+    fi
+    bashio::log.info "Updated config:"
+    cat /etc/default/hailort_service
+fi
+
+# Also try via environment variable
+export HAILORT_SERVICE_ADDRESS="${HAILO_SOCKET}"
+
 bashio::log.info "Starting hailort_service (driver ${DRIVER_VERSION})..."
 "${HAILO_SERVICE_BIN}"
 
-# hailort_service daemonizes itself — wait for its socket to appear
-HAILO_SOCKET=""
+# Wait for the socket to appear
 for i in $(seq 1 20); do
-    FOUND="$(find /var/run /run /tmp -name "*.sock" 2>/dev/null | grep -i hailo | head -1 || true)"
-    if [ -n "${FOUND}" ]; then
-        HAILO_SOCKET="${FOUND}"
-        break
+    [ -S "${HAILO_SOCKET}" ] && break
+    # Also check default location in case config was ignored
+    if [ -S /tmp/hailort_uds.sock ]; then
+        bashio::log.warning "Service created socket at default location — config key may differ"
+        bashio::log.warning "Contents of /etc/default/hailort_service:"
+        cat /etc/default/hailort_service || true
+        bashio::log.error "Cannot share socket across containers from /tmp — check config above"
+        exit 1
     fi
     sleep 0.5
 done
 
-if [ -z "${HAILO_SOCKET}" ]; then
-    bashio::log.error "hailort_service did not create a socket after 10s"
+if [ ! -S "${HAILO_SOCKET}" ]; then
+    bashio::log.error "hailort_service did not create socket at ${HAILO_SOCKET}"
     exit 1
 fi
 
-bashio::log.info "hailort_service socket: ${HAILO_SOCKET}"
-ln -sf "${HAILO_SOCKET}" "${SHARE_DIR}/hailo_rt_service.sock"
-bashio::log.info "Socket exposed at ${SHARE_DIR}/hailo_rt_service.sock"
+bashio::log.info "hailort_service ready — socket at ${HAILO_SOCKET}"
 
 # Keep container alive; exit if the socket disappears
 while [ -S "${HAILO_SOCKET}" ]; do
