@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.15
+
+- Fix app disappearing from HA: replace invalid `privileged: true` with `full_access: true` (correct bool field per HA docs)
+- Remove redundant `devices` entry (full_access covers all devices)
+
 ## 0.1.14
 
 - Add privileged: true to config.yaml to allow full device access from the container
