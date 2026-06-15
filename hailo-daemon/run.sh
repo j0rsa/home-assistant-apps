@@ -39,13 +39,16 @@ if [ "${DRIVER_VERSION}" != "unknown" ] && [ "${LIB_VERSION}" != "unknown" ] && 
     exit 1
 fi
 
-if ! command -v hailortd >/dev/null 2>&1; then
-    bashio::log.error "hailortd binary not found — is the .deb correctly installed?"
+HAILORTD_BIN="$(find /usr /opt /bin /sbin -name "hailortd" -type f 2>/dev/null | head -1 || true)"
+if [ -z "${HAILORTD_BIN}" ]; then
+    bashio::log.error "hailortd binary not found after .deb install. Contents of package:"
+    dpkg -L hailort 2>/dev/null | grep -i hailo || true
     exit 1
 fi
+bashio::log.info "Found hailortd at ${HAILORTD_BIN}"
 
 bashio::log.info "Starting hailortd (driver ${DRIVER_VERSION})..."
-hailortd &
+"${HAILORTD_BIN}" &
 HAILORTD_PID=$!
 
 # Wait up to 5 seconds for socket
