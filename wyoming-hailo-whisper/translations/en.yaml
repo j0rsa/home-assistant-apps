@@ -10,10 +10,6 @@ configuration:
       Hardware accelerator model installed in your Raspberry Pi 5.
       'hailo8l' is the M.2 module shipped with the AI Kit; 'hailo8' is the
       full-size Hailo-8 module.
-  language:
-    name: Language
-    description: >-
-      Language to recognize. Only the selected language will be transcribed.
   hailo_socket:
     name: Hailo Daemon Socket
     description: >-

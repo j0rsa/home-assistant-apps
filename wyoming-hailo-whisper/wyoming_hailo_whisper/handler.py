@@ -45,7 +45,7 @@ class HailoWhisperEventHandler(AsyncEventHandler):
             width=2,
             channels=1,
         )
-        self._language = self.cli_args.language or "en"
+        self._language = "auto"
 
     async def handle_event(self, event: Event) -> bool:
         if AudioChunk.is_type(event.type):
@@ -105,15 +105,9 @@ class HailoWhisperEventHandler(AsyncEventHandler):
 
             # Reset
             self.audio = bytes()
-            self._language = self.cli_args.language
-
             return False
 
         if Transcribe.is_type(event.type):
-            transcribe = Transcribe.from_event(event)
-            if transcribe.language:
-                self._language = transcribe.language
-                _LOGGER.debug("Language set to %s", transcribe.language)
             return True
 
         if Describe.is_type(event.type):

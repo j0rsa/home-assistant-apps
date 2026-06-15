@@ -60,11 +60,6 @@ async def main() -> None:
         help="Whisper variant to use (default: base)"
     )
     parser.add_argument(
-        "--language",
-        default="en",
-        help="Default language to set for transcription",
-    )
-    parser.add_argument(
         "--multi-process-service", 
         action="store_true", 
         help="Enable multi-process service to run other models in addition to Whisper"
@@ -108,7 +103,7 @@ async def main() -> None:
                             url="https://hailo.ai",
                         ),
                         installed=True,
-                        languages=["en", "ru"],
+                        languages=[],
                         version=__version__,
                     )
                 ],
@@ -125,7 +120,6 @@ async def main() -> None:
     _LOGGER.info("Device %s", args.device)
     _LOGGER.info("Encoder %s", encoder_path)
     _LOGGER.info("Decoder %s", decoder_path)
-    _LOGGER.info("Language %s", args.language)
     _LOGGER.info("Variant %s", args.variant)
 
     server = AsyncServer.from_uri(args.uri)

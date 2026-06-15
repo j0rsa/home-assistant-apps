@@ -8,12 +8,10 @@ MODELS_DIR="${SHARE_DIR}/models"
 APP_RESOURCE_DIR="${APP_DIR}/wyoming_hailo_whisper/app"
 VARIANT="$(bashio::config 'variant')"
 DEVICE="$(bashio::config 'device')"
-LANGUAGE="$(bashio::config 'language')"
 
 bashio::log.info "Starting Wyoming Hailo Whisper"
 bashio::log.info "Variant: ${VARIANT}"
 bashio::log.info "Device: ${DEVICE}"
-bashio::log.info "Language: ${LANGUAGE}"
 
 mkdir -p "${RUNTIME_DIR}" "${MODELS_DIR}"
 
@@ -119,5 +117,4 @@ bashio::log.info "Launching Wyoming Hailo Whisper on 0.0.0.0:10600"
 exec "${APP_DIR}/.venv/bin/python" -m wyoming_hailo_whisper \
     --uri 'tcp://0.0.0.0:10600' \
     --device "${DEVICE}" \
-    --variant "${VARIANT}" \
-    --language "${LANGUAGE}"
+    --variant "${VARIANT}"

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.17
+
+- Remove language option: the HEF decoder has no language token injection so the setting had no effect; language is now auto-detected from audio
+
 ## 0.1.16
 
 - Add hailo_socket option to use hailortd multiplexer (set to /share/hailo/hailo_rt_service.sock when Hailo Daemon add-on is running)
