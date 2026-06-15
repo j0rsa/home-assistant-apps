@@ -3,8 +3,7 @@ set -euo pipefail
 
 SHARE_DIR="/share/hailo"
 RUNTIME_DIR="/share/hailo-daemon/hailo_packages"
-HAILO_SOCKET=/var/run/hailo_rt_service.sock
-HAILO_SOCKET_SHARED="${SHARE_DIR}/hailo_rt_service.sock"
+HAILO_SERVICE_BIN="/usr/local/bin/hailort_service"
 
 bashio::log.info "Starting Hailo Daemon"
 
@@ -39,33 +38,36 @@ if [ "${DRIVER_VERSION}" != "unknown" ] && [ "${LIB_VERSION}" != "unknown" ] && 
     exit 1
 fi
 
-HAILORTD_BIN="$(find /usr /opt /bin /sbin -name "hailortd" -type f 2>/dev/null | head -1 || true)"
-if [ -z "${HAILORTD_BIN}" ]; then
-    bashio::log.error "hailortd binary not found after .deb install. Contents of package:"
-    dpkg -L hailort 2>/dev/null | grep -i hailo || true
+if [ ! -x "${HAILO_SERVICE_BIN}" ]; then
+    bashio::log.error "hailort_service binary not found at ${HAILO_SERVICE_BIN}"
     exit 1
 fi
-bashio::log.info "Found hailortd at ${HAILORTD_BIN}"
 
-bashio::log.info "Starting hailortd (driver ${DRIVER_VERSION})..."
-"${HAILORTD_BIN}" &
-HAILORTD_PID=$!
+bashio::log.info "Starting hailort_service (driver ${DRIVER_VERSION})..."
+"${HAILO_SERVICE_BIN}" &
+SERVICE_PID=$!
 
-# Wait up to 5 seconds for socket
+# Discover the socket — wait up to 5 seconds for it to appear
+HAILO_SOCKET=""
 for i in $(seq 1 10); do
-    [ -S "${HAILO_SOCKET}" ] && break
+    FOUND="$(find /var/run /run /tmp -name "*.sock" -newer /proc/1 2>/dev/null | grep -i hailo | head -1 || true)"
+    if [ -n "${FOUND}" ]; then
+        HAILO_SOCKET="${FOUND}"
+        break
+    fi
     sleep 0.5
 done
 
-if [ ! -S "${HAILO_SOCKET}" ]; then
-    bashio::log.error "hailortd did not create socket at ${HAILO_SOCKET}"
+if [ -z "${HAILO_SOCKET}" ]; then
+    bashio::log.error "hailort_service did not create a socket — check logs above"
     exit 1
 fi
 
-ln -sf "${HAILO_SOCKET}" "${HAILO_SOCKET_SHARED}"
-bashio::log.info "hailortd ready — socket exposed at ${HAILO_SOCKET_SHARED}"
+bashio::log.info "hailort_service socket: ${HAILO_SOCKET}"
+ln -sf "${HAILO_SOCKET}" "${SHARE_DIR}/hailo_rt_service.sock"
+bashio::log.info "Socket exposed at ${SHARE_DIR}/hailo_rt_service.sock"
 
-# Keep container alive and exit if hailortd dies
-wait "${HAILORTD_PID}"
-bashio::log.error "hailortd exited unexpectedly"
+# Keep container alive; exit if the service dies
+wait "${SERVICE_PID}"
+bashio::log.error "hailort_service exited unexpectedly"
 exit 1
