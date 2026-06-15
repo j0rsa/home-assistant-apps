@@ -44,13 +44,12 @@ if [ ! -x "${HAILO_SERVICE_BIN}" ]; then
 fi
 
 bashio::log.info "Starting hailort_service (driver ${DRIVER_VERSION})..."
-"${HAILO_SERVICE_BIN}" &
-SERVICE_PID=$!
+"${HAILO_SERVICE_BIN}"
 
-# Discover the socket — wait up to 5 seconds for it to appear
+# hailort_service daemonizes itself — wait for its socket to appear
 HAILO_SOCKET=""
-for i in $(seq 1 10); do
-    FOUND="$(find /var/run /run /tmp -name "*.sock" -newer /proc/1 2>/dev/null | grep -i hailo | head -1 || true)"
+for i in $(seq 1 20); do
+    FOUND="$(find /var/run /run /tmp -name "*.sock" 2>/dev/null | grep -i hailo | head -1 || true)"
     if [ -n "${FOUND}" ]; then
         HAILO_SOCKET="${FOUND}"
         break
@@ -59,7 +58,7 @@ for i in $(seq 1 10); do
 done
 
 if [ -z "${HAILO_SOCKET}" ]; then
-    bashio::log.error "hailort_service did not create a socket — check logs above"
+    bashio::log.error "hailort_service did not create a socket after 10s"
     exit 1
 fi
 
@@ -67,7 +66,10 @@ bashio::log.info "hailort_service socket: ${HAILO_SOCKET}"
 ln -sf "${HAILO_SOCKET}" "${SHARE_DIR}/hailo_rt_service.sock"
 bashio::log.info "Socket exposed at ${SHARE_DIR}/hailo_rt_service.sock"
 
-# Keep container alive; exit if the service dies
-wait "${SERVICE_PID}"
-bashio::log.error "hailort_service exited unexpectedly"
+# Keep container alive; exit if the socket disappears
+while [ -S "${HAILO_SOCKET}" ]; do
+    sleep 5
+done
+
+bashio::log.error "hailort_service socket disappeared — service likely crashed"
 exit 1

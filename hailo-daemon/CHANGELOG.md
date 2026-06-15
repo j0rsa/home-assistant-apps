@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+
+- Fix container exiting: hailort_service daemonizes itself so run it in foreground mode and monitor the socket instead of the PID
+
 ## 0.0.3
 
 - Fix binary name: use /usr/local/bin/hailort_service (not hailortd)
