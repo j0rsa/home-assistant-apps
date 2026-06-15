@@ -43,54 +43,38 @@ if [ ! -x "${HAILO_SERVICE_BIN}" ]; then
     exit 1
 fi
 
-HAILO_SOCKET="${SHARE_DIR}/hailo_rt_service.sock"
-
-# Configure hailort_service to create its socket at the shared path
-if [ -f /etc/default/hailort_service ]; then
-    bashio::log.info "Configuring hailort_service socket path..."
-    bashio::log.info "Contents of /etc/default/hailort_service:"
-    cat /etc/default/hailort_service
-    # Try to set the socket path if the config supports it
-    if grep -q "SOCKET" /etc/default/hailort_service; then
-        sed -i "s|.*SOCKET.*|HAILORT_SERVICE_ADDRESS=${HAILO_SOCKET}|" /etc/default/hailort_service
-    else
-        echo "HAILORT_SERVICE_ADDRESS=${HAILO_SOCKET}" >> /etc/default/hailort_service
-    fi
-    bashio::log.info "Updated config:"
-    cat /etc/default/hailort_service
-fi
-
-# Also try via environment variable
-export HAILORT_SERVICE_ADDRESS="${HAILO_SOCKET}"
+HAILO_INTERNAL_SOCKET=/tmp/hailort_uds.sock
+HAILO_SHARED_SOCKET="${SHARE_DIR}/hailo_rt_service.sock"
 
 bashio::log.info "Starting hailort_service (driver ${DRIVER_VERSION})..."
 "${HAILO_SERVICE_BIN}"
 
-# Wait for the socket to appear
+# Wait up to 10 seconds for the internal socket
 for i in $(seq 1 20); do
-    [ -S "${HAILO_SOCKET}" ] && break
-    # Also check default location in case config was ignored
-    if [ -S /tmp/hailort_uds.sock ]; then
-        bashio::log.warning "Service created socket at default location — config key may differ"
-        bashio::log.warning "Contents of /etc/default/hailort_service:"
-        cat /etc/default/hailort_service || true
-        bashio::log.error "Cannot share socket across containers from /tmp — check config above"
-        exit 1
-    fi
+    [ -S "${HAILO_INTERNAL_SOCKET}" ] && break
     sleep 0.5
 done
 
-if [ ! -S "${HAILO_SOCKET}" ]; then
-    bashio::log.error "hailort_service did not create socket at ${HAILO_SOCKET}"
+if [ ! -S "${HAILO_INTERNAL_SOCKET}" ]; then
+    bashio::log.error "hailort_service did not create socket at ${HAILO_INTERNAL_SOCKET}"
     exit 1
 fi
 
-bashio::log.info "hailort_service ready — socket at ${HAILO_SOCKET}"
+bashio::log.info "hailort_service ready — proxying ${HAILO_INTERNAL_SOCKET} -> ${HAILO_SHARED_SOCKET}"
 
-# Keep container alive; exit if the socket disappears
-while [ -S "${HAILO_SOCKET}" ]; do
+# Remove stale socket from previous run
+rm -f "${HAILO_SHARED_SOCKET}"
+
+# socat bridges the shared socket to the internal one so other containers can connect
+socat "UNIX-LISTEN:${HAILO_SHARED_SOCKET},fork,reuseaddr" "UNIX-CONNECT:${HAILO_INTERNAL_SOCKET}" &
+SOCAT_PID=$!
+
+bashio::log.info "Hailo daemon ready — shared socket at ${HAILO_SHARED_SOCKET}"
+
+# Keep alive; exit if socat or the internal socket dies
+while kill -0 "${SOCAT_PID}" 2>/dev/null && [ -S "${HAILO_INTERNAL_SOCKET}" ]; do
     sleep 5
 done
 
-bashio::log.error "hailort_service socket disappeared — service likely crashed"
+bashio::log.error "Hailo daemon stopped unexpectedly"
 exit 1

@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.6
+
+- Socket path is hardcoded in binary as /tmp/hailort_uds.sock; use socat to proxy it to /share/hailo/hailo_rt_service.sock
+- Install socat in Dockerfile
+
 ## 0.0.5
 
 - Configure hailort_service socket path via /etc/default/hailort_service and HAILORT_SERVICE_ADDRESS env var so socket lands in /share/hailo/ accessible to other containers
