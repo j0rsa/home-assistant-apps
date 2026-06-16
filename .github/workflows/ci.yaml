@@ -55,7 +55,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push ${{ matrix.target }}
-        uses: home-assistant/builder@2026.03.2
+        uses: home-assistant/builder@2026.06.0
         with:
           args: |
             ${{ matrix.platforms }} \
