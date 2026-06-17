@@ -11,6 +11,9 @@
   "ignorePaths": [
     "duplicati/**"
   ],
+  "ignoreDeps": [
+    "home-assistant/builder"
+  ],
   // Self-hosted: allow commands globally, e.g. allowedCommands: ["^python3 scripts/addon_version_sync\\.py sync .+$"]
   // Handlebars fills {{{packageFileDir}}} with the Dockerfile directory (addon slug).
   "packageRules": [
