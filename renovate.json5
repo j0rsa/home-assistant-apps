@@ -14,9 +14,16 @@
   "ignoreDeps": [
     "home-assistant/builder"
   ],
+  // scipy 1.18+ requires Python 3.12; wyoming-hailo-whisper uses Debian bookworm (3.11)
   // Self-hosted: allow commands globally, e.g. allowedCommands: ["^python3 scripts/addon_version_sync\\.py sync .+$"]
   // Handlebars fills {{{packageFileDir}}} with the Dockerfile directory (addon slug).
   "packageRules": [
+    {
+      "matchManagers": ["pip_requirements"],
+      "matchPackageNames": ["scipy"],
+      "matchPaths": ["wyoming-hailo-whisper/**"],
+      "allowedVersions": "<1.18.0"
+    },
     {
       "matchUpdateTypes": ["patch"],
       "automerge": true,

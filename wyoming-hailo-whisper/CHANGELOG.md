@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.18
+
+- Fix Docker build: pin scipy to 1.17.1 (1.18.0 requires Python 3.12; base image uses 3.11)
+
 ## 0.1.17
 
 - Remove language option: the HEF decoder has no language token injection so the setting had no effect; language is now auto-detected from audio
