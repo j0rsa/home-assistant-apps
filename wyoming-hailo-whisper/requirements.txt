@@ -1,5 +1,5 @@
 wyoming==1.10.0
-transformers==5.13.0
+transformers==5.13.1
 sounddevice==0.5.5
 torch==2.13.0
 scipy==1.17.1
