@@ -65,4 +65,12 @@ export LD_LIBRARY_PATH="/opt/litellm/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
 # LiteLLM ships in a uv virtualenv at /app/.venv. Put its bin dir first on PATH so
 # the `litellm` console script (and subprocesses like `prisma`) resolve.
 export PATH="/app/.venv/bin:${PATH}"
+
+# Point prisma-python and litellm-proxy-extras at the baked CLI/engines under
+# /opt/prisma (upstream moved these off /root/.cache in v1.93.0).
+export PRISMA_BINARY_CACHE_DIR=/opt/prisma/binaries
+export PRISMA_CLI_PATH=/opt/prisma/binaries/node_modules/.bin/prisma
+export PRISMA_CLI_QUERY_ENGINE_TYPE=binary
+export PRISMA_OFFLINE_MODE=true
+
 exec litellm --config "${LITELLM_CONFIG}" --port 4000 --host 0.0.0.0 --telemetry False

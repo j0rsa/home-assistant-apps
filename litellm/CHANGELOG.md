@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.93.0-1
+
+- Fix Docker build for upstream v1.93.0: package Prisma from `/opt/prisma` instead of removed `/root/.cache/prisma*` paths, and pin `PRISMA_*` env vars for offline migrations
+
 ## 1.86.14-5
 
 - Fix `aarch64` permanently and update LiteLLM to 1.86.2. Root cause of the earlier `import: command not found` crashes: litellm's versioned `vX.Y.Z-stable` images publish a broken `linux/arm64` variant whose manifest claims arm64 but contains amd64 binaries (verified on the registry), so the bundled Python could never run on aarch64 regardless of build-time platform pinning. Switched the upstream source to `ghcr.io/berriai/litellm:main-stable` (litellm's recommended, genuinely multi-arch image), pinned by its multi-arch index digest. The redundant `--platform` pin on the upstream stage was removed.

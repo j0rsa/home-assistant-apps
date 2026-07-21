@@ -9,6 +9,8 @@ FROM ${UPSTREAM_IMAGE} AS upstream
 # source on /app/litellm), so copying /app brings the CLI and its deps along. We also
 # sweep /usr/bin for any python console_scripts by shebang. run.sh adds /app/.venv/bin
 # to PATH so the `litellm` entrypoint resolves at runtime.
+# Prisma CLI + engines are baked at /opt/prisma (since upstream v1.93.0); older
+# /root/.cache/prisma* paths are gone. run.sh pins PRISMA_* so migrations stay offline.
 RUN PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')") && \
     { \
       echo /usr/local; \
@@ -20,8 +22,7 @@ RUN PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.versi
       echo /usr/lib/libssl.so.3; \
       echo /usr/lib/libgcc_s.so.1; \
       echo /app; \
-      echo /root/.cache/prisma-python; \
-      echo /root/.cache/prisma; \
+      echo /opt/prisma; \
       find /usr/bin -maxdepth 1 -type f \
         -exec sh -c 'head -c 50 "$1" | grep -qF "python" && echo "$1"' _ {} \;; \
     } | sort -u | tar -cf /upstream-payload.tar -T -
@@ -56,6 +57,7 @@ COPY --from=upstream /upstream-payload.tar /tmp/
 RUN mkdir -p /opt/litellm/lib && \
     tar xf /tmp/upstream-payload.tar -C / && \
     mv -f /usr/lib/libcrypto.so.3 /usr/lib/libssl.so.3 /usr/lib/libgcc_s.so.1 /opt/litellm/lib/ && \
+    chmod -R a+rX /opt/prisma && \
     ldconfig && \
     rm /tmp/upstream-payload.tar
 
