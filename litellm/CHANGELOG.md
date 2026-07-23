@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.93.0-2
+
+- Fix MCP stdio servers that use `npx` (e.g. Playwright) failing with `[Errno 2] No such file or directory` by installing `npm` alongside `nodejs`
+
 ## 1.93.0-1
 
 - Fix Docker build for upstream v1.93.0: package Prisma from `/opt/prisma` instead of removed `/root/.cache/prisma*` paths, and pin `PRISMA_*` env vars for offline migrations
