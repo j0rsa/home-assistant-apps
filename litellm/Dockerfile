@@ -44,6 +44,7 @@ RUN apt-get update && \
         libsndfile1 \
         libatomic1 \
         nodejs \
+        npm \
         tzdata \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
