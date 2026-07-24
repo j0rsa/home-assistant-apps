@@ -7,7 +7,7 @@ Built on the Home Assistant Ubuntu base image with bashio; the RustFS glibc bina
 ## Features
 
 - S3 API on port **9000**
-- Web console on port **9001** (ingress-enabled)
+- Web console on port **9001** at `/rustfs/console/` (ingress-enabled via nginx on 8099)
 - Optional OpenID Connect SSO for console login
 - Access to Home Assistant `config`, `share`, `media`, and app config folders
 
@@ -16,7 +16,7 @@ Built on the Home Assistant Ubuntu base image with bashio; the RustFS glibc bina
 | Option | Description |
 |--------|-------------|
 | `access_key` / `secret_key` | Root credentials (change the default secret) |
-| `volumes` | Object store data path(s), default `/data` |
+| `volumes` | Object store data path(s), default `/share/rustfs` |
 | `console_enable` | Enable the web console |
 | `region` | S3 region string |
 | `server_domains` | Virtual-hosted-style domains (comma-separated) |
@@ -36,7 +36,7 @@ Built on the Home Assistant Ubuntu base image with bashio; the RustFS glibc bina
 | SSL certs | `/ssl` (read-only) |
 | App data | `/data` (always present) |
 
-Point `volumes` at `/data` (default) or another writable path such as `/share/rustfs`.
+Point `volumes` at `/share/rustfs` (default) or another writable path such as `/data`.
 
 ## Quick S3 client test
 

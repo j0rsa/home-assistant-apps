@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.0-3
+
+- Fix Home Assistant Ingress 404 by proxying via nginx (`nginx.conf`) and opening `/rustfs/console/` (console is not served at `/`)
+
+## 1.0.0-2
+
+- Default object store path (`volumes`) to `/share/rustfs`
+
 ## 1.0.0-1
 
 - Initial release of RustFS S3-compatible object storage

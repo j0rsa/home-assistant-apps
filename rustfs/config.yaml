@@ -1,6 +1,6 @@
 ---
 name: RustFS
-version: 1.0.0-1
+version: 1.0.0-3
 slug: rustfs
 description: |
   RustFS
@@ -23,21 +23,22 @@ codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-rustfs-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
-webui: http://[HOST]:[PORT:9001]/
+webui: http://[HOST]:[PORT:9001]/rustfs/console/
 watchdog: http://[HOST]:[PORT:9000]/health
 ports:
   9000/tcp: 9000
   9001/tcp: 9001
 ports_description:
   9000/tcp: S3 API
-  9001/tcp: Web console
+  9001/tcp: Web console (direct access)
 ingress: true
-ingress_port: 9001
+ingress_port: 8099
+ingress_entry: rustfs/console/
 panel_icon: mdi:bucket-outline
 options:
   access_key: rustfsadmin
   secret_key: changeme-use-a-strong-secret
-  volumes: /data
+  volumes: /share/rustfs
   console_enable: true
   region: us-east-1
   server_domains: ""

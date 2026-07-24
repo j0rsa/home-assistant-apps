@@ -14,9 +14,11 @@ faq:
   - q: "What credentials do I use to log in?"
     a: "Use the access_key and secret_key from the app options. Change the default secret before exposing the S3 API or console."
   - q: "Where is object data stored?"
-    a: "By default in the app data partition at /data. Set volumes to another path such as /share/rustfs if you prefer."
+    a: "By default under /share/rustfs. Set volumes to another path such as /data if you prefer the app data partition."
   - q: "How do I enable SSO?"
     a: "Set oidc_enable to true and fill oidc_config_url, oidc_client_id, and oidc_client_secret. Register the redirect URI ending in /rustfs/admin/v3/oidc/callback/default on your IdP."
+  - q: "Open Web UI shows 404?"
+    a: "The console is at /rustfs/console/. Ingress is proxied through nginx on port 8099 and opens that path automatically. Direct access: http://homeassistant.local:9001/rustfs/console/."
 ---
 
 # RustFS
@@ -43,7 +45,7 @@ faq:
 | Endpoint | URL |
 |----------|-----|
 | S3 API | `http://homeassistant.local:9000` |
-| Web console | `http://homeassistant.local:9001` or Open Web UI (ingress) |
+| Web console | `http://homeassistant.local:9001/rustfs/console/` or Open Web UI (ingress) |
 | Health | `http://homeassistant.local:9000/health` |
 
 Authenticate S3 clients with your configured `access_key` / `secret_key`. Use path-style addressing unless you set `server_domains`.
@@ -55,7 +57,7 @@ Example options:
 ```yaml
 access_key: rustfsadmin
 secret_key: "replace-with-a-long-random-secret"
-volumes: /data
+volumes: /share/rustfs
 console_enable: true
 region: us-east-1
 server_domains: ""
@@ -106,7 +108,8 @@ Supported IdPs include Keycloak, Authentik, Microsoft Entra ID, Authing, and oth
 | `/share` | Shared folder |
 | `/media` | Media folder |
 | `/ssl` | TLS certificates (read-only) |
-| `/data` | Persistent app data (object store default) |
+| `/data` | Persistent app data |
+| `/share/rustfs` | Default object store path (`volumes`) |
 
 ## Security
 

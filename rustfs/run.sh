@@ -111,8 +111,35 @@ fi
 
 bashio::log.info "Starting RustFS S3 API on :9000 (volumes: ${VOLUMES})"
 if bashio::var.true "${CONSOLE_ENABLE}"; then
-    bashio::log.info "Console enabled on :9001"
+    bashio::log.info "Console enabled on :9001 (ingress via nginx :8099 → /rustfs/console/)"
 fi
 
 # Upstream entrypoint keeps credential validation and volume/log init.
-exec /entrypoint.sh
+/entrypoint.sh &
+RUSTFS_PID=$!
+
+cleanup() {
+    kill "${RUSTFS_PID}" 2>/dev/null || true
+    wait "${RUSTFS_PID}" 2>/dev/null || true
+}
+trap cleanup EXIT INT TERM
+
+# Wait for console (or API) before exposing ingress
+for _ in $(seq 1 60); do
+    if ! kill -0 "${RUSTFS_PID}" 2>/dev/null; then
+        bashio::log.fatal "RustFS exited during startup"
+        wait "${RUSTFS_PID}" || true
+        exit 1
+    fi
+    if bashio::var.true "${CONSOLE_ENABLE}"; then
+        if curl -sf "http://127.0.0.1:9001/rustfs/console/health" >/dev/null; then
+            break
+        fi
+    elif curl -sf "http://127.0.0.1:9000/health" >/dev/null; then
+        break
+    fi
+    sleep 1
+done
+
+bashio::log.info "Starting nginx Ingress proxy on :8099"
+exec nginx -g 'daemon off;'
