@@ -18,7 +18,7 @@ faq:
   - q: "How do I enable SSO?"
     a: "Set oidc_enable to true and fill oidc_config_url, oidc_client_id, and oidc_client_secret. Register the redirect URI ending in /rustfs/admin/v3/oidc/callback/default on your IdP."
   - q: "Open Web UI shows 404?"
-    a: "The console is at /rustfs/console/. Ingress is proxied through nginx on port 8099 and opens that path automatically. Direct access: http://homeassistant.local:9001/rustfs/console/."
+    a: "Ingress is disabled — open http://homeassistant.local:9001/rustfs/console/ directly. The console is not served at / and is not Home Assistant Ingress compatible."
 ---
 
 # RustFS
@@ -45,7 +45,7 @@ faq:
 | Endpoint | URL |
 |----------|-----|
 | S3 API | `http://homeassistant.local:9000` |
-| Web console | `http://homeassistant.local:9001/rustfs/console/` or Open Web UI (ingress) |
+| Web console | `http://homeassistant.local:9001/rustfs/console/` |
 | Health | `http://homeassistant.local:9000/health` |
 
 Authenticate S3 clients with your configured `access_key` / `secret_key`. Use path-style addressing unless you set `server_domains`.

@@ -7,7 +7,7 @@ Built on the Home Assistant Ubuntu base image with bashio; the RustFS glibc bina
 ## Features
 
 - S3 API on port **9000**
-- Web console on port **9001** at `/rustfs/console/` (ingress-enabled via nginx on 8099)
+- Web console on port **9001** at `/rustfs/console/` (direct access; not ingress-compatible)
 - Optional OpenID Connect SSO for console login
 - Access to Home Assistant `config`, `share`, `media`, and app config folders
 

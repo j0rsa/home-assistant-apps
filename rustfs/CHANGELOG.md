@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0-4
+
+- Disable Home Assistant Ingress and remove nginx; console is not ingress-ready (use port 9001 `/rustfs/console/`)
+
 ## 1.0.0-3
 
 - Fix Home Assistant Ingress 404 by proxying via nginx (`nginx.conf`) and opening `/rustfs/console/` (console is not served at `/`)

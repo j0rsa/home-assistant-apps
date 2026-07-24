@@ -1,6 +1,6 @@
 ---
 name: RustFS
-version: 1.0.0-3
+version: 1.0.0-4
 slug: rustfs
 description: |
   RustFS
@@ -30,10 +30,7 @@ ports:
   9001/tcp: 9001
 ports_description:
   9000/tcp: S3 API
-  9001/tcp: Web console (direct access)
-ingress: true
-ingress_port: 8099
-ingress_entry: rustfs/console/
+  9001/tcp: Web console
 panel_icon: mdi:bucket-outline
 options:
   access_key: rustfsadmin

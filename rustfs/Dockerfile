@@ -10,14 +10,12 @@ ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
 
-# Runtime deps; jq for options, nginx for Home Assistant Ingress path rewriting.
+# Runtime deps; jq is used by bashio option parsing helpers / run.sh.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
-        curl \
         jq \
         libgcc-s1 \
-        nginx \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -26,7 +24,6 @@ COPY --from=upstream /usr/bin/rustfs /usr/bin/rustfs
 COPY --from=upstream /entrypoint.sh /entrypoint.sh
 RUN chmod a+x /usr/bin/rustfs /entrypoint.sh
 
-COPY nginx.conf /etc/nginx/nginx.conf
 COPY run.sh /
 RUN chmod a+x /run.sh
 
