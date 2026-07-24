@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.1
+
+- Update base image to Alpine 3.24
+
 ## 2.2.0
 
 - Add resizable sidebar with width persisted in localStorage

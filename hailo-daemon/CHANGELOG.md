@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
+- Update base image to Debian trixie
+
 ## 0.0.6
 
 - Socket path is hardcoded in binary as /tmp/hailort_uds.sock; use socat to proxy it to /share/hailo/hailo_rt_service.sock

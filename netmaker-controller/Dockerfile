@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base:3.24
+ARG BUILD_FROM=ghcr.io/home-assistant/base:3.24
 
 # Extract netmaker binary from upstream image
 FROM gravitl/netmaker:v1.6.0 AS upstream

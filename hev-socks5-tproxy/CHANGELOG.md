@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.1
+
+- Update base image to Debian trixie
+
 ## 2.0.0
 
 - **Breaking:** Replace `listen_ports` with separate `listen_tcp_ports` and `listen_udp_ports` lists

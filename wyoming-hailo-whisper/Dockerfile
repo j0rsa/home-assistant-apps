@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/home-assistant/aarch64-base-debian:bookworm
+ARG BUILD_FROM=ghcr.io/home-assistant/base-debian:trixie
 FROM ${BUILD_FROM}
 
 ARG BUILD_VERSION

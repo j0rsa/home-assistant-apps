@@ -1,5 +1,5 @@
 ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:v1.93.0
-ARG BUILD_FROM=ghcr.io/hassio-addons/ubuntu-base/amd64:11.0.0
+ARG BUILD_FROM=ghcr.io/home-assistant/base-ubuntu:26.04
 
 FROM ${UPSTREAM_IMAGE} AS upstream
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.19
+
+- Update base image to Debian trixie
+
 ## 0.1.18
 
 - Fix Docker build: pin scipy to 1.17.1 (1.18.0 requires Python 3.12; base image uses 3.11)

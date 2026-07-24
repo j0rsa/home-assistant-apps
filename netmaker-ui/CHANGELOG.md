@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.0.1
+
+- Update base image to Alpine 3.24
+
 ## 1.5.0
 
 - Update Netmaker UI to v1.5.0
