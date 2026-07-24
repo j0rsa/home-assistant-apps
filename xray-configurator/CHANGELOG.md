@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.2.1
+
+- Update base image to Alpine 3.24
+
 ## 1.2.0
 
 - Add optional DNS configuration with customizable DNS servers (defaults to 1.1.1.1 and 8.8.8.8)

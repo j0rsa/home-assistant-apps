@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.0.1
+
+- Update base image to Alpine 3.24
+
 ## 1.5.0.3
 
 - Fix APIHost: set SERVER_HTTP_HOST to NM_DOMAIN, leave SERVER_HOST for auto-detection

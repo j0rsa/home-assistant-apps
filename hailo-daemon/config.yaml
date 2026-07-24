@@ -1,6 +1,6 @@
 ---
 name: "Hailo Daemon"
-version: 0.0.6
+version: 0.0.7
 slug: hailo_daemon
 description: |
   Runs hailortd to multiplex access to the Hailo-8/Hailo-8L AI accelerator.

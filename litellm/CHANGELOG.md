@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.93.0-3
+
+- Update base image to Ubuntu 26.04 (Node 22 via apt; fixes Playwright MCP)
+
 ## 1.93.0-2
 
 - Fix MCP stdio servers that use `npx` (e.g. Playwright) failing with `[Errno 2] No such file or directory` by installing `npm` alongside `nodejs`

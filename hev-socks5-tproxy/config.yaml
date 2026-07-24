@@ -1,6 +1,6 @@
 ---
 name: HevSocks5 TProxy
-version: 2.0.0
+version: 2.0.1
 slug: hev-socks5-tproxy
 description: |
   Transparent SOCKS5 proxy client for Linux.
