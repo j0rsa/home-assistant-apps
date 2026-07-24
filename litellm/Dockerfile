@@ -11,6 +11,10 @@ FROM ${UPSTREAM_IMAGE} AS upstream
 # to PATH so the `litellm` entrypoint resolves at runtime.
 # Prisma CLI + engines are baked at /opt/prisma (since upstream v1.93.0); older
 # /root/.cache/prisma* paths are gone. run.sh pins PRISMA_* so migrations stay offline.
+# Do not ship upstream (Wolfi) libssl/libcrypto. Ubuntu 26.04 provides OpenSSL
+# 3.5.x which is ABI-compatible with the bundled Python (_ssl links libssl.so.3).
+# Putting Wolfi OpenSSL 3.6 on LD_LIBRARY_PATH breaks the base openssl CLI
+# (undefined symbol BIO_f_zlib) and cascades into Prisma "Not connected".
 RUN PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')") && \
     { \
       echo /usr/local; \
@@ -18,9 +22,6 @@ RUN PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.versi
       echo /usr/bin/python${PY_VER}; \
       echo /usr/lib/python${PY_VER}; \
       echo /usr/lib/libpython${PY_VER}.so.1.0; \
-      echo /usr/lib/libcrypto.so.3; \
-      echo /usr/lib/libssl.so.3; \
-      echo /usr/lib/libgcc_s.so.1; \
       echo /app; \
       echo /opt/prisma; \
       find /usr/bin -maxdepth 1 -type f \
@@ -49,15 +50,9 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Extract Python, Node.js, and litellm from upstream image.
-# Keep the upstream's OpenSSL 3.6 (that Python was compiled against) in a private
-# directory instead of overwriting Ubuntu's system OpenSSL. Overwriting the system
-# libssl.so.3/libcrypto.so.3 breaks the base image's curl, which bashio/s6 use to
-# query the Supervisor API at boot (see run.sh for the LD_LIBRARY_PATH hand-off).
+# Extract Python and litellm from upstream; use Ubuntu's system OpenSSL.
 COPY --from=upstream /upstream-payload.tar /tmp/
-RUN mkdir -p /opt/litellm/lib && \
-    tar xf /tmp/upstream-payload.tar -C / && \
-    mv -f /usr/lib/libcrypto.so.3 /usr/lib/libssl.so.3 /usr/lib/libgcc_s.so.1 /opt/litellm/lib/ && \
+RUN tar xf /tmp/upstream-payload.tar -C / && \
     chmod -R a+rX /opt/prisma && \
     ldconfig && \
     rm /tmp/upstream-payload.tar
