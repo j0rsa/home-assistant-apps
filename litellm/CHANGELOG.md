@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.93.0-4
+
+- Fix startup failure after Ubuntu 26.04 base upgrade (`openssl: undefined symbol: BIO_f_zlib` / Prisma `Not connected to the query engine`) by using the base image OpenSSL instead of putting Wolfi OpenSSL on `LD_LIBRARY_PATH`
+
 ## 1.93.0-3
 
 - Update base image to Ubuntu 26.04 (Node 22 via apt; fixes Playwright MCP)
