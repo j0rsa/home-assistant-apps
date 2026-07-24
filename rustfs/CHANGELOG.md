@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0-5
+
+- Restrict mapped volumes to `share:rw` only (object data under `/share/rustfs`)
+
 ## 1.0.0-4
 
 - Disable Home Assistant Ingress and remove nginx; console is not ingress-ready (use port 9001 `/rustfs/console/`)

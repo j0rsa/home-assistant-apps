@@ -1,6 +1,6 @@
 ---
 name: RustFS
-version: 1.0.0-4
+version: 1.0.0-5
 slug: rustfs
 description: |
   RustFS
@@ -13,11 +13,7 @@ arch:
   - aarch64
   - amd64
 map:
-  - addon_config:rw
-  - homeassistant_config:rw
   - share:rw
-  - media:rw
-  - ssl:ro
 boot: auto
 codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-rustfs-{arch}"

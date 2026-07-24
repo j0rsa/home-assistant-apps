@@ -31,7 +31,7 @@ faq:
 - Web console for buckets, users, and access keys
 - Root credentials plus full IAM (users, groups, policies, STS)
 - Optional OpenID Connect SSO (Keycloak, Authentik, Entra ID, Authing, etc.)
-- Access to Home Assistant folders: app config, HA config, share, and media
+- Persistent object data under `/share/rustfs` (`share:rw`)
 
 ## Installation
 
@@ -103,12 +103,8 @@ Supported IdPs include Keycloak, Authentik, Microsoft Entra ID, Authing, and oth
 
 | Path in container | Source |
 |-------------------|--------|
-| `/config` | App public config (`addon_config`) |
-| `/homeassistant` | Home Assistant configuration |
-| `/share` | Shared folder |
-| `/media` | Media folder |
-| `/ssl` | TLS certificates (read-only) |
-| `/data` | Persistent app data |
+| `/share` | Shared folder (`share:rw`) |
+| `/data` | Persistent app data (always present) |
 | `/share/rustfs` | Default object store path (`volumes`) |
 
 ## Security
@@ -116,7 +112,6 @@ Supported IdPs include Keycloak, Authentik, Microsoft Entra ID, Authing, and oth
 - Change the default `secret_key` before opening ports outside your LAN
 - Prefer SSO + IAM users over sharing the root secret
 - Keep the S3 API (9000) off the public internet unless fronted by TLS and tight ACLs
-- Do not point `volumes` at `/homeassistant` unless you intentionally want the config tree as the object store disk
 
 ## Support
 

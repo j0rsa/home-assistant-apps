@@ -1,0 +1,49 @@
+---
+name: Copyparty
+version: 1.20.18
+slug: copyparty
+description: |
+  Copyparty
+
+  Portable file server with a browser UI. Share Home Assistant folders with
+  resumable uploads, downloads, and WebDAV. Good alternative when you need to
+  expose real directories (not S3 object storage).
+init: false
+startup: services
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+  - all_addon_configs:rw
+  - homeassistant_config:rw
+  - share:rw
+  - backup:rw
+  - media:rw
+  - ssl:ro
+boot: auto
+codenotary: red.avtovo@gmail.com
+image: "ghcr.io/j0rsa/haddon-copyparty-{arch}"
+udev: false
+url: https://github.com/j0rsa/home-assistant-apps
+webui: http://[HOST]:[PORT:3923]/
+watchdog: http://[HOST]:[PORT:3923]/?ls
+ports:
+  3923/tcp: 3923
+ports_description:
+  3923/tcp: Copyparty web UI / WebDAV
+ingress: true
+ingress_port: 3923
+panel_icon: mdi:folder-network
+options:
+  username: admin
+  password: changeme
+  anonymous_access: none
+  enable_indexing: true
+  server_name: homeassistant
+schema:
+  username: str
+  password: password
+  anonymous_access: list(none|read|readwrite)
+  enable_indexing: bool
+  server_name: str

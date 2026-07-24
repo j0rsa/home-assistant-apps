@@ -29,14 +29,10 @@ Built on the Home Assistant Ubuntu base image with bashio; the RustFS glibc bina
 
 | Host (HA) | Container path |
 |-----------|----------------|
-| App config | `/config` |
-| Home Assistant config | `/homeassistant` |
 | Share | `/share` |
-| Media | `/media` |
-| SSL certs | `/ssl` (read-only) |
 | App data | `/data` (always present) |
 
-Point `volumes` at `/share/rustfs` (default) or another writable path such as `/data`.
+Point `volumes` at `/share/rustfs` (default) or another path under `/share`.
 
 ## Quick S3 client test
 

@@ -33,10 +33,19 @@ Comprehensive backup solution with cloud support. Back up your Home Assistant da
 
 #### [RustFS](/apps/rustfs/)
 High-performance S3-compatible object storage (MinIO alternative) with a web console.
-- S3 API for backups, media, and application data
+- S3 API for backups and application data
 - Built-in web console for buckets and access keys
 - Optional OpenID Connect SSO (Keycloak, Authentik, Entra ID, …)
-- Access to Home Assistant config, share, and media folders
+- Persistent data under `/share/rustfs`
+
+**Architectures:** `aarch64` `amd64`
+
+#### [Copyparty](/apps/copyparty/)
+Turn Home Assistant folders into a browser file server with uploads, WebDAV, and more.
+- Browse and upload to share, media, HA config, and all app configs
+- Resumable uploads over HTTP; WebDAV support
+- Optional accounts and anonymous access modes
+- File indexing and multimedia thumbnails
 
 **Architectures:** `aarch64` `amd64`
 
