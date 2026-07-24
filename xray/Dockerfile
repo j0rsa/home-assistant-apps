@@ -14,7 +14,7 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       curl \
       unzip \
       ca-certificates \
-      netcat \
+      netcat-openbsd \
       jq && \
     echo "**** install xray-core ****" && \
     XRAY_VERSION=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")') && \
