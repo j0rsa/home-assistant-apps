@@ -31,6 +31,15 @@ Comprehensive backup solution with cloud support. Back up your Home Assistant da
 
 **Architectures:** `aarch64` `amd64`
 
+#### [RustFS](/apps/rustfs/)
+High-performance S3-compatible object storage (MinIO alternative) with a web console.
+- S3 API for backups, media, and application data
+- Built-in web console for buckets and access keys
+- Optional OpenID Connect SSO (Keycloak, Authentik, Entra ID, …)
+- Access to Home Assistant config, share, and media folders
+
+**Architectures:** `aarch64` `amd64`
+
 ---
 
 ### 📥 Download Management

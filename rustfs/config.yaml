@@ -1,0 +1,82 @@
+---
+name: RustFS
+version: 1.0.0-1
+slug: rustfs
+description: |
+  RustFS
+
+  High-performance, S3-compatible object storage written in Rust (MinIO alternative).
+  Exposes an S3 API and a web console. Optional OpenID Connect SSO for console login.
+init: false
+startup: services
+arch:
+  - aarch64
+  - amd64
+map:
+  - addon_config:rw
+  - homeassistant_config:rw
+  - share:rw
+  - media:rw
+  - ssl:ro
+boot: auto
+codenotary: red.avtovo@gmail.com
+image: "ghcr.io/j0rsa/haddon-rustfs-{arch}"
+udev: false
+url: https://github.com/j0rsa/home-assistant-apps
+webui: http://[HOST]:[PORT:9001]/
+watchdog: http://[HOST]:[PORT:9000]/health
+ports:
+  9000/tcp: 9000
+  9001/tcp: 9001
+ports_description:
+  9000/tcp: S3 API
+  9001/tcp: Web console
+ingress: true
+ingress_port: 9001
+panel_icon: mdi:bucket-outline
+options:
+  access_key: rustfsadmin
+  secret_key: changeme-use-a-strong-secret
+  volumes: /data
+  console_enable: true
+  region: us-east-1
+  server_domains: ""
+  browser_redirect_url: ""
+  cors_allowed_origins: "*"
+  log_level: info
+  oidc_enable: false
+  oidc_config_url: ""
+  oidc_client_id: ""
+  oidc_client_secret: ""
+  oidc_scopes: openid,profile,email
+  oidc_display_name: SSO
+  oidc_redirect_uri: ""
+  oidc_redirect_uri_dynamic: false
+  oidc_groups_claim: groups
+  oidc_roles_claim: ""
+  oidc_role_policy: ""
+  oidc_email_claim: email
+  oidc_username_claim: preferred_username
+schema:
+  access_key: str
+  secret_key: password
+  volumes: str
+  console_enable: bool
+  region: str
+  server_domains: str
+  browser_redirect_url: str
+  cors_allowed_origins: str
+  log_level: list(error|warn|info|debug|trace)
+  oidc_enable: bool
+  oidc_config_url: str
+  oidc_client_id: str
+  oidc_client_secret: password
+  oidc_scopes: str
+  oidc_display_name: str
+  oidc_redirect_uri: str
+  oidc_redirect_uri_dynamic: bool
+  oidc_groups_claim: str
+  oidc_roles_claim: str
+  oidc_role_policy: str
+  oidc_email_claim: str
+  oidc_username_claim: str
