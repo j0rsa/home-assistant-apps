@@ -4,7 +4,6 @@ set -euo pipefail
 
 bashio::log.info "Starting Copyparty..."
 
-USERNAME=$(bashio::config 'username')
 PASSWORD=$(bashio::config 'password')
 ANON=$(bashio::config 'anonymous_access')
 INDEXING=$(bashio::config 'enable_indexing')
@@ -14,7 +13,7 @@ if ! bashio::var.has_value "${PASSWORD}" || [ "${PASSWORD}" = "changeme" ]; then
     bashio::log.warning "Using default/empty password — change it before exposing Copyparty"
 fi
 
-mkdir -p /cfg /cfg/hists /config /addon_configs /share /media /homeassistant
+mkdir -p /cfg /cfg/hists /config /addon_configs /homeassistant /share /backup /media
 
 CFG_FILE=/cfg/copyparty.conf
 
@@ -33,7 +32,6 @@ if bashio::var.true "${INDEXING}"; then
     INDEX_FLAGS=$'  e2dsa\n  e2ts'
 fi
 
-USERNAME="${USERNAME//$'\n'/}"
 PASSWORD="${PASSWORD//$'\n'/}"
 
 write_volume() {
@@ -45,7 +43,7 @@ write_volume() {
         echo "[${url_path}]"
         echo "  ${fs_path}"
         echo "  accs:"
-        echo "    ${perms}: ${USERNAME}"
+        echo "    ${perms}: admin"
         if [ -n "${ANON_LINE}" ]; then
             # ssl volume stays authenticated-read even if anon is readwrite
             if [ "${fs_path}" = "/ssl" ]; then
@@ -70,15 +68,17 @@ cat > "${CFG_FILE}" << EOF
 ${INDEX_FLAGS}
 
 [accounts]
-  ${USERNAME}: ${PASSWORD}
+  admin: ${PASSWORD}
 
 EOF
 
-write_volume "/share" "/share" "rwmda"
-write_volume "/media" "/media" "rwmda"
+# Keep in sync with map: in config.yaml
 write_volume "/addon-config" "/config" "rwmda"
 write_volume "/addon-configs" "/addon_configs" "rwmda"
 write_volume "/homeassistant" "/homeassistant" "rwmda"
+write_volume "/share" "/share" "rwmda"
+write_volume "/backup" "/backup" "rwmda"
+write_volume "/media" "/media" "rwmda"
 write_volume "/ssl" "/ssl" "r"
 
 EXTRA_ARGS=()
@@ -89,7 +89,8 @@ for f in /config/*.conf; do
 done
 shopt -u nullglob
 
-bashio::log.info "Volumes: /share /media /config /addon_configs /homeassistant (rw admin) and /ssl (ro)"
+bashio::log.info "Volumes (rw): /addon-config /addon-configs /homeassistant /share /backup /media"
+bashio::log.info "Volumes (ro): /ssl"
 bashio::log.info "Listening on :3923"
 
 exec python3 -m copyparty -c "${CFG_FILE}" "${EXTRA_ARGS[@]}"

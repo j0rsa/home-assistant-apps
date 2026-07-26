@@ -42,7 +42,7 @@ High-performance S3-compatible object storage (MinIO alternative) with a web con
 
 #### [Copyparty](/apps/copyparty/)
 Turn Home Assistant folders into a browser file server with uploads, WebDAV, and more.
-- Browse and upload to share, media, HA config, and all app configs
+- Browse and upload to share, media, backups, HA config, and all app configs
 - Resumable uploads over HTTP; WebDAV support
 - Optional accounts and anonymous access modes
 - File indexing and multimedia thumbnails

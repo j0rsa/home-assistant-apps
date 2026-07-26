@@ -11,16 +11,16 @@ ports:
   - 3923
 faq:
   - q: "Where are my Home Assistant files?"
-    a: "Open /homeassistant for HA config, /share for the share folder, /media for media, /addon-config for this app's public config, and /addon-configs for every app's public config folder."
+    a: "Open /homeassistant for HA config, /share, /media, /backup, /addon-config for this app's public config, /addon-configs for every app's public config, and /ssl for certificates (read-only)."
   - q: "Why is there no /config URL for Home Assistant?"
-    a: "Supervisor maps HA config as homeassistant_config → /homeassistant when addon_config is also used."
+    a: "Supervisor maps HA config as homeassistant_config → /homeassistant when addon_config is also used. This app's own public config is at /addon-config → /config."
   - q: "Can guests upload without login?"
-    a: "Set anonymous_access to readwrite. Prefer none on networks you do not trust."
+    a: "Set anonymous_access to readwrite. Prefer none on networks you do not trust. /ssl stays login-only even when anonymous write is enabled."
 ---
 
 # Copyparty
 
-[Copyparty](https://github.com/9001/copyparty) is a portable file server with a rich browser UI. Use it when you need to expose real directories (share, media, Home Assistant config) with uploads and WebDAV — unlike S3 object storage.
+[Copyparty](https://github.com/9001/copyparty) is a portable file server with a rich browser UI. Use it when you need to expose real directories (share, media, backups, Home Assistant and app configs) with uploads and WebDAV — unlike S3 object storage.
 
 ## Features
 
@@ -42,38 +42,42 @@ faq:
 | Endpoint | URL |
 |----------|-----|
 | Web UI | `http://homeassistant.local:3923/` |
-| Share | `http://homeassistant.local:3923/share/` |
-| Media | `http://homeassistant.local:3923/media/` |
-| HA config | `http://homeassistant.local:3923/homeassistant/` |
 | App config | `http://homeassistant.local:3923/addon-config/` |
 | All app configs | `http://homeassistant.local:3923/addon-configs/` |
+| HA config | `http://homeassistant.local:3923/homeassistant/` |
+| Share | `http://homeassistant.local:3923/share/` |
+| Backups | `http://homeassistant.local:3923/backup/` |
+| Media | `http://homeassistant.local:3923/media/` |
+| SSL certs | `http://homeassistant.local:3923/ssl/` (read-only) |
 
 ## Configuration
 
 ```yaml
-username: admin
 password: "replace-with-a-strong-password"
 anonymous_access: none   # none | read | readwrite
 enable_indexing: true
 server_name: homeassistant
 ```
 
+Login as `admin` with the configured password.
+
 ### Mapped folders
 
-| Path in container | Source | Access |
-|-------------------|--------|--------|
-| `/config` | App public config (`addon_config`) | writable |
-| `/addon_configs` | All apps' public configs (`all_addon_configs`) | writable |
-| `/homeassistant` | Home Assistant configuration | writable |
-| `/share` | Shared folder | writable |
-| `/media` | Media folder | writable |
-| `/ssl` | TLS certificates | read-only |
+| URL path | Path in container | Source | Access |
+|----------|-------------------|--------|--------|
+| `/addon-config` | `/config` | App public config (`addon_config`) | writable |
+| `/addon-configs` | `/addon_configs` | All apps' public configs (`all_addon_configs`) | writable |
+| `/homeassistant` | `/homeassistant` | Home Assistant configuration | writable |
+| `/share` | `/share` | Shared folder | writable |
+| `/backup` | `/backup` | Home Assistant backups | writable |
+| `/media` | `/media` | Media folder | writable |
+| `/ssl` | `/ssl` | TLS certificates (`ssl`) | read-only |
 
 ## Security
 
 - Change the default password before opening port 3923 outside your LAN
 - Keep `anonymous_access: none` unless you intentionally want guest uploads
-- Granting write access to `/homeassistant` can break Home Assistant if files are edited carelessly
+- Write access to `/homeassistant`, `/backup`, and `/addon-configs` can break Home Assistant or other apps if files are edited carelessly
 
 ## Support
 

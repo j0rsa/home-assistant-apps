@@ -1,6 +1,6 @@
 ---
 name: Copyparty
-version: 1.20.18
+version: 1.20.18-1
 slug: copyparty
 description: |
   Copyparty
@@ -36,13 +36,11 @@ ingress: true
 ingress_port: 3923
 panel_icon: mdi:folder-network
 options:
-  username: admin
   password: changeme
   anonymous_access: none
   enable_indexing: true
   server_name: homeassistant
 schema:
-  username: str
   password: password
   anonymous_access: list(none|read|readwrite)
   enable_indexing: bool
