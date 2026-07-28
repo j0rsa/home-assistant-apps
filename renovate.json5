@@ -15,14 +15,49 @@
     "home-assistant/builder"
   ],
   // scipy 1.18+ requires Python 3.12; wyoming-hailo-whisper uses Debian bookworm (3.11)
-  // Self-hosted: allow commands globally, e.g. allowedCommands: ["^python3 scripts/addon_version_sync\\.py sync .+$"]
+  // Self-hosted (renovate-github): allowedCommands must allow python3 scripts/*;
+  // allowShellExecutorForPostUpgradeCommands required for quoted args.
   // Handlebars fills {{{packageFileDir}}} with the Dockerfile directory (addon slug).
+  // Release-note fields are NOT available in postUpgradeTasks — addon_changelog.py
+  // fetches GitHub Releases via RENOVATE_TOKEN / GITHUB_TOKEN.
   "packageRules": [
     {
       "matchManagers": ["pip_requirements"],
       "matchPackageNames": ["scipy"],
       "matchPaths": ["wyoming-hailo-whisper/**"],
       "allowedVersions": "<1.18.0"
+    },
+    // Docker Hub / GHCR images without org.opencontainers.image.source labels:
+    // without sourceUrl Renovate skips Release Notes in the PR body (see #167 ollama).
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ollama/ollama"],
+      "sourceUrl": "https://github.com/ollama/ollama"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["copyparty/ac"],
+      "sourceUrl": "https://github.com/9001/copyparty"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["hurlenko/aria2-ariang"],
+      "sourceUrl": "https://github.com/hurlenko/aria2-ariang"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["serjs/go-socks5-proxy"],
+      "sourceUrl": "https://github.com/serjs/go-socks5-proxy"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["rustfs/rustfs"],
+      "sourceUrl": "https://github.com/rustfs/rustfs"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["gravitl/netmaker", "gravitl/netmaker-ui"],
+      "sourceUrl": "https://github.com/gravitl/netmaker"
     },
     {
       "matchUpdateTypes": ["patch"],
@@ -36,8 +71,13 @@
     {
       "matchManagers": ["dockerfile"],
       "postUpgradeTasks": {
-        "commands": ["python3 scripts/addon_version_sync.py sync {{{packageFileDir}}}"],
-        "fileFilters": ["**/config.yaml"],
+        // Release-note Handlebars fields are not available in postUpgradeTasks;
+        // addon_changelog.py fetches GitHub Releases using sourceUrl/depName.
+        "commands": [
+          "python3 scripts/addon_version_sync.py sync {{{packageFileDir}}}",
+          "python3 scripts/addon_changelog.py {{{packageFileDir}}} --from {{{currentValue}}} --to {{{newValue}}} --source-url '{{{sourceUrl}}}' --dep-name '{{{depName}}}'"
+        ],
+        "fileFilters": ["**/config.yaml", "**/CHANGELOG.md"],
         "executionMode": "update"
       }
     }
