@@ -36,6 +36,12 @@ HEADER_RE = re.compile(r"^##\s+(?P<ver>\S+)\s*$", re.MULTILINE)
 BULLET_RE = re.compile(r"^\s*[-*]\s+\S")
 HTML_TAG_RE = re.compile(r"<[^>]+>")
 ZWSP_RE = re.compile(r"[\u200b\u200c\u200d\ufeff]|&#8203;|&ZeroWidthSpace;", re.IGNORECASE)
+# Ignore non-version GitHub "releases" (LiteLLM publishes many litellm_*-dev-* tags).
+SEMVERISH_TAG_RE = re.compile(r"^v?\d")
+PRERELEASE_TAG_RE = re.compile(
+    r"-(?:rc|dev|alpha|beta|pre|preview|nightly|canary)(?:[.\d]|$)",
+    re.IGNORECASE,
+)
 COMMIT_LINK_RE = re.compile(
     r"\s*[,\[]?\s*\[(?:Commit|commit)\]\([^)]+\)\.?",
     re.IGNORECASE,
@@ -57,6 +63,9 @@ SKIP_BULLET_PREFIXES = (
     "python packages are available",
     "[docker image]",
     "docker image]",
+    "the cosign claims were validated",
+    "the signatures were verified",
+    "full changelog",
 )
 
 # Docker image → GitHub repo when labels / sourceUrl are missing.
@@ -83,24 +92,31 @@ class ReleaseNotes:
     version_key: tuple[int | str, ...]
 
 
-def parse_version_key(raw: str) -> tuple[int | str, ...]:
-    """Comparable key for tags like v1.20.19 / 0.11.0 / 1.0.0-beta.11."""
+def parse_version_key(raw: str) -> tuple[tuple[int, int | str], ...]:
+    """Comparable key for tags like v1.20.19 / 1.0.0-beta.11 / litellm_dev-v0.1.
+
+    Each part is (kind, value) so ints and strings never compare directly
+    (LiteLLM publishes many non-semver release tags that mix both).
+    """
     s = raw.strip().strip('"').lstrip("vV")
-    parts: list[int | str] = []
+    parts: list[tuple[int, int | str]] = []
     for chunk in re.split(r"[.+_-]", s):
         if not chunk:
             continue
         if chunk.isdigit():
-            parts.append(int(chunk))
+            parts.append((0, int(chunk)))  # numeric parts sort before text
         else:
-            parts.append(chunk.lower())
-    return tuple(parts) or (0,)
+            parts.append((1, chunk.lower()))
+    return tuple(parts) or ((0, 0),)
 
 
 def version_in_range(tag: str, current: str, new: str) -> bool:
     """True if tag is strictly after current and at most new."""
-    t, c, n = parse_version_key(tag), parse_version_key(current), parse_version_key(new)
-    return c < t <= n
+    try:
+        t, c, n = parse_version_key(tag), parse_version_key(current), parse_version_key(new)
+        return c < t <= n
+    except TypeError:
+        return False
 
 
 def github_token() -> str | None:
@@ -162,8 +178,40 @@ def github_get(url: str) -> object:
         return json.load(resp)
 
 
+def is_prerelease_tag(tag: str) -> bool:
+    return bool(PRERELEASE_TAG_RE.search(tag.lstrip("vV")))
+
+
+def release_from_api_item(item: dict) -> ReleaseNotes:
+    tag = str(item.get("tag_name") or "")
+    return ReleaseNotes(
+        tag=tag,
+        name=str(item.get("name") or tag),
+        body=str(item.get("body") or ""),
+        html_url=str(item.get("html_url") or ""),
+        version_key=parse_version_key(tag),
+    )
+
+
+def fetch_tag_release(repo: str, tag: str) -> ReleaseNotes | None:
+    enc = urllib.parse.quote(tag, safe="")
+    url = f"https://api.github.com/repos/{repo}/releases/tags/{enc}"
+    try:
+        item = github_get(url)
+    except urllib.error.HTTPError:
+        return None
+    if isinstance(item, dict) and item.get("tag_name"):
+        return release_from_api_item(item)
+    return None
+
+
 def fetch_releases(repo: str, current: str, new: str) -> list[ReleaseNotes]:
-    """Fetch releases with tags in (current, new]. Falls back to the single new tag."""
+    """Fetch stable releases with tags in (current, new].
+
+    Skips GitHub prereleases and -rc/-dev-style tags (LiteLLM publishes many).
+    Always tries to include the target tag; if it has no release, keeps earlier
+    stable notes in the range (e.g. image v1.94.1 with notes only on v1.94.0).
+    """
     out: list[ReleaseNotes] = []
     page = 1
     while page <= 5 and len(out) < MAX_RELEASES:
@@ -179,47 +227,30 @@ def fetch_releases(repo: str, current: str, new: str) -> list[ReleaseNotes]:
         if not isinstance(data, list) or not data:
             break
         for item in data:
-            if not isinstance(item, dict) or item.get("draft"):
+            if not isinstance(item, dict) or item.get("draft") or item.get("prerelease"):
                 continue
             tag = str(item.get("tag_name") or "")
-            if not tag or not version_in_range(tag, current, new):
+            if not tag or not SEMVERISH_TAG_RE.match(tag) or is_prerelease_tag(tag):
                 continue
-            out.append(
-                ReleaseNotes(
-                    tag=tag,
-                    name=str(item.get("name") or tag),
-                    body=str(item.get("body") or ""),
-                    html_url=str(item.get("html_url") or ""),
-                    version_key=parse_version_key(tag),
-                )
-            )
+            if not version_in_range(tag, current, new):
+                continue
+            out.append(release_from_api_item(item))
         if len(data) < 100:
             break
         page += 1
 
-    out.sort(key=lambda r: r.version_key)
-    if out:
-        return out[:MAX_RELEASES]
+    # Prefer an exact release for the new tag when it exists.
+    seen = {r.tag.lstrip("vV") for r in out}
+    new_core = normalize_version(new)
+    if new_core not in seen and new.lstrip("vV") not in seen:
+        for tag in (new, f"v{new_core}", new_core):
+            rel = fetch_tag_release(repo, tag)
+            if rel:
+                out.append(rel)
+                break
 
-    # Single-tag fallback (some projects only expose the latest usefully).
-    for tag in (new, f"v{normalize_version(new)}", normalize_version(new)):
-        enc = urllib.parse.quote(tag, safe="")
-        url = f"https://api.github.com/repos/{repo}/releases/tags/{enc}"
-        try:
-            item = github_get(url)
-        except urllib.error.HTTPError:
-            continue
-        if isinstance(item, dict):
-            return [
-                ReleaseNotes(
-                    tag=str(item.get("tag_name") or tag),
-                    name=str(item.get("name") or tag),
-                    body=str(item.get("body") or ""),
-                    html_url=str(item.get("html_url") or ""),
-                    version_key=parse_version_key(str(item.get("tag_name") or tag)),
-                )
-            ]
-    return []
+    out.sort(key=lambda r: r.version_key)
+    return out[:MAX_RELEASES]
 
 
 def clean_text(text: str) -> str:
@@ -377,13 +408,18 @@ def cmd_update(args: argparse.Namespace) -> int:
 
     repo = guess_github_repo(args.dep_name, args.source_url, addon_dir / "Dockerfile")
     releases: list[ReleaseNotes] = []
-    if repo:
-        print(f"{slug}: fetching release notes from {repo} ({current} → {new})")
-        releases = fetch_releases(repo, current, new)
-        if not releases:
-            print(f"{slug}: no GitHub releases in range; writing stub entry")
-    else:
-        print(f"{slug}: could not resolve GitHub repo; writing stub entry", file=sys.stderr)
+    try:
+        if repo:
+            print(f"{slug}: fetching release notes from {repo} ({current} → {new})")
+            releases = fetch_releases(repo, current, new)
+            if not releases:
+                print(f"{slug}: no GitHub releases in range; writing stub entry")
+        else:
+            print(f"{slug}: could not resolve GitHub repo; writing stub entry", file=sys.stderr)
+    except Exception as e:
+        # Never fail the Renovate branch on changelog fetch/parse errors.
+        print(f"{slug}: release-note fetch failed ({e}); writing stub entry", file=sys.stderr)
+        releases = []
 
     section = format_section(addon_version, current, new, repo, releases)
     if prepend_changelog(changelog, section, addon_version):
