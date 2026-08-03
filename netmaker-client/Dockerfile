@@ -23,8 +23,21 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       echo "Unsupported arch '$BUILD_ARCH'" && \
       exit 255; \
     fi && \
-    curl -L "https://github.com/gravitl/netclient/releases/v1.6.0/download/netclient-linux-${NETCLIENT_ARCH}" -o /usr/local/bin/netclient && \
+    curl -fSL --retry 3 --retry-delay 2 \
+      "https://github.com/gravitl/netclient/releases/download/v1.6.0/netclient-linux-${NETCLIENT_ARCH}" \
+      -o /usr/local/bin/netclient || { echo "Failed to download netclient for ${NETCLIENT_ARCH}"; exit 1; } && \
+    if [ ! -s /usr/local/bin/netclient ]; then \
+      echo "Downloaded netclient is empty"; \
+      exit 1; \
+    fi && \
+    if [ "$(head -c 4 /usr/local/bin/netclient)" != "$(printf '\177ELF')" ]; then \
+      echo "Downloaded netclient is not an ELF binary (bad URL or HTML error page)"; \
+      head -c 200 /usr/local/bin/netclient; \
+      echo; \
+      exit 1; \
+    fi && \
     chmod +x /usr/local/bin/netclient && \
+    /usr/local/bin/netclient version && \
     echo "**** setup directories ****" && \
     mkdir -p /dev/net /var/lib/netclient && \
     echo "**** cleanup ****" && \
