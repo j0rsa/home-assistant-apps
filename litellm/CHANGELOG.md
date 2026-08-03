@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.95.0
+
+- Update upstream from `v1.94.1` to `v1.95.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.94.1...v1.95.0))
 ## 1.94.1
 
 - Update upstream from `v1.93.0` to `v1.94.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.93.0...v1.94.1))
