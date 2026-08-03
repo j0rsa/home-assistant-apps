@@ -37,7 +37,6 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       exit 1; \
     fi && \
     chmod +x /usr/local/bin/netclient && \
-    /usr/local/bin/netclient version && \
     echo "**** setup directories ****" && \
     mkdir -p /dev/net /var/lib/netclient && \
     echo "**** cleanup ****" && \

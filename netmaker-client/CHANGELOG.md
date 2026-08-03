@@ -1,10 +1,13 @@
 # Changelog
 
+## 1.6.0-2
+
+- Do not run `netclient version` during image build (it initializes WireGuard and fails in CI)
+
 ## 1.6.0-1
 
 - Fail the image build if netclient download fails, is empty, or is not an ELF binary
 - Fix netclient download URL (`releases/download/v1.6.0/...`)
-- Fail the image build if the downloaded binary is not a working netclient
 
 ## 1.6.0
 
