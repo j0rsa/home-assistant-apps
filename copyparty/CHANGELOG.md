@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.20.19-1
+
+- Add optional `readonly` account with read-only access to all volumes when `readonly_password` is set
+
 ## 1.20.18-1
 
 - Expose `/backup` in Copyparty to match `backup:rw` in `config.yaml`

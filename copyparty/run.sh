@@ -5,12 +5,21 @@ set -euo pipefail
 bashio::log.info "Starting Copyparty..."
 
 PASSWORD=$(bashio::config 'password')
+READONLY_PASSWORD=$(bashio::config 'readonly_password')
 ANON=$(bashio::config 'anonymous_access')
 INDEXING=$(bashio::config 'enable_indexing')
 SERVER_NAME=$(bashio::config 'server_name')
 
 if ! bashio::var.has_value "${PASSWORD}" || [ "${PASSWORD}" = "changeme" ]; then
     bashio::log.warning "Using default/empty password — change it before exposing Copyparty"
+fi
+
+PASSWORD="${PASSWORD//$'\n'/}"
+READONLY_PASSWORD="${READONLY_PASSWORD//$'\n'/}"
+
+ENABLE_READONLY=false
+if bashio::var.has_value "${READONLY_PASSWORD}"; then
+    ENABLE_READONLY=true
 fi
 
 mkdir -p /cfg /cfg/hists /config /addon_configs /homeassistant /share /backup /media
@@ -32,8 +41,6 @@ if bashio::var.true "${INDEXING}"; then
     INDEX_FLAGS=$'  e2dsa\n  e2ts'
 fi
 
-PASSWORD="${PASSWORD//$'\n'/}"
-
 write_volume() {
     local url_path="$1"
     local fs_path="$2"
@@ -44,6 +51,9 @@ write_volume() {
         echo "  ${fs_path}"
         echo "  accs:"
         echo "    ${perms}: admin"
+        if [ "${ENABLE_READONLY}" = "true" ]; then
+            echo "    r: readonly"
+        fi
         if [ -n "${ANON_LINE}" ]; then
             # ssl volume stays authenticated-read even if anon is readwrite
             if [ "${fs_path}" = "/ssl" ]; then
@@ -69,8 +79,16 @@ ${INDEX_FLAGS}
 
 [accounts]
   admin: ${PASSWORD}
-
 EOF
+
+if [ "${ENABLE_READONLY}" = "true" ]; then
+    echo "  readonly: ${READONLY_PASSWORD}" >> "${CFG_FILE}"
+    bashio::log.info "Readonly account enabled (user: readonly)"
+else
+    bashio::log.info "Readonly account disabled (set readonly_password to enable)"
+fi
+
+echo >> "${CFG_FILE}"
 
 # Keep in sync with map: in config.yaml
 write_volume "/addon-config" "/config" "rwmda"
@@ -89,7 +107,7 @@ for f in /config/*.conf; do
 done
 shopt -u nullglob
 
-bashio::log.info "Volumes (rw): /addon-config /addon-configs /homeassistant /share /backup /media"
+bashio::log.info "Volumes (admin rw): /addon-config /addon-configs /homeassistant /share /backup /media"
 bashio::log.info "Volumes (ro): /ssl"
 bashio::log.info "Listening on :3923"
 

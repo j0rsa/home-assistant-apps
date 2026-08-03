@@ -16,6 +16,8 @@ faq:
     a: "Supervisor maps HA config as homeassistant_config → /homeassistant when addon_config is also used. This app's own public config is at /addon-config → /config."
   - q: "Can guests upload without login?"
     a: "Set anonymous_access to readwrite. Prefer none on networks you do not trust. /ssl stays login-only even when anonymous write is enabled."
+  - q: "How do I give someone browse-only access?"
+    a: "Set readonly_password and log in as user readonly. That account can read all volumes but cannot upload, move, or delete."
 ---
 
 # Copyparty
@@ -27,6 +29,7 @@ faq:
 - Browse and upload files from a web browser
 - Resumable uploads / downloads
 - WebDAV on the same port
+- Optional `readonly` login for browse/download-only access
 - Optional guest read or read-write access
 - File indexing and multimedia thumbnails (ffmpeg)
 
@@ -54,12 +57,15 @@ faq:
 
 ```yaml
 password: "replace-with-a-strong-password"
+readonly_password: "optional-readonly-password"
 anonymous_access: none   # none | read | readwrite
 enable_indexing: true
 server_name: homeassistant
 ```
 
-Login as `admin` with the configured password.
+Accounts:
+- `admin` — full access (`rwmda`) on writable volumes; read-only on `/ssl`
+- `readonly` — read-only on all volumes; created only when `readonly_password` is set
 
 ### Mapped folders
 
@@ -76,6 +82,7 @@ Login as `admin` with the configured password.
 ## Security
 
 - Change the default password before opening port 3923 outside your LAN
+- Use `readonly` for browse/download-only access instead of sharing the admin password
 - Keep `anonymous_access: none` unless you intentionally want guest uploads
 - Write access to `/homeassistant`, `/backup`, and `/addon-configs` can break Home Assistant or other apps if files are edited carelessly
 
