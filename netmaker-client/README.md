@@ -2,141 +2,75 @@
 
 ![](logo.png)
 
-Netmaker WireGuard client that can route traffic through a SOCKS proxy for enhanced privacy and flexibility.
+Official Netmaker WireGuard client for Home Assistant. Joins a Netmaker mesh network as a plain peer.
 
 ![Supports aarch64 Architecture][aarch64-shield]
 ![Supports amd64 Architecture][amd64-shield]
-![Supports armv7 Architecture][armv7-shield]
 
 ## About
 
-This app runs the official Netmaker client to connect to your Netmaker network and optionally routes all traffic through a SOCKS proxy (like the Xray app). This provides a powerful combination of:
-
-- **Netmaker Network Access**: Connect to your Netmaker-managed WireGuard network
-- **SOCKS Proxy Integration**: Route traffic through additional proxy layers for enhanced privacy
-- **Flexible Routing**: Choose between direct WireGuard or proxy-routed traffic
-
-Perfect for combining enterprise-grade mesh networking with additional privacy layers.
+This app runs the official Netmaker `netclient` to connect Home Assistant to your Netmaker-managed WireGuard mesh. It performs enrollment and keeps the daemon running so peer config stays in sync.
 
 ## Configuration
 
 ### Required Settings
 
 #### Option: `host_name`
-The name of the host that will be used to identify the device in the Netmaker network.
+Device name shown in the Netmaker network.
 - Default: `homeassistant-netmaker`
 
 #### Option: `netclient_token`
-The Netclient enrollment token from your Netmaker server. Get this from your Netmaker dashboard when creating a new enrollment key.
-
-Example: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...`
+Enrollment token from your Netmaker dashboard (enrollment key).
 
 ### Optional Settings
 
-#### Option: `wg_interface`
-The WireGuard interface name that will be created by Netclient.
-- Default: `wg0`
-
-#### Option: `socks_proxy`
-The SOCKS proxy address to route traffic through when `enable_proxy` is true.
-- Default: `homeassistant:1080` (assumes Xray app running on port 1080)
-- Format: `hostname:port` or `ip:port`
-
-#### Option: `enable_proxy`
-Whether to route WireGuard traffic through the SOCKS proxy or use direct WireGuard routing.
-- Default: `true`
-- `true`: Route traffic through SOCKS proxy
-- `false`: Use direct WireGuard routing
-
-#### Option: `log_level`
-Set the log level for tun2socks (when proxy is enabled).
-- Default: `info`
-- Options: `debug`, `info`, `warning`, `error`
-
 #### Option: `debug_mode`
-Enable debug mode for additional troubleshooting tools and verbose logging.
+Log routing table and interfaces after join.
 - Default: `false`
 
 #### Option: `auto_restart`
-Automatically restart the setup process if it fails.
+Restart join/daemon if the process exits.
 - Default: `true`
 
 ## Example Configuration
 
-### Basic Configuration (with SOCKS proxy):
 ```yaml
 host_name: "homeassistant-netmaker"
 netclient_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.your_actual_token_here"
-wg_interface: "wg0"
-socks_proxy: "homeassistant:1080"
-enable_proxy: true
-log_level: "info"
 debug_mode: false
-auto_restart: true
-```
-
-### Direct WireGuard (no proxy):
-```yaml
-host_name: "homeassistant-netmaker"
-netclient_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.your_actual_token_here"
-enable_proxy: false
 auto_restart: true
 ```
 
 ## Setup Instructions
 
-1. **Set up Netmaker Server**: Ensure you have a working Netmaker server instance
-2. **Generate Enrollment Token**: In your Netmaker dashboard, create a new enrollment key
-3. **Configure App**: 
-   - Set `host_name` to your Netmaker host name
-   - Set `netclient_token` to your enrollment token
-   - Configure other options as needed
-4. **Start App**: The app will automatically join your Netmaker network
-
-## Integration with Xray App
-
-This app works perfectly with the Xray app for enhanced privacy:
-
-1. **Install and configure Xray app** with your VPN server details
-2. **Configure Netmaker app** with:
-   - `enable_proxy: true`
-   - `socks_proxy: "homeassistant:1080"` (Xray's SOCKS port)
-3. **Traffic flow**: Your device → Netmaker WireGuard → SOCKS proxy → Xray → VPN server
+1. Ensure your Netmaker server/API is reachable over HTTPS (e.g. Cloudflare Tunnel)
+2. Create an enrollment key in the Netmaker dashboard
+3. Set `host_name` and `netclient_token` in the app options
+4. Start the app — it joins the network and runs `netclient daemon`
 
 ## How It Works
 
-### With Proxy Enabled (default):
-1. Netclient joins your Netmaker network and sets up WireGuard
-2. Default route is set through the WireGuard interface
-3. tun2socks bridges the WireGuard traffic to your SOCKS proxy
-4. All traffic flows: Device → WireGuard → SOCKS Proxy → Internet
-
-### Direct WireGuard Mode:
-1. Netclient joins your Netmaker network and sets up WireGuard  
-2. Traffic flows directly through WireGuard: Device → WireGuard → Internet
+1. `netclient join` enrolls this host with the controller
+2. `netclient daemon` maintains WireGuard peers and MQTT signaling
+3. Mesh traffic follows Netmaker network policy (no local SOCKS redirection)
 
 ## Troubleshooting
 
 ### Enable Debug Mode
-Set `debug_mode: true` to get additional debugging tools and verbose logging.
-
-### Check Logs
-Monitor the app logs for connection status and error messages.
+Set `debug_mode: true` for extra interface/route logging after join.
 
 ### Common Issues
 
-- **"Netclient token is required"**: Ensure you've provided a valid enrollment token
-- **"WireGuard interface not found"**: Check your Netmaker server connectivity and token validity
-- **"Failed to join network"**: Verify your Netmaker server URL and token are correct
-- **Proxy connection issues**: Ensure your SOCKS proxy (like Xray) is running and accessible
+- **"Netclient token is required"**: Provide a valid enrollment token
+- **"Failed to join network"**: Verify the token and that `https://<nm_domain>` is reachable from HA
+- **EOF / connection errors on join**: Confirm Cloudflare Tunnel (or reverse proxy) is healthy; this app no longer routes API traffic through SOCKS
 
 ### Network Requirements
 
-The app requires:
-- `NET_ADMIN` capability for network configuration
-- Access to `/dev/net/tun` device
-- Outbound connectivity to your Netmaker server
-- Outbound connectivity to your SOCKS proxy (if enabled)
+- `NET_ADMIN` capability
+- Access to `/dev/net/tun`
+- Outbound HTTPS to your Netmaker API
+- Outbound connectivity to the MQ broker used by the controller
 
 ## Support
 
@@ -144,4 +78,3 @@ For issues and feature requests, please visit the [GitHub repository](https://gi
 
 [aarch64-shield]: https://img.shields.io/badge/aarch64-yes-green.svg
 [amd64-shield]: https://img.shields.io/badge/amd64-yes-green.svg
-[armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg

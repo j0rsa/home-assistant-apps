@@ -1,7 +1,7 @@
 ---
 name: netmaker-client
 title: Netmaker Client - VPN Client
-description: "WireGuard VPN client for Home Assistant with optional SOCKS proxy routing. Connect to Netmaker mesh networks with auto-restart and debug support."
+description: "Official Netmaker WireGuard client for Home Assistant. Joins a mesh network as a plain peer with auto-restart and debug support."
 category: Networking & Proxy
 version: latest
 architectures:
@@ -12,33 +12,25 @@ ports: []
 
 # Netmaker Client App
 
-Netmaker WireGuard client that can route traffic through a SOCKS proxy for enhanced privacy and flexibility.
+Official Netmaker WireGuard client for Home Assistant. Joins a Netmaker mesh network as a plain peer.
 
 ## About
 
-This app runs the official Netmaker client to connect to your Netmaker network and optionally routes all traffic through a SOCKS proxy (like the Xray app). This provides a powerful combination of enterprise-grade mesh networking with additional privacy layers.
+This app runs the official Netmaker `netclient` to connect Home Assistant to your Netmaker-managed WireGuard mesh. It enrolls with your controller and keeps the daemon running so peer configuration stays in sync.
 
 ## Features
 
-- 🔐 **WireGuard VPN**: Connect to Netmaker-managed networks
-- 🧦 **SOCKS Proxy Integration**: Route through additional proxy layers
-- 🔄 **Flexible Routing**: Direct WireGuard or proxy-routed traffic
-- 🔁 **Auto Restart**: Automatic recovery on failure
-- 🐛 **Debug Mode**: Troubleshooting tools included
-
-## Use Cases
-
-- **Enterprise Networking**: Connect to Netmaker mesh networks
-- **Enhanced Privacy**: Layer proxy on top of VPN
-- **Flexible Routing**: Choose direct or proxied traffic
-- **Remote Access**: Secure access to home network
+- WireGuard mesh connectivity via Netmaker
+- Official `netclient` join + daemon
+- Automatic restart on failure
+- Debug logging for interfaces and routes
 
 ## Installation
 
 1. Add the J0rsa repository to your Home Assistant
-2. Search for "Netmaker Client" in the App Store (formerly Add-on Store)
+2. Search for "Netmaker Client" in the App Store
 3. Click Install and wait for the download to complete
-4. Configure your Netmaker credentials
+4. Configure your Netmaker enrollment token
 5. Start the app
 
 ## Configuration
@@ -53,97 +45,57 @@ This app runs the official Netmaker client to connect to your Netmaker network a
 ### Optional Settings
 
 | Option | Description | Default |
-|--------|-------------|---------|
-| `wg_interface` | WireGuard interface name | `wg0` |
-| `socks_proxy` | SOCKS proxy address | `homeassistant:1080` |
-| `enable_proxy` | Route through SOCKS proxy | `true` |
-| `log_level` | Log level (debug, info, warning, error) | `info` |
-| `debug_mode` | Enable debug tools | `false` |
+|--------|-------------|--------|
+| `debug_mode` | Log interfaces/routes after join | `false` |
 | `auto_restart` | Auto restart on failure | `true` |
 
-## Example Configurations
-
-### With SOCKS Proxy (Default)
+## Example Configuration
 
 ```yaml
 host_name: "homeassistant-netmaker"
 netclient_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-wg_interface: "wg0"
-socks_proxy: "homeassistant:1080"
-enable_proxy: true
-log_level: "info"
 debug_mode: false
-auto_restart: true
-```
-
-### Direct WireGuard (No Proxy)
-
-```yaml
-host_name: "homeassistant-netmaker"
-netclient_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-enable_proxy: false
 auto_restart: true
 ```
 
 ## Setup Instructions
 
-1. **Set up Netmaker Server**: Ensure you have a working Netmaker instance
-2. **Generate Token**: Create enrollment key in Netmaker dashboard
-3. **Configure App**: Enter token and other settings
-4. **Start App**: It will automatically join your network
-
-## Integration with Xray App
-
-This app works perfectly with the Xray app:
-
-1. Install and configure Xray with your VPN server
-2. Configure Netmaker app with:
-   - `enable_proxy: true`
-   - `socks_proxy: "homeassistant:1080"`
-3. Traffic flow: Device → WireGuard → SOCKS Proxy → Xray → VPN
+1. Ensure your Netmaker API is reachable over HTTPS (e.g. Cloudflare Tunnel)
+2. Create an enrollment key in the Netmaker dashboard
+3. Enter `host_name` and `netclient_token` in the app options
+4. Start the app — it joins and runs `netclient daemon`
 
 ## How It Works
 
-### With Proxy Enabled
-
 ```
-Device → Netmaker WireGuard → tun2socks → SOCKS Proxy → Internet
-```
-
-1. Netclient joins Netmaker network
-2. WireGuard tunnel established
-3. tun2socks bridges to SOCKS proxy
-4. All traffic flows through proxy
-
-### Direct WireGuard Mode
-
-```
-Device → Netmaker WireGuard → Internet
+Home Assistant → netclient → Netmaker API (HTTPS) + MQTT
+                           → WireGuard mesh peers
 ```
 
-Traffic flows directly through WireGuard without proxy.
+1. `netclient join` enrolls this host
+2. `netclient daemon` maintains peers and signaling
+3. Traffic follows Netmaker network policy (no local SOCKS redirection)
 
 ## Troubleshooting
 
 ### Enable Debug Mode
 
-Set `debug_mode: true` for additional tools and logging.
+Set `debug_mode: true` for additional interface and route logging after join.
 
 ### Common Issues
 
 | Issue | Solution |
 |-------|----------|
-| "Netclient token is required" | Provide valid enrollment token |
-| "WireGuard interface not found" | Check Netmaker connectivity |
-| "Failed to join network" | Verify server URL and token |
-| Proxy connection issues | Ensure SOCKS proxy is running |
+| "Netclient token is required" | Provide a valid enrollment token |
+| "Failed to join network" | Verify token and API HTTPS reachability |
+| EOF / connection errors on join | Confirm Cloudflare Tunnel or reverse proxy is healthy |
 
 ### Network Requirements
 
 - `NET_ADMIN` capability
 - Access to `/dev/net/tun`
-- Outbound to Netmaker server
-- Outbound to SOCKS proxy (if enabled)
+- Outbound HTTPS to your Netmaker API
+- Outbound connectivity to the MQ broker used by the controller
 
 ## Support
 

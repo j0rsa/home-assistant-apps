@@ -35,7 +35,7 @@ If you want to do add the repository manually, please follow the procedure highl
 - **HevSocks5 TProxy** - Transparent SOCKS5 proxy client for routing traffic through a remote SOCKS5 server ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
 - **Xray** - High-performance proxy client supporting VLESS/VMess/Trojan protocols ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armv7 Architecture][armv7-shield]
 - **Xray Configurator** - Web interface to convert proxy links to Xray configuration files ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
-- **Netmaker Client** - WireGuard VPN client with SOCKS proxy support ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield] ![Supports armv7 Architecture][armv7-shield]
+- **Netmaker Client** - Official Netmaker WireGuard client (plain peer) ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
 
 ## DevOps & Git
 - **Gitea Mirror** - Mirror GitHub repositories, organizations, and metadata into your self-hosted Gitea instance. Minimal configuration required - all settings managed through the web UI. ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]

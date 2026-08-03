@@ -156,11 +156,11 @@ Web-based configuration generator for Xray. Simplify complex proxy setups.
 **Architectures:** `aarch64` `amd64`
 
 #### [Netmaker Client](/apps/netmaker-client/)
-WireGuard VPN client with advanced networking features.
-- WireGuard VPN connectivity
-- SOCKS proxy support
+Official Netmaker WireGuard client for joining a mesh network as a plain peer.
+- Official netclient join + daemon
+- WireGuard mesh connectivity
 - Automatic reconnection
-- Network mesh support
+- No SOCKS or traffic redirection
 
 **Architectures:** `aarch64` `amd64`
 

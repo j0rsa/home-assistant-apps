@@ -178,7 +178,6 @@ The debug script checks:
 This app works well with:
 
 - [Xray Configurator](/apps/xray-configurator/): Generate Xray configs from proxy links
-- [Netmaker Client](/apps/netmaker/): Route WireGuard traffic through Xray
 - [HevSocks5 TProxy](/apps/hev-socks5-tproxy/): Use Xray as upstream SOCKS server
 
 ## Support

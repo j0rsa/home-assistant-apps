@@ -67,10 +67,10 @@ Web interface for converting proxy links to Xray configuration files.
 
 **Version:** Latest | **Architectures:** `amd64`, `aarch64`
 
-### [Netmaker Client](/apps/netmaker/)
-WireGuard VPN client with SOCKS proxy support for secure networking.
+### [Netmaker Client](/apps/netmaker-client/)
+Official Netmaker WireGuard client for joining a mesh network as a plain peer.
 
-**Version:** Latest | **Architectures:** `amd64`, `aarch64`, `armv7`
+**Version:** Latest | **Architectures:** `amd64`, `aarch64`
 
 ### [Go SOCKS5 Proxy](/apps/go-socks5-proxy/)
 Simple, lightweight SOCKS5 proxy server with authentication and IP allowlisting support.

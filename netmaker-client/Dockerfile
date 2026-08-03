@@ -13,35 +13,18 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       curl \
       jq \
       iproute2 \
-      iptables \
-      redsocks \
       wireguard-tools && \
     echo "**** install netclient ****" && \
     if [ "$BUILD_ARCH" = "amd64" ]; then \
       NETCLIENT_ARCH="amd64"; \
     elif [ "$BUILD_ARCH" = "aarch64" ]; then \
       NETCLIENT_ARCH="arm64"; \
-    elif [ "$BUILD_ARCH" = "armv7" ]; then \
-      NETCLIENT_ARCH="armv7"; \
     else \
       echo "Unsupported arch '$BUILD_ARCH'" && \
       exit 255; \
     fi && \
-    curl -L "https://github.com/gravitl/netclient/releases/latest/download/netclient-linux-${NETCLIENT_ARCH}" -o /usr/local/bin/netclient && \
+    curl -L "https://github.com/gravitl/netclient/releases/v1.6.0/download/netclient-linux-${NETCLIENT_ARCH}" -o /usr/local/bin/netclient && \
     chmod +x /usr/local/bin/netclient && \
-    echo "**** install tun2socks ****" && \
-    if [ "$BUILD_ARCH" = "amd64" ]; then \
-      TUN2SOCKS_ARCH="amd64"; \
-    elif [ "$BUILD_ARCH" = "aarch64" ]; then \
-      TUN2SOCKS_ARCH="arm64"; \
-    elif [ "$BUILD_ARCH" = "armv7" ]; then \
-      TUN2SOCKS_ARCH="armv7"; \
-    else \
-      echo "Unsupported arch '$BUILD_ARCH'" && \
-      exit 255; \
-    fi && \
-    curl -L "https://github.com/xjasonlyu/tun2socks/releases/latest/download/tun2socks_linux_${TUN2SOCKS_ARCH}" -o /usr/local/bin/tun2socks && \
-    chmod +x /usr/local/bin/tun2socks && \
     echo "**** setup directories ****" && \
     mkdir -p /dev/net /var/lib/netclient && \
     echo "**** cleanup ****" && \
