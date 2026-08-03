@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.6.0-3
+
+- Use host networking so netclient can manage WireGuard on the HA host
+
 ## 1.6.0-2
 
 - Do not run `netclient version` during image build (it initializes WireGuard and fails in CI)

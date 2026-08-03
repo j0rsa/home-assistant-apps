@@ -92,6 +92,7 @@ Set `debug_mode: true` for additional interface and route logging after join.
 
 ### Network Requirements
 
+- Host networking (`host_network: true`)
 - `NET_ADMIN` capability
 - Access to `/dev/net/tun`
 - Outbound HTTPS to your Netmaker API

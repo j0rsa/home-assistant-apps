@@ -1,6 +1,6 @@
 ---
 name: Netmaker Client
-version: 1.6.0-2
+version: 1.6.0-3
 slug: netmaker-client
 description: |
   Netmaker WireGuard Client
@@ -23,6 +23,7 @@ schema:
   auto_restart: bool
 init: false
 startup: services
+host_network: true
 privileged:
   - NET_ADMIN
 devices:
