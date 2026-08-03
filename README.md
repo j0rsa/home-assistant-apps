@@ -44,12 +44,6 @@ If you want to do add the repository manually, please follow the procedure highl
 
 Ready-to-use Home Assistant automation blueprints:
 
-- **IKEA Bilresa Unified Controller** - Complete control for IKEA Bilresa scroll wheel with 3 layers × 3 buttons. Supports brightness adjustment, multi-press actions, hold actions, scenes, and covers.
-  
-  [![Import Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2Fj0rsa%2Fhome-assistant-apps%2Fblob%2Fmain%2Fblueprints%2Fikea_bilresa_unified.yaml)
-  
-  [View YAML](https://github.com/j0rsa/home-assistant-apps/blob/main/blueprints/ikea_bilresa_unified.yaml)
-
 - **ESPHome Auto-Updater** - Automatically update ESPHome devices when new versions are available. Supports update windows, notifications, and selective device updates.
   
   [![Import Blueprint](https://my.home-assistant.io/badges/blueprint_import.svg)](https://my.home-assistant.io/redirect/blueprint_import/?blueprint_url=https%3A%2F%2Fgithub.com%2Fj0rsa%2Fhome-assistant-apps%2Fblob%2Fmain%2Fblueprints%2Fesphome_auto_updater.yaml)
