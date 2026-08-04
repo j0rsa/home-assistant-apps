@@ -1,4 +1,4 @@
-ARG UPSTREAM_IMAGE=copyparty/ac:1.20.19
+ARG UPSTREAM_IMAGE=copyparty/ac:1.20.20
 ARG BUILD_FROM=ghcr.io/home-assistant/base:3.24
 
 FROM ${UPSTREAM_IMAGE} AS upstream
