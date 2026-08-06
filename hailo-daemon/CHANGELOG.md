@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8
+
+- Remove deprecated `codenotary` field from config and build metadata
+
 ## 0.0.7
 
 - Update base image to Debian trixie

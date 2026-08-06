@@ -22,7 +22,7 @@ if bashio::var.has_value "${READONLY_PASSWORD}"; then
     ENABLE_READONLY=true
 fi
 
-mkdir -p /cfg /cfg/hists /config /addon_configs /homeassistant /share /backup /media
+mkdir -p /cfg /cfg/hists /config /app_configs /homeassistant /share /backup /media
 
 CFG_FILE=/cfg/copyparty.conf
 
@@ -91,8 +91,8 @@ fi
 echo >> "${CFG_FILE}"
 
 # Keep in sync with map: in config.yaml
-write_volume "/addon-config" "/config" "rwmda"
-write_volume "/addon-configs" "/addon_configs" "rwmda"
+write_volume "/app-config" "/config" "rwmda"
+write_volume "/app-configs" "/app_configs" "rwmda"
 write_volume "/homeassistant" "/homeassistant" "rwmda"
 write_volume "/share" "/share" "rwmda"
 write_volume "/backup" "/backup" "rwmda"
@@ -107,7 +107,7 @@ for f in /config/*.conf; do
 done
 shopt -u nullglob
 
-bashio::log.info "Volumes (admin rw): /addon-config /addon-configs /homeassistant /share /backup /media"
+bashio::log.info "Volumes (admin rw): /app-config /app-configs /homeassistant /share /backup /media"
 bashio::log.info "Volumes (ro): /ssl"
 bashio::log.info "Listening on :3923"
 

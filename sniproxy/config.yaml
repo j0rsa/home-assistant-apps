@@ -1,6 +1,6 @@
 ---
 name: "SniProxy"
-version: 3.24.1
+version: 3.24.1-1
 slug: "sni-proxy"
 description: |
   SNI proxy
@@ -9,7 +9,6 @@ description: |
 arch:
   - aarch64
   - amd64
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-sni-proxy-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

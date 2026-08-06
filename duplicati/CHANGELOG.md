@@ -1,9 +1,6 @@
 # Changelog
 
-## 3.24.1-1
+## 2.0.8.1-1
 
 - Remove deprecated `codenotary` field from config and build metadata
-
-## 1.1.3
-
-- Remove armv7 architecture support
+- Replace legacy `addon_config` map type with `app_config`

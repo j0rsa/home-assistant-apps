@@ -1,6 +1,6 @@
 ---
 name: "Wyoming Hailo Whisper"
-version: 0.1.19
+version: 0.1.20
 slug: wyoming_hailo_whisper
 description: |
   Hailo-accelerated Whisper STT service for Home Assistant via Wyoming.
@@ -22,7 +22,6 @@ map:
   - share:rw
 image: "ghcr.io/j0rsa/haddon-wyoming-hailo-whisper-{arch}"
 panel_icon: mdi:microphone-message
-codenotary: red.avtovo@gmail.com
 url: https://github.com/j0rsa/home-assistant-apps
 options:
   variant: base

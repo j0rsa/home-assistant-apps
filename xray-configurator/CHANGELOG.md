@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2
+
+- Remove deprecated `codenotary` field from config and build metadata
+- Replace legacy `addon_config` map type with `app_config`
+
 ## 1.2.1
 
 - Update base image to Alpine 3.24

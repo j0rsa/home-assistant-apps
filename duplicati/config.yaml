@@ -1,6 +1,6 @@
 ---
 name: Duplicati
-version: 2.0.8.1
+version: 2.0.8.1-1
 slug: duplicati
 description: |
   Duplicati 
@@ -17,12 +17,11 @@ arch:
   - aarch64
   - amd64
 map: 
-  - addon_config:rw #will be mapped to /config
+  - app_config:rw #will be mapped to /config
   - share:rw
   - backup:rw
   - media:rw
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-duplicati-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

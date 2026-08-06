@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.2
+
+- Remove deprecated `codenotary` field from config and build metadata
+
 ## 2.2.1
 
 - Update base image to Alpine 3.24

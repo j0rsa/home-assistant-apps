@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.25.0-1
+
+- Remove deprecated `codenotary` field from config and build metadata
+- Replace legacy `addon_config` map type with `app_config`
+
 ## 3.25.0
 
 - Update upstream from `v3.22.0` to `v3.25.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.22.0...v3.25.0))

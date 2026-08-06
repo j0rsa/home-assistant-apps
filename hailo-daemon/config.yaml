@@ -1,6 +1,6 @@
 ---
 name: "Hailo Daemon"
-version: 0.0.7
+version: 0.0.8
 slug: hailo_daemon
 description: |
   Runs hailortd to multiplex access to the Hailo-8/Hailo-8L AI accelerator.
@@ -19,5 +19,4 @@ map:
   - share:rw
 image: "ghcr.io/j0rsa/haddon-hailo-daemon-{arch}"
 panel_icon: mdi:chip
-codenotary: red.avtovo@gmail.com
 url: https://github.com/j0rsa/home-assistant-apps

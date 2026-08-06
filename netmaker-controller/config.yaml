@@ -1,6 +1,6 @@
 ---
 name: Netmaker Controller
-version: 1.6.0.1
+version: 1.6.0.1-1
 slug: netmaker-controller
 description: |
   Netmaker Controller
@@ -14,9 +14,8 @@ arch:
   - aarch64
   - amd64
 map:
-  - addon_config:rw
+  - app_config:rw
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-netmaker-controller-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

@@ -1,7 +1,4 @@
 ---
-codenotary:
-    signer: "red.avtovo@gmail.com"
-
 build_from:
     amd64: "ghcr.io/home-assistant/base-debian:trixie"
     aarch64: "ghcr.io/home-assistant/base-debian:trixie"

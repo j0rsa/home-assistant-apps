@@ -1,7 +1,4 @@
 ---
-codenotary:
-  signer: "red.avtovo@gmail.com"
-
 build_from:
   amd64: "ghcr.io/home-assistant/base-ubuntu:26.04"
   aarch64: "ghcr.io/home-assistant/base-ubuntu:26.04"

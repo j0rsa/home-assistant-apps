@@ -1,6 +1,6 @@
 ---
 name: Copyparty
-version: 1.20.20
+version: 1.20.20-1
 slug: copyparty
 description: |
   Copyparty
@@ -14,15 +14,14 @@ arch:
   - aarch64
   - amd64
 map:
-  - addon_config:rw
-  - all_addon_configs:rw
+  - app_config:rw
+  - all_app_configs:rw
   - homeassistant_config:rw
   - share:rw
   - backup:rw
   - media:rw
   - ssl:ro
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-copyparty-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

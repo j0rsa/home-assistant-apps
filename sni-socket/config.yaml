@@ -1,18 +1,17 @@
 ---
 name: SNI Socket Proxy
-version: 1.1.1
+version: 1.1.2
 slug: sni_socket
 description: |
   SNI Socket Proxy
   
   SNI proxy with SOCKS5 proxy support. Routes HTTP and HTTPS traffic through a SOCKS5 proxy based on hostname matching.
 url: https://github.com/j0rsa/home-assistant-apps
-codenotary: red.avtovo@gmail.com
 arch:
   - aarch64
   - amd64
 map:
-  - addon_config:rw
+  - app_config:rw
 startup: services
 init: false
 boot: auto

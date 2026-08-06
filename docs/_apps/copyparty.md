@@ -11,9 +11,9 @@ ports:
   - 3923
 faq:
   - q: "Where are my Home Assistant files?"
-    a: "Open /homeassistant for HA config, /share, /media, /backup, /addon-config for this app's public config, /addon-configs for every app's public config, and /ssl for certificates (read-only)."
+    a: "Open /homeassistant for HA config, /share, /media, /backup, /app-config for this app's public config, /app-configs for every app's public config, and /ssl for certificates (read-only)."
   - q: "Why is there no /config URL for Home Assistant?"
-    a: "Supervisor maps HA config as homeassistant_config → /homeassistant when addon_config is also used. This app's own public config is at /addon-config → /config."
+    a: "Supervisor maps HA config as homeassistant_config → /homeassistant when app_config is also used. This app's own public config is at /app-config → /config."
   - q: "Can guests upload without login?"
     a: "Set anonymous_access to readwrite. Prefer none on networks you do not trust. /ssl stays login-only even when anonymous write is enabled."
   - q: "How do I give someone browse-only access?"
@@ -45,8 +45,8 @@ faq:
 | Endpoint | URL |
 |----------|-----|
 | Web UI | `http://homeassistant.local:3923/` |
-| App config | `http://homeassistant.local:3923/addon-config/` |
-| All app configs | `http://homeassistant.local:3923/addon-configs/` |
+| App config | `http://homeassistant.local:3923/app-config/` |
+| All app configs | `http://homeassistant.local:3923/app-configs/` |
 | HA config | `http://homeassistant.local:3923/homeassistant/` |
 | Share | `http://homeassistant.local:3923/share/` |
 | Backups | `http://homeassistant.local:3923/backup/` |
@@ -71,8 +71,8 @@ Accounts:
 
 | URL path | Path in container | Source | Access |
 |----------|-------------------|--------|--------|
-| `/addon-config` | `/config` | App public config (`addon_config`) | writable |
-| `/addon-configs` | `/addon_configs` | All apps' public configs (`all_addon_configs`) | writable |
+| `/app-config` | `/config` | App public config (`app_config`) | writable |
+| `/app-configs` | `/app_configs` | All apps' public configs (`all_app_configs`) | writable |
 | `/homeassistant` | `/homeassistant` | Home Assistant configuration | writable |
 | `/share` | `/share` | Shared folder | writable |
 | `/backup` | `/backup` | Home Assistant backups | writable |
@@ -84,7 +84,7 @@ Accounts:
 - Change the default password before opening port 3923 outside your LAN
 - Use `readonly` for browse/download-only access instead of sharing the admin password
 - Keep `anonymous_access: none` unless you intentionally want guest uploads
-- Write access to `/homeassistant`, `/backup`, and `/addon-configs` can break Home Assistant or other apps if files are edited carelessly
+- Write access to `/homeassistant`, `/backup`, and `/app-configs` can break Home Assistant or other apps if files are edited carelessly
 
 ## Support
 

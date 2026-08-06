@@ -1,6 +1,6 @@
 ---
 name: LiteLLM
-version: 1.95.0
+version: 1.95.0-1
 slug: litellm
 description: |
   LiteLLM Proxy Server
@@ -14,9 +14,8 @@ arch:
   - aarch64
   - amd64
 map:
-  - addon_config:rw
+  - app_config:rw
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-litellm-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

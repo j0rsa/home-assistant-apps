@@ -1,6 +1,6 @@
 ---
 name: "Course Watch"
-version: 2.2.1
+version: 2.2.2
 slug: course-watch
 description: |
   Video course player with WebDAV support.
@@ -17,7 +17,6 @@ map:
   - type: share
     read_only: true
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-course-watch-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

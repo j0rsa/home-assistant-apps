@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.3.4
+
+- Remove deprecated `codenotary` field from config and build metadata
+- Replace legacy `addon_config` map type with `app_config`
+
 ## 1.3.3
 
 - Fix Ubuntu 26.04 build: install `netcat-openbsd` instead of removed virtual `netcat` package

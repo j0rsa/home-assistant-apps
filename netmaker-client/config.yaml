@@ -1,6 +1,6 @@
 ---
 name: Netmaker Client
-version: 1.6.0-3
+version: 1.6.0-4
 slug: netmaker-client
 description: |
   Netmaker WireGuard Client
@@ -32,9 +32,8 @@ arch:
   - aarch64
   - amd64
 map:
-  - addon_config:rw
+  - app_config:rw
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-netmaker-client-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.32.6-1
+
+- Remove deprecated `codenotary` field from config and build metadata
+
 ## 0.32.6
 
 - Update upstream from `0.32.5` to `0.32.6` ([compare](https://github.com/ollama/ollama/compare/v0.32.5...v0.32.6))

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0-6
+
+- Remove deprecated `codenotary` field from config and build metadata
+
 ## 1.0.0-5
 
 - Restrict mapped volumes to `share:rw` only (object data under `/share/rustfs`)

@@ -1,6 +1,6 @@
 ---
 name: Xray Configurator
-version: 1.2.1
+version: 1.2.2
 slug: xray-configurator
 description: |
   Xray Configuration Generator
@@ -13,9 +13,8 @@ arch:
   - aarch64
   - amd64
 map: 
-  - addon_config:rw
+  - app_config:rw
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-xray-configurator-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

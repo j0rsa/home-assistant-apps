@@ -8,15 +8,15 @@ Matches `map:` in `config.yaml`:
 
 | URL path | Container path | HA mount |
 |----------|----------------|----------|
-| `/addon-config` | `/config` | `addon_config:rw` |
-| `/addon-configs` | `/addon_configs` | `all_addon_configs:rw` |
+| `/app-config` | `/config` | `app_config:rw` |
+| `/app-configs` | `/app_configs` | `all_app_configs:rw` |
 | `/homeassistant` | `/homeassistant` | `homeassistant_config:rw` |
 | `/share` | `/share` | `share:rw` |
 | `/backup` | `/backup` | `backup:rw` |
 | `/media` | `/media` | `media:rw` |
 | `/ssl` | `/ssl` | `ssl:ro` |
 
-> Home Assistant’s configuration folder is mapped as `homeassistant_config` (not legacy `config`), because `config` cannot be combined with `addon_config`.
+> Home Assistant’s configuration folder is mapped as `homeassistant_config` (not legacy `config`), because `config` cannot be combined with `app_config`.
 
 ## Configuration
 
@@ -37,4 +37,4 @@ Advanced: place extra `*.conf` files in the app config folder (`/config` in the 
 ## Access
 
 - Web UI: `http://homeassistant.local:3923/`
-- Paths: `/addon-config`, `/addon-configs`, `/homeassistant`, `/share`, `/backup`, `/media`, `/ssl` (read-only)
+- Paths: `/app-config`, `/app-configs`, `/homeassistant`, `/share`, `/backup`, `/media`, `/ssl` (read-only)

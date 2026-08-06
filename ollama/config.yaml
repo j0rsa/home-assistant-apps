@@ -1,6 +1,6 @@
 ---
 name: Ollama
-version: 0.32.6
+version: 0.32.6-1
 slug: ollama
 description: |
   Ollama 
@@ -12,7 +12,6 @@ arch:
 map: 
   - share:rw
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-ollama-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps

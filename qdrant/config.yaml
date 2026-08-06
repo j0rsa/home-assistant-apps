@@ -1,6 +1,6 @@
 ---
 name: Qdrant
-version: 1.16.3-2
+version: 1.16.3-3
 slug: qdrant
 description: |
   Qdrant Vector Database
@@ -32,10 +32,9 @@ arch:
   - aarch64
   - amd64
 map:
-  - addon_config:rw
+  - app_config:rw
   - data:rw
 boot: auto
-codenotary: red.avtovo@gmail.com
 image: "ghcr.io/j0rsa/haddon-qdrant-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
