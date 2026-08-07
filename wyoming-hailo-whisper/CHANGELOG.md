@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.20-1
+
+- Rebuild images after codenotary/`app_config` migration so CI publishes updated manifests
+
 ## 0.1.20
 
 - Remove deprecated `codenotary` field from config and build metadata
