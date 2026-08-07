@@ -1,6 +1,6 @@
 # Changelog
 
-## 1.3.4-2
+## 1.3.4-3
 
 - Resolve latest Xray-core version via GitHub release redirect instead of the rate-limited `/releases/latest` API
 
