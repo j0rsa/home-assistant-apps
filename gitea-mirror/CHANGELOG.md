@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.26.0-1
+
+- Rebuild images after codenotary/`app_config` migration so CI publishes updated manifests
+
 ## 3.26.0
 
 - Update upstream from `v3.25.0` to `v3.26.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.25.0...v3.26.0))
