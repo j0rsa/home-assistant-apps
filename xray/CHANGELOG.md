@@ -2,7 +2,7 @@
 
 ## 1.3.4-2
 
-- Pin Xray-core to `v26.3.27` instead of scraping GitHub `/releases/latest` at build time (fixes CI rate-limit flakes)
+- Resolve latest Xray-core version via GitHub release redirect instead of the rate-limited `/releases/latest` API
 
 ## 1.3.4-1
 

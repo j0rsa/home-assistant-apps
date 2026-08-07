@@ -6,8 +6,6 @@ ARG BUILD_VERSION
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
-# Pin release so CI builds do not scrape GitHub's unauthenticated /releases/latest API.
-ARG XRAY_VERSION=v26.3.27
 
 RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
     echo "**** install packages ****" && \
@@ -19,6 +17,14 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       netcat-openbsd \
       jq && \
     echo "**** install xray-core ****" && \
+    # github.com redirect (not api.github.com) to avoid unauthenticated API rate limits
+    XRAY_VERSION=$(curl -fsSL -o /dev/null -w '%{url_effective}' \
+      https://github.com/XTLS/Xray-core/releases/latest) && \
+    XRAY_VERSION="${XRAY_VERSION##*/}" && \
+    if [ -z "${XRAY_VERSION}" ] || [ "${XRAY_VERSION}" = "latest" ]; then \
+      echo "Failed to resolve latest Xray version" && \
+      exit 1; \
+    fi && \
     echo "Using Xray version: ${XRAY_VERSION}" && \
     if [ "$BUILD_ARCH" = "amd64" ]; then \
       XRAY_ARCH="linux-64"; \
