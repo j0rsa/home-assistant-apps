@@ -6,6 +6,8 @@ ARG BUILD_VERSION
 ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
+# Pin release so CI builds do not scrape GitHub's unauthenticated /releases/latest API.
+ARG XRAY_VERSION=v26.3.27
 
 RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
     echo "**** install packages ****" && \
@@ -17,7 +19,6 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       netcat-openbsd \
       jq && \
     echo "**** install xray-core ****" && \
-    XRAY_VERSION=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")') && \
     echo "Using Xray version: ${XRAY_VERSION}" && \
     if [ "$BUILD_ARCH" = "amd64" ]; then \
       XRAY_ARCH="linux-64"; \
@@ -29,7 +30,7 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       echo "Unsupported arch '$BUILD_ARCH'" && \
       exit 255; \
     fi && \
-    curl -L "https://github.com/XTLS/Xray-core/releases/download/${XRAY_VERSION}/Xray-${XRAY_ARCH}.zip" -o /tmp/xray.zip && \
+    curl -fsSL "https://github.com/XTLS/Xray-core/releases/download/${XRAY_VERSION}/Xray-${XRAY_ARCH}.zip" -o /tmp/xray.zip && \
     unzip /tmp/xray.zip -d /usr/local/bin/ && \
     chmod +x /usr/local/bin/xray && \
     echo "**** cleanup ****" && \

@@ -2,3 +2,6 @@
 build_from:
     amd64: "ghcr.io/home-assistant/base-ubuntu:26.04"
     aarch64: "ghcr.io/home-assistant/base-ubuntu:26.04"
+
+args:
+    XRAY_VERSION: "v26.3.27"

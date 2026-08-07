@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.4-2
+
+- Pin Xray-core to `v26.3.27` instead of scraping GitHub `/releases/latest` at build time (fixes CI rate-limit flakes)
+
 ## 1.3.4-1
 
 - Rebuild images after codenotary/`app_config` migration so CI publishes updated manifests
