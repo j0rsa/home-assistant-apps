@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.26.0
+
+- Update upstream from `v3.25.0` to `v3.26.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.25.0...v3.26.0))
+- Upstream v3.26.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.26.0))
+- GitHub API calls now reuse ETags across syncs** (#356, thanks @joshfree). Every GET replays the previously seen `ETag` as `If-None-Match`, so when nothing changed GitHub answers `304 Not Modified` and the cached body is used instead of a full download. Authorized 304s do not count against the token's primary rate limit, so large mirror sets and short sync intervals are much less likely to hit throttling. The cache is in-memory and per-user, keyed by the fully expanded request URL, bounded by both entry count and a 64MB byte budget, and clients created with only a token get a hashed token scope so users never share cache entries. No configuration needed and no schema changes; sync results are identical.
 ## 3.25.0-1
 
 - Remove deprecated `codenotary` field from config and build metadata
