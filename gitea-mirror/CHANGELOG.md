@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.26.2
+
+- Update upstream from `v3.26.0` to `v3.26.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.26.0...v3.26.2))
+- Upstream v3.26.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.26.1))
+- Long repository names no longer wrap in the repositories table.** Names and owner/repo paths that used to break onto two lines now stay on a single line, truncated with an ellipsis. Hovering over the text scrolls it sideways so you can read the full name, and it slides back when you move the mouse away.
+- Upstream v3.26.2 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.26.2))
+- Smoother hover scrolling for long repository names.** The marquee added in v3.26.1 was choppy because it animated a layout property. It now uses a GPU-composited transform, so the scroll is smooth. The hover target is also bigger: hovering anywhere over the repository cell scrolls both the name and the owner/repo path together.
 ## 3.26.0-1
 
 - Rebuild images after codenotary/`app_config` migration so CI publishes updated manifests
