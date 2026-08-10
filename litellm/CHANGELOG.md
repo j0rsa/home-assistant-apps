@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.96.0
+
+- Update upstream from `v1.95.0` to `v1.96.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.95.0...v1.96.0))
 ## 1.95.0-2
 
 - Rebuild images after codenotary/`app_config` migration so CI publishes updated manifests
