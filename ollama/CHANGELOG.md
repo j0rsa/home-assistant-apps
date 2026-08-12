@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.32.9
+
+- Update upstream from `0.32.6` to `0.32.9` ([compare](https://github.com/ollama/ollama/compare/v0.32.6...v0.32.9))
+- Upstream v0.32.7 ([notes](https://github.com/ollama/ollama/releases/tag/v0.32.7))
+- Upstream v0.32.8 ([notes](https://github.com/ollama/ollama/releases/tag/v0.32.8))
+- Add Muse Glimmer support for NVIDIA, AMD, and additional platforms
+- Upstream v0.32.9 ([notes](https://github.com/ollama/ollama/releases/tag/v0.32.9))
+- Added the Nemotron 3 architecture
+- Handle boundary condition in Muse Glimmer function calling parser
 ## 0.32.6-2
 
 - Rebuild images after codenotary/`app_config` migration so CI publishes updated manifests

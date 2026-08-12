@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.96.2
+
+- Update upstream from `v1.96.0` to `v1.96.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.96.0...v1.96.2))
+- Upstream v1.96.2 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.96.2))
+- chore(release): backport proxy request-handling maintenance and refresh runtime deps for 1.96.1 by @yuneng-berri in https://github.com/BerriAI/litellm/pull/36494
+- bump: version 1.96.1 → 1.96.2 (1.96.1 burned by the PyPI storage failure) by @yuneng-berri in https://github.com/BerriAI/litellm/pull/36570
 ## 1.96.0
 
 - Update upstream from `v1.95.0` to `v1.96.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.95.0...v1.96.0))
