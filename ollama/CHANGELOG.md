@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.32.13
+
+- Update upstream from `0.32.11` to `0.32.13` ([compare](https://github.com/ollama/ollama/compare/v0.32.11...v0.32.13))
+- Upstream v0.32.12 ([notes](https://github.com/ollama/ollama/releases/tag/v0.32.12))
+- Upstream v0.32.13 ([notes](https://github.com/ollama/ollama/releases/tag/v0.32.13))
+- qwen3.8: support developer instructions
 ## 0.32.11
 
 - Update upstream from `0.32.9` to `0.32.11` ([compare](https://github.com/ollama/ollama/compare/v0.32.9...v0.32.11))
