@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.97.0
+
+- Update upstream from `v1.96.2` to `v1.97.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.96.2...v1.97.0))
 ## 1.96.2
 
 - Update upstream from `v1.96.0` to `v1.96.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.96.0...v1.96.2))
