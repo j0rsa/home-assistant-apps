@@ -17,7 +17,14 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       netcat-openbsd \
       jq && \
     echo "**** install xray-core ****" && \
-    XRAY_VERSION=$(curl -s "https://api.github.com/repos/XTLS/Xray-core/releases/latest" | grep -Po '"tag_name": "\K.*?(?=")') && \
+    # github.com redirect (not api.github.com) to avoid unauthenticated API rate limits
+    XRAY_VERSION=$(curl -fsSL -o /dev/null -w '%{url_effective}' \
+      https://github.com/XTLS/Xray-core/releases/latest) && \
+    XRAY_VERSION="${XRAY_VERSION##*/}" && \
+    if [ -z "${XRAY_VERSION}" ] || [ "${XRAY_VERSION}" = "latest" ]; then \
+      echo "Failed to resolve latest Xray version" && \
+      exit 1; \
+    fi && \
     echo "Using Xray version: ${XRAY_VERSION}" && \
     if [ "$BUILD_ARCH" = "amd64" ]; then \
       XRAY_ARCH="linux-64"; \
@@ -29,7 +36,7 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       echo "Unsupported arch '$BUILD_ARCH'" && \
       exit 255; \
     fi && \
-    curl -L "https://github.com/XTLS/Xray-core/releases/download/${XRAY_VERSION}/Xray-${XRAY_ARCH}.zip" -o /tmp/xray.zip && \
+    curl -fsSL "https://github.com/XTLS/Xray-core/releases/download/${XRAY_VERSION}/Xray-${XRAY_ARCH}.zip" -o /tmp/xray.zip && \
     unzip /tmp/xray.zip -d /usr/local/bin/ && \
     chmod +x /usr/local/bin/xray && \
     echo "**** cleanup ****" && \
