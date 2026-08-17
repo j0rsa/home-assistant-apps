@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.32.14
+
+- Update upstream from `0.32.13` to `0.32.14` ([compare](https://github.com/ollama/ollama/compare/v0.32.13...v0.32.14))
+- Upstream v0.32.14 ([notes](https://github.com/ollama/ollama/releases/tag/v0.32.14))
+- llm: transcode WebP images for llama-server
+- renderers/qwen: tolerate non-leading system messages
 ## 0.32.13
 
 - Update upstream from `0.32.11` to `0.32.13` ([compare](https://github.com/ollama/ollama/compare/v0.32.11...v0.32.13))
