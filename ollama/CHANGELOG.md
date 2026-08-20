@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.32.15
+
+- Update upstream from `0.32.14` to `0.32.15` ([compare](https://github.com/ollama/ollama/compare/v0.32.14...v0.32.15))
+- Upstream v0.32.15 ([notes](https://github.com/ollama/ollama/releases/tag/v0.32.15))
+- Add a model metadata cache to reduce Ollama’s per-request overhead
+- @gaugarg-nv made their first contribution in https://github.com/ollama/ollama/pull/17752
 ## 0.32.14
 
 - Update upstream from `0.32.13` to `0.32.14` ([compare](https://github.com/ollama/ollama/compare/v0.32.13...v0.32.14))

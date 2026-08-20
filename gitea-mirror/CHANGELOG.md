@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.27.0
+
+- Update upstream from `v3.26.2` to `v3.27.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.26.2...v3.27.0))
+- Upstream v3.27.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.27.0))
+- Mirror options can now be set per repository and per organization** (#362, requested in #361 by @MMMMMoris). Options that were global only, Git LFS, issues, pull requests, releases, wiki, labels and milestones, can now be overridden on individual repos and orgs.
+- Options that can't take effect are now disabled and explain why**, instead of silently doing nothing. Starred repos with "starred code only" turned on show their metadata options greyed out with the reason, and the labels option explains that issues mirroring already syncs labels.
+- Repository and organization updates no longer wipe the destination override.** Both endpoints previously rewrote that field on every request, so an update touching anything else would clear it. They now only change the fields you actually send.
+- Scheduled syncs now honor mirror settings.** The sync path read its own copy of the options, so changes applied on the first mirror and were ignored on every sync after that.
 ## 3.26.2
 
 - Update upstream from `v3.26.0` to `v3.26.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.26.0...v3.26.2))
