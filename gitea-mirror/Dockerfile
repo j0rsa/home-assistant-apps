@@ -1,5 +1,5 @@
 # Multi-stage build: extract application from upstream image
-ARG UPSTREAM_IMAGE=ghcr.io/raylabshq/gitea-mirror:v3.26.2
+ARG UPSTREAM_IMAGE=ghcr.io/raylabshq/gitea-mirror:v3.27.0
 # Use HA Ubuntu base image with bashio (BUILD_FROM comes from build.yaml)
 ARG BUILD_FROM=ghcr.io/home-assistant/base-ubuntu:26.04
 
