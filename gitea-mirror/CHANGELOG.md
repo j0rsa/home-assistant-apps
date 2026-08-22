@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.27.2
+
+- Update upstream from `v3.27.0` to `v3.27.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.27.0...v3.27.2))
+- Upstream v3.27.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.27.1))
+- Mirror Options is now reachable on mobile** (#365, reported by @MMMMMoris in #361). The per-repository mirror options added in v3.27.0 could only be opened from the desktop table. Mobile repository cards now have a three-dot menu with the same dialog, and show the Custom badge when a repository overrides the defaults. The Organizations page had the reverse gap, with the menu item present on mobile but missing from the desktop dropdown, which is also fixed.
+- Upstream v3.27.2 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.27.2))
+- SSO sign-in with internal identity providers works again** (#366). Since v3.21.0, the auth library's SSRF hardening rejected SSO sign-ins whose IdP hostname resolves to a private address (common homelab split-DNS setups) unless the origin was manually added to `BETTER_AUTH_TRUSTED_ORIGINS`. Registered providers' issuer and endpoint origins are now trusted automatically. Because sessions last 30 days, this breakage could surface weeks after updating, whenever you next had to sign in.
+- SSO sign-in errors are now shown on the login page** instead of the button silently flipping back from "Redirecting..." with nothing in the logs.
+- `CLEANUP_DELETE_FROM_GITEA` is now honored** (#366). It was documented as gating Gitea-side deletion but was never read, so orphaned-repo cleanup always archived or deleted repos on the Gitea/Forgejo side. With the flag `false` (the default), cleanup now only updates gitea-mirror's own database and leaves your Gitea/Forgejo copies untouched.
+- Behavior change**: if you relied on the old unconditional Gitea-side archive/delete, set `CLEANUP_DELETE_FROM_GITEA=true` to keep it.
 ## 3.27.0
 
 - Update upstream from `v3.26.2` to `v3.27.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.26.2...v3.27.0))
