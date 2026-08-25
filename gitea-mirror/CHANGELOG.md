@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.28.0
+
+- Update upstream from `v3.27.2` to `v3.28.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.27.2...v3.28.0))
+- Upstream v3.28.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.28.0))
+- Release limit can now be set per repository and per organization** (#370, requested in #361 by @MMMMMoris). The global "latest N releases" setting (default 10) can be overridden from Mirror Options, with the same precedence as the other per-object options: repository, then organization, then your global config. Leave the field empty to inherit. Only the newest N releases and their assets are kept in Gitea and older ones are pruned on the next sync, so this is the lever for repos with a long release history you do not want on disk.
+- Repository description and topics are kept in sync with GitHub** (#370, reported in #361). The description was only sent when a mirror was first created, and only from gitea-mirror's own copy of it, so repositories imported before v3.13.0 or whose GitHub description changed later never got one. Both are now reconciled on every sync, read straight from GitHub, and existing mirrors pick it up on their next sync without re-mirroring. Unchanged values are not rewritten, and the check uses conditional requests so it does not eat into the GitHub rate limit.
+- Behavior change**: a description edited by hand in Gitea is replaced by the GitHub one on the next sync, the same way topics already behave.
+- Mobile repository cards use the full width** (#370). Name, Custom badge and menu share one aligned row, secondary badges sit under the name, and status and last sync time are on the right. Also fixes the name row sitting at a different height depending on whether the Custom badge was present.
 ## 3.27.2
 
 - Update upstream from `v3.27.0` to `v3.27.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.27.0...v3.27.2))
