@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.33.0
+
+- Update upstream from `0.32.15` to `0.33.0` ([compare](https://github.com/ollama/ollama/compare/v0.32.15...v0.33.0))
+- Upstream v0.33.0 ([notes](https://github.com/ollama/ollama/releases/tag/v0.33.0))
+- Turn individual Ollama models on or off for use in Claude, directly from the menu bar
+- Choose from your available Ollama models from within Claude; cloud models appear only when you're signed in
+- A new **Apps** view manages app integrations with copyable commands
+- Fixed a hang where agent clients that cancel long prefills
+- Prefill restore points are now trustworthy by construction: a cancelled prefill keeps every restore point it crossed, so retries resume where they stopped instead of restarting from scratch
+- Resumed prefills no longer record restore points that fail to cover what they claim; on models with recurrent layers this previously forced a request matching 46k of 47k tokens to reprocess from zero
+- Disabled Claude Code's "tokens left" token-countdown system message, which Ollama moved to the front of the prompt and broke the KV cache on every request
+- DeepSeek Harness launcher now falls back to `npx` when the global npm install fails, with Windows command-shim support
+- Onboarding flow has clearer introductory copy, a macOS header aligned with the native traffic-light controls, and Cmd/Ctrl zoom shortcuts disabled during onboarding so the fixed window keeps its intended scale
+- MLX dependency update (#17886)
+- Fixed broken default packaging caused by macOS-specific assumptions affecting Linux/Windows builds
+- Fixed the Apps header overlapping the macOS traffic lights during sidebar open transitions by synchronizing the header padding animation with the sidebar width animation
 ## 0.32.15
 
 - Update upstream from `0.32.14` to `0.32.15` ([compare](https://github.com/ollama/ollama/compare/v0.32.14...v0.32.15))
