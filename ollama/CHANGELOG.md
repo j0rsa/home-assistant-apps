@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.33.2
+
+- Update upstream from `0.33.1` to `0.33.2` ([compare](https://github.com/ollama/ollama/compare/v0.33.1...v0.33.2))
+- Upstream v0.33.2 ([notes](https://github.com/ollama/ollama/releases/tag/v0.33.2))
+- Ollama's app now follows the system appearance again, restoring dark mode support
+- Fixed the macOS app to properly hand off to an already-running instance instead of starting a second one
+- The Claude Desktop proxy no longer interrupts in-flight requests when the model catalog updates
 ## 0.33.1
 
 - Update upstream from `0.33.0` to `0.33.1` ([compare](https://github.com/ollama/ollama/compare/v0.33.0...v0.33.1))
