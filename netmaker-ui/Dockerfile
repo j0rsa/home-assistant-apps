@@ -1,7 +1,7 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/base:3.24
 
 # Extract UI static files from upstream image
-FROM gravitl/netmaker-ui:v1.6.0 AS upstream
+FROM gravitl/netmaker-ui:v1.7.0 AS upstream
 
 FROM ${BUILD_FROM}
 
