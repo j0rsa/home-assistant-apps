@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.3.4-3
+
+- Resolve latest Xray-core version via GitHub release redirect instead of the rate-limited `/releases/latest` API
+
 ## 1.3.4-1
 
 - Rebuild images after codenotary/`app_config` migration so CI publishes updated manifests
