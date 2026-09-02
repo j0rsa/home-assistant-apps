@@ -1,5 +1,89 @@
 # Changelog
 
+## 1.99.0
+
+- Update upstream from `v1.98.0` to `v1.99.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.98.0...v1.99.0))
+- Upstream v1.99.0 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.99.0))
+- chore(typing): drop 1.3k basedpyright errors across 30 Any hotspot files by @mateo-berri in https://github.com/BerriAI/litellm/pull/37073
+- fix(proxy): register WebSocket passthrough for OpenAI prefixes by @LHMQ878 in https://github.com/BerriAI/litellm/pull/36151
+- fix(bedrock): report uploaded size in the FileObject returned by managed batch uploads by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/36392
+- fix(batches): support AWS Bedrock batch cancellation via `StopModelInvocationJob` by @ArjunPakhan in https://github.com/BerriAI/litellm/pull/34087
+- feat: Async Rust OCR Bridge and MCP OAuth UI Restore by @ArjunPakhan in https://github.com/BerriAI/litellm/pull/31453
+- fix(batches): don't crash logging when a completed batch has no output file by @MUSE-CODE-SPACE in https://github.com/BerriAI/litellm/pull/34067
+- fix(UI): add default model pin to complexity router UI by @tin-berri in https://github.com/BerriAI/litellm/pull/36615
+- feat(ui): add Lite mixed-provider auto-router preset by @tin-berri in https://github.com/BerriAI/litellm/pull/37068
+- feat(ui): link key info header to its user, creator, team, and organization by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/37187
+- fix(guardrails): scan text on /guardrails/apply_guardrail for Azure Content Safety by @yucheng-berri in https://github.com/BerriAI/litellm/pull/36894
+- feat(bedrock): forward LiteLLM identity and metadata into Bedrock requestMetadata by @yassin-berriai in https://github.com/BerriAI/litellm/pull/36861
+- fix(azure): rename max_tokens to max_completion_tokens for gpt-5-chat deployments by @yassin-berriai in https://github.com/BerriAI/litellm/pull/36857
+- fix(bedrock): preserve cache token usage when invocationMetrics replace the usage block by @brian5021 in https://github.com/BerriAI/litellm/pull/36878
+- fix(proxy): registry caches stop per-request tag and end-user Postgres reads in auth by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/36801
+- test(e2e): replay a real tool-search assistant turn back to Bedrock Invoke by @yassin-berriai in https://github.com/BerriAI/litellm/pull/36856
+- fix(proxy): return 400 naming the missing required param on POST /v1/batches by @mateo-berri in https://github.com/BerriAI/litellm/pull/37199
+- fix(ci): bump sqlparse to 0.6.0 to resolve osv-scan CVEs by @mateo-berri in https://github.com/BerriAI/litellm/pull/37200
+- fix(ui): stop pairing key spend with the team budget when a key has no budget by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/37196
+- fix(guardrails): record MCP tool guardrail evaluations and blocks in … by @Scott-Wilson-ZocDoc in https://github.com/BerriAI/litellm/pull/36978
+- fix(proxy): return 400 for non-object metadata and litellm_metadata instead of silent drop or 500 by @mateo-berri in https://github.com/BerriAI/litellm/pull/37203
+- fix(anthropic): preserve optional Responses tool properties by @Scott-Wilson-ZocDoc in https://github.com/BerriAI/litellm/pull/36979
+- feat(ui): add user ID request log filter by @daniel-meismer-zocdoc in https://github.com/BerriAI/litellm/pull/36781
+- fix(anthropic): stop emitting empty thinking blocks on the Responses adapter by @Scott-Wilson-ZocDoc in https://github.com/BerriAI/litellm/pull/36033
+- fix(ui): make per-user usage filter searchable by @daniel-meismer-zocdoc in https://github.com/BerriAI/litellm/pull/36790
+- refactor(ui): decouple bulk invite from the invite user button by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37061
+- fix(helm): bound the migrations Job so a blocked migration cannot stall the release by @yuneng-berri in https://github.com/BerriAI/litellm/pull/36975
+- feat(proxy): let USE_V2_MIGRATION_RESOLVER select the v2 migration resolver by @yuneng-berri in https://github.com/BerriAI/litellm/pull/36258
+- fix(mcp): scope authorization server issuer by @irosh-colombage-ZocDoc2 in https://github.com/BerriAI/litellm/pull/36482
+- fix(responses): unwrap object-form tool_choice before calling the Responses API by @Scott-Wilson-ZocDoc in https://github.com/BerriAI/litellm/pull/36032
+- test(ui): query antd controls accessibly instead of by internal CSS class by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37014
+- fix(proxy): bill cancelled and failed batches that still produced an output file by @mateo-berri in https://github.com/BerriAI/litellm/pull/37205
+- fix(bedrock): read batch usage by payload shape, not by provider name by @marty-sullivan in https://github.com/BerriAI/litellm/pull/37078
+- fix(ui): self-contained searchable user filter on the Usage page by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/37206
+- revert: don't fix mcp scope authorization server issuer by @mateo-berri in https://github.com/BerriAI/litellm/pull/37220
+- fix(mcp): scope authorization server issuer for named MCP servers by @yucheng-berri in https://github.com/BerriAI/litellm/pull/37204
+- test(ui): gate dashboard test assertions with testing-library and jest-dom rules by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37018
+- feat(shadow-eval): name the shadowed key in job responses and the UI headline by @tin-berri in https://github.com/BerriAI/litellm/pull/37221
+- test(ui): assert what collaborators are called with, not merely that they were by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37019
+- fix(logging): stop deepcopying results redaction cannot redact by @marty-sullivan in https://github.com/BerriAI/litellm/pull/36638
+- fix(gemini): price gemini 3.6 flash at Google's introductory rates on every service tier by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/37197
+- perf(guardrails): stop sending the conversation twice in the noma v2 payload by @itaimodi in https://github.com/BerriAI/litellm/pull/36764
+- fix(streaming): track provider-reported cost when caller omits include_usage by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/35013
+- fix: stop rust flag from leaking into upstream provider request bodies by @mateo-berri in https://github.com/BerriAI/litellm/pull/37218
+- fix(proxy): return 404 instead of 500 for unresolvable batch and file ids on /v1/batches by @mateo-berri in https://github.com/BerriAI/litellm/pull/37201
+- fix(bedrock): validate file-content retrieval against the configured output bucket (#26335) by @kingdoooo in https://github.com/BerriAI/litellm/pull/31435
+- fix(proxy): reject out-of-range limit on GET /v1/batches with OpenAI-parity 400 by @mateo-berri in https://github.com/BerriAI/litellm/pull/37198
+- fix(batches): price a retrieved batch from its deployment's model and rates (internal copy of #37077) by @mateo-berri in https://github.com/BerriAI/litellm/pull/37219
+- feat(ocr): return Azure Document Intelligence's native payload from /v1/ocr via req_format=native by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/37194
+- fix(anthropic): fold guardrail-modified leading system rows into top-level system param by @mateo-berri in https://github.com/BerriAI/litellm/pull/37231
+- fix(shadow_eval): copy messages before router call and raise judge output cap by @tin-berri in https://github.com/BerriAI/litellm/pull/37232
+- feat(proxy): add Amazon Comprehend Medical passthrough provider by @mateo-berri in https://github.com/BerriAI/litellm/pull/37229
+- test(ui): settle the in-flight search before the loading tests end by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37227
+- test(cli): use example.com placeholder host in base-url trailing slash test by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/37240
+- feat(complexity_router): operator-defined tier sets for the LLM classifier by @tin-berri in https://github.com/BerriAI/litellm/pull/37226
+- feat(ui): configure the auto router's heuristic scorer from the Admin UI by @tin-berri in https://github.com/BerriAI/litellm/pull/37216
+- fix(shadow_eval): drop unused judge reasoning field and salvage truncated verdicts by @tin-berri in https://github.com/BerriAI/litellm/pull/37239
+- feat(proxy): proactive model deprecation alerts and `/model/deprecations` endpoint by @mateo-berri in https://github.com/BerriAI/litellm/pull/26900
+- refactor(ui): move dashboard toasts from antd message/notification onto sonner by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/37207
+- feat(guardrails): track bedrock guardrail usage units per invocation by @mateo-berri in https://github.com/BerriAI/litellm/pull/37225
+- fix(proxy): strip callback credentials from the auth object stamped into request metadata by @yucheng-berri in https://github.com/BerriAI/litellm/pull/37233
+- fix(guardrails): retry usage upserts only on connection errors by @mateo-berri in https://github.com/BerriAI/litellm/pull/37247
+- fix(mcp): oauth discovery must not cause outages by @daniel-meismer-zocdoc in https://github.com/BerriAI/litellm/pull/36599
+- test(ui): await the playground model combobox before clicking it by @yuneng-berri in https://github.com/BerriAI/litellm/pull/36850
+- refactor(ui): migrate budget and skill forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37262
+- refactor(ui): migrate tag and memory forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37266
+- feat(complexity_router): plan-mode tier floor for coding-agent clients by @tin-berri in https://github.com/BerriAI/litellm/pull/37230
+- refactor(ui): codemod every toast call site onto lib/toast and delete the antd-era facades by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/37253
+- feat(proxy): add /team/daily/activity/aggregated and switch the Usage team tab to it by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/36562
+- refactor(ui): migrate user, logging and policy forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37303
+- refactor(ui): migrate user, policy, and margin forms to shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37305
+- refactor(ui): migrate the regenerate key and team member forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37300
+- refactor(ui): migrate CloudZero and cost tracking forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37312
+- refactor(ui): migrate auto router and credential forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37304
+- refactor(ui): migrate guardrail and vector store forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37306
+- refactor(ui): migrate prompt, UI access, plugin and MCP filter forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37297
+- refactor(ui): drop the unreachable user edit modal by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37327
+- fix(router): route Responses API input through the auto-router by @mateo-berri in https://github.com/BerriAI/litellm/pull/37333
+- refactor(ui): migrate the login, onboarding and search tool forms to react-hook-form and shadcn by @yuneng-berri in https://github.com/BerriAI/litellm/pull/37334
+- feat(ui): plan-mode override tier in the auto-router create and edit forms by @tin-berri in https://github.com/BerriAI/litellm/pull/37319
+- … truncated upstream notes ([full notes](https://github.com/BerriAI/litellm/releases/tag/v1.99.0))
 ## 1.98.0
 
 - Update upstream from `v1.97.0` to `v1.98.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.97.0...v1.98.0))

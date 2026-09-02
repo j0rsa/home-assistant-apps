@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.29.0
+
+- Update upstream from `v3.28.0` to `v3.29.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.28.0...v3.29.0))
+- Upstream v3.28.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.28.1))
+- Settings card labels no longer wrap onto a second line.** The Database Maintenance footer read "Last cleanup" and "Next cleanup", which wrapped next to a full timestamp. The card is already titled Database Maintenance, so these are now "Last run" and "Next run". The Smart backup tile had the same problem with "Snapshot only on history rewrites" and now reads "Snapshot only on rewrites", since a force-push is the only history rewrite the sync sees.
+- Upstream v3.28.2 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.28.2))
+- The Identity Providers card now matches Sign-in Methods.** It was built on a different card primitive than the panel beside it, so the two headers were different heights and their dividers did not line up. It now uses the same markup: icon, title, divider, body, footer.
+- The header description was removed. It wrapped onto a second line and ran into the Add provider button.
+- Add provider moved into the header row, and the extra margin on its icon is gone. The button supplies its own icon spacing, so the margin was stacking on top of it and pushing the label off-centre.
+- Provider details are easier to scan.** Issuer, Client ID, Scopes and Organization were all one muted weight with no hierarchy, and the longest label overflowed its column so its value broke the alignment. Labels now carry weight and sit in a fixed column, so every value lines up.
+- Upstream v3.29.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.29.0))
+- The activity log rows were rebuilt.** A row used to spend three stacked lines on a status, a repository name and a Show Details button, leaving most of its width empty. It now follows the dashboard's Recent Activity shape and uses the width for the repository or organization and the message, with the whole row toggling the details pane. Rows went from about 170px to 69px, so ten fit where six did.
+- Activity stats sit above the log** and report the current state of each repository or organization rather than counting events, so a repo that failed and then synced counts once, as synced. Each one filters the log to that status.
+- Both add dialogs accept a GitHub URL.** Adding something you were looking at on GitHub meant reading the URL and retyping the owner and name separately. Paste it instead and the fields fill in. Handles browser URLs, clone URLs, SSH remotes, the `owner/repo` shorthand and deep links into a repo, and rejects reserved paths like `/settings` so they cannot be read as an account name.
+- Every page had two scrollbars.** The shell could grow past the viewport while the content area sized itself against a guess at the header's height, so the body scrolled behind the content area's own scroll. There is now one scroll region per page.
+- Tablets in portrait got the desktop toolbar.** All three list pages switched layouts at 640px, so a tablet got the full row of six controls with the search box squeezed down to its icon. The handover moved to 1024px, and the compact layout already carries every filter in its drawer.
+- Lists now fill the window.** They sized themselves with hard-coded pixel offsets that went stale whenever a toolbar changed height. The repository table shows 13 rows on an 800px window and 23 on a 1400px one, where it used to stop at the same count either way.
+- The repositories filter bar was reworked.** The status, mirror options and sort dropdowns moved down to the row carrying the count, so the search box keeps its width, and the owner and organization pickers now match the dropdowns beside them.
+- An unfiltered repository list no longer claims to be filtered.** The check treated an unset filter as a set one, so a clean view showed "Showing 697 of 697 repositories" with a Clear filters button and a "Filters applied" footer.
+- The dashboard's Repositories and Recent Activity cards are the same height** whatever their lists contain.
+- Two virtualizer bugs in the activity log.** Row measurements were dropped because the index attribute they are read from was never set, so rows only ever used their estimated height; and expanding a row discarded every measurement instead of re-measuring the row that changed.
 ## 3.28.0
 
 - Update upstream from `v3.27.2` to `v3.28.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.27.2...v3.28.0))
