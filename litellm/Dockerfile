@@ -15,6 +15,40 @@ FROM ${UPSTREAM_IMAGE} AS upstream
 # 3.5.x which is ABI-compatible with the bundled Python (_ssl links libssl.so.3).
 # Putting Wolfi OpenSSL 3.6 on LD_LIBRARY_PATH breaks the base openssl CLI
 # (undefined symbol BIO_f_zlib) and cascades into Prisma "Not connected".
+#
+# Stage Wolfi glibc under /opt/litellm/lib (not /lib). Ubuntu 26.04 ships glibc
+# 2.43; Wolfi CPython 3.13 needs GLIBC_2.44. Overwriting Ubuntu's dynamic linker
+# would break bashio/s6. wrap-wolfi-python later invokes CPython through that
+# private loader so Python sees 2.44 without leaking libs into Ubuntu processes.
+RUN mkdir -p /opt/litellm/lib && \
+    found_ld=0 && \
+    for dir in /lib /usr/lib /lib64 /usr/lib64; do \
+        [ -d "${dir}" ] || continue; \
+        for f in \
+            "${dir}"/ld-linux*.so* \
+            "${dir}"/libc.so* \
+            "${dir}"/libm.so* \
+            "${dir}"/libmvec.so* \
+            "${dir}"/libgcc_s.so* \
+            "${dir}"/libpthread.so* \
+            "${dir}"/libdl.so* \
+            "${dir}"/librt.so* \
+            "${dir}"/libresolv.so* \
+            "${dir}"/libutil.so* \
+            "${dir}"/libcrypt.so* \
+            "${dir}"/libanl.so* \
+            "${dir}"/libnss_*.so*; do \
+            [ -e "${f}" ] || continue; \
+            cp -aL "${f}" /opt/litellm/lib/; \
+            case "${f}" in \
+                */ld-linux*.so*) found_ld=1 ;; \
+            esac; \
+        done; \
+    done && \
+    [ "${found_ld}" = 1 ] && \
+    test -e /opt/litellm/lib/libc.so.6 && \
+    test -e /opt/litellm/lib/libm.so.6
+
 RUN PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.version_info.minor}')") && \
     { \
       echo /usr/local; \
@@ -24,6 +58,7 @@ RUN PY_VER=$(python3 -c "import sys; print(f'{sys.version_info.major}.{sys.versi
       echo /usr/lib/libpython${PY_VER}.so.1.0; \
       echo /app; \
       echo /opt/prisma; \
+      echo /opt/litellm/lib; \
       find /usr/bin -maxdepth 1 -type f \
         -exec sh -c 'head -c 50 "$1" | grep -qF "python" && echo "$1"' _ {} \;; \
     } | sort -u | tar -cf /upstream-payload.tar -T -
@@ -47,15 +82,23 @@ RUN apt-get update && \
         nodejs \
         npm \
         tzdata \
+        patchelf \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Extract Python and litellm from upstream; use Ubuntu's system OpenSSL.
+# Wrap CPython so it loads Wolfi glibc 2.44 via a private dynamic linker.
 COPY --from=upstream /upstream-payload.tar /tmp/
-RUN tar xf /tmp/upstream-payload.tar -C / && \
-    chmod -R a+rX /opt/prisma && \
+COPY with-wolfi-ld /usr/local/bin/with-wolfi-ld
+COPY wrap-wolfi-python /usr/local/bin/wrap-wolfi-python
+RUN chmod a+x /usr/local/bin/with-wolfi-ld /usr/local/bin/wrap-wolfi-python && \
+    tar xf /tmp/upstream-payload.tar -C / && \
+    chmod -R a+rX /opt/prisma /opt/litellm && \
+    wrap-wolfi-python && \
     ldconfig && \
-    rm /tmp/upstream-payload.tar
+    rm /tmp/upstream-payload.tar && \
+    python3 -c "from math import log" && \
+    /app/.venv/bin/python3 -c "from math import log"
 
 COPY run.sh /
 RUN chmod a+x /run.sh

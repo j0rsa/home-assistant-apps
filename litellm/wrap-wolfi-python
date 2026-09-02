@@ -1,0 +1,80 @@
+#!/bin/bash
+set -euo pipefail
+
+# Relocate Wolfi CPython binaries and retarget Prisma engines so they use
+# /opt/litellm/lib's dynamic linker instead of Ubuntu's. Called at image build.
+
+LOADER=""
+for candidate in /opt/litellm/lib/ld-linux*.so*; do
+    if [ -e "${candidate}" ]; then
+        LOADER="${candidate}"
+        break
+    fi
+done
+
+if [ -z "${LOADER}" ]; then
+    echo "wrap-wolfi-python: missing /opt/litellm/lib/ld-linux*.so*" >&2
+    exit 1
+fi
+
+is_elf() {
+    [ -f "$1" ] && [ "$(head -c 4 "$1")" = $'\x7fELF' ]
+}
+
+install_wrapper() {
+    local dest="$1"
+    local real="$2"
+    cat > "${dest}" << EOF
+#!/bin/bash
+set -euo pipefail
+exec /usr/local/bin/with-wolfi-ld ${real} "\$@"
+EOF
+    chmod a+x "${dest}"
+}
+
+mkdir -p /opt/litellm/bin
+
+for py in /usr/bin/python /usr/bin/python3 /usr/bin/python3.[0-9]*; do
+    [ -e "${py}" ] || continue
+    [ -L "${py}" ] && continue
+    if is_elf "${py}"; then
+        real="/opt/litellm/bin/$(basename "${py}")"
+        mv "${py}" "${real}"
+        install_wrapper "${py}" "${real}"
+    fi
+done
+
+real_python=""
+for candidate in /opt/litellm/bin/python3.[0-9]* /opt/litellm/bin/python3 /opt/litellm/bin/python; do
+    if [ -f "${candidate}" ]; then
+        real_python="${candidate}"
+        break
+    fi
+done
+
+if [ -z "${real_python}" ]; then
+    echo "wrap-wolfi-python: no relocated CPython binary under /opt/litellm/bin" >&2
+    exit 1
+fi
+
+if [ -d /app/.venv/bin ]; then
+    for py in /app/.venv/bin/python /app/.venv/bin/python3 /app/.venv/bin/python3.[0-9]*; do
+        [ -e "${py}" ] || continue
+        [ -L "${py}" ] && continue
+        if is_elf "${py}"; then
+            rm -f "${py}"
+            install_wrapper "${py}" "${real_python}"
+        fi
+    done
+fi
+
+multiarch="$(uname -m)-linux-gnu"
+rpath="/opt/litellm/lib:/usr/lib/${multiarch}:/lib/${multiarch}:/usr/lib:/lib"
+
+if [ -d /opt/prisma ]; then
+    while IFS= read -r -d '' f; do
+        if is_elf "${f}" && patchelf --print-interpreter "${f}" >/dev/null 2>&1; then
+            patchelf --set-interpreter "${LOADER}" --set-rpath "${rpath}" "${f}"
+        fi
+    done < <(find /opt/prisma -type f -print0)
+fi

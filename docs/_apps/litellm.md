@@ -11,7 +11,7 @@ ports:
   - 4000
 faq:
   - q: "Why won't the LiteLLM app start?"
-    a: "Verify the database_url is correct and the PostgreSQL database is reachable. Also check that master_key and salt_key are non-empty strings in the configuration."
+    a: "Verify the database_url is correct and the PostgreSQL database is reachable. Also check that master_key and salt_key are non-empty strings in the configuration. If logs show GLIBC_2.44 not found, update to app version 1.99.0-1 or later."
   - q: "Why do LiteLLM model requests return errors?"
     a: "Confirm the model name in your request matches an entry in litellm_config.yaml, and check that the provider API keys are valid and the provider is reachable."
 ---
@@ -137,6 +137,7 @@ response = client.chat.completions.create(
 ### App won't start
 - Verify `database_url` is correct and the database is reachable
 - Check that `master_key` and `salt_key` are non-empty strings
+- If logs show `GLIBC_2.44' not found`, update to app version 1.99.0-1 or later
 
 ### Models return errors
 - Confirm the model name in your request matches an entry in `litellm_config.yaml`

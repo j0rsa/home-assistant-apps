@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.99.0-1
+
+- Fix startup crash (`GLIBC_2.44' not found` when importing `math`) by running upstream CPython against Wolfi glibc from the same image, instead of Ubuntu 26.04's glibc 2.43
+
 ## 1.99.0
 
 - Update upstream from `v1.98.0` to `v1.99.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.98.0...v1.99.0))
