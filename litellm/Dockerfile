@@ -18,8 +18,9 @@ FROM ${UPSTREAM_IMAGE} AS upstream
 #
 # Stage Wolfi glibc under /opt/litellm/lib (not /lib). Ubuntu 26.04 ships glibc
 # 2.43; Wolfi CPython 3.13 needs GLIBC_2.44. Overwriting Ubuntu's dynamic linker
-# would break bashio/s6. wrap-wolfi-python later invokes CPython through that
-# private loader so Python sees 2.44 without leaking libs into Ubuntu processes.
+# would break bashio/s6. wrap-wolfi-python patchelf's CPython in place so the
+# private loader is used without replacing the venv python (argv[0] must stay
+# under /app/.venv or site-packages is dropped).
 RUN mkdir -p /opt/litellm/lib && \
     found_ld=0 && \
     for dir in /lib /usr/lib /lib64 /usr/lib64; do \
@@ -87,18 +88,17 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Extract Python and litellm from upstream; use Ubuntu's system OpenSSL.
-# Wrap CPython so it loads Wolfi glibc 2.44 via a private dynamic linker.
+# patchelf CPython onto the private Wolfi loader without moving the binary.
 COPY --from=upstream /upstream-payload.tar /tmp/
-COPY with-wolfi-ld /usr/local/bin/with-wolfi-ld
 COPY wrap-wolfi-python /usr/local/bin/wrap-wolfi-python
-RUN chmod a+x /usr/local/bin/with-wolfi-ld /usr/local/bin/wrap-wolfi-python && \
+RUN chmod a+x /usr/local/bin/wrap-wolfi-python && \
     tar xf /tmp/upstream-payload.tar -C / && \
     chmod -R a+rX /opt/prisma /opt/litellm && \
     wrap-wolfi-python && \
     ldconfig && \
     rm /tmp/upstream-payload.tar && \
     python3 -c "from math import log" && \
-    /app/.venv/bin/python3 -c "from math import log"
+    /app/.venv/bin/python3 -c "from math import log; from litellm import run_server"
 
 COPY run.sh /
 RUN chmod a+x /run.sh

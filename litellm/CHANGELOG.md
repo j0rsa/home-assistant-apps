@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.99.0-2
+
+- Fix `ModuleNotFoundError: No module named 'litellm'` by patching CPython in place so the venv `python` path still activates site-packages
+
 ## 1.99.0-1
 
 - Fix startup crash (`GLIBC_2.44' not found` when importing `math`) by running upstream CPython against Wolfi glibc from the same image, instead of Ubuntu 26.04's glibc 2.43

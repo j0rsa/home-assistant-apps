@@ -60,8 +60,8 @@ echo "Starting LiteLLM proxy on port 4000..."
 
 # LiteLLM ships in a uv virtualenv at /app/.venv. Put its bin dir first on PATH so
 # the `litellm` console script (and subprocesses like `prisma`) resolve.
-# /usr/bin/python3 is a with-wolfi-ld wrapper: Wolfi CPython needs glibc 2.44
-# from /opt/litellm/lib, while the Ubuntu 26.04 base only provides 2.43.
+# CPython is patchelf'd onto Wolfi glibc 2.44 in /opt/litellm/lib; the venv
+# python path is left in place so pyvenv.cfg still activates site-packages.
 export PATH="/app/.venv/bin:${PATH}"
 
 # Point prisma-python and litellm-proxy-extras at the baked CLI/engines under
