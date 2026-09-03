@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.99.1
+
+- Update upstream from `v1.99.0` to `v1.99.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.99.0...v1.99.1))
+- Upstream v1.99.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.99.1))
+- chore(release): backport #38716 to stable/1.99.x and cut 1.99.1 by @yuneng-berri in https://github.com/BerriAI/litellm/pull/39179
 ## 1.99.0-2
 
 - Fix `ModuleNotFoundError: No module named 'litellm'` by patching CPython in place so the venv `python` path still activates site-packages
