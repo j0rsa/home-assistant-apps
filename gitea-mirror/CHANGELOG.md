@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.32.0
+
+- Update upstream from `v3.31.0` to `v3.32.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.31.0...v3.32.0))
+- Upstream v3.32.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.32.0))
+- Move mirrors to another owner from the app.** Changing a repository's destination now offers to transfer its mirror on Gitea or Forgejo as well, with its history, issues and mirror settings. Changing an organization's destination does the same for all of its mirrored repositories, after a confirmation that lists what moves and what is left alone. The target organization is created if needed, a name held by another repository refuses the move, and a mirror of the same source that already sits under the target is recorded instead of duplicated. When the token cannot create repositories under the new owner, Gitea asks its owners to accept the transfer; the mirror keeps syncing where it is and sync follows it once accepted. Nothing is deleted on either side. Also available as `POST /api/repositories/{id}/move-mirror` and `POST /api/organizations/{id}/move-mirrors`, see [API.md](https://github.com/RayLabsHQ/gitea-mirror/blob/main/docs/API.md). (#401, closes #400)
+- Sync follows mirrors moved in Gitea.** When a mirror is no longer where the app recorded it, sync searches the destination for a mirror of the same source before failing, and Retry reuses it instead of creating a second copy. Reconcile lists such mirrors under "Moved on the destination" and can record their new location. (#401)
+- The inline destination editor shows an "at owner" badge when a repository's label names one owner while its mirror sits under another, and says what a label-only change does. Its check button now works with the mouse. (#401)
 ## 3.31.0
 
 - Update upstream from `v3.29.0` to `v3.31.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.29.0...v3.31.0))

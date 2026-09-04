@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.33.3
+
+- Update upstream from `0.33.2` to `0.33.3` ([compare](https://github.com/ollama/ollama/compare/v0.33.2...v0.33.3))
+- Upstream v0.33.3 ([notes](https://github.com/ollama/ollama/releases/tag/v0.33.3))
+- gemma4 now supports images and audio on MLX engine
+- Report cached prompt tokens
+- Honor GGUF model defined default parameters
+- MLX, MLX-C, llama.cpp update
+- @marcelpetrick made their first contribution in https://github.com/ollama/ollama/pull/17579
 ## 0.33.2
 
 - Update upstream from `0.33.1` to `0.33.2` ([compare](https://github.com/ollama/ollama/compare/v0.33.1...v0.33.2))
