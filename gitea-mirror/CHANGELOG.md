@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.32.1
+
+- Update upstream from `v3.32.0` to `v3.32.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.32.0...v3.32.1))
+- Upstream v3.32.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.32.1))
+- Image hardening and cleared scan alerts.** Docker Scout flagged three high severity util-linux CVEs (CVE-2026-78408, CVE-2026-78409, CVE-2026-78410) in the Debian trixie base image. Debian rates them minor and ships no fix for trixie, and none of them can be reached from this image: it runs as an unprivileged user, never runs `nsenter`, and the two `mount(8)` issues need a setuid mount binary plus a user-mountable fstab entry. The runner stage now strips the setuid and setgid bit from every binary, and an OpenVEX document under `.vex/` marks the three CVEs as not affected with that reasoning. The build workflow's Scout steps read it, and it is copied into the image so `docker scout cves` on the published image reports the same. See [`.vex/README.md`](https://github.com/RayLabsHQ/gitea-mirror/blob/main/.vex/README.md). (#402)
+- git-lfs rebuilt with golang.org/x/crypto 0.56.0.** The bundled git-lfs binary carried x/crypto 0.55.0, which is affected by CVE-2026-56855 and CVE-2026-78662 (a malicious SSH peer can deadlock the connection). The build stage used `go get @latest` and a cached layer had kept the old resolution; the versions are now pinned (x/crypto 0.56.0, x/net 0.58.0) so a rebuild always ships what the Dockerfile says. x/crypto 0.56.0 needs Go 1.26 or newer, so git-lfs is now built with Go 1.27.1. (#402)
 ## 3.32.0
 
 - Update upstream from `v3.31.0` to `v3.32.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.31.0...v3.32.0))
