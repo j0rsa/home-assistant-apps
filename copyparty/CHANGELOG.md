@@ -1,5 +1,47 @@
 # Changelog
 
+## 1.20.23
+
+- Update upstream from `1.20.21` to `1.20.23` ([compare](https://github.com/9001/copyparty/compare/v1.20.21...v1.20.23))
+- hello fedora ([notes](https://github.com/9001/copyparty/releases/tag/v1.20.22))
+- [v1.20.19 (2026-07-27)](https://github.com/9001/copyparty/releases/tag/v1.20.19) fixed an FTP-server vuln (upload outside defined volumes)
+- [v1.20.17 (2026-07-06)](https://github.com/9001/copyparty/releases/tag/v1.20.17) fixed a vuln when a volume has both filekeys and dirkeys enabled
+- [v1.20.17 (2026-07-06)](https://github.com/9001/copyparty/releases/tag/v1.20.17) introduced csp nonces, possibly breaking some javascript-based plugins
+- iPhone: new bug in iOS breaks uploading; add workaround
+- apple broke XHR/fetch in a recent iOS version by introducing some wtf race-conditions in response handling; under high network load, the browser simply forgets to tell js that there's a response, so we're basically flying blind
+- this workaround makes iOS uploads 50x faster than before but still not perfect (impossible given the situation); will be stuttery until apple fixes iOS
+- apple will probably fix it very soon given the severity of the bug, but at least one copyparty user is forever-stuck on iOS-18.x which will never be fixed by apple, so a workaround is justified
+- #1617 new plugin to thumbnail office documents with collabora (thx @kamaeff!)
+- new hook: [phonecam-sorter.py](https://github.com/9001/copyparty/blob/hovudstraum/bin/hooks/phonecam-sorter.py) to automate organizing of pics/vids synced from phone to nas
+- dirkeys: allow non-recursive download-as-zip with just `dk`
+- `--no-mime` / volflag `nomime` disables `?mime=` for specifying custom response mimetype
+- btrfs-specific: nocow .hist to improve sqlite performance
+- two low-severity vulns in different components, but surprisingly similar synopses:
+- GHSA-mc69-pxc8-4xf4 dirkeys (volflag `dk`) did not prevent descending into subdirs if an attacker could guess the name of the subdir
+- GHSA-3fhv-rhjw-7hrg sftp did not fully enforce volflags xvol/xdev; an attacker could read a file inside the symlink destination if they could guess the name inside
+- not important enough to be listed in "recent important news", but will be detected by the (default-disabled) [version-checker](https://github.com/9001/copyparty/#version-checker)
+- #1628 fix http206 range-request for last-n-bytes
+- #1610 autogrid didn't count jxl images (thx @sylfn!)
+- when running without `e2d`, a config-reload would block uploads
+- really old chrome versions (before ver.62) was only able to upload over https
+- #1632 connect-page: adjust rclone commands to support long passwords
+- packaging: fix jank in source tarballs
+- packaging: don't list licenses of unvendored modules
+- #1631 systemd-examples: move config to `/etc/copyparty.conf`
+- reduce binary-garbage in logs from scrapers/scanners
+- sfx: prefer `~/.cache/` (set `PRTY_XD=/tmp` to override)
+- sfx: mention https://copyparty.eu/sfx-wtf/ in the header
+- reduce complaining in log about default/unsafe tls-certs when not relevant
+- #887 copyparty has been packaged for Fedora 44! And EPEL-10 is on the way too... Thx @supakeen o/
+- [verified at RevSpace NL](https://a.ocv.me/pub/g/2026/09/20260901_151949.jpg?cache)
+- rcm once again ([notes](https://github.com/9001/copyparty/releases/tag/v1.20.23))
+- [v1.20.19 (2026-07-27)](https://github.com/9001/copyparty/releases/tag/v1.20.19) fixed an FTP-server vuln (upload outside defined volumes)
+- [v1.20.17 (2026-07-06)](https://github.com/9001/copyparty/releases/tag/v1.20.17) fixed a vuln when a volume has both filekeys and dirkeys enabled
+- [v1.20.17 (2026-07-06)](https://github.com/9001/copyparty/releases/tag/v1.20.17) introduced csp nonces, possibly breaking some javascript-based plugins
+- the custom right-click-menu didn't like being enabled
+- this release is a hotfix for that; see [v1.20.22](https://github.com/9001/copyparty/releases/tag/v1.20.22) for all the other new stuff
+- #887 copyparty has been packaged for Fedora 44! And EPEL-10 is on the way too... Thx @supakeen o/
+- [verified at RevSpace NL](https://a.ocv.me/pub/g/2026/09/20260901_151949.jpg?cache)
 ## 1.20.21
 
 - Update upstream from `1.20.20` to `1.20.21` ([compare](https://github.com/9001/copyparty/compare/v1.20.20...v1.20.21))
