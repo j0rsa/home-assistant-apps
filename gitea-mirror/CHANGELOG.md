@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.33.0
+
+- Update upstream from `v3.32.1` to `v3.33.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.32.1...v3.33.0))
+- Upstream v3.33.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.33.0))
+- Several sources per account.** The Configuration page now has a Sources card instead of the single GitHub connection card. Connect GitHub, GitHub Enterprise, GitLab and Gitea/Forgejo side by side, each with its own instance URL, username and token. Every repository remembers the source it was imported from, and discovery, import, scheduling, organization mirroring, retry, recovery, push targets, cleanup and reconcile use that source's credentials. A source with imported repositories is locked the same way the destination is: changing its host or removing it asks for confirmation, and removing it leaves its repositories in place; adding the same host again picks them back up. The same repository name can exist on two sources, for example github.com and a GitHub Enterprise instance. Thanks to @TomRoyls. (#404)
+- Skip forks per organization.** The organization Mirror options dialog gained a Skip forks row with the usual Inherit, On and Off choices. An organization can opt out of importing and mirroring forks without touching the global switch, or keep its forks while the global switch is on. The pin is honored by the bulk organization mirror, the add-organization route, bulk import and the scheduler. Adding an organization now also respects the global Skip forks switch, which it ignored before. Thanks to @TomRoyls. (#405)
+- Organizations page follows the configured source.** With a GitLab or Gitea/Forgejo source the page and the add dialog use that source's wording, icon and instance URL: groups instead of organizations on GitLab, links that open the organization on your own instance, and no billing manager role outside GitHub. Adding a nested GitLab group name is refused with a hint to add the top level group, since projects flatten onto it. Thanks to @TomRoyls. (#403)
+- The GitHub only switches on the mirror settings card (issues, pull requests, releases, labels, milestones, star lists) stay available while any connected source is GitHub, not only when the oldest one is. (#406)
+- The add organization dialog shows the configured instance in its URL placeholder, uses the right noun and article in its hints, and reads underscores and dots in names pasted from GitLab or Gitea URLs, including the GitLab `/groups/` form. (#406)
+- The Configuration page header no longer names GitHub and Gitea specifically. (#406)
+- Security
+- The token settings link in the Sources card is built from the validated scheme, host and path of the instance URL rather than from the typed text, so a pasted `javascript:` URL can never become the link target (CodeQL alert on the merged multi-source code). (#406)
+- CVE-2026-85091, a heap overflow in zlib's `gz_vacate()`, is reported against the Debian trixie base image with no fix available in any Debian release. It sits in the gz* file writing API, which nothing in the image uses: git links only the deflate and inflate stream functions, git-lfs is a Go binary, and Bun's zlib bindings are stream only. A VEX statement under `.vex/` marks it not affected with that reasoning, the same mechanism as the util-linux exceptions from 3.32.1. (#406)
+- Migration 0019 runs on first start.** It creates the `sources` table, seeds one source from your existing connection, adds `repositories.source_id` and fills it in by provider and host, and widens the per-user unique indexes on repositories to include the source. Single-source setups carry over unchanged, and environment variable configuration keeps working: the first source row follows `SOURCE_PROVIDER`, `SOURCE_URL`, `GITHUB_USERNAME` and `GITHUB_TOKEN` as before.
+- The legacy connection fields in the config keep mirroring the oldest source, so scripts that read them still work. Two things are still on the list: a toggle for pausing a source without removing it, and the scheduler's token check, which still reads that legacy field.
+- Back up `data/gitea-mirror.db` before upgrading, as with every release.
 ## 3.32.1
 
 - Update upstream from `v3.32.0` to `v3.32.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.32.0...v3.32.1))
