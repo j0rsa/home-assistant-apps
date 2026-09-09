@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.34.0
+
+- Update upstream from `v3.33.0` to `v3.34.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.33.0...v3.34.0))
+- Upstream v3.34.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.34.0))
+- Pick a source per organization.** With more than one source connected, an organization can be pinned to the source it imports and mirrors from. The Add Organization dialog gains a Source picker that drives the wording, the URL placeholder and the role choices, each organization card gets an inline source editor with an Every source option, and the View on source link opens the right instance. A pinned organization scopes its repository counts, its mirror job and its deletion to that source. Unpinned organizations keep following every connected source's repositories of the same name, and a pin whose source was removed falls back to the same. Single-source setups see no change. Thanks to @TomRoyls. (#407)
+- The bulk import only clears an organization's source pin when it created that pin itself in the same run and a second source lists the same organization. Pins set through the picker or the add dialog are kept. (#408)
+- The organization mirror job filters its repository query by user, so on a multi-user instance another user's repositories with the same organization name are no longer picked up. (#407)
+- Migration 0020 runs on first start.** It adds `organizations.source_id` and fills it in only for organizations whose repositories all come from one source; organizations spanning several sources, and those without repositories, stay unpinned.
+- `POST /api/sync/organization` accepts an optional `sourceId`, and `PATCH /api/organizations/:id` sets it or clears it with `null`. See docs/API.md.
+- Back up `data/gitea-mirror.db` before upgrading, as with every release.
 ## 3.33.0
 
 - Update upstream from `v3.32.1` to `v3.33.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.32.1...v3.33.0))
