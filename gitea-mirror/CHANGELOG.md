@@ -1,5 +1,27 @@
 # Changelog
 
+## 3.35.1
+
+- Update upstream from `v3.34.0` to `v3.35.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.34.0...v3.35.1))
+- Upstream v3.35.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.35.0))
+- Mirror public organizations without connecting an account.** With only a destination configured, the Add Organization dialog offers a Public only mode: pick GitHub, GitLab or Gitea/Forgejo, optionally point at a self-hosted instance, type the organization name, and its public repositories are imported anonymously. Behind it a tokenless source row is created for that provider and host and the organization is pinned to it, so per-source attribution, locks, scheduling and cleanup keep working exactly as they do for a connected account. Anonymous GitHub clients carry the same throttling and rate-limit backoff as authenticated ones. Adding a username and token to that row later turns it into a regular source without touching the organizations already pinned to it. Thanks to @TomRoyls. (#409)
+- Mirroring, syncing, retrying, scheduling and crash recovery now require only the destination token. A source that has no account (a public-only one) no longer blocks the Sync button, the scheduler, or the recovery of an interrupted job. (#409, #411)
+- Issue, pull request, label and milestone mirroring runs with whatever client the repository's own source provides, so public metadata mirrors for tokenless sources instead of failing with a configuration error on every sync. (#411)
+- Import Data skips public-only sources instead of reporting them as failed, and says so when every connected source is public only. (#411)
+- Re-adding an existing organization with `force` no longer moves its source pin unless the request names a source. Pins set from the organization card, and organizations left on every source, stay as they are. (#411)
+- The Public only badge appears as soon as a public organization is added, without reloading the page. (#411)
+- Organization cards keep their column width when only one or two are shown, instead of stretching across the page. (#410)
+- No migration in this release. Tokenless sources reuse the existing nullable token column, and there are no new environment variables.
+- Anonymous GitHub access is limited to 60 requests an hour per IP, shared by everyone using an instance, so a public-only setup mirrors more slowly than a connected one and metadata for large organizations can take several scheduler runs to catch up.
+- Public-only sources mirror public repositories only: private repositories, starred lists and personal discovery need a token.
+- Back up `data/gitea-mirror.db` before upgrading, as with every release.
+- Upstream v3.35.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.35.1))
+- Security
+- Astro** to 7.2.8 or newer (7.3.2 resolved): remote code execution through AVIF image optimization (GHSA-26w7-cxv4-gfx2, critical), and an authorization bypass from a missing path segment boundary check when stripping the configured base (GHSA-376h-93r7-7g6f).
+- @xmldom/xmldom** to 0.8.15: eight parser and serializer issues, CVE-2026-83605 through CVE-2026-83619. It reaches the image through the SAML dependencies of the SSO provider.
+- sharp** to 0.35.4 (libheif), **svgo** to 4.1.0 (removeScripts sanitization) and **js-yaml** to 4.3.2 (merge key CPU use).
+- Nothing to do on upgrade beyond pulling the new image. No migration, no configuration change.
+- One image scan alert stays open on the repository: CVE-2026-85091 in zlib, which Debian has not fixed in any release. It sits in the gz* file writing API, which nothing in the image uses, and it is covered by the VEX statement under `.vex/`.
 ## 3.34.0
 
 - Update upstream from `v3.33.0` to `v3.34.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.33.0...v3.34.0))

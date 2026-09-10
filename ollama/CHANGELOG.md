@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.34.0
+
+- Update upstream from `0.33.3` to `0.34.0` ([compare](https://github.com/ollama/ollama/compare/v0.33.3...v0.34.0))
+- Upstream v0.34.0 ([notes](https://github.com/ollama/ollama/releases/tag/v0.34.0))
 ## 0.33.3
 
 - Update upstream from `0.33.2` to `0.33.3` ([compare](https://github.com/ollama/ollama/compare/v0.33.2...v0.33.3))

@@ -1,6 +1,6 @@
 ---
 name: Ollama
-version: 0.33.3
+version: 0.34.0
 slug: ollama
 description: |
   Ollama 
