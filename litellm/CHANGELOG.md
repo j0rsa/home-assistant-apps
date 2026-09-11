@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.100.1
+
+- Update upstream from `v1.100.0` to `v1.100.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.100.0...v1.100.1))
+- Upstream v1.100.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.100.1))
+- chore(release): backport #39568 and #39572 to stable/1.100.x and cut 1.100.1 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/40176
+- fix(router): backport #39491 to stable/1.100.x so retry breadcrumbs stop retaining every earlier request by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/40455
+- revert: drop the spend attribution backports from stable/1.100.x by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/40495
 ## 1.100.0
 
 - Update upstream from `v1.99.1` to `v1.100.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.99.1...v1.100.0))

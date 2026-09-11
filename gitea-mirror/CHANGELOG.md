@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.36.1
+
+- Update upstream from `v3.35.1` to `v3.36.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.35.1...v3.36.1))
+- Upstream v3.36.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.36.0))
+- Organization Mirror Destination equal to the organization's own name is kept instead of dropped (#416, #418). Under the single-org strategy the default destination is the configured organization, so typing the source organization's own name is a real override. The card now shows the default for the configured strategy, marks any stored destination as custom, and Reset to Default clears the override instead of saving the current value again. The Repositories page shows an organization's override as the default for its repositories. Reported by @Clear2437.
+- Release assets are never duplicated on the destination (#417, #419). Gitea and Forgejo accept any number of attachments with the same name, and two overlapping mirror passes both uploaded. Release reconciliation now runs one pass at a time per destination repository, keeps a single copy of each asset and deletes surplus copies before uploading, fails closed when the destination cannot list a release's assets, and a sync no longer starts on a repository that another run is already mirroring or syncing. The next sync of an affected repository cleans up the duplicates for releases that still receive assets. Reported by @Clear2437.
+- After updating, set organization destinations that did not stick again. If a reconcile ran while everything was in the default organization, individual repositories may carry their own pin; they show a custom badge on the Repositories page and the field needs to be cleared once.
+- Releases that have dropped out of the newest-N asset window are not visited by a sync any more, so their duplicate assets stay until removed by hand.
+- Upstream v3.36.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.36.1))
+- Security
+- smol-toml raised to 1.7.1 or later in both the app and the website (#422). smol-toml 1.7.0 and below can be made to hang on a malformed TOML document (GHSA-7w5x-hrqm-74c2). The app lockfile had 1.6.0 through astro, which Dependabot does not see; both now resolve to 1.8.0.
+- Crash recovery no longer resumes a job that is still running (#423). A job older than two hours was treated as interrupted even while it checkpointed every two minutes, so recovery started a second pass over the same repositories alongside the original. Only a missing or stale checkpoint marks a job interrupted now. Every completed item is recorded in the checkpoint instead of one in every few, so a real resume skips exactly what was done, and concurrent progress writes no longer overwrite each other.
+- The same upstream repository is no longer imported twice under two sources that point at the same host (#424). An organization pinned to a public-only github.com source next to a personal github.com token produced two rows for one repository, and both mirrored to the same destination in the same batch. Discovery and the import endpoints now identify a repository by host and full name whichever source lists it, and a scheduler pass runs one row per repository, logging any duplicate rows it skips.
+- Existing duplicate rows are not deleted. The scheduler log names them ("is tracked more than once"); remove the one you do not want from the Repositories page.
 ## 3.35.1
 
 - Update upstream from `v3.34.0` to `v3.35.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.34.0...v3.35.1))
