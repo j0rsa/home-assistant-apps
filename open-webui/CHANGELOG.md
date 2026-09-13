@@ -1,5 +1,25 @@
 # Changelog
 
+## 19.0.0
+
+- Update upstream from `18.0.0` to `19.0.0` ([compare](https://github.com/hassio-addons/addon-base-python/compare/v18.0.0...v19.0.0))
+- Upstream v19.0.0 ([notes](https://github.com/hassio-addons/app-base-python/releases/tag/v19.0.0))
+- Repository maintenance and renaming add-ons to apps @frenck ([#380](https://github.com/hassio-addons/app-base-python/pull/380))
+- Repository maintenance and renaming add-ons to apps @frenck ([#380](https://github.com/hassio-addons/app-base-python/pull/380))
+- 👷 Replace Repology with Alpine CDN datasource for package pins @frenck ([#381](https://github.com/hassio-addons/app-base-python/pull/381))
+- ⬆️ Update setuptools to v80.10.1 @[renovate[bot]](https://github.com/apps/renovate) ([#344](https://github.com/hassio-addons/app-base-python/pull/344))
+- ⬆️ Update setuptools to v80.10.2 @[renovate[bot]](https://github.com/apps/renovate) ([#345](https://github.com/hassio-addons/app-base-python/pull/345))
+- ⬆️ Update setuptools to v83 @[renovate[bot]](https://github.com/apps/renovate) ([#356](https://github.com/hassio-addons/app-base-python/pull/356))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v21 @[renovate[bot]](https://github.com/apps/renovate) ([#347](https://github.com/hassio-addons/app-base-python/pull/347))
+- ⬆️ Update pip to v26 @[renovate[bot]](https://github.com/apps/renovate) ([#348](https://github.com/hassio-addons/app-base-python/pull/348))
+- ⬆️ Update setuptools to v84 @[renovate[bot]](https://github.com/apps/renovate) ([#373](https://github.com/hassio-addons/app-base-python/pull/373))
+- ⬆️ Update alpine_3_24/expat-dev to v2.8.4-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#374](https://github.com/hassio-addons/app-base-python/pull/374))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v21.0.4 @[renovate[bot]](https://github.com/apps/renovate) ([#375](https://github.com/hassio-addons/app-base-python/pull/375))
+- ⬆️ Update alpine_3_24/util-linux-dev to v2.42.3-r1 @[renovate[bot]](https://github.com/apps/renovate) ([#376](https://github.com/hassio-addons/app-base-python/pull/376))
+- ⬆️ Update alpine_3_24/xz-dev to v5.8.4-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#378](https://github.com/hassio-addons/app-base-python/pull/378))
+- ⬆️ Update alpine_3_24/xz to v5.8.4-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#377](https://github.com/hassio-addons/app-base-python/pull/377))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v21.0.5 @[renovate[bot]](https://github.com/apps/renovate) ([#379](https://github.com/hassio-addons/app-base-python/pull/379))
+- ⬆️ Update python/cpython to v3.14.7 @[renovate[bot]](https://github.com/apps/renovate) ([#343](https://github.com/hassio-addons/app-base-python/pull/343))
 ## 0.11.3
 
 - Update upstream from `v0.11.1` to `v0.11.3` ([compare](https://github.com/open-webui/open-webui/compare/v0.11.1...v0.11.3))

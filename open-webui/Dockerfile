@@ -1,4 +1,4 @@
-ARG BUILD_FROM=ghcr.io/hassio-addons/base-python:18.0.0
+ARG BUILD_FROM=ghcr.io/hassio-addons/base-python:19.0.0
 
 FROM ${BUILD_FROM}
 
