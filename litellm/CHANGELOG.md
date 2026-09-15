@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.101.0
+
+- Update upstream from `v1.100.1` to `v1.101.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.100.1...v1.101.0))
 ## 1.100.1
 
 - Update upstream from `v1.100.0` to `v1.100.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.100.0...v1.100.1))
