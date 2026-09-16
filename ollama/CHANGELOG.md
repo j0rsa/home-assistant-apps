@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.34.1
+
+- Update upstream from `0.34.0` to `0.34.1` ([compare](https://github.com/ollama/ollama/compare/v0.34.0...v0.34.1))
+- Upstream v0.34.1 ([notes](https://github.com/ollama/ollama/releases/tag/v0.34.1))
+- MLX safetensors `ollama create` no longer experimental. GGUF model creation now requires using llama.cpp tooling for safetensor conversion and quantization.
+- Improved MLX memory handling on Apple Silicon
+- Runaway repeat token detection now requires 100 repeat tokens for reduced false positives (e.g. OCR)
+- `/api/tags` is much faster on large model libraries (3.1 s → 294 ms cold in testing), and model capabilities are now reported consistently.
+- Deprecated `typical_p`: it can no longer be set when creating new models, existing GGUF models retain support.
+- MLX and llama.cpp updates
 ## 0.34.0
 
 - Update upstream from `0.33.3` to `0.34.0` ([compare](https://github.com/ollama/ollama/compare/v0.33.3...v0.34.0))
