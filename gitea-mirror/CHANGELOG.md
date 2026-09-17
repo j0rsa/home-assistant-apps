@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.36.2
+
+- Update upstream from `v3.36.1` to `v3.36.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.36.1...v3.36.2))
+- Upstream v3.36.2 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.36.2))
+- `latest` image tag lagging behind a release** (#425). A merge and the version bump that follows it both built the image and both pushed `latest`; on 3.36.1 the older build finished last. The workflow now runs one build per ref at a time, `latest` is pushed only by a stable release tag build, and main builds push `edge` and the short commit sha.
+- Automation card showing a schedule that was not the one running** (#427). A fresh install started with scheduling on a plain 24 hour interval counted from first login while the card showed 22:00 daily. The card now says what actually runs when a plain interval is stored (from `SCHEDULE_INTERVAL`, `GITEA_MIRROR_INTERVAL` or an older version), shows the stored timezone, and offers a one-click switch to the browser timezone.
+- Ignore Organization did not stop its repositories from syncing** (#429). The organization's repositories are now ignored with it and restored on Include, and rediscovery skips ignored organizations. Cancelling a sync that is already running is still not possible; that part of #429 stays open.
+- Organization cards said Gitea for a Forgejo destination** (#430).
+- Nix snippets missing the module import** (#426).
+- A new configuration starts with scheduling off unless `SCHEDULE_ENABLED=true`, `SCHEDULE_INTERVAL` or `GITEA_MIRROR_INTERVAL` turns it on, matching the environment loader. Enable it from the automation card and it stores the clock schedule in your browser timezone. Existing configurations are not touched.
 ## 3.36.1
 
 - Update upstream from `v3.35.1` to `v3.36.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.35.1...v3.36.1))
