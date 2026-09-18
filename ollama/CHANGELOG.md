@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.34.2
+
+- Update upstream from `0.34.1` to `0.34.2` ([compare](https://github.com/ollama/ollama/compare/v0.34.1...v0.34.2))
+- Upstream v0.34.2 ([notes](https://github.com/ollama/ollama/releases/tag/v0.34.2))
+- Added first-run setup when running `ollama`, with options to sign in or continue locally. Setup completion is shared with the desktop app on macOS and Windows.
+- Added `ollama://apps` to open the desktop app’s Apps page directly on macOS and Windows.
+- Fixed excessive memory growth during long generations with MLX speculative decoding.
+- Updated llama.cpp.
 ## 0.34.1
 
 - Update upstream from `0.34.0` to `0.34.1` ([compare](https://github.com/ollama/ollama/compare/v0.34.0...v0.34.1))

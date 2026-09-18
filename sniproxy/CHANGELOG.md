@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.24.2
+
+- Update upstream from `3.24.1` to `3.24.2`
 ## 3.24.1-2
 
 - Rebuild images after codenotary/`app_config` migration so CI publishes updated manifests
