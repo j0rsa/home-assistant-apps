@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.20.24
+
+- Update upstream from `1.20.23` to `1.20.24` ([compare](https://github.com/9001/copyparty/compare/v1.20.23...v1.20.24))
+- redup ([notes](https://github.com/9001/copyparty/releases/tag/v1.20.24))
+- [v1.20.19 (2026-07-27)](https://github.com/9001/copyparty/releases/tag/v1.20.19) fixed an FTP-server vuln (upload outside defined volumes)
+- [v1.20.17 (2026-07-06)](https://github.com/9001/copyparty/releases/tag/v1.20.17) fixed a vuln when a volume has both filekeys and dirkeys enabled
+- [v1.20.17 (2026-07-06)](https://github.com/9001/copyparty/releases/tag/v1.20.17) introduced csp nonces, possibly breaking some javascript-based plugins
+- new option [--redup](https://copyparty.eu/cli/#g-redup) (global or volflag) to convert local files between various dedup approaches
+- turn full copies into reflinks/symlinks/hardlinks or convert between those
+- run it with `--redup-dry` (dryrun) to check for unexpected consequences
+- WARNING: maybe take a snapshot of your filesystem before enabling this; brand new code with little testing, read [--help-redup](https://copyparty.eu/cli/#redup-help-page) and use with care
+- the feature is currently being stress-tested; results on tuesday
+- #1643 textfile-viewer can detect filetype from shebang (thx @botahamec!)
+- when dedup with [reflink](https://copyparty.eu/cli/#g-reflink) is enabled, then also dedup between volumes when possible (since reflink makes that safe)
+- option [-i no](https://copyparty.eu/cli/#bind-help-page) to launch copyparty without the webserver, for indexing / testing / whatever
+- if `--dedup` was enabled, then copying a file from one volume to another could dedup (create a symlink/hardlink/reflink) instead of a full copy
+- mainly an issue for portable storage such as flashdrives, and the main reason why `--redup` was added
+- the list of filenames given as input to xiu hooks did not have a trailing newline
+- #1611 volflag `nosub` would still result in empty folders from up2k
+- fix `PRTY_NO_IFADDR`
+- iOS: further improved upload-speeds on buggy iOS versions
+- looks like apple is working on fixing this bug; iOS v27 made https way more stable but http is still just as broken, so improved the workaround a bit more
+- added [--help-dedup](https://copyparty.eu/cli/#dedup-help-page) and [--help-redup](https://copyparty.eu/cli/#redup-help-page)
+- add a warning that the sourceforge project is not official and probably malware
+- the [railgun roulette vip-mix](https://www.youtube.com/watch?v=mv9BmrzkiJc) has the same bpm as the [turn-signal on a honda jazz](https://a.ocv.me/pub/stuff/music/railgun-roulette-honda-remix.opus)
+- on that note, [this fantasy-OPNA remake](https://www.youtube.com/watch?v=hv2hr8aPBMU) is too awesome to leave out
 ## 1.20.23
 
 - Update upstream from `1.20.21` to `1.20.23` ([compare](https://github.com/9001/copyparty/compare/v1.20.21...v1.20.23))
