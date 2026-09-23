@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.34.3
+
+- Update upstream from `0.34.2` to `0.34.3` ([compare](https://github.com/ollama/ollama/compare/v0.34.2...v0.34.3))
+- Upstream v0.34.3 ([notes](https://github.com/ollama/ollama/releases/tag/v0.34.3))
+- Nemotron H** vision models are now supported on Apple Silicon with MLX
+- Ollama's macOS app will now no longer reopen windows you've closed when activating it
+- Fix for model pulls from HuggingFace
 ## 0.34.2
 
 - Update upstream from `0.34.1` to `0.34.2` ([compare](https://github.com/ollama/ollama/compare/v0.34.1...v0.34.2))
