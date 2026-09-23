@@ -1,5 +1,27 @@
 # Changelog
 
+## 3.38.1
+
+- Update upstream from `v3.36.2` to `v3.38.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.36.2...v3.38.1))
+- Upstream v3.37.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.37.0))
+- Scheduler stuck as "already running" after a GitHub rate limit** (#437). Every rate-limited request used to sleep for the full reset window inside the scheduler run, so a large sync could hold the lock for hours and only a restart helped. Waits of up to two minutes are still slept off; a longer reset pauses the source, the run stops at the next batch or repository, and the next run is moved to just after the reset. Repositories that failed only on the limit go back to their previous status and are retried on their own.
+- Sync Organization** (#429). The organization card menu can re-sync an organization that is already mirrored: it re-lists the repositories from the source, mirrors the imported ones and syncs the rest.
+- CSV export** (#428). Export CSV buttons on the repositories and organizations pages, backed by `GET /api/repositories/export` and `GET /api/organizations/export`. The table minus the internal fields; API keys work on both routes. Values a spreadsheet would run as a formula are prefixed with a quote.
+- Login page can open on SSO** (#438). `AUTH_DEFAULT_METHOD=sso` sets the instance default, and each browser remembers the method it last signed in with.
+- Security
+- devalue floor raised to 5.9.2 in the application and the documentation site (GHSA-9rgm-9g3h-6x36). Both lockfiles resolve 5.9.4.
+- Upstream v3.38.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.38.0))
+- Releases mirror from Gitea and Forgejo sources, Codeberg included (#440, #446)
+- The release mirror lists releases through the repository's own source instead of always through the GitHub API, and keeps the same release limit, asset limit, per-destination lock, tag check and retention pruning
+- Release assets are downloaded with the credentials of the host they live on: a Gitea or Forgejo source uses its own token, a public one needs none, and a GitHub repository uses its own source token
+- The release switch and its two limits are enabled for Gitea and Forgejo sources; GitLab stays code only
+- Upstream v3.38.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.38.1))
+- Security
+- `POST /api/gitea/test-connection` and `POST /api/github/test-connection` now require a signed-in user. They were the only non-public API routes without a guard and made a server side request to any URL in the body (#447)
+- Email sign-up is closed server side once an account exists. `AUTH_ALLOW_SIGNUP=true` reopens it; the first account is always allowed
+- SSO providers are scoped to the user who created them for listing, updating and deleting, and the OIDC client secret is no longer returned by the API. Leaving the secret blank when editing keeps the stored one
+- HTTP errors from Gitea and other hosts no longer include the upstream response body in the message
+- Requests to user supplied URLs (connection tests, OIDC discovery, ntfy, Gotify, Apprise and webhook notifications) refuse link local and cloud metadata addresses and no longer follow redirects. Private networks stay allowed because mirroring to a LAN Gitea is the normal deployment
 ## 3.36.2
 
 - Update upstream from `v3.36.1` to `v3.36.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.36.1...v3.36.2))
