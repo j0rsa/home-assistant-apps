@@ -1,5 +1,26 @@
 # Changelog
 
+## 3.40.1
+
+- Update upstream from `v3.38.1` to `v3.40.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.38.1...v3.40.1))
+- Upstream v3.38.2 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.38.2))
+- Security
+- Source and destination URLs stored through `POST /api/sources`, `PUT /api/sources/:id` and the configuration save now go through the outbound guard: link local and cloud metadata addresses are refused, private networks stay allowed (#448)
+- The source fetch helper pins plain http to the checked address and no longer follows redirects, like the connection tests and the notification providers
+- Source errors carry the URL and status only; the upstream response body never enters the message
+- Errors raised by a request to another host are never forwarded to API clients, whatever words they contain
+- Upstream v3.39.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.39.0))
+- The watermark is stored per repository in the metadata state and only advances when a pass finishes with no failed item, so anything that failed is listed again next time.
+- A full pass still runs on the first sync, after Reset metadata, when the last full pass is 7 or more days old, and when the destination has no mirrored issues or pull requests (for example after it was recreated).
+- Existing installs need no action. The first sync after upgrading is a full pass and later ones are incremental.
+- Upstream v3.40.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.40.0))
+- The choice is remembered per browser, next to the theme and time format preferences.
+- On a phone the table scrolls sideways inside its own container with the organization column pinned to the left edge.
+- Upstream v3.40.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.40.1))
+- Every GitHub client now holds its requests while the source is paused. A limit that resets within two minutes is waited out inside the request; a longer one fails the request at once without contacting GitHub. Only the rate limit probe endpoint stays open, so the pause can end early when GitHub reports budget again.
+- The retry helper no longer retries a rate limit refusal and stops starting the remaining items of the batch.
+- A refusal inside the issues, pull requests, releases, labels or milestones pass fails the repository instead of moving on to the next component. The scheduler already puts such a repository back to its previous status and retries it a minute after the reset; with the incremental sync from v3.39.0 the watermark stays put as well.
+- A secondary rate limit pauses the whole client for its retry-after window, not only the request that was told to slow down.
 ## 3.38.1
 
 - Update upstream from `v3.36.2` to `v3.38.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.36.2...v3.38.1))

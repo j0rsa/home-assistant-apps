@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.102.1
+
+- Update upstream from `v1.102.0` to `v1.102.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.102.0...v1.102.1))
+- Upstream v1.102.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.102.1))
+- fix(anthropic): backport #42152 and #42288 to stable/1.102.x for v1.102.1 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42538
+- feat(typesafe): backport the jev change set to stable/1.102.x for v1.102.1 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42595
+- chore(release): backport #42388 and #41462 to stable/1.102.x by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42618
 ## 1.102.0
 
 - Update upstream from `v1.101.0` to `v1.102.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.101.0...v1.102.0))
