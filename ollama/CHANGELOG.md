@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.34.4
+
+- Update upstream from `0.34.3` to `0.34.4` ([compare](https://github.com/ollama/ollama/compare/v0.34.3...v0.34.4))
+- Upstream v0.34.4 ([notes](https://github.com/ollama/ollama/releases/tag/v0.34.4))
+- Structured outputs on thinking models now apply in a single pass, making them faster and more reliable.
+- Fixed intermittent "model not found" errors with a large local library
+- Fixed the macOS app becoming unresponsive when checking if ChatGPT or Codex is running.
+- Qwen 3.8 prompt processing is faster on Apple Silicon.
+- Gemma 4 on Apple Silicon now picks the best image resolution per image, keeping more detail in high-resolution images.
+- Updated llama.cpp, MLX, and XGrammar.
 ## 0.34.3
 
 - Update upstream from `0.34.2` to `0.34.3` ([compare](https://github.com/ollama/ollama/compare/v0.34.2...v0.34.3))
