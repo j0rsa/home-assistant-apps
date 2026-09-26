@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.40.2
+
+- Update upstream from `v3.40.1` to `v3.40.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.40.1...v3.40.2))
+- Upstream v3.40.2 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.40.2))
+- Issue and pull request passes over large repositories now finish across rate limit resets (#449, #453)
+- A pass stopped by the rate limit keeps the items it finished. The next run continues from there and only redoes an item if it changed in the meantime. Before, every run started over from the first item, so a repository too large for one hour of budget never completed a pass.
+- The weekly full pass no longer fetches comments for issues, or the details, commits and files of pull requests, that are already in the destination and unchanged since the last completed pass. It lists everything and corrects title, body, state and labels from the listing, which is about one request per hundred items.
+- A sync paused by the rate limit logs one line instead of the full error object, and its activity entry says it was paused.
 ## 3.40.1
 
 - Update upstream from `v3.38.1` to `v3.40.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.38.1...v3.40.1))
