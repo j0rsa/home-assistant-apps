@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.40.3
+
+- Update upstream from `v3.40.2` to `v3.40.3` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.40.2...v3.40.3))
+- Upstream v3.40.3 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.40.3))
+- The Activity Log summary no longer shows a repository as syncing after a quick sync finished (#454, #455). Events are stored to the second, and a sync that starts and finishes in the same second could come back in the wrong order, so the start event was counted as the current state. Activities now come back newest first within the same second too, and the summary counts a finish over a start from the same second.
+- The documentation site builds on Cloudflare Pages again (#456). A stale `www/bun.lock` left from before the site moved to pnpm made the build image install with bun and fail. No change to the application.
 ## 3.40.2
 
 - Update upstream from `v3.40.1` to `v3.40.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.40.1...v3.40.2))
