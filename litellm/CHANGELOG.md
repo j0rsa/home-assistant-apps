@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.103.1
+
+- Update upstream from `v1.103.0` to `v1.103.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.103.0...v1.103.1))
+- Upstream v1.103.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.103.1))
 ## 1.103.0
 
 - Update upstream from `v1.102.1` to `v1.103.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.102.1...v1.103.0))
