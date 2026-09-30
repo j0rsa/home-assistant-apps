@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.35.0
+
+- Update upstream from `0.34.4` to `0.35.0` ([compare](https://github.com/ollama/ollama/compare/v0.34.4...v0.35.0))
+- Upstream v0.35.0 ([notes](https://github.com/ollama/ollama/releases/tag/v0.35.0))
+- [**Nimble**](https://ollama.com/library/nimble) from Bespoke Labs
+- [**Tev1**](https://ollama.com/library/tev1) from Together AI
+- `choice`: Select an option and return probabilities for each.
+- `noul`: Return the probability that a condition is true.
+- `score`: Return a score across an ordered set of criteria
+- Settings now opens without waiting for model discovery.
+- Fixed the macOS update menu and icon not reflecting an available update at startup.
+- Fixed stalled MLX model downloads hanging indefinitely.
+- Requests containing the deprecated `typical_p` parameter now log a warning instead of failing.
 ## 0.34.4
 
 - Update upstream from `0.34.3` to `0.34.4` ([compare](https://github.com/ollama/ollama/compare/v0.34.3...v0.34.4))
