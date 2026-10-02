@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.103.2
+
+- Update upstream from `v1.103.1` to `v1.103.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.103.1...v1.103.2))
+- Upstream v1.103.2 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.103.2))
+- chore(release): sync stable/1.103.x to v1.103.1 by @yuneng-berri in https://github.com/BerriAI/litellm/pull/43824
+- fix(proxy): backport #40541, #43642, and #43656 to stable/1.103.x for v1.103.2 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/43897
+- fix(anthropic): backport #42152 and #42288 to stable/1.103.x by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/43662
+- fix(proxy): backport #43962 to stable/1.103.x by @yuneng-berri in https://github.com/BerriAI/litellm/pull/43984
 ## 1.103.1
 
 - Update upstream from `v1.103.0` to `v1.103.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.103.0...v1.103.1))
