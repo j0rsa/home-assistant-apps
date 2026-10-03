@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.35.1
+
+- Update upstream from `0.35.0` to `0.35.1` ([compare](https://github.com/ollama/ollama/compare/v0.35.0...v0.35.1))
+- Upstream v0.35.1 ([notes](https://github.com/ollama/ollama/releases/tag/v0.35.1))
+- Models using web search can now perform up to ten searches per response, up from three
+- Modelfiles now support `CAPABILITY` declarations, so model creators can explicitly declare what a model can do. Declarations are preserved when creating from GGUF or safetensors, through model inheritance, and on Modelfile export
+- `ollama show` and the model list now report only `decision` as the capability for decision models, so clients no longer offer them for general chat, tools, or thinking
+- Updated llama.cpp and the MLX engine
 ## 0.35.0
 
 - Update upstream from `0.34.4` to `0.35.0` ([compare](https://github.com/ollama/ollama/compare/v0.34.4...v0.35.0))
