@@ -1,5 +1,89 @@
 # Changelog
 
+## 1.104.0
+
+- Update upstream from `v1.103.2` to `v1.104.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.103.2...v1.104.0))
+- Upstream v1.103.3 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.103.3))
+- fix(proxy): enforce the migration check by default and stop building SpendLogs indexes in migrations (stable/1.103.x) by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44205
+- chore(release): bump litellm-proxy-extras 0.4.100 -> 0.4.100.post1 for stable/1.103.x by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44225
+- fix(proxy-extras): stop the migration sanity check from building the hand-built SpendLogs indexes and cut 1.103.3 by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44286
+- chore(release): backport #42643 to stable/1.103.x by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44309
+- chore(deps): bump pyjwt, pypdf, tornado, urllib3 and gitpython for stable/1.103.x by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44352
+- chore(release): backport #44341, #44346 to stable/1.103.x by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44404
+- test(e2e): backport Together structured-output and text-completion fixes to stable/1.103.x by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44437
+- Upstream v1.104.0 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.104.0))
+- build(deps): re-suppress GHSA-h7x2-h6g9-p789 in osv-scan, mlflow still has no fixed release by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/41036
+- feat(auth): add breached password detection to password policy by @ojensen-berri in https://github.com/BerriAI/litellm/pull/39321
+- feat(auth): add self-service password change and plug plaintext password leaks by @ojensen-berri in https://github.com/BerriAI/litellm/pull/39562
+- feat(auth): force password reset for breached or admin-set passwords by @ojensen-berri in https://github.com/BerriAI/litellm/pull/40107
+- perf(proxy): serialize /model/info listing once with orjson by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/41061
+- fix(utils): stop wrapper_async submitting the sync success handler twice by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/41058
+- test(integration): native responses and messages cost cases by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42010
+- fix(proxy): stop re-sending un-resendable spend batches from the Redis buffer by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/41994
+- fix(router): skip cooldown for background response cost poll 404s by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42046
+- fix(router): stamp model_group when retrieving a batch, so batch tokens are attributable (internal copy of #38499) by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42062
+- test(mcp): restore scoped execution and credential isolation regressions by @joshua-berri in https://github.com/BerriAI/litellm/pull/42050
+- feat(proxy)!: refuse to start with an unset, empty, or publicly known master key by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/42019
+- docs: stop advertising sk-1234 as the master key in shipped configs and examples by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/42011
+- test(logging): add autorouter estimate keys to the GCS pub/sub spend-log golden by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42061
+- fix(router): add NotFoundErrorRetries so a retry policy can pin 404 retries by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42045
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42077
+- fix(google_genai): forward response schema and tool parameters through the generateContent adapter by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42067
+- test(e2e): restore MCP OAuth happy-path coverage (LIT-3467) by @joshua-berri in https://github.com/BerriAI/litellm/pull/42051
+- fix(mcp): tools/call no longer 404s on a worker that has not served tools/list by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42072
+- chore(prices): sync OpenRouter prices: 7 models, 6 deprecated by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42082
+- fix(proxy): wait for the spend-log table before creating startup views by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/41974
+- fix(guardrails): scan each choice's tool-call arguments apart on n>1 streams and log why a rewrite was discarded by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/40986
+- chore(prices): sync OpenRouter prices: 1 model by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42089
+- chore(prices): sync OpenRouter prices: 1 model by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42092
+- chore: remove the dead telemetry flag from the SDK, proxy CLI and configs by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42071
+- docs(tests): define the tier contract for unit, integration and e2e by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42099
+- fix(proxy): coordinate v2 migration startup and qualify container recovery by @yuneng-berri in https://github.com/BerriAI/litellm/pull/40932
+- ci(tests): wire tests/unit into CircleCI and keep draining GHA shards green by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42103
+- test(unit): block external sockets at import time and add a socket policy regression test by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42113
+- fix(ci): excuse retired test-quality rules in the budget ratchet by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42116
+- test: migrate wave 1 phase 2 legacy unit tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42108
+- test(llms): migrate bedrock, baseten and base_llm batch tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42110
+- test(llms): migrate phase 6 provider unit tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42107
+- test: migrate nvidia, oci, ocr, oobabooga and openai legacy tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42115
+- test: migrate phase 9 legacy llm provider tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42117
+- test(llms): migrate phase 7 provider unit tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42114
+- test: migrate wave 1 phase 8 legacy llm tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42112
+- test(llms): migrate phase 5 provider unit tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42109
+- refactor(types): replace Any with proven types in 30 files by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42127
+- test(unit): make every tests/unit directory a package so pytest collection is unique by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42135
+- test(unit): migrate wave 1 phase 3 anthropic, apiserpent, azure and azure_ai legacy tests by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42118
+- test: migrate openai, openai_like and openrouter legacy tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42128
+- test: migrate phase 14 wave 2 provider tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42132
+- test: migrate phase 16 legacy tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42131
+- test: migrate wave 1 phase 1 legacy tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42123
+- test: migrate phase 12 legacy llm provider tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42137
+- test: migrate phase 15 legacy tests to tests/unit by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42136
+- fix(proxy): enforce virtual key budgets for JEV test routing by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/41879
+- feat(fal_ai): add Seedance 2.5 / 2.0 video generation via fal queue API by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/41980
+- chore(prices): sync OpenRouter prices: 11 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42096
+- test: migrate legacy provider tests to tests/unit (wave 2, phase 13) by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42145
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42154
+- chore(prices): sync OpenRouter prices: 5 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42155
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42157
+- fix(auth): reject deactivated JWT users and refresh cached status by @joshua-berri in https://github.com/BerriAI/litellm/pull/42064
+- fix(mcp): explain missing public client dependencies by @joshua-berri in https://github.com/BerriAI/litellm/pull/42148
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42162
+- chore(prices): sync OpenRouter prices: 3 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42163
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42164
+- chore(prices): sync OpenRouter prices: 1 model by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42166
+- chore(prices): sync OpenRouter prices: 3 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42168
+- refactor(rust): split token counter backends by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42165
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42169
+- chore(prices): sync OpenRouter prices: 3 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42175
+- chore(prices): sync OpenRouter prices: 4 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42178
+- chore(prices): sync OpenRouter prices: 3 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42179
+- chore(prices): sync OpenRouter prices: 1 model by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42182
+- feat(rust): add typed secret managers and shared auth adapters by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42173
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42184
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42187
+- chore(prices): sync OpenRouter prices: 2 models by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/42192
+- … truncated upstream notes ([full notes](https://github.com/BerriAI/litellm/releases/tag/v1.104.0))
 ## 1.103.2
 
 - Update upstream from `v1.103.1` to `v1.103.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.103.1...v1.103.2))
