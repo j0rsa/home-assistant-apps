@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.20.25
+
+- Update upstream from `1.20.24` to `1.20.25` ([compare](https://github.com/9001/copyparty/compare/v1.20.24...v1.20.25))
 ## 1.20.24
 
 - Update upstream from `1.20.23` to `1.20.24` ([compare](https://github.com/9001/copyparty/compare/v1.20.23...v1.20.24))
