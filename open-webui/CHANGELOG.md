@@ -1,5 +1,13 @@
 # Changelog
 
+## 19.1.0
+
+- Update upstream from `19.0.0` to `19.1.0` ([compare](https://github.com/hassio-addons/addon-base-python/compare/v19.0.0...v19.1.0))
+- Upstream v19.1.0 ([notes](https://github.com/hassio-addons/app-base-python/releases/tag/v19.1.0))
+- ⬆️ Update alpine_3_24/expat-dev to v2.8.5-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#382](https://github.com/hassio-addons/app-base-python/pull/382))
+- ⬆️ Update alpine_3_24/openssl-dev to v3.5.9-r0 - autoclosed @[renovate[bot]](https://github.com/apps/renovate) ([#383](https://github.com/hassio-addons/app-base-python/pull/383))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v21.0.7 @[renovate[bot]](https://github.com/apps/renovate) ([#384](https://github.com/hassio-addons/app-base-python/pull/384))
+- ⬆️ Update python/cpython to v3.14.8 @[renovate[bot]](https://github.com/apps/renovate) ([#385](https://github.com/hassio-addons/app-base-python/pull/385))
 ## 0.11.4
 
 - Update upstream from `v0.11.3` to `v0.11.4` ([compare](https://github.com/open-webui/open-webui/compare/v0.11.3...v0.11.4))
