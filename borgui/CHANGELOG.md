@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.9
+
+- Rename app from Borg to BorgUI; slug and image changed to borgui
+- Change sidebar icon to mdi:backup-restore
+
 ## 0.0.8
 
 - Replace proxy auth with ALLOW_INSECURE_NO_AUTH: HA ingress handles auth, no multi-user needed

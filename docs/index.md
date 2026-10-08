@@ -40,7 +40,7 @@ High-performance S3-compatible object storage (MinIO alternative) with a web con
 
 **Architectures:** `aarch64` `amd64`
 
-#### [Borg](/apps/borg/)
+#### [BorgUI](/apps/borgui/)
 BorgBackup engine (1.x and 2.x) with a web UI — create encrypted deduplicated backups without a terminal.
 - Full borg and borg2 binaries bundled in the image
 - Browse archives and restore files from the browser

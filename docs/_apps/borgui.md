@@ -1,7 +1,7 @@
 ---
-name: borg
-title: Borg - BorgBackup with Web UI
-description: "BorgBackup engine with a web interface — create encrypted deduplicated backups and manage them from the browser."
+name: borgui
+title: BorgUI - BorgBackup Web Interface
+description: "BorgBackup with a web UI — create encrypted deduplicated backups and manage them from the browser."
 category: Backup & Storage
 version: latest
 architectures:

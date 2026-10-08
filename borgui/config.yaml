@@ -1,7 +1,7 @@
 ---
-name: "Borg"
-version: "0.0.8"
-slug: "borg"
+name: "BorgUI"
+version: "0.0.9"
+slug: "borgui"
 description: |
   BorgBackup with a web UI. Create encrypted, deduplicated backups of your data and manage them from the browser.
 init: false
@@ -15,11 +15,11 @@ map:
   - backup:rw
   - media:ro
 boot: auto
-image: "ghcr.io/j0rsa/haddon-borg-{arch}"
+image: "ghcr.io/j0rsa/haddon-borgui-{arch}"
 udev: false
 url: https://borgui.com
 ingress: true
 ingress_port: 8081
-panel_icon: mdi:archive-arrow-down
+panel_icon: mdi:backup-restore
 privileged:
   - SYS_ADMIN
