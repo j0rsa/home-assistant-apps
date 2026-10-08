@@ -8,12 +8,10 @@ export DISABLE_AUTHENTICATION=true
 export PUID=0
 export PGID=0
 
-# Borgui stores all persistent state under /data.
-# HA mounts app_config at /config; redirect /data there so data survives restarts.
-if [ ! -L /data ]; then
-    rm -rf /data
-    ln -sf /config /data
-fi
+# HA Supervisor auto-mounts a volume at /data — it cannot be removed or symlinked.
+# Override DATA_DIR so borgui persists its state in app_config (/config) instead.
+export DATA_DIR=/config
+mkdir -p /config/ssh_keys /config/borg_keys /config/logs /config/config
 
 # Expose HA volumes as local mount points borgui can browse and back up.
 export LOCAL_MOUNT_POINTS=/share,/backup,/media
