@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.3
+
+- Fix missing Python extension libs (libsqlite3, liblzma, libbz2, libreadline, libncursesw, etc.)
+- Replace libfuse3-dev with libfuse3-3 (runtime library only)
+
 ## 0.0.2
 
 - Fix privileged field: use list format `[SYS_ADMIN]` instead of boolean (HA Supervisor requirement)

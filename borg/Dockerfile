@@ -10,8 +10,9 @@ ARG BUILD_ARCH
 ARG BUILD_DATE
 ARG BUILD_REF
 
-# Runtime deps matching upstream's python:3.12-slim (Debian bookworm) base.
-# No Python from Ubuntu's repos — we copy the full CPython runtime from upstream.
+# Runtime deps for the copied Python 3.12 extensions (lib-dynload) and borg tools.
+# libfuse3-dev replaced with libfuse3-3 (runtime only); added the full set of
+# .so deps found in python3.12/lib-dynload via objdump/strings scan.
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         ca-certificates \
@@ -20,9 +21,19 @@ RUN apt-get update && \
         fuse3 \
         gosu \
         libacl1 \
-        libfuse3-dev \
+        libbz2-1.0 \
+        libffi8 \
+        libfuse3-3 \
+        libgdbm6t64 \
         liblz4-1 \
+        liblzma5 \
+        libncursesw6 \
+        libreadline8t64 \
+        libsqlite3-0 \
         libssl3 \
+        libtinfo6 \
+        libuuid1 \
+        libxcrypt1 \
         libxxhash0 \
         libzstd1 \
         openssh-client \
@@ -30,6 +41,7 @@ RUN apt-get update && \
         sshfs \
         sshpass \
         sudo \
+        zlib1g \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -65,7 +77,7 @@ RUN ldconfig && \
     chown -R borg:borg /app /data /backups /var/log/borg /etc/borg /home/borg && \
     chmod -R 755 /app /data /backups /var/log/borg /etc/borg && \
     chmod 700 /home/borg/.ssh /home/borg/.cache/borg && \
-    python3 -c "from cryptography.fernet import Fernet"
+    python3 -c "from cryptography.fernet import Fernet; import sqlite3; import hashlib"
 
 ENV PYTHONPATH=/app
 ENV DATA_DIR=/data
