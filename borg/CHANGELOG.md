@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.5
+
+- Fix ingress asset/API paths: set BASE_PATH from container hostname (HA token)
+- App rewrites index.html and injects window.__BASE_PATH__ at startup for correct routing
+
 ## 0.0.4
 
 - Fix apt package names for Ubuntu 26.04: libcrypt1 (was libxcrypt1), drop libfuse3-3 (fuse3 pulls libfuse3-4)
