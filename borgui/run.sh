@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/with-contenv bashio
+# shellcheck shell=bash
 set -euo pipefail
 
 # Skip borgui's own auth entirely — HA ingress already authenticates the user.
@@ -13,8 +14,14 @@ export PGID=0
 export DATA_DIR=/config
 mkdir -p /config/ssh_keys /config/borg_keys /config/logs /config/config
 
-# Expose HA volumes as local mount points borgui can browse and back up.
-export LOCAL_MOUNT_POINTS=/share,/backup,/media
+# borgui mounts archives at {DATA_DIR}/mounts — symlink that to borg_path so
+# mounted archives land in a user-visible, configurable location under /share.
+BORG_PATH=$(bashio::config 'borg_path')
+mkdir -p "${BORG_PATH}"
+ln -sfn "${BORG_PATH}" /config/mounts
+
+# Expose HA volumes + the borg mount path as local mount points.
+export LOCAL_MOUNT_POINTS="/share,/backup,/media,${BORG_PATH}"
 
 # Fetch the real ingress entry path from the HA Supervisor API.
 # SUPERVISOR_TOKEN is injected by HA into every add-on container.

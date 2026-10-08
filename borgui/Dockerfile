@@ -80,7 +80,6 @@ RUN ldconfig && \
 
 ENV PYTHONPATH=/app
 ENV DATA_DIR=/data
-ENV BORG_BACKUP_PATH=/backups
 ENV BORG_CACHE_DIR=/home/borg/.cache/borg
 ENV PORT=8081
 ENV OPENSSL_armcap=0

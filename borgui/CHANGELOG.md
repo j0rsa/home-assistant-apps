@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0
+
+- Add configurable borg_path option (default /share/borg-mounts)
+- Symlink /config/mounts → borg_path so archive FUSE mounts land at the configured path
+- Remove unused BORG_BACKUP_PATH env var
+
 ## 0.0.9
 
 - Rename app from Borg to BorgUI; slug and image changed to borgui
