@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.104.1
+
+- Update upstream from `v1.104.0` to `v1.104.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.104.0...v1.104.1))
+- Upstream v1.104.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.104.1))
+- chore(release): refresh dependencies on stable/1.104.x and cut 1.104.1 by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44777
+- chore(docker): bump pgbouncer to 1.26.0 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/45012
 ## 1.104.0
 
 - Update upstream from `v1.103.2` to `v1.104.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.103.2...v1.104.0))
