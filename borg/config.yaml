@@ -21,4 +21,3 @@ url: https://borgui.com
 ingress: true
 ingress_port: 8081
 panel_icon: mdi:archive-arrow-down
-privileged: true
