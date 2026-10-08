@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.4
+
+- Fix apt package names for Ubuntu 26.04: libcrypt1 (was libxcrypt1), drop libfuse3-3 (fuse3 pulls libfuse3-4)
+
 ## 0.0.3
 
 - Fix missing Python extension libs (libsqlite3, liblzma, libbz2, libreadline, libncursesw, etc.)

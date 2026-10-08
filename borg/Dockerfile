@@ -22,8 +22,8 @@ RUN apt-get update && \
         gosu \
         libacl1 \
         libbz2-1.0 \
+        libcrypt1 \
         libffi8 \
-        libfuse3-3 \
         libgdbm6t64 \
         liblz4-1 \
         liblzma5 \
@@ -33,7 +33,6 @@ RUN apt-get update && \
         libssl3 \
         libtinfo6 \
         libuuid1 \
-        libxcrypt1 \
         libxxhash0 \
         libzstd1 \
         openssh-client \
