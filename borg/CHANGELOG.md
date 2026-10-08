@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.2
+
+- Fix privileged field: use list format `[SYS_ADMIN]` instead of boolean (HA Supervisor requirement)
+- Fix startup: replace /data symlink approach with DATA_DIR=/config (HA auto-mounts /data)
+
 ## 0.0.1
 
 - Add initial Home Assistant app release based on ainullcode/borg-ui:edge
