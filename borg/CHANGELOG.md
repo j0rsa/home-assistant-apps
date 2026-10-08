@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8
+
+- Replace proxy auth with ALLOW_INSECURE_NO_AUTH: HA ingress handles auth, no multi-user needed
+
 ## 0.0.7
 
 - Fix proxy auth: set PROXY_AUTH_HEADER=X-Hass-User-ID so borgui reads HA's user header instead of expecting X-Forwarded-User
