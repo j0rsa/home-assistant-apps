@@ -11,16 +11,16 @@ FROM ${UPSTREAM_IMAGE} AS upstream
 # to PATH so the `litellm` entrypoint resolves at runtime.
 # Prisma CLI + engines are baked at /opt/prisma (since upstream v1.93.0); older
 # /root/.cache/prisma* paths are gone. run.sh pins PRISMA_* so migrations stay offline.
-# Do not ship upstream (Wolfi) libssl/libcrypto. Ubuntu 26.04 provides OpenSSL
-# 3.5.x which is ABI-compatible with the bundled Python (_ssl links libssl.so.3).
-# Putting Wolfi OpenSSL 3.6 on LD_LIBRARY_PATH breaks the base openssl CLI
-# (undefined symbol BIO_f_zlib) and cascades into Prisma "Not connected".
-#
-# Stage Wolfi glibc under /opt/litellm/lib (not /lib). Ubuntu 26.04 ships glibc
-# 2.43; Wolfi CPython 3.13 needs GLIBC_2.44. Overwriting Ubuntu's dynamic linker
-# would break bashio/s6. wrap-wolfi-python patchelf's CPython in place so the
-# private loader is used without replacing the venv python (argv[0] must stay
-# under /app/.venv or site-packages is dropped).
+# Stage Wolfi glibc and OpenSSL under /opt/litellm/lib (not /lib). Ubuntu 26.04
+# ships glibc 2.43; Wolfi CPython 3.13 needs GLIBC_2.44. Overwriting Ubuntu's
+# dynamic linker would break bashio/s6. wrap-wolfi-python patchelf's CPython in
+# place so the private loader is used without replacing the venv python (argv[0]
+# must stay under /app/.venv or site-packages is dropped).
+# Wolfi now ships OpenSSL 4.0 (libssl.so.4 / libcrypto.so.4). Ubuntu 26.04 only
+# has libssl.so.3 / libcrypto.so.3. Since the sonames differ, shipping Wolfi's
+# .so.4 files alongside Ubuntu's .so.3 is safe — they coexist without conflict.
+# Only patchelf'd binaries (Python extensions) search /opt/litellm/lib via rpath;
+# system binaries (openssl, node) are unaffected.
 RUN mkdir -p /opt/litellm/lib && \
     found_ld=0 && \
     for dir in /lib /usr/lib /lib64 /usr/lib64; do \
@@ -38,7 +38,9 @@ RUN mkdir -p /opt/litellm/lib && \
             "${dir}"/libutil.so* \
             "${dir}"/libcrypt.so* \
             "${dir}"/libanl.so* \
-            "${dir}"/libnss_*.so*; do \
+            "${dir}"/libnss_*.so* \
+            "${dir}"/libssl.so* \
+            "${dir}"/libcrypto.so*; do \
             [ -e "${f}" ] || continue; \
             cp -aL "${f}" /opt/litellm/lib/; \
             case "${f}" in \

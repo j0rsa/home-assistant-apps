@@ -3,8 +3,8 @@ name: Build add-on
 on:
   push:
     branches: [ main ]
-  # pull_request:
-  #   branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   generate-matrix:
@@ -54,6 +54,11 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Stamp PR version
+        if: github.event_name == 'pull_request'
+        run: |
+          sed -i "s/^version:.*/version: 0.0.0-pr.${{ github.event.number }}.${{ github.run_number }}/" ${{ matrix.target }}/config.yaml
+
       - name: Build and push ${{ matrix.target }}
         uses: home-assistant/builder@2026.03.2
         with:
@@ -62,4 +67,4 @@ jobs:
             --target ${{ matrix.target }} \
             --docker-hub ghcr.io/${{ github.repository_owner }} \
             --addon \
-            --cosign
+            ${{ github.event_name != 'pull_request' && '--cosign' || '' }}
