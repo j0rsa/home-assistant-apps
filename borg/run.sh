@@ -16,9 +16,14 @@ mkdir -p /config/ssh_keys /config/borg_keys /config/logs /config/config
 # Expose HA volumes as local mount points borgui can browse and back up.
 export LOCAL_MOUNT_POINTS=/share,/backup,/media
 
-# HA sets HOSTNAME=<token_with_hyphens>; the ingress URL uses underscores.
-# BASE_PATH makes the app rewrite index.html asset paths at startup and
-# injects window.__BASE_PATH__ so the React app prefixes all API calls.
-export BASE_PATH="/api/hassio_ingress/$(hostname | tr '-' '_')"
+# Fetch the real ingress entry path from the HA Supervisor API.
+# SUPERVISOR_TOKEN is injected by HA into every add-on container.
+# ingress_entry looks like /api/hassio_ingress/{token}.
+BASE_PATH=$(curl -sf \
+    -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" \
+    http://supervisor/addons/self/info \
+    | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['ingress_entry'])" \
+    2>/dev/null || true)
+export BASE_PATH
 
 exec /entrypoint.sh

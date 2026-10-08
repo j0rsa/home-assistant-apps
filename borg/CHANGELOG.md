@@ -1,8 +1,13 @@
 # Changelog
 
+## 0.0.6
+
+- Fix ingress BASE_PATH: fetch real ingress_entry from HA Supervisor API at startup
+  (hostname is the slug, not the ingress token; SUPERVISOR_TOKEN gives the correct path)
+
 ## 0.0.5
 
-- Fix ingress asset/API paths: set BASE_PATH from container hostname (HA token)
+- Fix ingress asset/API paths: set BASE_PATH from container hostname (HA token — was wrong)
 - App rewrites index.html and injects window.__BASE_PATH__ at startup for correct routing
 
 ## 0.0.4
