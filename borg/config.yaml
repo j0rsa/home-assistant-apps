@@ -1,0 +1,24 @@
+---
+name: "Borg"
+version: "0.0.1"
+slug: "borg"
+description: |
+  BorgBackup with a web UI. Create encrypted, deduplicated backups of your data and manage them from the browser.
+init: false
+startup: services
+arch:
+  - aarch64
+  - amd64
+map:
+  - app_config:rw
+  - share:rw
+  - backup:rw
+  - media:ro
+boot: auto
+image: "ghcr.io/j0rsa/haddon-borg-{arch}"
+udev: false
+url: https://borgui.com
+ingress: true
+ingress_port: 8081
+panel_icon: mdi:archive-arrow-down
+privileged: true
