@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.7
+
+- Fix proxy auth: set PROXY_AUTH_HEADER=X-Hass-User-ID so borgui reads HA's user header instead of expecting X-Forwarded-User
+
 ## 0.0.6
 
 - Fix ingress BASE_PATH: fetch real ingress_entry from HA Supervisor API at startup

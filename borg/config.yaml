@@ -1,6 +1,6 @@
 ---
 name: "Borg"
-version: "0.0.6"
+version: "0.0.7"
 slug: "borg"
 description: |
   BorgBackup with a web UI. Create encrypted, deduplicated backups of your data and manage them from the browser.

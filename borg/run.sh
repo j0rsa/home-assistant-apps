@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Authentication is handled by Home Assistant ingress — disable the built-in login.
+# Authentication is handled by Home Assistant ingress.
+# DISABLE_AUTHENTICATION switches borgui to proxy-auth mode; PROXY_AUTH_HEADER
+# tells it which header carries the username. HA ingress sends X-Hass-User-ID.
 export DISABLE_AUTHENTICATION=true
+export PROXY_AUTH_HEADER="X-Hass-User-ID"
 
 # Run as root so the entrypoint's UID/GID management is a no-op.
 export PUID=0
