@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2
+
+- Fix exit code 111: use CMD instead of ENTRYPOINT so the base image's s6 init runs first,
+  initialising /run/s6/container_environment before with-contenv bashio is called
+
 ## 0.1.0
 
 - Add configurable borg_path option (default /share/borg-mounts)

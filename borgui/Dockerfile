@@ -87,7 +87,7 @@ ENV OPENSSL_armcap=0
 COPY run.sh /run-ha.sh
 RUN chmod a+x /run-ha.sh
 
-ENTRYPOINT ["/run-ha.sh"]
+CMD ["/run-ha.sh"]
 
 LABEL \
   io.hass.version=${BUILD_VERSION} \
