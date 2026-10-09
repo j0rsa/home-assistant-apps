@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.104.2
+
+- Update upstream from `v1.104.1` to `v1.104.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.104.1...v1.104.2))
+- Upstream v1.104.2 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.104.2))
+- feat(decisions): backport /v1/systemone, OpenAI-format /v1/decisions and the OpenAI Decisions provider to stable/1.104.x for v1.104.2 (#44236, #45184, #45214) by @mateo-berri in https://github.com/BerriAI/litellm/pull/45190
 ## 1.104.1
 
 - Update upstream from `v1.104.0` to `v1.104.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.104.0...v1.104.1))
