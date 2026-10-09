@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.40.2
+
+- Update upstream from `0.40.1` to `0.40.2` ([compare](https://github.com/ollama/ollama/compare/v0.40.1...v0.40.2))
+- Upstream v0.40.2 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.2))
+- README: add oxi to community integrations by @maziluiosif in https://github.com/ollama/ollama/pull/18739
+- server: hide duplicate and downgrade guards from list by @dhiltgen in https://github.com/ollama/ollama/pull/18874
+- @maziluiosif made their first contribution in https://github.com/ollama/ollama/pull/18739
 ## 0.40.1
 
 - Update upstream from `0.40.0` to `0.40.1` ([compare](https://github.com/ollama/ollama/compare/v0.40.0...v0.40.1))
