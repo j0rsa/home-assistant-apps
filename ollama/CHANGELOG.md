@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.40.3
+
+- Update upstream from `0.40.2` to `0.40.3` ([compare](https://github.com/ollama/ollama/compare/v0.40.2...v0.40.3))
+- Upstream v0.40.3 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.3))
+- `ollama launch claude` no longer shows a warning about Claude connectors by @hoyyeva in https://github.com/ollama/ollama/pull/18878
+- `ollama launch codex` no longer warns about service tiers by @hoyyeva in https://github.com/ollama/ollama/pull/18879
+- Paused background model upgrade for embedding and other request performance, by @jmorganca in https://github.com/ollama/ollama/pull/18908
 ## 0.40.2
 
 - Update upstream from `0.40.1` to `0.40.2` ([compare](https://github.com/ollama/ollama/compare/v0.40.1...v0.40.2))
