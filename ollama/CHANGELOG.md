@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.40.4
+
+- Update upstream from `0.40.3` to `0.40.4` ([compare](https://github.com/ollama/ollama/compare/v0.40.3...v0.40.4))
+- Upstream v0.40.4 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.4))
+- llama: update llama.cpp to b11521 for decision models and EmbeddingGemma 2 by @jmorganca in https://github.com/ollama/ollama/pull/18917
+- server: reuse verified manifests and loaded models in inference routes by @dhiltgen in https://github.com/ollama/ollama/pull/18947
+- mlx: compact restored recurrent state after speculative rollback by @dhiltgen in https://github.com/ollama/ollama/pull/18955
+- launch: include installed models in Codex /model picker by @ParthSareen in https://github.com/ollama/ollama/pull/18887
+- MLX, MLX-C: version bump by @dhiltgen in https://github.com/ollama/ollama/pull/18956
 ## 0.40.3
 
 - Update upstream from `0.40.2` to `0.40.3` ([compare](https://github.com/ollama/ollama/compare/v0.40.2...v0.40.3))
