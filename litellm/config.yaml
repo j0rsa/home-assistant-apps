@@ -1,6 +1,6 @@
 ---
 name: LiteLLM
-version: 1.105.0
+version: 1.105.0-1
 slug: litellm
 description: |
   LiteLLM Proxy Server
@@ -33,6 +33,8 @@ options:
   ui_password: ""
   database_url: postgresql://user:pass@host:5432/litellm
   store_model_in_db: true
+  enable_mcp_stdio: false
+  auto_redirect_sso: false
 schema:
   master_key: password
   salt_key: password
@@ -40,3 +42,5 @@ schema:
   ui_password: password
   database_url: password
   store_model_in_db: bool
+  enable_mcp_stdio: bool
+  auto_redirect_sso: bool

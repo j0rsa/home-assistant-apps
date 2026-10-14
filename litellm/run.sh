@@ -11,6 +11,8 @@ UI_USERNAME=$(jq -r '.ui_username' "${OPTIONS_FILE}")
 UI_PASSWORD=$(jq -r '.ui_password' "${OPTIONS_FILE}")
 DATABASE_URL=$(jq -r '.database_url' "${OPTIONS_FILE}")
 STORE_MODEL_IN_DB=$(jq -r 'if .store_model_in_db then "True" else "False" end' "${OPTIONS_FILE}")
+ENABLE_MCP_STDIO=$(jq -r 'if .enable_mcp_stdio then "true" else "false" end' "${OPTIONS_FILE}")
+AUTO_REDIRECT_SSO=$(jq -r 'if .auto_redirect_sso then "true" else "false" end' "${OPTIONS_FILE}")
 
 # Export as environment variables consumed by LiteLLM
 export LITELLM_MASTER_KEY="${MASTER_KEY}"
@@ -20,6 +22,8 @@ export UI_PASSWORD="${UI_PASSWORD}"
 export DATABASE_URL="${DATABASE_URL}"
 export STORE_MODEL_IN_DB="${STORE_MODEL_IN_DB}"
 export PROXY_ADMIN_ID="${UI_USERNAME}"
+export LITELLM_ENABLE_MCP_STDIO="${ENABLE_MCP_STDIO}"
+export AUTO_REDIRECT_UI_LOGIN_TO_SSO="${AUTO_REDIRECT_SSO}"
 
 # Create a default model config if none exists yet
 if [ ! -f "${LITELLM_CONFIG}" ]; then

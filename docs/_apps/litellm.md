@@ -61,6 +61,8 @@ store_model_in_db: true
 | `ui_password` | Web UI login password | Yes |
 | `database_url` | PostgreSQL connection string | Yes |
 | `store_model_in_db` | Store model definitions in PostgreSQL (enables UI-based model management) | No |
+| `enable_mcp_stdio` | Allow stdio MCP servers (`LITELLM_ENABLE_MCP_STDIO=true`) | No |
+| `auto_redirect_sso` | Auto-redirect UI login to SSO (`AUTO_REDIRECT_UI_LOGIN_TO_SSO=true`) | No |
 
 ## Model Configuration
 
