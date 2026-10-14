@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.105.0-1
+
+- Add `enable_mcp_stdio` option to set `LITELLM_ENABLE_MCP_STDIO` env var (enables stdio MCP servers in the proxy)
+- Add `auto_redirect_sso` option to set `AUTO_REDIRECT_UI_LOGIN_TO_SSO` env var (re-enables auto-redirect to SSO login)
+
 ## 1.105.0
 
 - Update upstream from `v1.104.2` to `v1.105.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.104.2...v1.105.0))
