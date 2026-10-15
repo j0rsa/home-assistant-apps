@@ -1,5 +1,25 @@
 # Changelog
 
+## 1.20.26
+
+- Update upstream from `1.20.25` to `1.20.26` ([compare](https://github.com/9001/copyparty/compare/v1.20.25...v1.20.26))
+- one 20 26 ([notes](https://github.com/9001/copyparty/releases/tag/v1.20.26))
+- [v1.20.25 (2026-10-06)](https://github.com/9001/copyparty/releases/tag/v1.20.25) improved shadowing on Windows/MacOS
+- [v1.20.19 (2026-07-27)](https://github.com/9001/copyparty/releases/tag/v1.20.19) fixed an FTP-server vuln (upload outside defined volumes)
+- [v1.20.17 (2026-07-06)](https://github.com/9001/copyparty/releases/tag/v1.20.17) introduced csp nonces, possibly breaking some javascript-based plugins
+- xvol/xdev now usually doesn't list symlinks that can't be followed
+- generating jxl thumbnails of raw photos would fail in most environments
+- fix some false-positive warnings regarding dangerous shadowing on casefolding filesystems
+- GHSA-hg99-jqfp-rf76 another xvol/xdev joke, not a cause for concern in any realistic scenario
+- also see the new warning in the [xvol readme section](https://github.com/9001/copyparty#filesystem-guards)
+- btrfs: would only nocow same-fs histfolders
+- openjpeg (jpeg2000 support in pillow) was removed from all docker images
+- because openjpeg is unmaintained and there's some minor unfixed vulns
+- no practical consequences since ffmpeg will handle thumbnailing of those
+- for the first time in 4 years, the music folder on the demo-server has a new album! [Sunnexo - Netpunk](https://a.ocv.me/pub/demo/music/Sunnexo%20-%20Netpunk/#af-90014daf,sorthref)
+- it is really good, you should [buy it](https://sunnexo.bandcamp.com/album/netpunk)
+- and if you ever get the chance to see Sunnexo live DO IT
+- faelnor made a [draw.io plugin](https://codeberg.org/anodal/copyparty-drawio) // [demo vid](https://a.ocv.me/pub/g/2026/10/cpp-drawio.mp4)
 ## 1.20.25
 
 - Update upstream from `1.20.24` to `1.20.25` ([compare](https://github.com/9001/copyparty/compare/v1.20.24...v1.20.25))

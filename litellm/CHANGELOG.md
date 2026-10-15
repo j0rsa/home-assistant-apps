@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.105.1
+
+- Update upstream from `v1.105.0` to `v1.105.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.105.0...v1.105.1))
+- Upstream v1.105.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.105.1))
+- fix(proxy): backport #44243 and #44508 to stable/1.105.x for v1.105.1 by @kerry-berri in https://github.com/BerriAI/litellm/pull/46313
 ## 1.105.0-1
 
 - Add `enable_mcp_stdio` option to set `LITELLM_ENABLE_MCP_STDIO` env var (enables stdio MCP servers in the proxy)

@@ -1,5 +1,16 @@
 # Changelog
 
+## 3.40.4
+
+- Update upstream from `v3.40.3` to `v3.40.4` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.40.3...v3.40.4))
+- Upstream v3.40.4 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.40.4))
+- Mirrored issues and pull requests are now assigned to their milestones (#460, #463). Milestones were created in Gitea, but no issue was ever put on one. Milestones now sync before issues and pull requests, new items are created with their milestone, and existing items get it set, changed or cleared when GitHub differs.
+- Items mirrored before this release that have not changed on GitHub get their milestone on the next weekly full pass. Anything that changes on GitHub picks it up on its next sync.
+- A milestone made in Gitea alone is never assigned or cleared by the mirror. If milestone mirroring is off for a repository, its issues' milestones are left as they are.
+- Mirrored milestones now follow GitHub after they are created. Closing or reopening a milestone, changing its due date or editing its description on GitHub carries over to Gitea. Before, milestones were only ever created and then left as they were.
+- A mirrored issue whose title mentions `[PR #N]`, such as "Revert [PR #12]", is no longer mistaken for the mirror of that pull request.
+- The password reset CLI works again (#461, thanks @xbreaker). `bun run reset-password` failed with `TypeError: undefined is not an object (evaluating 'db.query.users.findFirst')` in both source and Docker installs, and inside the Docker image the `manage-db` scripts pointed at a source file the image does not ship. They now run the bundled `dist/scripts/manage-db.js`, so `docker exec bun run reset-password -- --email=... --new-password=...` works.
+- The NixOS module no longer prints the `'system' has been renamed to 'stdenv.hostPlatform.system'` evaluation warning (#459, thanks @CrumblyLiquid).
 ## 3.40.3
 
 - Update upstream from `v3.40.2` to `v3.40.3` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.40.2...v3.40.3))
