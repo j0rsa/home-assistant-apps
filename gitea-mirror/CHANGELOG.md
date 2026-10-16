@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.41.0
+
+- Update upstream from `v3.40.4` to `v3.41.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.40.4...v3.41.0))
+- Upstream v3.40.5 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.40.5))
+- The server no longer shuts down when a dashboard tab disconnects on Bun 1.4 (#465, #466). On Bun 1.4.0 and later, closing the browser's event stream closed the stream before our cleanup ran, the cleanup then threw, and the uncaught exception took the whole process down. Both event stream routes now handle that order. Bun 1.3.x was never affected, so the Docker image (Bun 1.3.14) did not have this problem; source installs that take the latest Bun did, including the Proxmox community script.
+- A shutdown caused by a crash now exits with status 1 instead of 0, so a service unit with `Restart=on-failure` (the Proxmox community script's unit) restarts the service instead of leaving it stopped.
+- Upstream v3.41.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.41.0))
+- The "New repo discovered" notification now works (#464, thanks @MajMcCloud). It was listed in the notification settings as coming soon. When a discovery pass (scheduled sync, boot auto-start or the manual organization sync) imports new repositories, you get one alert per owner or organization listing what was imported. Starred repositories arrive as a single "Starred" alert. A large import lists the first 10 names plus a count of the rest, so one pass never floods your provider. It is off by default; turn it on under Settings, Notifications.
+- `bun run build` no longer runs out of memory on installs that keep repository backups inside the project directory (#465, #467). Tailwind scans every file under the project root for class names, and the default backup directory `data/repo-backups` sits there on source installs such as the Proxmox community script. Large git bundles were read into memory and the kernel killed the build. The scan is now limited to `src/`. Docker images were not affected, since the image is built without a data directory. The stylesheet also lost about 27 KB of classes that only the documentation site used.
 ## 3.40.4
 
 - Update upstream from `v3.40.3` to `v3.40.4` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.40.3...v3.40.4))
