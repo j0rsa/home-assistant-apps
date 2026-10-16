@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.40.5
+
+- Update upstream from `0.40.4` to `0.40.5` ([compare](https://github.com/ollama/ollama/compare/v0.40.4...v0.40.5))
+- Upstream v0.40.5 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.5))
+- Decision models are now available on cloud — use `clef:cloud` and `clef-flash:cloud` to run decision models through ollama.com cloud without pulling them locally
+- Continuing an OpenAI-compatible Responses conversation that includes custom tool calls no longer fails with an error
+- Clearer error messages when cloud access fails: sign-in problems, payment issues in the desktop app, and upstream access errors from the ChatGPT gateway now explain what went wrong
+- Updated llama.cpp (adding Nemotron 3.5 support) and MLX
+- @willietran made their first contribution in https://github.com/ollama/ollama/pull/18986
 ## 0.40.4
 
 - Update upstream from `0.40.3` to `0.40.4` ([compare](https://github.com/ollama/ollama/compare/v0.40.3...v0.40.4))
