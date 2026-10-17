@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.40.6
+
+- Update upstream from `0.40.5` to `0.40.6` ([compare](https://github.com/ollama/ollama/compare/v0.40.5...v0.40.6))
+- Upstream v0.40.6 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.6))
+- win: prevent orphaned runners by @dhiltgen in https://github.com/ollama/ollama/pull/18500
+- gguf: add the q2_0 tensor and file types by @jmorganca in https://github.com/ollama/ollama/pull/18967
+- Launch clef in Ollama's cloud by @jberg5 in https://github.com/ollama/ollama/pull/19036
+- use identifiers for --ask mode question keys by @jberg5 in https://github.com/ollama/ollama/pull/19041
 ## 0.40.5
 
 - Update upstream from `0.40.4` to `0.40.5` ([compare](https://github.com/ollama/ollama/compare/v0.40.4...v0.40.5))
