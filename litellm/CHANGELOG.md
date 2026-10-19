@@ -1,5 +1,89 @@
 # Changelog
 
+## 1.106.0
+
+- Update upstream from `v1.105.1` to `v1.106.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.105.1...v1.106.0))
+- Upstream v1.106.0 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.0))
+- test(mcp): fire MCP client test deadlines on conditions instead of wall-clock time by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44166
+- fix(cost-map): add OpenAI TTS and GPT-5.x deprecation dates by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44175
+- fix(tracing): unify ClickHouse storage configuration by @yujonglee-berri in https://github.com/BerriAI/litellm/pull/43941
+- feat(docker): one-command quickstart that starts the gateway, Postgres, and the admin UI by @misbahsy in https://github.com/BerriAI/litellm/pull/43673
+- fix(lens): simplify the example investigation preview by @moe-berri in https://github.com/BerriAI/litellm/pull/44123
+- chore(helm): drop migrationJob values the chart never reads by @Bernedotcom2312 in https://github.com/BerriAI/litellm/pull/42141
+- fix(ui): register tencent in the Add Model provider dropdown by @jimaldon in https://github.com/BerriAI/litellm/pull/40924
+- test: remove 130 legacy tests owned by stronger unit proofs by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44157
+- feat(mcp)!: disable stdio MCP servers by default by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44066
+- fix(proxy): exit when DATABASE_URL is set but the Prisma toolchain is missing by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44207
+- fix(proxy): preserve lifespan state across all entrypoints by @tin-berri in https://github.com/BerriAI/litellm/pull/44214
+- fix(oci): resolve the GenAI endpoint realm from the compartment OCID instead of hardcoding oraclecloud.com by @fede-kamel in https://github.com/BerriAI/litellm/pull/43180
+- fix(chatgpt): preserve requested service tier in Responses calls by @SteffanWolter in https://github.com/BerriAI/litellm/pull/40108
+- fix(ui): leave unset callback select params out of the save payload by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44213
+- fix(proxy-extras): hand libpq a root cert, not Prisma's sslcert, when the migration job builds indexes by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44203
+- feat: add Laya gateway and OSS classifier providers by @tin-berri in https://github.com/BerriAI/litellm/pull/43626
+- fix(auto-router): count usage savings by selected UTC request day by @tin-berri in https://github.com/BerriAI/litellm/pull/44115
+- fix(lens): preserve framework agent names and GenAI message content by @moe-berri in https://github.com/BerriAI/litellm/pull/44218
+- feat(jwt): auto_register_map_existing_key maps JWT to the user's existing virtual key by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42375
+- feat(ui): select Laya for OSS classification by @tin-berri in https://github.com/BerriAI/litellm/pull/43768
+- fix(otel): tolerate non-dict callback_settings.otel and ignore bare EXCLUDED_SERVICES env by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44086
+- fix(proxy): carry key, team and project tags into pass-through spend logs by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42662
+- feat(ui): add System One (Jev) tab to the playground by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44043
+- chore: bump litellm-proxy-extras 0.4.104 -> 0.4.105 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44234
+- chore(prices): add xAI grok-voice-transcribe-1.0 deprecation date by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/44237
+- fix(exa): fall back to highlights/summary when text is missing by @wakqasahmed in https://github.com/BerriAI/litellm/pull/42213
+- fix(scim): apply path-less group PATCH ops instead of storing them under an empty metadata key by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/43978
+- fix(lens): run investigations with configured wildcard models by @moe-berri in https://github.com/BerriAI/litellm/pull/44233
+- fix(ui): shrink the sidebar logo so it stops outweighing page titles by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44247
+- feat(tracing): support claude agent sdk traces with agent name, logo and chat content by @ishaan-berri in https://github.com/BerriAI/litellm/pull/44248
+- fix(ui): make model leaderboard chart bars wide and readable by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44249
+- test: repair stale and polluting tests red on scheduled main CI by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44229
+- feat(traces): type queries and align read access with log visibility by @yujonglee-berri in https://github.com/BerriAI/litellm/pull/44228
+- chore(ui): untrack tsconfig.tsbuildinfo and gitignore *.tsbuildinfo by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44261
+- refactor(mcp): extract upstream preparation and support modern clients by @joshua-berri in https://github.com/BerriAI/litellm/pull/44232
+- fix(lens): default to traces and reopen span details by @moe-berri in https://github.com/BerriAI/litellm/pull/44260
+- fix(bedrock): surface unrecognized converse-stream event frames instead of an empty turn by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44112
+- perf(proxy): batch daily model usage writes instead of upserting per request by @ishaan-berri in https://github.com/BerriAI/litellm/pull/44243
+- test(integration): opt the config pass-through spend-log case into auth by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44265
+- test: fix three order-dependent and timing-flaky tests by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44271
+- fix(ui): make the Lens traces refresh button always clickable by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44252
+- feat(lens): add sample previews and improve setup and worker feedback by @moe-berri in https://github.com/BerriAI/litellm/pull/44268
+- chore(openrouter): sync prices, limits and deprecation dates from the models API by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/44287
+- refactor(traces): type the ClickHouse query help response by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44285
+- fix(proxy): stop queued registry read-throughs spending the resync budget by @yuneng-berri in https://github.com/BerriAI/litellm/pull/44277
+- feat(lens): show investigation progress as one staged bar with time left by @ishaan-berri in https://github.com/BerriAI/litellm/pull/44301
+- refactor(ui): compose dashboard pages with shared layouts by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44306
+- fix(proxy): share ownership permissions for spend logs and traces by @yujonglee-berri in https://github.com/BerriAI/litellm/pull/44239
+- fix(proxy-extras): retry P3009 when a peer already recovered the named migration row by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44283
+- fix(bedrock): price amazon nova 2 pro preview at the standard tier by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/44302
+- feat: add Bespoke Nimble gateway and OSS classifier support by @tin-berri in https://github.com/BerriAI/litellm/pull/44246
+- fix(anthropic): stop repeating streamed thinking text in the signature chunk by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44127
+- fix(responses): drop bridge-minted reasoning items from OpenAI replays by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44132
+- feat(bedrock): drop lookaround regex patterns from tool schemas for Converse models that reject them by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44138
+- feat(bedrock): serve gpt-5.6+ chat completions natively by default, with chat_completions/ opt-in for gpt-oss and grok by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44307
+- feat(lens): issue briefs with problem, user goal, outcome and test cases by @ishaan-berri in https://github.com/BerriAI/litellm/pull/44311
+- fix(responses): keep gpt-5.4/5.5 tool calls on chat and merge bridged tool calls into one choice by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44295
+- fix(cost): price rule-only model names at the deployment's rate by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44144
+- fix(auto-router): attribute router-day savings without spend logs or a session by @tin-berri in https://github.com/BerriAI/litellm/pull/44226
+- test(integration): let run.py select cells by pytest node id by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44319
+- fix(bedrock): honor unsupported reasoning effort levels for OpenAI GPT models by @Aasif-Multani in https://github.com/BerriAI/litellm/pull/44183
+- feat(lens): add preset watch-for checks to investigation setup by @ishaan-berri in https://github.com/BerriAI/litellm/pull/44313
+- fix(proxy): use OpenAI workload identity federation tokens on /openai_passthrough by @6matt in https://github.com/BerriAI/litellm/pull/44140
+- feat(interactions): durable cross-pod settlement for background interaction billing by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/41955
+- fix(streaming): keep the finish_reason of the provider's last content chunk in the logged response by @joeym82956 in https://github.com/BerriAI/litellm/pull/44318
+- fix(bedrock): send the anthropic-workspace-id header to Bedrock Mantle by @kohjunhao in https://github.com/BerriAI/litellm/pull/44173
+- fix(guardrails): run unified guardrails on /v1/images/edits by @michelligabriele in https://github.com/BerriAI/litellm/pull/44195
+- feat(scaleway): add rerank support by @ankit373 in https://github.com/BerriAI/litellm/pull/44160
+- fix(vector_stores): return managed file ids from vector store file list by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/43800
+- fix(proxy): return 4xx instead of 500 for missing required params, invalid pagination and unknown ids by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/43787
+- fix(guardrails): encrypt guardrail litellm_params secrets at rest by @yucheng-berri in https://github.com/BerriAI/litellm/pull/43627
+- fix(search_tools): encrypt search tool litellm_params at rest by @yucheng-berri in https://github.com/BerriAI/litellm/pull/43631
+- feat(roi): add GitLab sources and branch cost attribution by @moe-berri in https://github.com/BerriAI/litellm/pull/44324
+- fix(model-prices): mark azure us/eu responses-only models as mode responses by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44323
+- revert(cost): revert "fix(cost): price rule-only model names at the deployment's rate" (#44144) by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44335
+- fix(proxy): stamp the client alias on a copy of each streamed chunk so pricing sees the deployment model by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44341
+- revert(responses): revert "fix(responses): keep gpt-5.4/5.5 tool calls on chat and merge bridged tool calls into one choice" (#44295) by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44344
+- refactor(dashboard): migrate to zod 4 and openai 6 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44345
+- feat(ui): move LiteAdmin into the header with a docked side panel by @tin-berri in https://github.com/BerriAI/litellm/pull/44293
+- … truncated upstream notes ([full notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.0))
 ## 1.105.1
 
 - Update upstream from `v1.105.0` to `v1.105.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.105.0...v1.105.1))
