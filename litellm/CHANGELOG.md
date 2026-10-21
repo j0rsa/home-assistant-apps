@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.106.1
+
+- Update upstream from `v1.106.0` to `v1.106.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.0...v1.106.1))
+- Upstream v1.106.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.1))
+- chore(release): v1.106.1 patch by @yuneng-berri in https://github.com/BerriAI/litellm/pull/47517
 ## 1.106.0
 
 - Update upstream from `v1.105.1` to `v1.106.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.105.1...v1.106.0))

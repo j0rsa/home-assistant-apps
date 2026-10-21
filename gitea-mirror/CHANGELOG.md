@@ -1,5 +1,12 @@
 # Changelog
 
+## 3.42.0
+
+- Update upstream from `v3.41.0` to `v3.42.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.41.0...v3.42.0))
+- Upstream v3.42.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.42.0))
+- GitHub sources can now sign in as a GitHub App installation instead of a personal access token (#457, thanks @jwillaz). Pick "GitHub App installation" under Authentication in the Sources card and enter the App ID, installation ID and PEM private key. The private key is encrypted at rest and never returned by the API. App requests count against the installation's own rate limit, not your user account's. The App only sees the repositories it is installed on, so starred repositories and star lists still need a token. Setup and permissions are in [docs/SOURCE_PROVIDERS.md](https://github.com/RayLabsHQ/gitea-mirror/blob/main/docs/SOURCE_PROVIDERS.md).
+- App installation tokens expire after an hour. Gitea Mirror stores a fresh one on each mirror before every sync and turns off Gitea's own pull schedule for App-backed repositories, so keep the Gitea Mirror scheduler on for them. This needs Gitea 1.27 or later as the destination. Gitea 1.26 and earlier, and Forgejo, cannot update a mirror's credentials through the API, so App-backed repositories are refused there with an error. Use a token for those. GitHub and GitLab destinations work with any version.
+- The dashboard's last sync time now includes manual syncs, not only scheduler runs.
 ## 3.41.0
 
 - Update upstream from `v3.40.4` to `v3.41.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.40.4...v3.41.0))
