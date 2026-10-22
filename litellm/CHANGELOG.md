@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.106.2
+
+- Update upstream from `v1.106.1` to `v1.106.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.1...v1.106.2))
+- Upstream v1.106.2 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.2))
+- fix(count_tokens): backport Bedrock Mantle 404 fallback to stable/1.106.x by @mateo-berri in https://github.com/BerriAI/litellm/pull/47742
+- fix(batches)!: backport P0 batch-cost, pricing and translation fixes to stable/1.106.x for v1.106.2 by @mrinal-berri in https://github.com/BerriAI/litellm/pull/47736
+- fix(proxy): backport LIT-145 spend and cost fixes to stable/1.106.x for v1.106.2 by @kerry-berri in https://github.com/BerriAI/litellm/pull/47695
 ## 1.106.1
 
 - Update upstream from `v1.106.0` to `v1.106.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.0...v1.106.1))
