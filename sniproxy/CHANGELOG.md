@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.24.3
+
+- Update upstream from `3.24.2` to `3.24.3`
 ## 3.24.2
 
 - Update upstream from `3.24.1` to `3.24.2`

@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.40.8
+
+- Update upstream from `0.40.6` to `0.40.8` ([compare](https://github.com/ollama/ollama/compare/v0.40.6...v0.40.8))
+- Upstream v0.40.7 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.7))
+- [pplx-decider](https://ollama.com/library/pplx-decider) is a 27B decision model from Perplexity, fine-tuned from
+- Continuing an OpenAI-compatible Responses conversation no longer fails when switching between models with and without
+- Fixed streaming Responses requests where client tool calls (e.g. Codex with web search) could emit before open
+- Requests routed to remote models are now cancelled on ollama.com when the client disconnects, instead of continuing
+- `ollama show` now reports which renderer and parser a model uses and where its chat template comes from; the API
+- More draft models now work with speculative decoding: llama-server infers the draft type automatically instead of
+- `ollama launch claude` now clamps `CLAUDE_CODE_AUTO_COMPACT_WINDOW` to Claude Code's supported range, avoiding a
+- Updated llama.cpp and MLX
+- Upstream v0.40.8 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.8))
 ## 0.40.6
 
 - Update upstream from `0.40.5` to `0.40.6` ([compare](https://github.com/ollama/ollama/compare/v0.40.5...v0.40.6))
