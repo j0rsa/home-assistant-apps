@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.43.0
+
+- Update upstream from `v3.42.0` to `v3.43.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.42.0...v3.43.0))
+- Upstream v3.43.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.43.0))
+- You can now pick which new repositories send a notification (#468, thanks @MajMcCloud). Under Settings, Notifications, "New repositories discovered" has three switches below it: in your account, in an organization, and starred repositories. They only apply while the main switch is on. All three are on by default, and a configuration saved before this release behaves as all three on, so nothing changes until you turn one off.
 ## 3.42.0
 
 - Update upstream from `v3.41.0` to `v3.42.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.41.0...v3.42.0))
