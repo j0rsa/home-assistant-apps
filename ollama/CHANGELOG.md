@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.40.10
+
+- Update upstream from `0.40.8` to `0.40.10` ([compare](https://github.com/ollama/ollama/compare/v0.40.8...v0.40.10))
+- Upstream v0.40.9 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.9))
+- Streaming OpenAI Responses and Anthropic Messages requests now report generation failures instead of ending silently after partial output.
+- `ollama launch` now passes cloud models' context lengths and capabilities to coding tools, fixing incorrect context and compaction settings.
+- Anthropic-compatible web search now uses the model's supported thinking setting in follow-up requests, preventing avoidable failures.
+- Upstream v0.40.10 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.10))
 ## 0.40.8
 
 - Update upstream from `0.40.6` to `0.40.8` ([compare](https://github.com/ollama/ollama/compare/v0.40.6...v0.40.8))

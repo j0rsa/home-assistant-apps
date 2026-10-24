@@ -1,5 +1,27 @@
 # Changelog
 
+## 3.45.0
+
+- Update upstream from `v3.43.0` to `v3.45.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.43.0...v3.45.0))
+- Upstream v3.44.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.44.0))
+- Release filters** (#471, thanks @MajMcCloud). Under the Releases switch in the mirror settings there is now a **Pre-releases** switch: turn it off to skip releases the source marks as pre-release. **Custom tag rules...** opens a dialog with **Include tags** and **Exclude tags** lists. A pattern is a glob over the whole tag (`v1.*`, `*-rc.*`) or a regular expression in slashes (`/^v\d+\.\d+\.\d+$/`), matched case-insensitively, and an excluded tag wins over an included one. Both settings can also be set per organization and per repository in **Mirror options**, where Inherit (or empty lists) means the level above. The filters need a GitHub or Gitea/Forgejo source.
+- The release limit counts the releases that match, so "the newest 10" means the newest 10 matching releases.
+- `RELEASE_TYPE` (`all` or `stable`), `RELEASE_INCLUDE_TAGS` and `RELEASE_EXCLUDE_TAGS` set the global defaults.
+- Security
+- git-lfs in the image is built with Go 1.27.3, golang.org/x/net 0.61.0 and golang.org/x/crypto 0.58.0, which clears the Go standard library and x/net findings Docker Scout reported against it. (#473)
+- npm packages bumped in the app and the docs site: sharp 0.35.5, smol-toml 1.9.1, source-map-js 1.2.2 and http-cache-semantics 4.3.0, plus vite 8.1.6 for the site. http-cache-semantics 4.3.0 is outside the advisory's range but does not change the affected code; it is only used by Astro at build time, so nothing in the running app loads it. (#473)
+- The VEX statement for zlib CVE-2026-85091 (no fix in any Debian release) never matched the published image because its product ID put the registry in the wrong place, so Scout kept reporting it on ghcr.io. The statements now use `pkg:docker/raylabshq/gitea-mirror?repository_url=ghcr.io`. (#473)
+- Filters remove releases that are already mirrored.** When a filter is active, the next sync deletes releases in Gitea that no longer match. The tag rules dialog lists the releases the destination holds and crosses out the ones your draft rules would delete, so check a pattern there before saving. If the filters remove every release a repository had, the activity log shows an "All releases removed" warning, and the Sync errors notification sends the same alert.
+- Nothing changes until you turn a filter on: the default is all releases and no tag rules. No migration.
+- Upstream v3.45.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.45.0))
+- API additions for integrations** (#476, for #472). `GET /api/repositories/{id}` and `GET /api/organizations/{id}` return a single repository or organization, so a script can watch one mirror without fetching the whole list. When a repository or organization is already tracked, the `409` from `POST /api/sync/repository` and `POST /api/sync/organization` now includes the stored record, so its `id` is there to start a mirror.
+- `role` is optional on `POST /api/sync/organization`. A new organization without one is added as `member`, and a forced re-add without one keeps the stored role instead of overwriting it. An unknown role is refused with `400`. (#476)
+- A path or method under `/api` that has no endpoint answers with a JSON `404` that names the method and path, instead of the HTML "Page Not Found" page. (#476)
+- Adding a user account as an organization still answers `404`, and the message now says that user accounts cannot be added as organizations. (#476)
+- The API docs list the organization endpoints with their status codes, the `host` and `path` fields for pasted URLs, and where the ids come from. They also note that every `POST`, `PUT`, `PATCH` and `DELETE` from a script needs `Content-Type: application/json`, even without a body; without it the request is refused with `403`. (#476)
+- Security
+- astro 7.3.5 in the app and the docs site, for GHSA-mpr7-6m5w-76rw (CSS injection in View Transitions, low). @astrojs/node moves to 11.1.6 with it. (#475)
+- The app's own lockfile still had vite 8.0.0 and 8.1.5, inside the October vite advisories that #473 fixed for the docs site only. The app now uses vite 8.1.6 as well. (#475)
 ## 3.43.0
 
 - Update upstream from `v3.42.0` to `v3.43.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.42.0...v3.43.0))
