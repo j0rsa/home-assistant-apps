@@ -1,5 +1,19 @@
 # Changelog
 
+## 20.0.0
+
+- Update upstream from `19.1.0` to `20.0.0` ([compare](https://github.com/hassio-addons/addon-base-python/compare/v19.1.0...v20.0.0))
+- Upstream v20.0.0 ([notes](https://github.com/hassio-addons/app-base-python/releases/tag/v20.0.0))
+- ⬆️ Update alpine_3_24/zlib-dev to v1.3.2-r1 @[renovate[bot]](https://github.com/apps/renovate) ([#386](https://github.com/hassio-addons/app-base-python/pull/386))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v21.0.8 @[renovate[bot]](https://github.com/apps/renovate) ([#387](https://github.com/hassio-addons/app-base-python/pull/387))
+- ⬆️ Update alpine_3_24/expat-dev to v2.9.0-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#389](https://github.com/hassio-addons/app-base-python/pull/389))
+- ⬆️ Update setuptools to v84.2.0 @[renovate[bot]](https://github.com/apps/renovate) ([#390](https://github.com/hassio-addons/app-base-python/pull/390))
+- ⬆️ Update pip to v26.2.2 @[renovate[bot]](https://github.com/apps/renovate) ([#391](https://github.com/hassio-addons/app-base-python/pull/391))
+- ⬆️ Update setuptools to v84.2.1 @[renovate[bot]](https://github.com/apps/renovate) ([#392](https://github.com/hassio-addons/app-base-python/pull/392))
+- ⬆️ Update alpine_3_24/musl-dev to v1.2.6-r3 @[renovate[bot]](https://github.com/apps/renovate) ([#393](https://github.com/hassio-addons/app-base-python/pull/393))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v21.0.9 @[renovate[bot]](https://github.com/apps/renovate) ([#394](https://github.com/hassio-addons/app-base-python/pull/394))
+- ⬆️ Update hassio-addons/workflows action to v5 @[renovate[bot]](https://github.com/apps/renovate) ([#395](https://github.com/hassio-addons/app-base-python/pull/395))
+- ⬆️ Update python/cpython to v3.15.1 @[renovate[bot]](https://github.com/apps/renovate) ([#388](https://github.com/hassio-addons/app-base-python/pull/388))
 ## 0.12.3
 
 - Update upstream from `v0.12.2` to `v0.12.3` ([compare](https://github.com/open-webui/open-webui/compare/v0.12.2...v0.12.3))
