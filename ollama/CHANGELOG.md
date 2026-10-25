@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.40.11
+
+- Update upstream from `0.40.10` to `0.40.11` ([compare](https://github.com/ollama/ollama/compare/v0.40.10...v0.40.11))
+- Upstream v0.40.11 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.11))
+- @SynapShift made their first contribution in https://github.com/ollama/ollama/pull/19173
 ## 0.40.10
 
 - Update upstream from `0.40.8` to `0.40.10` ([compare](https://github.com/ollama/ollama/compare/v0.40.8...v0.40.10))

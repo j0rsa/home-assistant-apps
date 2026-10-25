@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.106.3
+
+- Update upstream from `v1.106.2` to `v1.106.3` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.2...v1.106.3))
+- Upstream v1.106.3 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.3))
+- Deployment:** Verify image signatures with the `cosign.pub` from commit `e82a3c6`, the previous key no longer matches (#48103) Also in [1.103.8](https://github.com/BerriAI/litellm/releases/tag/v1.103.8), [1.104.6](https://github.com/BerriAI/litellm/releases/tag/v1.104.6), [1.105.4](https://github.com/BerriAI/litellm/releases/tag/v1.105.4)
+- Deployment:** Removed the eMudhra root CA from every certificate bundle the SDK, proxy and Docker images trust (#47670, #47969, #48139) Also in [1.103.8](https://github.com/BerriAI/litellm/releases/tag/v1.103.8), [1.104.6](https://github.com/BerriAI/litellm/releases/tag/v1.104.6), [1.105.4](https://github.com/BerriAI/litellm/releases/tag/v1.105.4)
+- Deployment:** Changed the cosign key that signs Docker images and Helm charts to the one from commit `e82a3c6` (#48103) Also in [1.103.8](https://github.com/BerriAI/litellm/releases/tag/v1.103.8), [1.104.6](https://github.com/BerriAI/litellm/releases/tag/v1.104.6), [1.105.4](https://github.com/BerriAI/litellm/releases/tag/v1.105.4)
 ## 1.106.2
 
 - Update upstream from `v1.106.1` to `v1.106.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.1...v1.106.2))
