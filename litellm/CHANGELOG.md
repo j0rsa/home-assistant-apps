@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.106.4
+
+- Update upstream from `v1.106.3` to `v1.106.4` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.3...v1.106.4))
+- Upstream v1.106.4 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.4))
+- Deployment:** Fixed the proxy sometimes exiting on startup with an `ImportError` when it cannot reach the remote model cost map, broken since v1.104.0 (#46711) Also in [1.104.7](https://github.com/BerriAI/litellm/releases/tag/v1.104.7), [1.105.5](https://github.com/BerriAI/litellm/releases/tag/v1.105.5)
+- Deployment:** Fixed image scans flagging brotli 1.2.0, the emSign ECC Root CA - G3 and unused lockfile packages (#48283, #48300)
 ## 1.106.3
 
 - Update upstream from `v1.106.2` to `v1.106.3` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.2...v1.106.3))
