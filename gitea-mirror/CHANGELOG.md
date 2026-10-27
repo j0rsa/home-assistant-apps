@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.46.0
+
+- Update upstream from `v3.45.0` to `v3.46.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.45.0...v3.46.0))
+- Upstream v3.46.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.46.0))
+- MCP endpoint** (#478). Gitea Mirror now serves [MCP](https://modelcontextprotocol.io) at `/api/mcp`, so Claude, Cursor and other MCP clients can check on your mirrors, find failures, add repositories and organizations, and start syncs and retries. It takes an API key in `x-api-key`. Eight tools: `list_repositories`, `get_repository`, `list_failures`, `list_organizations`, `add_repository`, `add_organization`, `sync_repositories` and `retry_repositories`. None of them delete, archive or change settings. Setup is on the [MCP docs page](https://gitea-mirror.raylabs.io/docs/mcp/). For Claude Code:
+- Read only API keys** (#478). **Create key** in the **API Keys** card has an **Access** choice, and read only keys get a badge in the list. A read only key can call every `GET` endpoint; any `POST`, `PUT`, `PATCH` or `DELETE`, and every `/api/auth/*` call except `get-session`, gets `403` with the code `API_KEY_READ_ONLY`. The MCP tools go through the same check, so a read only key can look but not change anything. Existing keys keep full access.
+- The MCP tools call the app's own REST API at the address it listens on (`HOST` and `PORT`, under `BASE_URL`). If that address is not reachable from inside the app, set `MCP_INTERNAL_URL`, for example `http://127.0.0.1:4321`.
+- `gitea-mirror-mcp`, the stdio bridge for Claude Desktop and Cursor in `mcp/`, is not on npm yet, so the `npx -y gitea-mirror-mcp` command in the docs does not work for now. Until it is published, build it from a checkout (`cd mcp && npm ci && npm run build`, needs Bun) and use `node /path/to/gitea-mirror/mcp/dist/index.js` as the command.
 ## 3.45.0
 
 - Update upstream from `v3.43.0` to `v3.45.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.43.0...v3.45.0))
