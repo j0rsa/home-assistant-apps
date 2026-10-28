@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.106.5
+
+- Update upstream from `v1.106.4` to `v1.106.5` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.4...v1.106.5))
+- Upstream v1.106.5 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.5))
+- Logging and observability:** Changed failure logs for rejected requests to keep only core request fields, `tags` and guardrail details (#48599) Also in [1.103.10](https://github.com/BerriAI/litellm/releases/tag/v1.103.10), [1.104.8](https://github.com/BerriAI/litellm/releases/tag/v1.104.8), [1.105.6](https://github.com/BerriAI/litellm/releases/tag/v1.105.6)
+- Logging and observability:** Changed the GCS logger to use the bucket and credentials configured on the proxy (#48599) Also in [1.103.10](https://github.com/BerriAI/litellm/releases/tag/v1.103.10), [1.104.8](https://github.com/BerriAI/litellm/releases/tag/v1.104.8), [1.105.6](https://github.com/BerriAI/litellm/releases/tag/v1.105.6)
 ## 1.106.4
 
 - Update upstream from `v1.106.3` to `v1.106.4` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.3...v1.106.4))

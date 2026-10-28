@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.40.12
+
+- Update upstream from `0.40.11` to `0.40.12` ([compare](https://github.com/ollama/ollama/compare/v0.40.11...v0.40.12))
+- Upstream v0.40.12 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.12))
+- [lfm3](https://ollama.com/library/lfm3): a 1.7B text model with a 256K-token context window
+- [lfm3-vl](https://ollama.com/library/lfm3-vl): adds image understanding
+- [lfm3-audio](https://ollama.com/library/lfm3-audio): speech recognition, translation, and text-to-speech in 18 languages
+- [lfm3-omni](https://ollama.com/library/lfm3-omni): text, images, and audio in one model
+- Faster prompt processing on Apple silicon for Gemma 4, Flint and Laguna models
+- Speculative decoding now supports DFlash2 draft models on MLX
+- Gemma 4 keeps more detail in small images
+- `ollama launch` now works with OpenCode v2
+- Fixed tool-only assistant turns from Kimi CLI
+- Updated MLX and llama.cpp
 ## 0.40.11
 
 - Update upstream from `0.40.10` to `0.40.11` ([compare](https://github.com/ollama/ollama/compare/v0.40.10...v0.40.11))
