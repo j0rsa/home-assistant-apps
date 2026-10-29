@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.106.6
+
+- Update upstream from `v1.106.5` to `v1.106.6` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.5...v1.106.6))
+- Upstream v1.106.6 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.6))
+- fix(proxy): backport #46712 gzip scoping and off-loop compression to stable/1.106.x for v1.106.6 by @kerry-berri in https://github.com/BerriAI/litellm/pull/48680
 ## 1.106.5
 
 - Update upstream from `v1.106.4` to `v1.106.5` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.4...v1.106.5))
