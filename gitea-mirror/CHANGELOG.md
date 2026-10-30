@@ -1,5 +1,32 @@
 # Changelog
 
+## 3.49.0
+
+- Update upstream from `v3.46.0` to `v3.49.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.46.0...v3.49.0))
+- Upstream v3.47.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.47.0))
+- Storage page** (#480, #479). A new **Storage** page in the sidebar shows how much space your mirrors take on the destination: the total, Git + LFS, release assets and how many mirrors are measured, bars by destination owner and for the largest repositories, and a table you can sort, search and filter by owner. A repository whose release assets are most of its size gets a hint that a lower release limit removes the oldest releases on the next sync. The same numbers are available from `GET /api/storage`. Thanks to @MajMcCloud for the idea and the first design.
+- Sizes are recorded during syncs, from responses the sync already fetches (the destination repository lookup and the destination release listing), so this adds no requests to GitHub or to your destination.
+- The page starts empty after the upgrade and fills in as each repository syncs. The Git + LFS size is read before the sync pulls, so it trails by one sync. Release asset sizes are recorded for repositories that mirror releases.
+- Only Gitea and Forgejo destinations are measured. Mirrors pushed to GitHub or GitLab do not appear on the page.
+- The database gets four new columns on the `repositories` table at startup (migration 0021).
+- Upstream v3.48.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.48.0))
+- Refresh sizes** on the Storage page (#483). The Storage page no longer has to wait for every mirror to sync before it fills in. **Refresh sizes** measures every mirror now, with its progress on the button. It only reads your destination: one repository listing per owner, the single repository lookup for a mirror the listing does not have, and the release listing of repositories that mirror releases. Nothing is requested from GitHub. The same refresh is available as `POST /api/storage/refresh`.
+- Pages keep their data** (#484). Dashboard, Repositories, Organizations, Storage and Activity Log keep what they last showed in this browser tab. Going back to one shows its data at once and refreshes it in the background, instead of starting from a skeleton and loading the whole list again. Nothing is written to browser storage; a reload or a new tab starts fresh.
+- Large libraries stay light** (#484). The Repositories page built a card for every repository even on desktop, where the cards are hidden, and the Storage table rendered every row. Only the layout on screen renders now, and both lists only draw the rows near the viewport. With 3,000 repositories the Repositories page went from about 124,000 elements to under 1,000.
+- Smoother table scrolling** (#484). Scrolling the desktop Repositories table re-rendered the filters and every visible row on each step. Only the rows coming into view render now. With the CPU slowed 4x, a scroll frame went from about 31 ms to about 13 ms.
+- Destination release listings stopped after 30 releases (#483). Gitea and Forgejo ignore `per_page` and return 30 releases a page, and the listing treated that short page as the end. Because of that:
+- the release limit only trimmed within the newest 30 releases on each sync
+- the Storage page counted at most 30 releases per repository
+- the release filter preview listed only the newest 30 tags.
+- The sync button on an archived repository says **Sync** like the other rows, instead of **Manual Sync**, which pushed the status badge out of line (#482). Hovering it explains that automatic syncs are off for archived mirrors.
+- Security
+- zod 4.6.7 (#481, GHSA-mrhx-c7xc-m3w5). Older zod validated every element of an array longer than its `.max()`, so an oversized list could run the process out of memory. In this app that list is the MCP tools' `repositoryIds`, which needs an API key.
+- The next sync can delete older releases.** Retention and the release filters used to see only the newest 30 releases in the destination. They now see all of them, so a repository with more releases than its release limit, or with older releases your filters exclude, has those removed on its next sync. A release limit of 30 or more never trimmed anything before.
+- Upstream v3.49.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.49.0))
+- Remove old release assets** (#489, closes #485, thanks @MajMcCloud). **Assets for latest** only decides what a sync uploads, so files already on Gitea stayed when you set or lowered it. A new switch under the release settings, **Remove old release assets**, deletes the attachments of every mirrored release past that count on each sync. The releases, their notes and their tags stay. It is off by default and can also be set with `PRUNE_OLD_RELEASE_ASSETS=true`. A release whose attachments cannot be listed is left alone until the next sync, and releases that already have no attachments cost no extra requests.
+- The Activity Log failed to load once a sync had written a release filter warning (#488, thanks @MajMcCloud). Since v3.44.0, when the release filters remove every release a repository had, the sync records an "All releases removed" warning. The activity feed did not accept that status and answered with an error instead of the list.
+- The owner and organization filters on the Repositories page and the name filter on the Activity Log sort names alphabetically regardless of case (#487, thanks @MajMcCloud, and #490).
+- Remove old release assets deletes files from your destination.** On the first sync after you turn it on, every mirrored release past **Assets for latest** loses its attachments. The switch is global, but the count comes from each repository's own asset limit, including organization and repository overrides.
 ## 3.46.0
 
 - Update upstream from `v3.45.0` to `v3.46.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.45.0...v3.46.0))
