@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.50.0
+
+- Update upstream from `v3.49.0` to `v3.50.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.49.0...v3.50.0))
+- Upstream v3.50.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.50.0))
+- Issue filters** (#491, thanks @cypherbits). Under **Mirror Content > Repository metadata**, Issues now has three options of its own, and each can be overridden per organization and repository in **Mirror options**:
+- State**: all issues, open only or closed only. The filter decides which issues get created. An issue that is already mirrored keeps following GitHub, so closing it there still closes the copy.
+- Copy comments**: off skips comments, and with them the comment listing for each issue.
+- Copy images and attachments**: off removes images, videos and files attached on GitHub from issue bodies and new comments, and leaves `[media omitted]` in their place.
+- Destination filter on Repositories** (#492, thanks @cypherbits). The new **All destinations** filter lists repositories by the owner or organization they mirror into, worked out the way the mirror does it: the starred organization, the repository's own destination, its organization's destination, then the mirror strategy.
+- The Organization column on the Repositories page shows the same destination the mirror uses (#492). It used to show the Gitea user for personal repositories under the mixed strategy, though those mirror into the organization.
+- Changing the issue state filter runs a full issue pass on the next sync, so issues the old filter left out are picked up.
+- With images and attachments off, mirrored issue bodies lose their media the next time they sync. Comments that are already mirrored keep theirs.
 ## 3.49.0
 
 - Update upstream from `v3.46.0` to `v3.49.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.46.0...v3.49.0))
