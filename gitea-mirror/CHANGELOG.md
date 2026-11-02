@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.51.0
+
+- Update upstream from `v3.50.0` to `v3.51.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.50.0...v3.51.0))
+- Upstream v3.51.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.0))
+- Stalled sync warning** (#494, follow-up to #493). Gitea and Forgejo accept a mirror sync request with a 200 and queue it, so a stuck mirror queue used to look like a working sync while commits and releases stopped arriving. gitea-mirror now checks on each sync whether Gitea ran the previous request, using the repository's last mirror run time it already reads, so it adds no API calls. A request Gitea has not run after an hour gets a warning in the Activity Log that points at **Site Administration > Monitoring > Queues > mirror** in Gitea, and a notification through the **Sync errors** switch, at most one every six hours.
+- The Dashboard's Repositories and Recent Activity lists run down to the bottom of the screen instead of stopping at eight rows, so a large screen shows more and a small one fewer (#495). They follow the window as it is resized.
+- Organization cards no longer cut off their Gitea and GitHub buttons on large screens (#495). Cards are a little wider now, and a longer label such as Forgejo moves the buttons onto a second line.
+- The stalled sync check only covers syncs gitea-mirror requests, on its schedule or from **Sync**. A mirror left only to Gitea's own interval is not checked.
 ## 3.50.0
 
 - Update upstream from `v3.49.0` to `v3.50.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.49.0...v3.50.0))
