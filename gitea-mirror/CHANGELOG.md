@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.51.1
+
+- Update upstream from `v3.51.0` to `v3.51.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.0...v3.51.1))
+- Upstream v3.51.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.1))
+- Mirrors left without releases after a gateway timeout** (#498, fixes #496). A reverse proxy in front of Gitea can time out on the import while Gitea carries on. The retry then found the repository in place, marked it mirrored and stopped, so it stayed green with no releases, issues or other metadata, and with scheduling off nothing ever came back for them. Finding an existing mirror now runs a full sync, after waiting up to 30 minutes for an import Gitea is still running.
+- Release assets of private GitHub repositories** (#497, thanks @zfb132). Every asset failed with `404 Not Found`, because the browser download URL does not accept API tokens on a private repository. They now download through GitHub's REST asset URL. Each of those downloads spends one API request and stops when the rate limit gate closes. Public repositories keep the browser URL, which spends none.
+- Repositories already left without releases this way catch up on their next sync. With scheduling off, press **Sync** on them.
+- Pressing **Mirror** on a repository that is already in Gitea now runs a full sync, and its status ends as synced rather than mirrored.
 ## 3.51.0
 
 - Update upstream from `v3.50.0` to `v3.51.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.50.0...v3.51.0))

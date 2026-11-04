@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.40.14
+
+- Update upstream from `0.40.13` to `0.40.14` ([compare](https://github.com/ollama/ollama/compare/v0.40.13...v0.40.14))
+- Upstream v0.40.14 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.14))
+- `ollama launch claude` now applies the model's output token limit for Claude Code, so cloud models no longer run into the 128k default cap
+- Cloud web search responses on `/api/chat` are now decoded correctly, including compressed responses
+- OpenAI-compatible endpoints no longer override a model's packaged sampler defaults — clients that send no `temperature`/`top_p` get the model's own values instead of 1.0, matching `/api/chat`
+- `/v1/responses` now preserves readable input content, including prior assistant refusals, instead of flattening it
+- Ollama's app can now retry ChatGPT disconnect failures instead of leaving the connection in a broken state
+- `ollama launch codex` verifies ChatGPT routing before configuring, and reports a clear error when routing is unavailable
+- Faster top-k sampling on MLX for large vocabularies
 ## 0.40.13
 
 - Update upstream from `0.40.12` to `0.40.13` ([compare](https://github.com/ollama/ollama/compare/v0.40.12...v0.40.13))
