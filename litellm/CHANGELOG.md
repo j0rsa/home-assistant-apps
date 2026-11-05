@@ -1,5 +1,89 @@
 # Changelog
 
+## 1.108.0
+
+- Update upstream from `v1.106.6` to `v1.108.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.6...v1.108.0))
+- Upstream v1.106.7 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.106.7))
+- Lens:** If your Helm values set `lensWorker.enabled`, remove it before upgrading so the chart renders (#49173)
+- Embeddings, images and audio:** Added `/v1/videos` support for custom providers registered in `custom_provider_map` (#49802)
+- Lens:** Moved the Lens beta out of the proxy package and Helm charts (#49173)
+- Upstream v1.108.0 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.108.0))
+- fix(a2a): normalize agent card protocolBinding casing before transport match by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/37917
+- fix(interactions): track cost and spend for Google Interactions API requests by @mateo-berri in https://github.com/BerriAI/litellm/pull/33310
+- fix(bedrock): stop emitting an empty assistant delta after the finish_reason chunk by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/36806
+- fix(anthropic): reconcile enum with declared type in output_format schema by @dkindlund in https://github.com/BerriAI/litellm/pull/37882
+- feat(azure_ai): support entra id / oauth auth on every azure ai foundry route by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/35415
+- fix(ui): boot the UI image as an arbitrary uid by anchoring nginx writes under /tmp by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/37982
+- fix(proxy): parse form-encoded video edit/extension bodies after auth by @Souravrajvi0 in https://github.com/BerriAI/litellm/pull/36513
+- fix(anthropic): keep legacy thinking budget_tokens on Claude 4.6 models on /v1/messages by @mateo-berri in https://github.com/BerriAI/litellm/pull/38108
+- fix(utils): make prompt_token_calculator count claude models again by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/38130
+- fix(proxy): keep every value of a repeated form key, and gate the tests that hid it by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/37908
+- fix(health): apply model_info.health_check_params to health check probes by @mateo-berri in https://github.com/BerriAI/litellm/pull/38101
+- fix(runwayml): route every generation endpoint and fix video cost tracking by @mateo-berri in https://github.com/BerriAI/litellm/pull/38115
+- fix(passthrough): attribute spend and release budget reservation on router-model /vllm and /azure routes by @mateo-berri in https://github.com/BerriAI/litellm/pull/38111
+- fix: match OpenAI SDK wire format on image/video routes by @mateo-berri in https://github.com/BerriAI/litellm/pull/38104
+- fix(ci): give three unit shards a job deadline that outlasts their pytest budget by @tin-berri in https://github.com/BerriAI/litellm/pull/38139
+- feat(ui): add Gemini Family auto-router preset by @tin-berri in https://github.com/BerriAI/litellm/pull/38138
+- fix(logging_worker): carry queued tasks across event-loop change instead of dropping them by @mateo-berri in https://github.com/BerriAI/litellm/pull/38144
+- feat(proxy): enforce vector-store upload security controls on /v1/rag/ingest by @mateo-berri in https://github.com/BerriAI/litellm/pull/38135
+- test(e2e): pin require_managed_files enforcement behind a marker-gated stack phase by @mateo-berri in https://github.com/BerriAI/litellm/pull/38117
+- refactor(ui): move the dashboard onto class-variance-authority by @yuneng-berri in https://github.com/BerriAI/litellm/pull/38125
+- refactor(utils)!: delete prompt_token_calculator by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/38132
+- fix(auto-router): list configured auto-routers in the usage picker before they have traffic by @tin-berri in https://github.com/BerriAI/litellm/pull/38129
+- refactor(ui): install the shadcn field primitive by @yuneng-berri in https://github.com/BerriAI/litellm/pull/38126
+- fix(complexity_router): keep both ends of a clipped classifier context turn by @tin-berri in https://github.com/BerriAI/litellm/pull/38141
+- fix(ci): ignore-list recursive form-field flatteners in recursive_detector by @mateo-berri in https://github.com/BerriAI/litellm/pull/38149
+- fix(passthrough): stop leaking the caller's virtual key on credential-less Vertex passthrough by @mateo-berri in https://github.com/BerriAI/litellm/pull/38114
+- fix(router): stop copying forwarded credentials into retry breadcrumbs by @mateo-berri in https://github.com/BerriAI/litellm/pull/38133
+- feat(e2e): record and replay streamed provider responses chunk-for-chunk by @mateo-berri in https://github.com/BerriAI/litellm/pull/38136
+- fix: tolerate stream chunks without a choices key in stream_chunk_builder by @AkshaySasi in https://github.com/BerriAI/litellm/pull/34382
+- fix(files): decode x-litellm-model encoded file_id in chat + responses by @hclsys in https://github.com/BerriAI/litellm/pull/29832
+- fix(videos): forward uploaded source file on /v1/videos/edits to the provider by @mateo-berri in https://github.com/BerriAI/litellm/pull/38155
+- fix(s3_v2): percent-encode object keys once so signed and sent URLs match by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/38005
+- feat(ui): add error-code drilldown for failed requests on caching page by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/38156
+- feat(search): add Grounding with Bing Search (bing_grounding) as a search provider by @mateo-berri in https://github.com/BerriAI/litellm/pull/38119
+- ci: ban row-rewriting DML from prisma migrations by @yucheng-berri in https://github.com/BerriAI/litellm/pull/37899
+- fix(langsmith): keep root-run ids self-consistent so batch ingest stops rejecting header-tagged requests by @yucheng-berri in https://github.com/BerriAI/litellm/pull/38116
+- ci(e2e): record the e2e suite weekly and replay it on weekdays with zero egress by @mateo-berri in https://github.com/BerriAI/litellm/pull/38163
+- chore(codeowners): unown ui container plumbing and generated files by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/38124
+- fix(logging): skip parsing redacted tool call arguments by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/38169
+- feat(complexity_router): bound the classifier context block, not each turn in it by @tin-berri in https://github.com/BerriAI/litellm/pull/38145
+- fix(http_handler): dispose aiohttp session when AsyncHTTPHandler is finalized without a running loop by @anmolg1997 in https://github.com/BerriAI/litellm/pull/36670
+- fix(proxy): reset a stuck team member's budget by @yassin-berriai in https://github.com/BerriAI/litellm/pull/37971
+- fix(anthropic/bedrock): request summarized adaptive thinking for reasoning_effort and use provider thinking token counts by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/37979
+- fix(completion_extras): forward reasoning_effort=max through the Responses API bridge by @mateo-berri in https://github.com/BerriAI/litellm/pull/38222
+- feat(vertex_ai): add native Vertex AI Interactions API support by @mateo-berri in https://github.com/BerriAI/litellm/pull/38229
+- test(mcp): drain the logging worker after each test so queued callbacks cannot leak into the next test by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/38228
+- fix(ui): forward OAuth issuer/authorization/token/registration URLs from the MCP server edit form by @yassin-berriai in https://github.com/BerriAI/litellm/pull/38154
+- fix(together_ai): default endpoints to api.together.ai instead of api.together.xyz by @mateo-berri in https://github.com/BerriAI/litellm/pull/38233
+- fix(bedrock_mantle): register a Bedrock runtime passthrough config so /bedrock/model//invoke works by @mateo-berri in https://github.com/BerriAI/litellm/pull/38231
+- fix(router): resolve provider from api_base in deployment validation and acompletion by @mateo-berri in https://github.com/BerriAI/litellm/pull/38235
+- fix(model_prices): raise bedrock_mantle gpt-5.6 max_input_tokens to Mantle's enforced 1050000 by @mateo-berri in https://github.com/BerriAI/litellm/pull/38225
+- fix(bedrock_mantle): normalize Codex input item types Mantle rejects by @mateo-berri in https://github.com/BerriAI/litellm/pull/38227
+- fix(proxy): store the actual selected model in spend logs for Azure Model Router by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/37770
+- feat(router): per-group supported reasoning efforts with the max level by @tin-berri in https://github.com/BerriAI/litellm/pull/37897
+- fix(proxy): stop expected 4xx responses from saturating worker CPU on failure logging by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/38102
+- fix(caching): use upstream RedisCluster on redis-py with per-connection recovery by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/38171
+- perf(auth): drop guaranteed-miss internal-cache Redis read from team object lookup by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/38073
+- fix(together_ai): route chat completions through a dedicated TogetherAIChatConfig by @mateo-berri in https://github.com/BerriAI/litellm/pull/38248
+- fix(ui): read reasoning tokens from Responses API output_tokens_details by @yassin-berriai in https://github.com/BerriAI/litellm/pull/37952
+- fix(dashboard): don't show a stale provider prompt-cache chip on a response-cache hit by @yassin-berriai in https://github.com/BerriAI/litellm/pull/37951
+- fix(ui): render tag-based guardrail mode instead of crashing the guardrails page by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/37493
+- fix(scim): return user_id as Group members[].value on transformed group responses by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/38161
+- fix(scim): preserve existing team memberships when POST /Users adoption carries no groups by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/38166
+- fix(router): support mid-stream fallback for anthropic_messages route type by @yassin-berriai in https://github.com/BerriAI/litellm/pull/38153
+- fix(auth): support wildcard prefixes in jwt team_allowed_routes by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/37756
+- feat(models): add missing Together AI serverless models to the cost map by @mateo-berri in https://github.com/BerriAI/litellm/pull/38230
+- fix(cerebras)!: add max_retries and extra_headers to get_supported_openai_params by @deepanshululla in https://github.com/BerriAI/litellm/pull/36601
+- fix(anthropic): translate tool_result document blocks in the /v1/messages bridge by @mateo-berri in https://github.com/BerriAI/litellm/pull/38251
+- fix(team): serialize member_add, member_delete, and delete under the team's advisory lock by @yassin-berriai in https://github.com/BerriAI/litellm/pull/37969
+- docs(pr-template): split Caveats bullets into severity tiers and call for plain engineering language by @mateo-berri in https://github.com/BerriAI/litellm/pull/38252
+- fix(anthropic): carry tool_result document blocks through the /v1/messages responses bridge by @mateo-berri in https://github.com/BerriAI/litellm/pull/38261
+- fix(together_ai): pass tools through for models missing from the registry by @mateo-berri in https://github.com/BerriAI/litellm/pull/38265
+- fix(anthropic): carry user-content document blocks through the /v1/messages responses bridge by @mateo-berri in https://github.com/BerriAI/litellm/pull/38267
+- fix(rerank): emit latency and cost headers on /rerank by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/35419
+- perf(streaming): add shared JSONFragmentAccumulator for Vertex and Anthropic by @deepanshululla in https://github.com/BerriAI/litellm/pull/36610
+- … truncated upstream notes ([full notes](https://github.com/BerriAI/litellm/releases/tag/v1.108.0))
 ## 1.106.6
 
 - Update upstream from `v1.106.5` to `v1.106.6` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.5...v1.106.6))
