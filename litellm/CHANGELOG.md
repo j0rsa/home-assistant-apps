@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.108.1
+
+- Update upstream from `v1.108.0` to `v1.108.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.108.0...v1.108.1))
+- Upstream v1.108.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.108.1))
+- ci: run the OSV scan and unit tests on stable, rc and lts branches (#50086) [backport lts/1.108.x] by @yuneng-berri in https://github.com/BerriAI/litellm/pull/50088
+- test: fix stale unit tests on 1.108 LTS by @yuneng-berri in https://github.com/BerriAI/litellm/pull/50091
+- fix(backport): backport 21 main fixes plus 2 prerequisites to lts/1.108.x for v1.108.1 by @kerry-berri in https://github.com/BerriAI/litellm/pull/50136
+- fix(passthrough): skip team deployments when picking proxy-wide pass-through credentials on lts/1.108.x by @kerry-berri in https://github.com/BerriAI/litellm/pull/50217
 ## 1.108.0
 
 - Update upstream from `v1.106.6` to `v1.108.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.106.6...v1.108.0))

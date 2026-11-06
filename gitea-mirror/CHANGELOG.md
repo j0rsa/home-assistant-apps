@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.51.2
+
+- Update upstream from `v3.51.1` to `v3.51.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.1...v3.51.2))
+- Upstream v3.51.2 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.2))
+- Security
+- Forgejo release assets linked by URL.** Forgejo lets a repository's owner attach a release asset as a link to any address. Mirroring that repository with release mirroring on sent your source token to that address and stored the response as a release asset on your mirror. The owner needed no account on your instance. These assets now download without the token and only from public addresses, checked on every redirect. This affects v3.38.0 and later.
+- GitLab and GitHub destinations.** The address is now checked on every request and every redirect, not only when the destination is saved, so a name that later resolves to the cloud metadata address, or a redirect to it, is refused. A destination token no longer follows a redirect to another host.
+- Outbound guard.** It now connects to the address its check saw. It used to look the name up twice and could send the request unpinned if the second answer was a blocked address.
+- If you mirror releases from a Forgejo source such as Codeberg with a token, and mirror repositories you do not fully trust, rotate that token.
+- An external asset on a private or local address is now skipped with a warning in the logs, for example a self hosted Forgejo linking to a file on its LAN.
 ## 3.51.1
 
 - Update upstream from `v3.51.0` to `v3.51.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.0...v3.51.1))
