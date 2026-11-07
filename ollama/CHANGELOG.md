@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.40.15
+
+- Update upstream from `0.40.14` to `0.40.15` ([compare](https://github.com/ollama/ollama/compare/v0.40.14...v0.40.15))
+- Upstream v0.40.15 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.15))
+- ollama launch now supports Kimi Code CLI — the successor to kimi-cli — and offers to migrate existing kimi-cli setups
+- ollama launch now fills in Pi's model list automatically so models can be picked inside Pi, and Claude Desktop's model
+- Recurrent and vision GGUF models can now serve more than one request at a time
+- Qwen3 and Qwen3.5 models using long-context (YaRN) scaling
+- Running ollama with no arguments opens the welcome launcher
 ## 0.40.14
 
 - Update upstream from `0.40.13` to `0.40.14` ([compare](https://github.com/ollama/ollama/compare/v0.40.13...v0.40.14))

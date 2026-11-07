@@ -1,5 +1,21 @@
 # Changelog
 
+## 1.108.2
+
+- Update upstream from `v1.108.1` to `v1.108.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.108.1...v1.108.2))
+- 1.108.2 (LTS) ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.108.2))
+- OpenAI:** Fixed `openai/` deployments with an empty `api_key` sending `OPENAI_ADMIN_KEY` as the bearer token (#50218)
+- AWS Bedrock:** Fixed Converse `service_tier` so unsupported tiers answer 400 and `reserved`, `auto` and `standard_only` are honored (#50360)
+- AWS Bedrock:** Fixed Invoke dropping the `per-turn-control-2026-07-01` beta on Claude 4.5 and newer (#50362)
+- Vertex AI and Gemini:** Fixed chirp text-to-speech ignoring `vertex_location`, so US and EU deployments call their multi-region host (#50392)
+- Chat completions:** Fixed `response_format: json_object` on `openai/responses/*` and `azure/responses/*` answering 400 about the word json (#50267)
+- Chat completions:** Fixed base64 PDFs sent to Claude as `image_url` answering 400, and Bedrock JSON schema calls dropping thinking (#50280)
+- Responses API:** Fixed `/v1/responses/compact` returning 500 when a `during_call` guardrail is on by default (#50274)
+- Embeddings, images and audio:** Fixed audio transcription errors echoing the full provider reply, transcript included, to clients and logs (#50325)
+- MCP:** Changed hosted MCP tools that a translated route cannot run to return a clear 400, or be dropped with `drop_params` (#50348)
+- Routing and fallbacks:** Fixed groups that accept unmatched tags rejecting requests after affinity or cooldown filtering (#48470)
+- Routing and fallbacks:** Fixed prompt caching routing not pinning follow-ups to one deployment when `turn_off_message_logging` is on (#50276)
+- Cost tracking and pricing:** Fixed spend rows being dropped and valid keys getting 401 while Postgres restarts or shuts down (#50132)
 ## 1.108.1
 
 - Update upstream from `v1.108.0` to `v1.108.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.108.0...v1.108.1))

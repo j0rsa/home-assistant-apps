@@ -1,5 +1,13 @@
 # Changelog
 
+## 3.51.3
+
+- Update upstream from `v3.51.2` to `v3.51.3` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.2...v3.51.3))
+- Upstream v3.51.3 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.3))
+- Security
+- Forgejo release assets linked by URL** (#501). The owner of a mirrored Forgejo repository could run the mirror out of memory with an asset linked to their own server. The download read whatever that server sent with no limit, and a redirect with an endless body kept streaming after the outbound guard had refused it, because Bun keeps reading a response whose body was cancelled. Linked assets are now capped at 512 MB and 15 minutes and skipped with a warning past either, and every response a download does not use is aborted, which is what closes its connection. This affects v3.38.0 and later.
+- Release asset downloads that hang** (#501). Downloads had no timeout, so a connection that stopped sending held the sync for good. Every asset download now gives up after two minutes without data. The asset fails and the next sync tries again.
+- A linked asset larger than 512 MB, or one that takes longer than 15 minutes, is now skipped with a warning in the logs. Assets stored on the source itself have no size cap.
 ## 3.51.2
 
 - Update upstream from `v3.51.1` to `v3.51.2` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.1...v3.51.2))
