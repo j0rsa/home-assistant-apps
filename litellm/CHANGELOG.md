@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.108.3
+
+- Update upstream from `v1.108.2` to `v1.108.3` ([compare](https://github.com/BerriAI/litellm/compare/v1.108.2...v1.108.3))
+- 1.108.3 (LTS) ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.108.3))
+- AWS Bedrock:** Fixed every request failing on a Bedrock deployment with `api_base: ""`, which answered 500 or 400 (#50449)
+- MCP:** Fixed tool results over 1 MiB failing with `SSE stream ended without a response`, broken since v1.103.0 (#47034)
+- Guardrails:** Fixed model-level `post_call` guardrails checking each response twice and calling the moderation provider twice (#50463)
 ## 1.108.2
 
 - Update upstream from `v1.108.1` to `v1.108.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.108.1...v1.108.2))
