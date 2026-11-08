@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.51.5
+
+- Update upstream from `v3.51.3` to `v3.51.5` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.3...v3.51.5))
+- Upstream v3.51.4 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.4))
+- Backup environment variables were ignored** (#504, fixes #503, thanks @tiennm99 for the report). `PRE_SYNC_BACKUP_STRATEGY`, `PRE_SYNC_BACKUP_ENABLED`, `PRE_SYNC_BACKUP_KEEP_COUNT` and `PRE_SYNC_BACKUP_RETENTION_DAYS` had no effect, because a new configuration stored the built-in backup settings and a stored setting wins over the environment. They now set the starting values, and so does `PRE_SYNC_BACKUP_DIR`, which a first sign in also overrode.
+- Backups turned back on by a restart.** With environment configuration, a configuration from before backup strategies existed that had backups off was stored as Smart on restart. It now stays disabled.
+- Existing configurations keep their backup settings. The variables only apply when a configuration is created, so change existing settings on the Configuration page.
+- If you had backups off from before backup strategies and run with environment configuration, check the backup mode on the Configuration page, since an earlier restart may have stored Smart.
+- Upstream v3.51.5 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.5))
+- A Postgres `DATABASE_URL` started the app over with an empty database** (#505, refs #502 and #358). gitea-mirror only supports SQLite. Until v3.25.0 it did not read `DATABASE_URL` at all, so a setup with a `postgresql://` URL there kept its data in `data/gitea-mirror.db`. From v3.25.0 the URL was read as a file path, which opened a new, empty database outside the data volume, and the push engine put its clones next to it. Any scheme other than `sqlite://` and `file:` is now ignored with a warning, and the app uses `data/gitea-mirror.db` again.
+- If your setup looked wiped after an upgrade and you have a `postgresql://` or other non-SQLite `DATABASE_URL`, this release opens your earlier data again. Remove the variable, or set it to `file:data/gitea-mirror.db`, to drop the warning.
+- Anything you set up again after hitting this lived in that other file, outside the data volume, and is not carried over.
 ## 3.51.3
 
 - Update upstream from `v3.51.2` to `v3.51.3` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.2...v3.51.3))
