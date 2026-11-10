@@ -1,5 +1,14 @@
 # Changelog
 
+## 20.0.1
+
+- Update upstream from `20.0.0` to `20.0.1` ([compare](https://github.com/hassio-addons/addon-base-python/compare/v20.0.0...v20.0.1))
+- Upstream v20.0.1 ([notes](https://github.com/hassio-addons/app-base-python/releases/tag/v20.0.1))
+- ⬆️ Update ghcr.io/hassio-addons/base Docker tag to v21.0.10 @[renovate[bot]](https://github.com/apps/renovate) ([#397](https://github.com/hassio-addons/app-base-python/pull/397))
+- ⬆️ Update alpine_3_24/expat-dev to v2.10.0-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#398](https://github.com/hassio-addons/app-base-python/pull/398))
+- ⬆️ Update pip to v26.3 @[renovate[bot]](https://github.com/apps/renovate) ([#399](https://github.com/hassio-addons/app-base-python/pull/399))
+- ⬆️ Update python/cpython to v3.15.2 @[renovate[bot]](https://github.com/apps/renovate) ([#396](https://github.com/hassio-addons/app-base-python/pull/396))
+- ⬆️ Update alpine_3_24/zlib-dev to v1.4-r0 @[renovate[bot]](https://github.com/apps/renovate) ([#400](https://github.com/hassio-addons/app-base-python/pull/400))
 ## 0.13.3
 
 - Update upstream from `v0.13.0` to `v0.13.3` ([compare](https://github.com/open-webui/open-webui/compare/v0.13.0...v0.13.3))
