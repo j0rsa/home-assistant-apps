@@ -1,5 +1,89 @@
 # Changelog
 
+## 1.109.0
+
+- Update upstream from `v1.108.4` to `v1.109.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.108.4...v1.109.0))
+- 1.108.5 (LTS) ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.108.5))
+- OpenAI:** Fixed keyless workload identity deployments answering 401 on image edits, audio, files, batches and other routes (#50962)
+- Other providers:** Fixed `ollama_chat/` streams giving every parallel tool call index 0, so clients ran only the first call (#50718)
+- Messages API:** Fixed `/v1/messages` answering 400 for a param listed in the deployment's `additional_drop_params` (#50755)
+- Cost tracking and pricing:** Fixed incorrect transcription cost for some FLAC files, which could push a key over its budget (#50860)
+- Upstream v1.109.0 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.109.0))
+- fix(prompt-templates): treat initial_prompt_value and final_prompt_value as optional by @mdevhurt1 in https://github.com/BerriAI/litellm/pull/39762
+- fix(proxy)!: count prompt-only token_counter requests with the provider when call_endpoint is set by @mateo-berri in https://github.com/BerriAI/litellm/pull/46839
+- fix(interactions): keep background interaction bills through crashes, late restarts, and deployment keys by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/45743
+- fix(proxy)!: honor caller litellm_session_id in spend log session_id by @deepanshupal in https://github.com/BerriAI/litellm/pull/44199
+- feat(router): mid-stream fallback continuation for chat completions by @ayushh0110 in https://github.com/BerriAI/litellm/pull/41127
+- feat(volcengine): add Doubao-Seedance video generation via the OpenAI /v1/videos surface by @Bytechoreographer in https://github.com/BerriAI/litellm/pull/46156
+- fix(realtime)!: keep turn_detection.type when a transcript guardrail disables auto-response by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44939
+- fix(budget): hold Redis-less budget spend per key instead of queueing it per request by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/46831
+- fix(proxy)!: delete callbacks configured under callbacks or failure_callback by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/42740
+- feat(ui): turn the Chat UI on by default by @krrish-berri-2 in https://github.com/BerriAI/litellm/pull/46918
+- fix(bedrock)!: keep reasoning, thinking blocks and the json_mode finish_reason on fake streams by @mateo-berri in https://github.com/BerriAI/litellm/pull/46863
+- test(cost): add tier 1 cost tracking cases for gpt-5.6-terra, gemini-4-argon and gemini-3.1-pro-preview by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/46931
+- fix(responses): log and bill every round of non-stream MCP auto-execute by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/43667
+- fix(count_tokens): apply context_management edits in the Gemini /v1/messages/count_tokens count by @mateo-berri in https://github.com/BerriAI/litellm/pull/46843
+- test(cost): bill vertex gemini-3.8-flash reasoning tokens at the reasoning price by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/46939
+- fix(proxy): streaming responses hand the event loop back every 50 ms instead of holding it for the whole buffered stream by @klu-berri in https://github.com/BerriAI/litellm/pull/46925
+- test(perf): cap every awaited Postgres statement at 0.5 calls per request by @klu-berri in https://github.com/BerriAI/litellm/pull/46944
+- feat(mcp): accept an ID-JAG as an RFC 7523 jwt-bearer grant on the gateway token endpoint by @yassin-berriai in https://github.com/BerriAI/litellm/pull/46748
+- feat(sso): capture the IdP id_token on Microsoft and Google logins for oauth2_id_jag by @yassin-berriai in https://github.com/BerriAI/litellm/pull/46747
+- feat(sso): retain the SAML assertion at login as the saml2 subject token for oauth2_id_jag by @yassin-berriai in https://github.com/BerriAI/litellm/pull/46745
+- test(rust-bridge): relocate dispatch tests to the Rust test suite by @yujonglee-berri in https://github.com/BerriAI/litellm/pull/46926
+- fix(tests): drain SDK logging before restoring callbacks by @klu-berri in https://github.com/BerriAI/litellm/pull/46924
+- test(integration): remove BUG skip for 1 test that passes on main by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/46937
+- test(perf): cap every background Postgres statement at 0.9 calls per request by @klu-berri in https://github.com/BerriAI/litellm/pull/46957
+- fix(rust): forward Anthropic headers to DeepSeek by @mateo-berri in https://github.com/BerriAI/litellm/pull/46959
+- test(cost): rekey vertex gemini, add bedrock mantle gpt and claude-opus-5-5, drop suite-only price fields by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/46962
+- fix(openai)!: route gpt-transcribe to GPT audio transcription config by @irvallensar in https://github.com/BerriAI/litellm/pull/44021
+- feat(ui): add the 1 hour cache write cost to the add model and model edit forms by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/46830
+- fix(proxy): report in-memory spend queue size by @mateo-berri in https://github.com/BerriAI/litellm/pull/46956
+- fix(bedrock): drop dangerous-tool-use beta without safeguards by @axelray-dev in https://github.com/BerriAI/litellm/pull/44471
+- feat(cost-map): add together_ai reflection/Beam-1.0-501B-A23B by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/46964
+- feat(ui): redesign the playground chat around a single composer and inspector by @yuneng-berri in https://github.com/BerriAI/litellm/pull/46934
+- build(deps): bump claude-agent-sdk to 0.2.165 to unblock osv-scan by @yuneng-berri in https://github.com/BerriAI/litellm/pull/46971
+- fix(proxy): keep a retried /v1/messages stream's spend log by logging the superseded attempt as a failure by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/45136
+- fix(mcp): stop proxy-started legacy listeners from consuming server rpm by @yuneng-berri in https://github.com/BerriAI/litellm/pull/46968
+- fix(proxy): give /team/delete transactions a 30s timeout by @yuneng-berri in https://github.com/BerriAI/litellm/pull/46979
+- feat(ui): add Authorization URL, Token URL and Scopes fields for OAuth Delegate and True Passthrough MCP servers by @yassin-berriai in https://github.com/BerriAI/litellm/pull/46941
+- fix(guardrails): accept Gemini tools in generic_guardrail_api, add opt-in forward_messages_as_sent, name the error type on fail-open by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/46338
+- docs(agents): keep directory rules in nested AGENTS.md and pin integration tests to CircleCI by @mateo-berri in https://github.com/BerriAI/litellm/pull/46796
+- fix(proxy)!: answer 400 for malformed tools on count_tokens instead of crashing by @mateo-berri in https://github.com/BerriAI/litellm/pull/46583
+- fix(sso): concurrent first sign-ins land on the winner's account, worker-kill test stops waiting on the reap by @mateo-berri in https://github.com/BerriAI/litellm/pull/46855
+- fix(bedrock): backfill Priority and Batch prices from the AWS offer index by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/46987
+- feat(cost-map): add baseten and nebius rows for Reflection Beam 1.0 by @kerry-berri in https://github.com/BerriAI/litellm/pull/46991
+- fix(cost): bill bridged /v1/messages Responses replies like native /v1/responses for reasoning tokens and service tier by @yuneng-berri in https://github.com/BerriAI/litellm/pull/46975
+- fix(providers): route Azure Responses past dated api versions, count Grok reasoning tokens on azure_ai, refresh provider sets after register_model, fix gpt-6.1-sol Azure rows by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/46377
+- feat(openai)!: honor per-deployment workload identity on non-chat routes by @mateo-berri in https://github.com/BerriAI/litellm/pull/39966
+- refactor(ui): validate model edit prices in the zod schema by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/46978
+- fix(bedrock): set supports_none_reasoning_effort on gpt-6-sol and gpt-6-luna by @berriai-litellm-provider-info-sync[bot] in https://github.com/BerriAI/litellm/pull/47000
+- test(integration): fix seven CircleCI integration tests that race or assume a worker spread by @yuneng-berri in https://github.com/BerriAI/litellm/pull/47001
+- test(e2e): fix MCP tool search hit matching and the retired Bedrock image model by @yuneng-berri in https://github.com/BerriAI/litellm/pull/46998
+- test(ui): wait for the logout redirect before visiting a protected page by @yuneng-berri in https://github.com/BerriAI/litellm/pull/47008
+- feat(cost-map): support s3:// URIs for LITELLM_MODEL_COST_MAP_URL by @klu-berri in https://github.com/BerriAI/litellm/pull/46972
+- feat(ui): shareable URL state for usage views and users-to-usage deeplinks by @jesus-berri in https://github.com/BerriAI/litellm/pull/43425
+- fix(azure_ai): bill Grok reasoning tokens whatever the deployment is named by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/46969
+- fix(ui): preserve key settings drafts during background refreshes by @yuneng-berri in https://github.com/BerriAI/litellm/pull/41350
+- fix(openai_like)!: surface provider response headers on non-streaming chat completions by @jesus-berri in https://github.com/BerriAI/litellm/pull/46928
+- fix(bedrock)!: block realtime replay after an input-first start and reject malformed Nova Sonic session settings by @mateo-berri in https://github.com/BerriAI/litellm/pull/46936
+- fix(logging): stop the spend metadata merge from walking a dict the logging thread writes to by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/46044
+- docs(cost): rewrite stale completion_cost docstring by @klu-berri in https://github.com/BerriAI/litellm/pull/47022
+- fix(openai): send chat completions through client.post so the SDK's per-message param transform stops holding the event loop by @klu-berri in https://github.com/BerriAI/litellm/pull/46967
+- feat: add Nace Drex decisions provider by @joshua-berri in https://github.com/BerriAI/litellm/pull/46523
+- test(integration): expect a pre-token invalid prompt on a bridged stream to fall back by @yuneng-berri in https://github.com/BerriAI/litellm/pull/47020
+- test(e2e): repair fallback management test for config-owned fallbacks by @yuneng-berri in https://github.com/BerriAI/litellm/pull/47023
+- fix(proxy): keep the OIDC login refresh token as the ID-JAG subject when the SSO client is the ID-JAG client by @yassin-berriai in https://github.com/BerriAI/litellm/pull/47004
+- test(e2e): assert the Vertex cache-creation billing contract in the prompt caching test by @yuneng-berri in https://github.com/BerriAI/litellm/pull/47027
+- build(docker): cache the Rust extension build in its own stage by @mateo-berri in https://github.com/BerriAI/litellm/pull/47033
+- fix(proxy): unset DB environment variables removed from the row on every worker by row revision by @mateo-berri in https://github.com/BerriAI/litellm/pull/46709
+- ci(cost map): classify token_count_model as an object key in the schema generator by @mateo-berri in https://github.com/BerriAI/litellm/pull/47057
+- fix(bedrock): use native structured output on Haiku 5.5 and Sonnet 5.5, and fix Fable 5 and Sonnet 4.6 schema 400s by @mateo-berri in https://github.com/BerriAI/litellm/pull/46870
+- fix(mcp): log upstream exchange when an MCP health check fails by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/44125
+- perf(cli): start lite without initializing the litellm SDK by @mateo-berri in https://github.com/BerriAI/litellm/pull/46803
+- fix(prometheus): set the remaining rate-limit gauges from decimal headers again by @mateo-berri in https://github.com/BerriAI/litellm/pull/47039
+- ci(cost map): remove the generated model prices JSON schema by @mateo-berri in https://github.com/BerriAI/litellm/pull/47064
+- test(integration): write worker configs beside test-supplied configs by @yuneng-berri in https://github.com/BerriAI/litellm/pull/47066
+- … truncated upstream notes ([full notes](https://github.com/BerriAI/litellm/releases/tag/v1.109.0))
 ## 1.108.4
 
 - Update upstream from `v1.108.3` to `v1.108.4` ([compare](https://github.com/BerriAI/litellm/compare/v1.108.3...v1.108.4))
