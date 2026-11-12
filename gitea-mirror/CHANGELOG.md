@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.51.7
+
+- Update upstream from `v3.51.5` to `v3.51.7` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.5...v3.51.7))
+- Upstream v3.51.6 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.6))
+- GitLab imports timing out on slow instances** (#507, fixes #506, thanks @tiennm99 for the report and measurements). Importing from a busy self-hosted GitLab failed with `TimeoutError: The operation timed out.`, because projects were listed 100 to a page and the instance needed longer than the 30 second request limit to answer. Projects are now listed 20 to a page, which answers in a few seconds on the same instance. The group list stays at 100.
+- A GitLab import now makes more, smaller requests: about 5 times as many project listing requests as before.
+- Upstream v3.51.7 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.7))
+- GitLab project listing back to full speed** (#509, follow-up to #507 and #506). v3.51.6 listed GitLab projects 20 to a page so a slow instance would not time out, which made the listing about twice as slow on a fast one: 300 projects from gitlab.com took about 11 s at 100 a page and 20 s at 20. Listings ask for 100 a page again. When a page times out, the listing carries on from the same place at 50, then 20, then 10 a page, and keeps the smaller size for the rest of that listing.
+- A slow GitLab instance still imports, after losing 30 seconds to each timeout on the way down to a page size it can answer.
 ## 3.51.5
 
 - Update upstream from `v3.51.3` to `v3.51.5` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.3...v3.51.5))
