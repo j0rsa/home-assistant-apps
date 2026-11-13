@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.109.1
+
+- Update upstream from `v1.109.0` to `v1.109.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.109.0...v1.109.1))
+- Upstream v1.109.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.109.1))
+- security(proxy): backport #51254 to stable/1.109.x by @shrey-berri in https://github.com/BerriAI/litellm/pull/51264
+- chore: bump litellm 1.109.0 -> 1.109.1 by @yuneng-berri in https://github.com/BerriAI/litellm/pull/51298
 ## 1.109.0
 
 - Update upstream from `v1.108.4` to `v1.109.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.108.4...v1.109.0))
