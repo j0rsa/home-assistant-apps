@@ -1,5 +1,11 @@
 # Changelog
 
+## 3.51.8
+
+- Update upstream from `v3.51.7` to `v3.51.8` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.7...v3.51.8))
+- Upstream v3.51.8 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.51.8))
+- A mirror the destination refuses to create now says why (#511). Gitea and Forgejo reject the request with a plain sentence, such as "You can not import from disallowed hosts." for a source on a private address when `ALLOW_LOCALNETWORKS` is off, but the error only read "HTTP 422: Unprocessable Entity". That sentence is now added to the error, cut to one short line.
+- The Dashboard's repository list links to the destination for repositories that are mirroring, syncing or archived, like the Repositories page does, and its status labels are capitalized the same way (#512).
 ## 3.51.7
 
 - Update upstream from `v3.51.5` to `v3.51.7` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.5...v3.51.7))
