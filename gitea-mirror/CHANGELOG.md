@@ -1,5 +1,22 @@
 # Changelog
 
+## 3.53.0
+
+- Update upstream from `v3.51.8` to `v3.53.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.8...v3.53.0))
+- Upstream v3.52.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.52.0))
+- Git URL source** (beta): mirror any repository that can be cloned over http(s), for hosts with no API this app knows, such as cgit, gitweb, Gitflic or kernel.org (#514, #508).
+- Connect the host as a source on the Configuration page. A username and password are only needed if the host asks for a login.
+- Add repositories one at a time by pasting their clone URL on the Repositories page.
+- Branches and tags are mirrored. There is nothing to list on such a host, so there is no import, no organizations or stars, and no releases or issues. Cleanup never treats these repositories as deleted upstream.
+- Force push detection needs the GitHub API, so use the Always Backup snapshot strategy for these repositories.
+- SSH remotes are not supported.
+- Upstream v3.53.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.53.0))
+- `GITLAB_PAGE_SIZE`** sets how many projects a GitLab listing asks for at a time, from 10 to 100 (default 100) (#506).
+- Listings start at 100 and drop to 50, 20, then 10 when a page times out. On a slow GitLab that cost about 30 s per step on every import and scheduled run.
+- Set it lower, for example `GITLAB_PAGE_SIZE=20`, to start there instead. The step down still runs below it.
+- Any other value is ignored with a warning in the log.
+- Security
+- The app now uses Astro 7.4.7 and its node adapter 11.1.13 (GHSA-r3h5-4585-7x3w: Astro's image endpoint could read files from a folder whose name differs from the build output folder only in letter case, on case-sensitive filesystems. GHSA-mh32-jxcr-mh9f: attribute injection in dynamic tag names). The docs site got the same bump.
 ## 3.51.8
 
 - Update upstream from `v3.51.7` to `v3.51.8` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.7...v3.51.8))
