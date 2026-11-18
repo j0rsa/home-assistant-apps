@@ -1,5 +1,37 @@
 # Changelog
 
+## 3.54.0
+
+- Update upstream from `v3.53.0` to `v3.54.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.53.0...v3.54.0))
+- Upstream v3.53.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.53.1))
+- Mirroring release assets no longer eats the machine's memory (#523).
+- Each asset was held in memory while it was copied from the source to the destination, and copied again on the way, so one asset took up to about three times its size, and the memory was not given back between assets. A 300 MB asset took about 1 GB, and a repository with large assets could push the machine into swap.
+- Assets now pass through a file in the data directory (`data/tmp/release-assets`, next to the database), so a sync holds only a small piece of an asset at a time. In testing, a 1 GB asset peaked at about 160 MB instead of 1.3 GB.
+- The data directory needs free space for the largest asset while it is copied. Each file is removed after its upload, and anything a crash leaves behind is cleared after a day.
+- Uploads to the destination now use chunked transfer encoding instead of a Content-Length header.
+- A large repository whose first mirror took longer than five minutes no longer fails (#521, #502).
+- gitea-mirror stops waiting for a request after five minutes, but Gitea and Forgejo keep importing. The first mirror failed with `Network error: The operation timed out.`, and Retry then failed with "not a mirror" and `HTTP 400: Bad Request`, because the repository has no mirror settings until the import ends.
+- When the migrate call gets no answer, from that timeout or from a proxy, gitea-mirror now checks the destination and follows the import if one is running. Retry, Sync and scheduled syncs also wait for a running import, up to 30 minutes.
+- A failed import stays on the destination looking exactly like one still running. The message after the wait, and the "not a mirror" error, now say to delete the repository there and retry.
+- Upstream v3.54.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.54.0))
+- Security
+- Saved tokens and secrets can no longer be read back (#528).
+- `GET /api/config` and `GET /api/sources` returned the source and destination tokens, the ntfy, Apprise and Gotify tokens and the webhook signing secret in plain text, so anything that could read settings, a read only API key included, could copy them.
+- They now come back empty, with `hasToken` (`hasSecret` for the webhook signing secret) saying whether one is saved. An empty field keeps the saved value and a new one replaces it. The optional ntfy token and webhook signing secret get a **Remove** button.
+- A saved token is only sent to the address it was saved for: the same scheme, host and port. Pointing the destination, a source or a notification service somewhere else without entering a new token is refused with a message saying so.
+- SSO no longer creates an account for anyone the identity provider knows (#530).
+- Email sign-up closes once the first account exists, but SSO kept creating accounts, so with Google as a provider any Google account could get in.
+- Once an account exists, SSO now only creates one when the email belongs to the provider's Email Domain. `AUTH_ALLOW_SIGNUP=true` lets anyone in, as it does for email sign-up.
+- An SSO sign-in is no longer linked to a local account from another domain (#530).
+- When the provider said the email was verified, the sign-in was linked to the local account with that email whatever the provider's Email Domain, so someone who could get that email at the provider could take over the account. Linking now only happens for emails in the provider's domain.
+- Settings saved on the Configuration page no longer turn back off at every restart when a GitHub or Gitea credential is set through environment variables (#525).
+- A true/false variable that was not set counted as false and was saved over the stored value on each start. That switched off topics, metadata mirroring, private repositories, the schedule and more, and reset the mirror strategy.
+- A variable that is not set now keeps the stored value. One that is set still wins.
+- Discover** on the SSO provider form no longer fills the Domain field with the provider's hostname, such as `accounts.google.com` (#531). The form and the provider list warn when Domain is the provider's hostname.
+- The docs website now holds all the user docs, with new pages for tokens and permissions, repositories and organizations, reverse proxies, backups and upgrades, and troubleshooting, plus a full API reference (#526, #527, #529).
+- Broken links between pages work again, and many pages were corrected against the code. The README is a short overview, and the pages in `docs/` that repeated the website now point to it.
+- SSO:** check that each provider's Domain is your users' email domain (`example.com`), not the provider's hostname. A provider saved with the hostname now refuses new people with `SIGNUP_CLOSED` and won't link existing accounts that sign in through it for the first time. The provider list shows a warning on those. People who have already signed in through SSO are not affected.
+- Scripts** that read tokens back from `/api/config` or `/api/sources` need to keep their own copy.
 ## 3.53.0
 
 - Update upstream from `v3.51.8` to `v3.53.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.51.8...v3.53.0))
