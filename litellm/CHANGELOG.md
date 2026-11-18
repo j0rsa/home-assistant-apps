@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.109.1-1
+
+- Fix startup crash `ImportError: no pq wrapper available` during database migrations. `wrap-wolfi-python` replaced the RPATH of every shared library in the venv, dropping the `$ORIGIN/../psycopg_binary.libs` entry psycopg-binary needs to load its bundled libpq. It now prepends its paths and keeps the existing RPATH, which also fixes other wheels that bundle their own libraries.
+- Build now imports `psycopg` and checks libpq loads, so this kind of breakage fails the image build instead of the add-on at startup.
+
 ## 1.109.1
 
 - Update upstream from `v1.109.0` to `v1.109.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.109.0...v1.109.1))

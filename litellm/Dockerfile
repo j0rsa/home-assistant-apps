@@ -100,7 +100,7 @@ RUN chmod a+x /usr/local/bin/wrap-wolfi-python && \
     ldconfig && \
     rm /tmp/upstream-payload.tar && \
     python3 -c "from math import log" && \
-    /app/.venv/bin/python3 -c "from math import log; from litellm import run_server"
+    /app/.venv/bin/python3 -c "from math import log; from litellm import run_server; import psycopg; print('libpq', psycopg.pq.version(), psycopg.pq.__impl__)"
 
 COPY run.sh /
 RUN chmod a+x /run.sh

@@ -40,10 +40,18 @@ relocate_elf() {
             return 0
             ;;
     esac
+    # Prepend our paths but keep the existing RPATH/RUNPATH: auditwheel wheels
+    # (e.g. psycopg-binary) locate vendored libs via $ORIGIN/../<pkg>.libs.
+    local old new
+    old="$(patchelf --print-rpath "${f}" 2>/dev/null || true)"
+    case "${old}" in
+        "${rpath}"|"${rpath}":*) new="${old}" ;;
+        *) new="${rpath}${old:+:${old}}" ;;
+    esac
     if patchelf --print-interpreter "${f}" >/dev/null 2>&1; then
-        patchelf --set-interpreter "${LOADER}" --force-rpath --set-rpath "${rpath}" "${f}"
+        patchelf --set-interpreter "${LOADER}" --force-rpath --set-rpath "${new}" "${f}"
     elif patchelf --print-needed "${f}" >/dev/null 2>&1; then
-        patchelf --force-rpath --set-rpath "${rpath}" "${f}"
+        patchelf --force-rpath --set-rpath "${new}" "${f}"
     fi
 }
 
