@@ -1,6 +1,6 @@
 ---
 name: Netmaker Client
-version: 1.6.0-5
+version: 1.8.0
 slug: netmaker-client
 description: |
   Netmaker WireGuard Client

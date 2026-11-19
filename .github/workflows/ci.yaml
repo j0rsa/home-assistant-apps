@@ -33,7 +33,8 @@ jobs:
 
 
   build:
-    runs-on: ubuntu-latest
+    name: Build ${{ matrix.target }} (${{ matrix.arch }})
+    runs-on: ${{ matrix.os }}
     needs: generate-matrix
     if: ${{ needs.generate-matrix.outputs.matrix-count != '0' }}
     permissions:
@@ -46,25 +47,45 @@ jobs:
     steps:
       - name: Check out the repo
         uses: actions/checkout@v7.0.1
-
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v4.8.0
         with:
-          registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          persist-credentials: false
 
       - name: Stamp PR version
         if: github.event_name == 'pull_request'
         run: |
           sed -i "s/^version:.*/version: 0.0.0-pr.${{ github.event.number }}.${{ github.run_number }}/" ${{ matrix.target }}/config.yaml
 
-      - name: Build and push ${{ matrix.target }}
-        uses: home-assistant/builder@2026.03.2
+      - name: Read add-on version
+        id: info
+        env:
+          TARGET: ${{ matrix.target }}
+          IS_PR: ${{ github.event_name == 'pull_request' }}
+        run: |
+          version=$(sed -n 's/^version:[[:space:]]*["'\'']\{0,1\}\([^"'\'' ]*\).*/\1/p' "${TARGET}/config.yaml")
+          [[ -n "${version}" ]] || { echo "::error::No version in ${TARGET}/config.yaml"; exit 1; }
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+          {
+            echo "tags<<EOF"
+            echo "${version}"
+            [[ "${IS_PR}" == "true" ]] || echo "latest"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Build and push ${{ matrix.target }} (${{ matrix.arch }})
+        uses: home-assistant/builder/actions/build-image@2026.09.0
         with:
-          args: |
-            ${{ matrix.platforms }} \
-            --target ${{ matrix.target }} \
-            --docker-hub ghcr.io/${{ github.repository_owner }} \
-            --addon \
-            ${{ github.event_name != 'pull_request' && '--cosign' || '' }}
+          arch: ${{ matrix.arch }}
+          context: ./${{ matrix.target }}
+          image: ${{ matrix.image }}
+          image-tags: ${{ steps.info.outputs.tags }}
+          version: ${{ steps.info.outputs.version }}
+          build-args: ${{ matrix.build_args }}
+          labels: |
+            io.hass.type=addon
+            io.hass.name=${{ matrix.name }}
+            io.hass.description=${{ matrix.description }}
+            io.hass.url=${{ matrix.url }}
+          cache-gha-scope: ${{ matrix.target }}
+          container-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          push: "true"
+          cosign: ${{ github.event_name != 'pull_request' }}

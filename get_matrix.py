@@ -51,14 +51,43 @@ class MatrixGenerator:
         architecture = config_data.get('arch')
         return architecture
 
+    RUNNERS = {'amd64': 'ubuntu-24.04', 'aarch64': 'ubuntu-24.04-arm'}
+
+    @staticmethod
+    def __load_yaml(path) -> dict:
+        if not os.path.isfile(path):
+            return {}
+        with open(path, 'r') as f:
+            return yaml.safe_load(f) or {}
+
     def get_matrix(self, architectures = None) -> dict:
-        """Generates the matrix for the workflow"""
+        """Generates one matrix entry per add-on and architecture"""
         if architectures is None:
             architectures = self.__find_module_architectures()
         result = []
         for target, architecture in architectures.items():
-            platforms = " ". join(["--" + platform for platform in architecture])
-            result.append({'target': target, 'platforms': platforms})
+            config = self.__load_yaml(os.path.join(target, 'config.yaml'))
+            build = self.__load_yaml(os.path.join(target, 'build.yaml'))
+            for arch in architecture:
+                if arch not in self.RUNNERS:
+                    raise ValueError(f"{target}: unsupported architecture {arch}")
+                build_args = []
+                build_from = (build.get('build_from') or {}).get(arch)
+                if build_from:
+                    build_args.append(f"BUILD_FROM={build_from}")
+                for key, value in (build.get('args') or {}).items():
+                    build_args.append(f"{key}={value}")
+                description = str(config.get('description', '')).strip().splitlines()
+                result.append({
+                    'target': target,
+                    'arch': arch,
+                    'os': self.RUNNERS[arch],
+                    'image': config['image'].replace('{arch}', arch),
+                    'name': config.get('name', target),
+                    'description': description[0] if description else '',
+                    'url': config.get('url', ''),
+                    'build_args': "\n".join(build_args),
+                })
         return {'include': result}
     
     def get_json_matrix(self, architectures = None) -> str:

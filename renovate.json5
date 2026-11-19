@@ -6,7 +6,10 @@
   "commitMessagePrefix": "⬆️",
   "commitMessageTopic": "{{depName}}",
   "extends": [
-    "config:recommended"
+    "config:recommended",
+    // Tracks `# renovate: datasource=... depName=...` comments above
+    // `ARG <NAME>_VERSION=...` in Dockerfiles (e.g. netclient binary download).
+    "customManagers:dockerfileVersions"
   ],
   "ignorePaths": [
     "duplicati/**"
@@ -69,7 +72,7 @@
       "automerge": true
     },
     {
-      "matchManagers": ["dockerfile"],
+      "matchManagers": ["dockerfile", "custom.regex"],
       "postUpgradeTasks": {
         // Release-note Handlebars fields are not available in postUpgradeTasks;
         // addon_changelog.py fetches GitHub Releases using sourceUrl/depName.

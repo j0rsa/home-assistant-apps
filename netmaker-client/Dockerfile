@@ -2,6 +2,9 @@ ARG BUILD_FROM=ghcr.io/home-assistant/base:3.24
 
 FROM ${BUILD_FROM}
 
+# renovate: datasource=github-releases depName=gravitl/netclient
+ARG NETCLIENT_VERSION=v1.8.0
+
 ARG BUILD_VERSION
 ARG BUILD_ARCH
 ARG BUILD_DATE
@@ -24,7 +27,7 @@ RUN echo "**** Building $BUILD_ARCH:$BUILD_VERSION image ****" && \
       exit 255; \
     fi && \
     curl -fSL --retry 3 --retry-delay 2 \
-      "https://github.com/gravitl/netclient/releases/download/v1.6.0/netclient-linux-${NETCLIENT_ARCH}" \
+      "https://github.com/gravitl/netclient/releases/download/${NETCLIENT_VERSION}/netclient-linux-${NETCLIENT_ARCH}" \
       -o /usr/local/bin/netclient || { echo "Failed to download netclient for ${NETCLIENT_ARCH}"; exit 1; } && \
     if [ ! -s /usr/local/bin/netclient ]; then \
       echo "Downloaded netclient is empty"; \
