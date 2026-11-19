@@ -15,7 +15,7 @@ map:
   - backup:rw
   - media:ro
 boot: auto
-image: "ghcr.io/j0rsa/haddon-borgui-{arch}"
+image: "ghcr.io/j0rsa/happ-borgui-{arch}"
 udev: false
 url: https://borgui.com
 ingress: true

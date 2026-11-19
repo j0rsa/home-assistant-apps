@@ -22,7 +22,7 @@ map:
   - backup:rw
   - media:rw
 boot: auto
-image: "ghcr.io/j0rsa/haddon-duplicati-{arch}"
+image: "ghcr.io/j0rsa/happ-duplicati-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 ports:

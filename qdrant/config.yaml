@@ -35,7 +35,7 @@ map:
   - app_config:rw
   - data:rw
 boot: auto
-image: "ghcr.io/j0rsa/haddon-qdrant-{arch}"
+image: "ghcr.io/j0rsa/happ-qdrant-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 ports:

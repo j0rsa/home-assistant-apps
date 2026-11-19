@@ -29,7 +29,7 @@ arch:
   - aarch64
   - amd64
 boot: auto
-image: "ghcr.io/j0rsa/haddon-go-socks5-proxy-{arch}"
+image: "ghcr.io/j0rsa/happ-go-socks5-proxy-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 ports:

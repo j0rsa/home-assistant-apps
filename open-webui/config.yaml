@@ -17,7 +17,7 @@ options:
   ollama_api_url: http://ollama:11434
 schema:
   ollama_api_url: url
-image: "ghcr.io/j0rsa/haddon-open-webui-{arch}"
+image: "ghcr.io/j0rsa/happ-open-webui-{arch}"
 ports:
   8080/tcp: 5000
 ports_description:

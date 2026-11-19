@@ -34,7 +34,7 @@ arch:
 map:
   - app_config:rw
 boot: auto
-image: "ghcr.io/j0rsa/haddon-netmaker-client-{arch}"
+image: "ghcr.io/j0rsa/happ-netmaker-client-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 panel_icon: mdi:vpn

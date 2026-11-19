@@ -17,7 +17,7 @@ init: false
 boot: auto
 panel_icon: mdi:network
 panel_title: SNI Socket Proxy
-image: "ghcr.io/j0rsa/haddon-sni-socket-{arch}"
+image: "ghcr.io/j0rsa/happ-sni-socket-{arch}"
 ports:
   80/tcp: 80
   443/tcp: 443

@@ -28,7 +28,7 @@ arch:
 map: 
   - app_config:rw
 boot: auto
-image: "ghcr.io/j0rsa/haddon-xray-{arch}"
+image: "ghcr.io/j0rsa/happ-xray-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 ports:

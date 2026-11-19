@@ -20,7 +20,7 @@ full_access: true
 udev: true
 map:
   - share:rw
-image: "ghcr.io/j0rsa/haddon-wyoming-hailo-whisper-{arch}"
+image: "ghcr.io/j0rsa/happ-wyoming-hailo-whisper-{arch}"
 panel_icon: mdi:microphone-message
 url: https://github.com/j0rsa/home-assistant-apps
 options:

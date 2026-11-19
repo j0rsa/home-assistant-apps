@@ -49,7 +49,7 @@ arch:
   - aarch64
   - amd64
 boot: auto
-image: "ghcr.io/j0rsa/haddon-hev-socks5-tproxy-{arch}"
+image: "ghcr.io/j0rsa/happ-hev-socks5-tproxy-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 panel_icon: mdi:network-outline

@@ -19,7 +19,7 @@ environment:
 map: 
   - share:rw
 boot: auto
-image: "ghcr.io/j0rsa/haddon-ariang-{arch}"
+image: "ghcr.io/j0rsa/happ-ariang-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 ports:

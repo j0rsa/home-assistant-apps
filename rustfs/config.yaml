@@ -15,7 +15,7 @@ arch:
 map:
   - share:rw
 boot: auto
-image: "ghcr.io/j0rsa/haddon-rustfs-{arch}"
+image: "ghcr.io/j0rsa/happ-rustfs-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 webui: http://[HOST]:[PORT:9001]/rustfs/console/

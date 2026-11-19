@@ -22,7 +22,7 @@ map:
   - media:rw
   - ssl:ro
 boot: auto
-image: "ghcr.io/j0rsa/haddon-copyparty-{arch}"
+image: "ghcr.io/j0rsa/happ-copyparty-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 webui: http://[HOST]:[PORT:3923]/

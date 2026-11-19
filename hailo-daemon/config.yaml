@@ -17,6 +17,6 @@ full_access: true
 udev: true
 map:
   - share:rw
-image: "ghcr.io/j0rsa/haddon-hailo-daemon-{arch}"
+image: "ghcr.io/j0rsa/happ-hailo-daemon-{arch}"
 panel_icon: mdi:chip
 url: https://github.com/j0rsa/home-assistant-apps

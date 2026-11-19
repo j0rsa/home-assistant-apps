@@ -17,7 +17,7 @@ map:
   - type: share
     read_only: true
 boot: auto
-image: "ghcr.io/j0rsa/haddon-course-watch-{arch}"
+image: "ghcr.io/j0rsa/happ-course-watch-{arch}"
 udev: false
 url: https://github.com/j0rsa/home-assistant-apps
 ingress: true
