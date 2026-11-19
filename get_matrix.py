@@ -99,10 +99,19 @@ class MatrixGenerator:
 parser = argparse.ArgumentParser()
 parser.add_argument('--from-changes', action='store_true', help='Generate matrix from changed directories')
 parser.add_argument('--previous', action='store_true', help='Use previous commit to generate matrix')
+parser.add_argument('--apps', default='', help='Space or comma separated app directories to build (skips git diff)')
 args = parser.parse_args()
 
-converter = MatrixGenerator(from_changes=True, previous=True)
-# converter = MatrixGenerator(from_changes=args.from_changes, previous=args.previous)
+apps = args.apps.replace(',', ' ').split()
+if apps:
+    missing = [a for a in apps if not os.path.isfile(os.path.join(a, 'config.yaml'))]
+    if missing:
+        raise SystemExit(f"Unknown app(s), no config.yaml found: {', '.join(missing)}")
+    print(f"Building requested apps: {apps}")
+    converter = MatrixGenerator(from_changes=False)
+    converter.directories = apps
+else:
+    converter = MatrixGenerator(from_changes=True, previous=True)
 
 matrix = converter.get_matrix()
 with open('matrix-count.txt', 'w', encoding='utf-8') as f:

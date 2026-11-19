@@ -5,6 +5,12 @@ on:
     branches: [ main ]
   pull_request:
     branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      apps:
+        description: App directories to rebuild and publish (space or comma separated, e.g. "litellm netmaker-client")
+        required: true
+        type: string
 
 jobs:
   generate-matrix:
@@ -20,9 +26,11 @@ jobs:
           fetch-depth: 2
 
       - name: Generate matrix
+        env:
+          APPS: ${{ inputs.apps }}
         run: |
-          # git --no-pager diff --name-only HEAD^ HEAD
-          python get_matrix.py --from-changes --previous
+          # Manual runs build the requested apps; otherwise diff HEAD^..HEAD
+          python get_matrix.py --apps "${APPS}"
 
       - name: Set matrix output
         id: set-matrix
@@ -92,3 +100,27 @@ jobs:
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           push: "true"
           cosign: ${{ github.event_name != 'pull_request' }}
+
+  # Single stable check to mark as required in branch protection: the per-addon
+  # build jobs are dynamic, so their names can't be required individually.
+  build-result:
+    name: Build result
+    runs-on: ubuntu-latest
+    needs: [generate-matrix, build]
+    if: always()
+    steps:
+      - name: Check build results
+        env:
+          MATRIX_RESULT: ${{ needs.generate-matrix.result }}
+          BUILD_RESULT: ${{ needs.build.result }}
+        run: |
+          echo "generate-matrix: ${MATRIX_RESULT}, build: ${BUILD_RESULT}"
+          if [[ "${MATRIX_RESULT}" != "success" ]]; then
+            echo "::error::Matrix generation ${MATRIX_RESULT}"
+            exit 1
+          fi
+          # build is "skipped" when no add-on changed, which is fine
+          if [[ "${BUILD_RESULT}" != "success" && "${BUILD_RESULT}" != "skipped" ]]; then
+            echo "::error::One or more add-on builds ${BUILD_RESULT}"
+            exit 1
+          fi
