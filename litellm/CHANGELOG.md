@@ -1,5 +1,89 @@
 # Changelog
 
+## 1.110.0
+
+- Update upstream from `v1.109.1` to `1.110.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.109.1...v1.110.0))
+- Upstream v1.110.0 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.110.0))
+- fix(gemini)!: answer 400 for an unsupported chat audio format, drop it under drop_params by @paveln83 in https://github.com/BerriAI/litellm/pull/49423
+- fix(router): keep encrypted reasoning when a fallback hops between same-key deployments with no api_base by @tessellark in https://github.com/BerriAI/litellm/pull/49396
+- fix(anthropic)!: sync the beta header allowlist with what anthropic, vertex_ai, and azure_ai accept by @tavren27 in https://github.com/BerriAI/litellm/pull/49409
+- fix(responses): serialize sequence_number on every bridged streaming event by @kaust1495 in https://github.com/BerriAI/litellm/pull/44944
+- fix(proxy): make /update/sso_settings a true PATCH and send only changed SSO fields from the UI by @jesus-berri in https://github.com/BerriAI/litellm/pull/49527
+- test(integration): fix four flaky integration tests by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49554
+- fix(anthropic): stream azure_ai natively on an Azure OpenAI host on /v1/messages by @mika-lt in https://github.com/BerriAI/litellm/pull/49216
+- fix(proxy): check the model in every OpenAI websocket passthrough frame by @zoveki in https://github.com/BerriAI/litellm/pull/48979
+- fix(proxy): keep provider fields on streamed chat completion chunks by @quietjules in https://github.com/BerriAI/litellm/pull/49398
+- fix(providers): trim prompt_cache_breakpoint to what each API takes under drop_params by @tavren27 in https://github.com/BerriAI/litellm/pull/49064
+- fix(bedrock): price Web Search on the GPT-5.4 and later Mantle rows and the GovCloud West Mantle rows by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/49687
+- fix(model-catalog): declare the tool and Responses token count framing keys by @tavren27 in https://github.com/BerriAI/litellm/pull/49683
+- fix(proxy): count the context_management edits /v1/messages applies on every bridged provider by @tessellark in https://github.com/BerriAI/litellm/pull/49234
+- fix(fireworks): keep developer items in place for models that accept a later system message by @tessellark in https://github.com/BerriAI/litellm/pull/49399
+- fix(databricks): join plain text blocks for non-Claude json_object requests by @zoveki in https://github.com/BerriAI/litellm/pull/49385
+- test(integration): repair stale contract fixtures by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49700
+- fix(bedrock)!: give Invoke and Mantle Claude the model's own default max_tokens by @zoveki in https://github.com/BerriAI/litellm/pull/49692
+- fix(count_tokens): count grok-4-1, grok-4.3 and DeepSeek V4.1 tool requests the way their hosts bill them by @tavren27 in https://github.com/BerriAI/litellm/pull/49074
+- fix(cohere): map Cohere v2 finish_reason on non-streaming chat responses by @jesus-berri in https://github.com/BerriAI/litellm/pull/49529
+- test(integration): align remaining release qualification checks by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49714
+- fix(prometheus): retain deployment attribution on proxy failures by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49717
+- test(integration): isolate stranger batch authorization from the batch-cost poller by @mateo-berri in https://github.com/BerriAI/litellm/pull/49522
+- fix(mcp): answer 400 for a hosted MCP tool a translated route cannot run, drop it under drop_params by @simonp9 in https://github.com/BerriAI/litellm/pull/48931
+- feat(hosted_vllm)!: keep vLLM's stop_reason and token_ids on chat choices and stream chunks by @PrabalParihar in https://github.com/BerriAI/litellm/pull/48393
+- feat(proxy)!: honor model_info.max_input_tokens in the Codex catalog for stock models by @tessellark in https://github.com/BerriAI/litellm/pull/49701
+- ci: remove workflows whose secrets are dead by @mateo-berri in https://github.com/BerriAI/litellm/pull/49722
+- test(integration): repair agent reads and bulk deletion setup by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49719
+- test(e2e): share the coding-CLI harness between suites by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/49370
+- feat(model_info): add supports_continuation capability flag for Gemini long decode continuation by @jesus-berri in https://github.com/BerriAI/litellm/pull/49500
+- fix(spend)!: save streamed /v1/responses spend rows under the encrypted resp_ id the client received by @simonp9 in https://github.com/BerriAI/litellm/pull/49493
+- fix(cost): add deepgram/streaming/nova-3-medical and update stale Nova-3 streaming rates by @jesus-berri in https://github.com/BerriAI/litellm/pull/49733
+- build(deps): allow huggingface-hub 2.x by @davanstrien in https://github.com/BerriAI/litellm/pull/49056
+- fix(proxy): charge budget windows when the cached key or team expired before the request ended by @etiennechabert in https://github.com/BerriAI/litellm/pull/47608
+- fix(proxy)!: ignore stored general_settings keys no settings API manages by @paveln83 in https://github.com/BerriAI/litellm/pull/48967
+- fix(bedrock): reserve DeepSeek V3.2 output capacity and date GovCloud West Llama 3 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/49732
+- test(gemini): assert vertex lists on content chunks by @mateo-berri in https://github.com/BerriAI/litellm/pull/49734
+- fix(model-catalog): declare the thinking_on_by_default key by @tavren27 in https://github.com/BerriAI/litellm/pull/49720
+- fix(ui): make the off state of switches visible in light theme by @shrey-berri in https://github.com/BerriAI/litellm/pull/49718
+- fix(proxy): preserve DB settings during config reload by @mateo-berri in https://github.com/BerriAI/litellm/pull/49735
+- refactor(ui): move MCP text onto i18n by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49473
+- refactor(ui): move guardrails text onto i18n by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49524
+- refactor(ui): move agents and knowledge text onto i18n by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49530
+- fix(proxy): log each endpoint's own call type on failed audio, moderation, image, and rerank spend rows by @paveln83 in https://github.com/BerriAI/litellm/pull/49684
+- refactor(ui): move admin and settings text onto i18n by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49546
+- fix(mcp): answer bare OPTIONS on MCP routes without running LiteLLM auth by @jesus-berri in https://github.com/BerriAI/litellm/pull/49497
+- fix(managed_files): keep the upload the managed id encodes when two target models share a deployment by @quietjules in https://github.com/BerriAI/litellm/pull/49420
+- test(integration): look up streamed Responses spend rows by the client-facing id by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/49752
+- fix(gemini): resend once with the placeholder signature when the other backend rejects a replayed thought signature by @tavren27 in https://github.com/BerriAI/litellm/pull/49697
+- fix(vertex_ai)!: map Anthropic context overflow errors by @mgeorgaklis in https://github.com/BerriAI/litellm/pull/36963
+- test(e2e): drive the Codex CLI through LiteLLM, command round trip by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/49374
+- test(e2e): add Codex file edit, long session and auto-compaction rows through LiteLLM by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/49386
+- fix(anthropic_endpoints)!: return Anthropic error envelopes on /v1/messages auth failures by @albertoperdomo2 in https://github.com/BerriAI/litellm/pull/48466
+- feat(anthropic): pick the beta allowlist row per deployment and surface input_transformations by @mika-lt in https://github.com/BerriAI/litellm/pull/49689
+- fix(bedrock): send native structured output for json_schema on Claude models that cannot force a tool by @tavren27 in https://github.com/BerriAI/litellm/pull/49703
+- test(integration): repair release qualification timing and labels by @yuneng-berri in https://github.com/BerriAI/litellm/pull/49737
+- fix(tool_choice): accept OpenAI allowed_tools on chat completions and flatten it for the Responses bridge by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/49043
+- fix(cost-map): give the bare gpt-4o, gpt-4o-mini, gpt-4.1 and gpt-4.1-mini aliases their 2027-01-14 shutdown date by @zoveki in https://github.com/BerriAI/litellm/pull/49707
+- fix(responses)!: authorize and decode comparison response IDs by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/49402
+- fix(spend): bill web search interception follow-ups once under the outer request by @mateo-berri in https://github.com/BerriAI/litellm/pull/49762
+- fix(vllm): list hosted_vllm wildcard models when the server has no api key by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/40066
+- feat(decisions): add Parallel AI web-grounded decisions by @devin-gupta in https://github.com/BerriAI/litellm/pull/49188
+- test(messages): add rust vs python messages parity characterization suite by @narmstrong-berri in https://github.com/BerriAI/litellm/pull/49610
+- fix(messages): make rust messages copy python messages behaviour by @narmstrong-berri in https://github.com/BerriAI/litellm/pull/49611
+- feat(videos): serve custom_provider_map BaseVideoConfig providers on /v1/videos by @kerry-berri in https://github.com/BerriAI/litellm/pull/49785
+- test(bedrock): assert native structured output when the model rejects forced tools by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/49799
+- test(spend): expect the Anthropic budget envelope on a broken messages stream by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/49800
+- fix(router)!: scope context fallback precedence to the requested group by @mateo-berri in https://github.com/BerriAI/litellm/pull/49779
+- docs: preserve author review when updating PR summaries by @mateo-berri in https://github.com/BerriAI/litellm/pull/49803
+- fix(embeddings): honor the caller's timeout on Cohere sync and HuggingFace embedding requests by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/48593
+- fix(cost-map): price Mistral Large 4 at its current list price by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/49814
+- fix(anthropic): send an https PDF image_url to Claude as a document by @tessellark in https://github.com/BerriAI/litellm/pull/49708
+- feat(realtime)!: support latest OpenAI audio models by @emerzon in https://github.com/BerriAI/litellm/pull/35600
+- fix(cache_control)!: keep one deployment's prompt-cache opt-in from reaching siblings on the same model by @tessellark in https://github.com/BerriAI/litellm/pull/49685
+- fix(bedrock)!: fail a Nova Sonic realtime session whose Bedrock stream drops instead of closing 1000 by @norkelbyte in https://github.com/BerriAI/litellm/pull/49170
+- fix(azure_ai): keep azure_ad_token out of the request body by @tavren27 in https://github.com/BerriAI/litellm/pull/49769
+- fix(typesafe): mark jev-latest as answering Box questions now that it points to Jev 1.14 by @devin-ai-integration[bot] in https://github.com/BerriAI/litellm/pull/49835
+- fix(proxy): let a config license unlock enterprise settings and spell "environment" right in license errors by @paveln83 in https://github.com/BerriAI/litellm/pull/49745
+- fix(logging): keep the caller's call_type when chat completions are bridged to the Responses API by @zoveki in https://github.com/BerriAI/litellm/pull/49710
+- fix(anthropic)!: carry prompt_cache_breakpoint to cache_control on chat completions to Claude by @zoveki in https://github.com/BerriAI/litellm/pull/49783
+- … truncated upstream notes ([full notes](https://github.com/BerriAI/litellm/releases/tag/v1.110.0))
 ## 1.109.1-1
 
 - Fix startup crash `ImportError: no pq wrapper available` during database migrations. `wrap-wolfi-python` replaced the RPATH of every shared library in the venv, dropping the `$ORIGIN/../psycopg_binary.libs` entry psycopg-binary needs to load its bundled libpq. It now prepends its paths and keeps the existing RPATH, which also fixes other wheels that bundle their own libraries.
