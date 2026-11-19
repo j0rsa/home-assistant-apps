@@ -85,7 +85,10 @@ jobs:
             io.hass.name=${{ matrix.name }}
             io.hass.description=${{ matrix.description }}
             io.hass.url=${{ matrix.url }}
-          cache-gha-scope: ${{ matrix.target }}
+          # GHA cache export (mode=max) of multi-GB images like litellm crashes
+          # buildkitd and would blow the 10 GB repo cache limit anyway; rely on
+          # the registry inline cache from the previous `latest` image instead.
+          cache-gha: "false"
           container-registry-password: ${{ secrets.GITHUB_TOKEN }}
           push: "true"
           cosign: ${{ github.event_name != 'pull_request' }}
