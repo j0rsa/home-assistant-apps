@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.4.10
+
+- Pin upstream image to `ainullcode/borg-ui:2.4.10` instead of the floating `edge` tag,
+  so Renovate can track upstream releases
+- Add-on version now follows the upstream release version
+
 ## 0.1.2
 
 - Fix exit code 111: use CMD instead of ENTRYPOINT so the base image's s6 init runs first,

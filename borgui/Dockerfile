@@ -1,4 +1,4 @@
-ARG UPSTREAM_IMAGE=ainullcode/borg-ui:edge
+ARG UPSTREAM_IMAGE=ainullcode/borg-ui:2.4.10
 ARG BUILD_FROM=ghcr.io/home-assistant/base-ubuntu:26.04
 
 FROM ${UPSTREAM_IMAGE} AS upstream
