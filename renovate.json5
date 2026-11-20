@@ -11,9 +11,6 @@
     // `ARG <NAME>_VERSION=...` in Dockerfiles (e.g. netclient binary download).
     "customManagers:dockerfileVersions"
   ],
-  "ignorePaths": [
-    "duplicati/**"
-  ],
   "ignoreDeps": [
     "home-assistant/builder"
   ],

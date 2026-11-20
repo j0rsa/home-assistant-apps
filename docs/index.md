@@ -22,15 +22,6 @@ https://github.com/j0rsa/home-assistant-apps
 
 ### 💾 Backup & Storage
 
-#### [Duplicati](/apps/duplicati/)
-Comprehensive backup solution with cloud support. Back up your Home Assistant data to various cloud providers or local storage with encryption and scheduling options.
-- Supports multiple cloud providers (Google Drive, Dropbox, S3, etc.)
-- Encrypted backups with strong AES-256 encryption
-- Flexible scheduling and retention policies
-- Web-based management interface
-
-**Architectures:** `aarch64` `amd64`
-
 #### [RustFS](/apps/rustfs/)
 High-performance S3-compatible object storage (MinIO alternative) with a web console.
 - S3 API for backups and application data

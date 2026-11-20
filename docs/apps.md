@@ -8,15 +8,6 @@ permalink: /apps/
 
 Browse all available apps organized by category. Click on any app for detailed documentation.
 
-## 💾 Backup & Storage
-
-### [Duplicati](/apps/duplicati/)
-Free backup software to store encrypted backups online. Supports many storage providers including Google Drive, Amazon S3, Dropbox, and more.
-
-**Version:** Latest | **Architectures:** `amd64`, `aarch64`
-
----
-
 ## 📥 Download Management
 
 ### [Ariang](/apps/ariang/)

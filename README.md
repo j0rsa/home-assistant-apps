@@ -16,9 +16,6 @@ If you want to do add the repository manually, please follow the procedure highl
 
 # Apps provided by this repository
 
-## Backup & Storage
-- **Duplicati** - Backup your data to the cloud or locally ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
-
 ## Download Management
 - **Ariang** - Modern web frontend for aria2 download utility ![Supports aarch64 Architecture][aarch64-shield] ![Supports amd64 Architecture][amd64-shield]
 

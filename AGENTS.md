@@ -1,7 +1,7 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-Each top-level directory named after an add-on (e.g., `airang`, `duplicati`, `ollama`, `netmaker`) contains `config.yaml`, `Dockerfile`, optional `build.yaml`, assets, and helper scripts such as `run.sh`. Shared docs live under `docs/` (`_addons/` per add-on, `assets/` for media), and `repository.json` must be kept in sync whenever add-ons are added, renamed, or deprecated.
+Each top-level directory named after an add-on (e.g., `airang`, `borgui`, `ollama`, `netmaker`) contains `config.yaml`, `Dockerfile`, optional `build.yaml`, assets, and helper scripts such as `run.sh`. Shared docs live under `docs/` (`_addons/` per add-on, `assets/` for media), and `repository.json` must be kept in sync whenever add-ons are added, renamed, or deprecated.
 
 ## Build, Test, and Development Commands
 Use the Home Assistant CLI to build locally: `ha addons build <addon_slug>` from a Supervisor devcontainer pointed at this checkout. For a standalone smoke test run `docker build -t local/<slug> <slug>` and `docker run --rm -it --env-file <slug>/build.yaml local/<slug>`; ensure `run.sh` stays executable and idempotent for asset-heavy add-ons like `open-webui`.
