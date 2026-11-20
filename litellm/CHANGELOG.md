@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.110.1
+
+- Update upstream from `1.110.0` to `1.110.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.110.0...v1.110.1))
+- Upstream v1.110.1 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.110.1))
+- OpenAI:** Fixed GPT-6.2 prompt caching for system prompts sent to `/v1/chat/completions` or `/v1/messages` with `store: false` (#52658)
+- Deployment:** Changed the UI image to slim nginx, which drops `curl` but keeps `wget` and `nc` (#52595)
+- Deployment:** Changed the Docker images to a newer Wolfi base image (#52749)
 ## 1.110.0
 
 - Update upstream from `v1.109.1` to `1.110.0` ([compare](https://github.com/BerriAI/litellm/compare/v1.109.1...v1.110.0))
