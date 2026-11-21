@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.110.2
+
+- Update upstream from `1.110.1` to `1.110.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.110.1...v1.110.2))
+- Upstream v1.110.2 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.110.2))
+- Anthropic:** Fixed `temperature=1` returning 400 on Claude models that removed sampling params on Anthropic, Vertex AI and Azure AI, broken since v1.110.0-rc.2 (#52341)
+- Responses API:** Fixed streams retrying after output reached the client, which sent duplicate events and billed extra calls (#52461)
+- Responses API:** Fixed streams that fail after reasoning output restarting on a fallback group and sending a second response (#52616)
+- Caching:** Fixed GPT-6.2 system prompts missing the prompt cache on `/v1/chat/completions` and `/v1/messages` unless `store: false` (#52906) Also in [1.106.12](https://github.com/BerriAI/litellm/releases/tag/v1.106.12), [1.108.13](https://github.com/BerriAI/litellm/releases/tag/v1.108.13), [1.109.3](https://github.com/BerriAI/litellm/releases/tag/v1.109.3)
+- Cost tracking and pricing:** Fixed forwarded Anthropic credentials on `/v1/messages` ignoring the deployment's custom prices, broken since v1.109.0 (#52313)
+- Keys, teams and auth:** Fixed JWT key mappings without `jwt_issuer` taking 5 minutes to apply when `litellm_jwtauth.issuers` is set, broken since v1.103.0 (#52350) Also in [1.108.13](https://github.com/BerriAI/litellm/releases/tag/v1.108.13), [1.109.3](https://github.com/BerriAI/litellm/releases/tag/v1.109.3)
+- Keys, teams and auth:** Fixed `/key/info` letting a key with no user read other userless keys by hash or alias (#52838, #52925) Also in [1.106.12](https://github.com/BerriAI/litellm/releases/tag/v1.106.12), [1.108.13](https://github.com/BerriAI/litellm/releases/tag/v1.108.13), [1.109.3](https://github.com/BerriAI/litellm/releases/tag/v1.109.3)
+- Performance:** Fixed memory growth from every finished request staying in memory until a full GC pass, broken since v1.110.0-rc.1 (#51888)
 ## 1.110.1
 
 - Update upstream from `1.110.0` to `1.110.1` ([compare](https://github.com/BerriAI/litellm/compare/v1.110.0...v1.110.1))
