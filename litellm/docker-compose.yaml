@@ -10,7 +10,7 @@ services:
       - UI_PASSWORD=sk-1234
       - PROXY_ADMIN_ID=admin
   db:
-    image: postgres:18
+    image: postgres:19
     environment:
       POSTGRES_DB: litellm
       POSTGRES_USER: user
