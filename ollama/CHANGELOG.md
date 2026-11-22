@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.40.17
+
+- Update upstream from `0.40.16` to `0.40.17` ([compare](https://github.com/ollama/ollama/compare/v0.40.16...v0.40.17))
+- Upstream v0.40.17 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.17))
+- `ollama launch claude` supports Claude Code's deferred tool loading, so MCP tools are loaded when needed instead of all at
+- Ollama on Apple silicon now serves multiple requests at once.
+- `ollama launch opencode` sets thinking options from the model's metadata
+- `ollama launch pi` refreshes Pi's model list after sign-in and passes along prompt arguments
+- `ollama launch chatgpt --restore` asks before switching an active profile and preserves existing settings and chat history
+- Running `ollama` with no arguments in a non-interactive shell prints help instead of erroring
+- Ctrl+C or Ctrl+G while in a multiline `"""` block leaves multiline mode instead of swallowing the next line
+- Changing the context shift setting no longer reloads the model
+- Vulkan now uses mmap for integrated GPUs, fixing `Failed to allocate pinned memory` load failures on shared-memory GPUs
+- On Windows iGPUs, partially offloaded models no longer fail to allocate the KV cache
+- Tool definitions passed through the API keep JSON schema keywords Ollama doesn't model instead of dropping them
+- Disabling thinking now maps to the model's lowest supported reasoning level rather than being ignored
+- Source builds can use prebuilt MLX-C and XGrammar binaries
 ## 0.40.16
 
 - Update upstream from `0.40.15` to `0.40.16` ([compare](https://github.com/ollama/ollama/compare/v0.40.15...v0.40.16))
