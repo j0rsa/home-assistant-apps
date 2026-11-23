@@ -1,5 +1,29 @@
 # Changelog
 
+## 1.20.27
+
+- Update upstream from `1.20.26` to `1.20.27` ([compare](https://github.com/9001/copyparty/compare/v1.20.26...v1.20.27))
+- SECURITY: dk, sftp, csrf ([notes](https://github.com/9001/copyparty/releases/tag/v1.20.27))
+- ⚠️ ATTN: this release fixes security issues:
+- GHSA-8gpx-8h68-6wgh -- [dirkeys](https://github.com/9001/copyparty/#dirkeys) allowed downloading from subfolders
+- GHSA-677g-3f98-vr4p -- SFTP: users with read-access could truncate files
+- GHSA-j7p7-25xm-9pv6 -- csrf; not a concern in default/reasonable deployments
+- GHSA-q5w8-q9m6-8xw5 -- xss; ideally also of minimal concern
+- None of these issues were exploitable by default; they all required certain features to be enabled or changed
+- #1698 logout failing in hybrid idp deployments
+- #1679 login failing in some reverseproxy setups
+- docker: build pillow from source to get v13 since v13 fixes vulns but cannot be backported to current alpine stable because it also has breaking changes which doesnt affect copyparty
+- can now [bind/listen](https://copyparty.eu/cli/#bind-help-page) on:
+- subnets such as `-i 192.168.0.0/16`
+- nic-names such as `-i eth0,wlan0`
+- ipv6 linklocal such as `-i fe80::deca%wlan0`
+- when binding to subnets or nic-name, beware that new IPs are NOT detected at runtime, so ensure all IPs are NIC-assigned before startup
+- textfile editor can be used even when [nohtml](https://copyparty.eu/cli/#g-no-html) enabled
+- [--bauth-q](https://copyparty.eu/cli/#g-bauth-q) to configure the basic-auth realm
+- [--sftp-ipa](https://copyparty.eu/cli/#g-sftp-ipa) to restrict sftp to certain client IPs
+- please do not rely on this for security; ssh has pubkey-auth for a reason
+- [--scots](https://copyparty.eu/cli/#g-scots)
+- already obvious, but here's the confirmation: I'm not able to spend time on copyparty at the moment, definitely until 2027-03, maybe longer. Fixing vulnerabilities and severe bugs in a timely manner is still target, but right now not much else
 ## 1.20.26
 
 - Update upstream from `1.20.25` to `1.20.26` ([compare](https://github.com/9001/copyparty/compare/v1.20.25...v1.20.26))
