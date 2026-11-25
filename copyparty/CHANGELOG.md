@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.20.28
+
+- Update upstream from `1.20.27` to `1.20.28` ([compare](https://github.com/9001/copyparty/compare/v1.20.27...v1.20.28))
+- SECURITY: dk 2nd season ([notes](https://github.com/9001/copyparty/releases/tag/v1.20.28))
+- GHSA-6442-xff5-p6c9 dirkeys (the `dk` volflag)
+- workaround https://code.ffmpeg.org/FFmpeg/FFmpeg/issues/26292
+- already obvious, but here's the confirmation: I'm not able to spend time on copyparty at the moment, definitely until 2027-03, maybe longer. Fixing vulnerabilities and severe bugs in a timely manner is still target, but right now not much else
+- couldntve made a better dogwhistle if i tried
 ## 1.20.27
 
 - Update upstream from `1.20.26` to `1.20.27` ([compare](https://github.com/9001/copyparty/compare/v1.20.26...v1.20.27))

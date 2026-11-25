@@ -1,5 +1,43 @@
 # Changelog
 
+## 3.56.1
+
+- Update upstream from `v3.54.0` to `v3.56.1` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.54.0...v3.56.1))
+- Upstream v3.54.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.54.1))
+- Release asset uploads no longer fill the disk (#540, closes #539).
+- When the destination answered before reading the whole upload, such as a reverse proxy refusing a large asset with 413, the temporary file stayed open after it was deleted. Its space only came back on a restart, and every sync that retried the asset leaked another one.
+- Updating frees the space already taken, because the restart releases it. Nothing else to do.
+- `AUTO_IMPORT_REPOS=false` now also holds for the run right after startup (#537, closes #532). With a schedule on, that run imported every repository from the sources on each restart.
+- Mirrors follow a Gitea or Forgejo server that moved to a new address (#536, closes #535, thanks @tiennm99).
+- Every repository recorded on the old address failed, and nothing updated the address. A repository is now repointed when the configured server already has a pull mirror of the same source in the expected place, and the token can push to it.
+- The health check no longer asks GitHub on every call after one failed check for the latest release (#534, closes #533, thanks @tiennm99). A failed check is now kept for 15 minutes, along with the last version it knew.
+- Release assets refused with 413:** the log shows `Failed to upload asset : 413`. A proxy in front of Gitea or Forgejo is limiting upload size. Raise the limit above your largest asset (`client_max_body_size` in nginx), or those assets keep failing.
+- Upstream v3.55.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.55.0))
+- Auto-import new repositories** switch on the Automation tab (#542, closes #541, thanks @zwimer for the idea).
+- It sits next to Auto-mirror new repositories. When it's off, scheduled syncs and the run after startup only update the repositories you already have.
+- Before this, auto import could only be turned off with `AUTO_IMPORT_REPOS=false`.
+- `ENVIRONMENT_SEEDING`** decides whether environment variables are copied into the settings (#542, closes #541).
+- They used to be copied only when `GITHUB_USERNAME`, `GITHUB_TOKEN`, `GITEA_URL`, `GITEA_USERNAME` or `GITEA_TOKEN` was set, so keeping your tokens in the UI meant giving up variables like `AUTO_IMPORT_REPOS`.
+- `true` copies them without any of those five, and leaves the tokens and URLs saved in the UI alone. `false` never copies them. Leaving it unset changes nothing.
+- `AUTO_IMPORT_REPOS`, when set, still wins over the new switch on every restart, like any other environment variable.
+- Upstream v3.56.0 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.56.0))
+- Run now** buttons for cleanup on the Automation tab (#553, closes #547, thanks @zwimer).
+- Database Maintenance gets a Run now row at the bottom of the card. It trims the activity log with your retention period and says how many entries it removed.
+- Repository Cleanup gets a Run now button next to Reconcile. It checks your sources right away instead of at the next check, and asks first when its action would change anything.
+- While a run is going, the card shows its progress. When it finishes it says what it did, and the info button next to the result lists the repositories and any errors.
+- Database maintenance can also be run with `POST /api/cleanup/maintenance`.
+- Database maintenance's next run follows the retention period (#553, closes #548, thanks @zwimer).
+- Changing the retention period kept the old next run, so going from 3 months to 1 day still waited up to a week. Shortening it now brings the next run forward, and lengthening it never pushes back a run that's due.
+- Repository cleanup also moved the next maintenance run a day out whenever it found a repository whose source was gone. It no longer touches it.
+- The compose files and the Docker examples in the docs drop all Linux capabilities and set `no-new-privileges` (#545, closes #544, thanks @zwimer). The app never used any of them, so nothing changes day to day. If you run the container as root, remove `cap_drop` or make sure the data directory belongs to root.
+- The Repository Cleanup card now says it checks every 6 hours and with each scheduled sync, which is when it actually runs.
+- Data Retention only controls how long the activity log is kept. Repositories whose source is gone are handled by Repository Cleanup on its own schedule.
+- Upstream v3.56.1 ([notes](https://github.com/RayLabsHQ/gitea-mirror/releases/tag/v3.56.1))
+- Issue and pull request syncs make fewer GitHub requests that count against the rate limit (#555, thanks @cypherbits).
+- The incremental listing carries the time of the last pass, so every sync asked for a new URL and never got GitHub's "not modified" answer, which is free.
+- That time is now rounded down to the hour, so the pull request pass gets the free answer for the listing the issue pass just made, and syncs less than an hour apart share it too.
+- A sync may look again at up to an hour of issues and pull requests that are already mirrored. They are updated in place, not copied again.
+- Issues that GitHub lists with no comments no longer get a separate request for their comments (#556, thanks @cypherbits). The listing already says how many there are, so this saves one request per such issue, most of all on a full pass.
 ## 3.54.0
 
 - Update upstream from `v3.53.0` to `v3.54.0` ([compare](https://github.com/RayLabsHQ/gitea-mirror/compare/v3.53.0...v3.54.0))
