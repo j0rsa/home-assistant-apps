@@ -1,5 +1,18 @@
 # Changelog
 
+## 1.110.4
+
+- Update upstream from `1.110.2` to `1.110.4` ([compare](https://github.com/BerriAI/litellm/compare/v1.110.2...v1.110.4))
+- Upstream v1.110.3 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.110.3))
+- MCP:** Set `LITELLM_MCP_DCR_GATEWAY_CLIENT=true` to keep automatic gateway-owned registration for new clientless DCR bridges (#53059) Also in [1.108.16](https://github.com/BerriAI/litellm/releases/tag/v1.108.16), [1.109.4](https://github.com/BerriAI/litellm/releases/tag/v1.109.4)
+- Batches and files:** Fixed `/gemini` pass-through file get, download and delete skipping the file ownership check `/v1/files` applies (#53171, #53210)
+- MCP:** Changed gateway-owned DCR client registration to opt-in, fixing `403 oauth_principal_mismatch` for shared service keys (#53059) Also in [1.108.16](https://github.com/BerriAI/litellm/releases/tag/v1.108.16), [1.109.4](https://github.com/BerriAI/litellm/releases/tag/v1.109.4)
+- Routing and fallbacks:** Fixed a complexity-routed request to a model in cooldown failing instead of using that model's fallbacks (#52510)
+- Logging and observability:** Fixed `GET /audit` returning 500 after a key or team update, which left the Admin UI Audit Logs page empty, broken since v1.108.0 (#50929, #53305)
+- Upstream v1.110.4 ([notes](https://github.com/BerriAI/litellm/releases/tag/v1.110.4))
+- ci: scan the stable line with OSV and grype after every merge [stable/1.110.x] by @yuneng-berri in https://github.com/BerriAI/litellm/pull/54242
+- fix(ui): bump nginx to 1.31.10 and zlib to 1.4-r0 by @ojensen-berri in https://github.com/BerriAI/litellm/pull/54150
+- fix(auth): backport #51772 restricted end-user index to stable/1.110.x for v1.110.4 by @ryan-crabbe-berri in https://github.com/BerriAI/litellm/pull/54069
 ## 1.110.2
 
 - Update upstream from `1.110.1` to `1.110.2` ([compare](https://github.com/BerriAI/litellm/compare/v1.110.1...v1.110.2))

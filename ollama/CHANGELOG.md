@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.40.18
+
+- Update upstream from `0.40.17` to `0.40.18` ([compare](https://github.com/ollama/ollama/compare/v0.40.17...v0.40.18))
+- Upstream v0.40.18 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.18))
+- mlx: fuse Inkling residual mixing on Metal by @dhiltgen in https://github.com/ollama/ollama/pull/19808
+- mlxrunner: share tensor helpers and model setup across architectures by @jaingaurav in https://github.com/ollama/ollama/pull/19805
+- llama.cpp: version bump b12651 + remove jetpack5 support by @pdevine in https://github.com/ollama/ollama/pull/19865
+- inkling2: faster Metal decode, prefill and draft rounds by @dhiltgen in https://github.com/ollama/ollama/pull/19843
 ## 0.40.17
 
 - Update upstream from `0.40.16` to `0.40.17` ([compare](https://github.com/ollama/ollama/compare/v0.40.16...v0.40.17))

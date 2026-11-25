@@ -1,4 +1,4 @@
-ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:1.110.2
+ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:1.110.4
 ARG BUILD_FROM=ghcr.io/home-assistant/base-ubuntu:26.04
 
 FROM ${UPSTREAM_IMAGE} AS upstream
