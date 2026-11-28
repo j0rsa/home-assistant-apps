@@ -53,6 +53,12 @@ Ready-to-use Home Assistant automation blueprints:
 [armv7-shield]: https://img.shields.io/badge/armv7-yes-green.svg
 [i386-shield]: https://img.shields.io/badge/i386-yes-green.svg
 
+## Usage
+
+How often each app's image is pulled from GHCR (installs and updates), refreshed daily by the [Usage stats](.github/workflows/usage-stats.yml) workflow.
+
+![App downloads](https://raw.githubusercontent.com/j0rsa/home-assistant-apps/stats/downloads.svg)
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=j0rsa/home-assistant-apps&type=Date)](https://star-history.com/#j0rsa/home-assistant-apps&Date)
