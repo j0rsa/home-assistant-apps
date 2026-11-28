@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.40.19
+
+- Update upstream from `0.40.18` to `0.40.19` ([compare](https://github.com/ollama/ollama/compare/v0.40.18...v0.40.19))
+- Upstream v0.40.19 ([notes](https://github.com/ollama/ollama/releases/tag/v0.40.19))
+- inkling2: faster short histories, draft proposals and conv snapshots by @dhiltgen in https://github.com/ollama/ollama/pull/19881
+- mlxrunner: compact Engram history buffers by @pdevine in https://github.com/ollama/ollama/pull/19913
+- bump llama-server by @pdevine in https://github.com/ollama/ollama/pull/19917
 ## 0.40.18
 
 - Update upstream from `0.40.17` to `0.40.18` ([compare](https://github.com/ollama/ollama/compare/v0.40.17...v0.40.18))

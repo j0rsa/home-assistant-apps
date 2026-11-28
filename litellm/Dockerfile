@@ -1,7 +1,8 @@
-ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:1.110.4
+ARG UPSTREAM_IMAGE=ghcr.io/berriai/litellm:1.111.0
 ARG BUILD_FROM=ghcr.io/home-assistant/base-ubuntu:26.04
 
 FROM ${UPSTREAM_IMAGE} AS upstream
+USER root
 
 # Bundle all runtime artifacts; resolves the versioned Python lib path dynamically
 # to avoid hardcoding the Python version (Wolfi installs packages to /usr/lib/python3.x/).
