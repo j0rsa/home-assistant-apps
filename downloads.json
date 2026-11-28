@@ -1,0 +1,90 @@
+{
+ "2026-11-28": {
+  "airang": {
+   "aarch64": 5,
+   "amd64": 1
+  },
+  "borgui": {
+   "aarch64": 15,
+   "amd64": 11
+  },
+  "copyparty": {
+   "aarch64": 43,
+   "amd64": 33
+  },
+  "course-watch": {
+   "aarch64": 1,
+   "amd64": 1
+  },
+  "gitea-mirror": {
+   "aarch64": 33,
+   "amd64": 33
+  },
+  "go-socks5-proxy": {
+   "aarch64": 1,
+   "amd64": 1
+  },
+  "hailo-daemon": {
+   "aarch64": 1
+  },
+  "hev-socks5-tproxy": {
+   "aarch64": 1,
+   "amd64": 6
+  },
+  "litellm": {
+   "aarch64": 91,
+   "amd64": 103
+  },
+  "netmaker-client": {
+   "aarch64": 27,
+   "amd64": 5
+  },
+  "netmaker-controller": {
+   "aarch64": 5,
+   "amd64": 1
+  },
+  "netmaker-ui": {
+   "aarch64": 5,
+   "amd64": 1
+  },
+  "ollama": {
+   "aarch64": 45,
+   "amd64": 45
+  },
+  "open-webui": {
+   "aarch64": 29,
+   "amd64": 32
+  },
+  "qdrant": {
+   "aarch64": 1,
+   "amd64": 1
+  },
+  "rustfs": {
+   "aarch64": 7,
+   "amd64": 1
+  },
+  "sni-socket": {
+   "aarch64": 1,
+   "amd64": 5
+  },
+  "sniproxy": {
+   "aarch64": 1,
+   "amd64": 1
+  },
+  "vk-turn-proxy": {
+   "aarch64": 1,
+   "amd64": 1
+  },
+  "wyoming-hailo-whisper": {
+   "aarch64": 27
+  },
+  "xray": {
+   "aarch64": 14,
+   "amd64": 24
+  },
+  "xray-configurator": {
+   "aarch64": 5,
+   "amd64": 24
+  }
+ }
+}

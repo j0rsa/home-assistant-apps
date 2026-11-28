@@ -1,0 +1,222 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="836" height="696" viewBox="0 0 836 696" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif" font-size="13">
+<style>
+.bg{fill:#ffffff}.fg{fill:#1f2328}.muted{fill:#656d76}.dead{fill:#cf222e}.grid{stroke:#d0d7de}.a0{fill:#2f81f7}.s0{stroke:#2f81f7}.a1{fill:#d4760a}.s1{stroke:#d4760a}.a2{fill:#8250df}.s2{stroke:#8250df}.a3{fill:#1a7f37}.s3{stroke:#1a7f37}.a4{fill:#bf3989}.s4{stroke:#bf3989}
+@media (prefers-color-scheme: dark){.bg{fill:#0d1117}.fg{fill:#e6edf3}.muted{fill:#8d96a0}.dead{fill:#f85149}.grid{stroke:#30363d}.a0{fill:#4493f8}.s0{stroke:#4493f8}.a1{fill:#f0883e}.s1{stroke:#f0883e}.a2{fill:#a371f7}.s2{stroke:#a371f7}.a3{fill:#3fb950}.s3{stroke:#3fb950}.a4{fill:#db61a2}.s4{stroke:#db61a2}}
+.spark{fill:none;stroke-width:1.5}
+.num{text-anchor:end;font-variant-numeric:tabular-nums}.h{font-weight:600}.mid{text-anchor:middle}
+</style>
+<rect class="bg" width="836" height="696" rx="6"/>
+<text class="fg h" x="16" y="26" font-size="15">App downloads (GHCR image pulls)</text>
+<text class="muted num" x="820" y="26">updated 2026-11-28</text>
+<text class="muted" x="16" y="74">App</text>
+<text class="muted" x="196" y="74">last 30 days</text>
+<text class="muted" x="700" y="74">daily, 60d</text>
+<rect class="a0" x="404.0" y="48" width="10" height="10" rx="2"/>
+<text class="fg h" x="418.0" y="57">amd64</text>
+<line class="grid" x1="364" x2="516" y1="62" y2="62"/>
+<text class="muted num" x="412" y="74">30d</text>
+<text class="muted num" x="464" y="74">7d</text>
+<text class="muted num" x="516" y="74">total</text>
+<rect class="a1" x="574.0" y="48" width="10" height="10" rx="2"/>
+<text class="fg h" x="588.0" y="57">aarch64</text>
+<line class="grid" x1="534" x2="686" y1="62" y2="62"/>
+<text class="muted num" x="582" y="74">30d</text>
+<text class="muted num" x="634" y="74">7d</text>
+<text class="muted num" x="686" y="74">total</text>
+<line class="grid" x1="16" x2="820" y1="80" y2="80"/>
+<text class="fg" x="16" y="101.0">LiteLLM</text>
+<text class="fg num" x="412" y="101.0">—</text>
+<text class="fg num" x="464" y="101.0">—</text>
+<text class="muted num" x="516" y="101.0">103</text>
+<text class="fg num" x="582" y="101.0">—</text>
+<text class="fg num" x="634" y="101.0">—</text>
+<text class="muted num" x="686" y="101.0">91</text>
+<text class="muted" x="700" y="101.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="110" y2="110" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="127.0">Ollama</text>
+<text class="fg num" x="412" y="127.0">—</text>
+<text class="fg num" x="464" y="127.0">—</text>
+<text class="muted num" x="516" y="127.0">45</text>
+<text class="fg num" x="582" y="127.0">—</text>
+<text class="fg num" x="634" y="127.0">—</text>
+<text class="muted num" x="686" y="127.0">45</text>
+<text class="muted" x="700" y="127.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="136" y2="136" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="153.0">Copyparty</text>
+<text class="fg num" x="412" y="153.0">—</text>
+<text class="fg num" x="464" y="153.0">—</text>
+<text class="muted num" x="516" y="153.0">33</text>
+<text class="fg num" x="582" y="153.0">—</text>
+<text class="fg num" x="634" y="153.0">—</text>
+<text class="muted num" x="686" y="153.0">43</text>
+<text class="muted" x="700" y="153.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="162" y2="162" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="179.0">Gitea Mirror</text>
+<text class="fg num" x="412" y="179.0">—</text>
+<text class="fg num" x="464" y="179.0">—</text>
+<text class="muted num" x="516" y="179.0">33</text>
+<text class="fg num" x="582" y="179.0">—</text>
+<text class="fg num" x="634" y="179.0">—</text>
+<text class="muted num" x="686" y="179.0">33</text>
+<text class="muted" x="700" y="179.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="188" y2="188" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="205.0">Open WebUI</text>
+<text class="fg num" x="412" y="205.0">—</text>
+<text class="fg num" x="464" y="205.0">—</text>
+<text class="muted num" x="516" y="205.0">32</text>
+<text class="fg num" x="582" y="205.0">—</text>
+<text class="fg num" x="634" y="205.0">—</text>
+<text class="muted num" x="686" y="205.0">29</text>
+<text class="muted" x="700" y="205.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="214" y2="214" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="231.0">Xray</text>
+<text class="fg num" x="412" y="231.0">—</text>
+<text class="fg num" x="464" y="231.0">—</text>
+<text class="muted num" x="516" y="231.0">24</text>
+<text class="fg num" x="582" y="231.0">—</text>
+<text class="fg num" x="634" y="231.0">—</text>
+<text class="muted num" x="686" y="231.0">14</text>
+<text class="muted" x="700" y="231.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="240" y2="240" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="257.0">Netmaker Client</text>
+<text class="fg num" x="412" y="257.0">—</text>
+<text class="fg num" x="464" y="257.0">—</text>
+<text class="muted num" x="516" y="257.0">5</text>
+<text class="fg num" x="582" y="257.0">—</text>
+<text class="fg num" x="634" y="257.0">—</text>
+<text class="muted num" x="686" y="257.0">27</text>
+<text class="muted" x="700" y="257.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="266" y2="266" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="283.0">Xray Configurator</text>
+<text class="fg num" x="412" y="283.0">—</text>
+<text class="fg num" x="464" y="283.0">—</text>
+<text class="muted num" x="516" y="283.0">24</text>
+<text class="fg num" x="582" y="283.0">—</text>
+<text class="fg num" x="634" y="283.0">—</text>
+<text class="muted num" x="686" y="283.0">5</text>
+<text class="muted" x="700" y="283.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="292" y2="292" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="309.0">Wyoming Hailo Whisper</text>
+<text class="muted mid" x="446.0" y="309.0" font-size="11">not built</text>
+<text class="fg num" x="582" y="309.0">—</text>
+<text class="fg num" x="634" y="309.0">—</text>
+<text class="muted num" x="686" y="309.0">27</text>
+<text class="muted" x="700" y="309.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="318" y2="318" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="335.0">BorgUI</text>
+<text class="fg num" x="412" y="335.0">—</text>
+<text class="fg num" x="464" y="335.0">—</text>
+<text class="muted num" x="516" y="335.0">11</text>
+<text class="fg num" x="582" y="335.0">—</text>
+<text class="fg num" x="634" y="335.0">—</text>
+<text class="muted num" x="686" y="335.0">15</text>
+<text class="muted" x="700" y="335.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="344" y2="344" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="361.0">RustFS</text>
+<text class="fg num" x="412" y="361.0">—</text>
+<text class="fg num" x="464" y="361.0">—</text>
+<text class="muted num" x="516" y="361.0">1</text>
+<text class="fg num" x="582" y="361.0">—</text>
+<text class="fg num" x="634" y="361.0">—</text>
+<text class="muted num" x="686" y="361.0">7</text>
+<text class="muted" x="700" y="361.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="370" y2="370" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="387.0">HevSocks5 TProxy</text>
+<text class="fg num" x="412" y="387.0">—</text>
+<text class="fg num" x="464" y="387.0">—</text>
+<text class="muted num" x="516" y="387.0">6</text>
+<text class="fg num" x="582" y="387.0">—</text>
+<text class="fg num" x="634" y="387.0">—</text>
+<text class="muted num" x="686" y="387.0">1</text>
+<text class="muted" x="700" y="387.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="396" y2="396" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="413.0">Ariang</text>
+<text class="fg num" x="412" y="413.0">—</text>
+<text class="fg num" x="464" y="413.0">—</text>
+<text class="muted num" x="516" y="413.0">1</text>
+<text class="fg num" x="582" y="413.0">—</text>
+<text class="fg num" x="634" y="413.0">—</text>
+<text class="muted num" x="686" y="413.0">5</text>
+<text class="muted" x="700" y="413.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="422" y2="422" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="439.0">Netmaker Controller</text>
+<text class="fg num" x="412" y="439.0">—</text>
+<text class="fg num" x="464" y="439.0">—</text>
+<text class="muted num" x="516" y="439.0">1</text>
+<text class="fg num" x="582" y="439.0">—</text>
+<text class="fg num" x="634" y="439.0">—</text>
+<text class="muted num" x="686" y="439.0">5</text>
+<text class="muted" x="700" y="439.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="448" y2="448" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="465.0">Netmaker Dashboard UI</text>
+<text class="fg num" x="412" y="465.0">—</text>
+<text class="fg num" x="464" y="465.0">—</text>
+<text class="muted num" x="516" y="465.0">1</text>
+<text class="fg num" x="582" y="465.0">—</text>
+<text class="fg num" x="634" y="465.0">—</text>
+<text class="muted num" x="686" y="465.0">5</text>
+<text class="muted" x="700" y="465.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="474" y2="474" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="491.0">SNI Socket Proxy</text>
+<text class="fg num" x="412" y="491.0">—</text>
+<text class="fg num" x="464" y="491.0">—</text>
+<text class="muted num" x="516" y="491.0">5</text>
+<text class="fg num" x="582" y="491.0">—</text>
+<text class="fg num" x="634" y="491.0">—</text>
+<text class="muted num" x="686" y="491.0">1</text>
+<text class="muted" x="700" y="491.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="500" y2="500" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="517.0">Course Watch</text>
+<text class="fg num" x="412" y="517.0">—</text>
+<text class="fg num" x="464" y="517.0">—</text>
+<text class="muted num" x="516" y="517.0">1</text>
+<text class="fg num" x="582" y="517.0">—</text>
+<text class="fg num" x="634" y="517.0">—</text>
+<text class="muted num" x="686" y="517.0">1</text>
+<text class="muted" x="700" y="517.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="526" y2="526" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="543.0">Go SOCKS5 Proxy</text>
+<text class="fg num" x="412" y="543.0">—</text>
+<text class="fg num" x="464" y="543.0">—</text>
+<text class="muted num" x="516" y="543.0">1</text>
+<text class="fg num" x="582" y="543.0">—</text>
+<text class="fg num" x="634" y="543.0">—</text>
+<text class="muted num" x="686" y="543.0">1</text>
+<text class="muted" x="700" y="543.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="552" y2="552" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="569.0">Qdrant</text>
+<text class="fg num" x="412" y="569.0">—</text>
+<text class="fg num" x="464" y="569.0">—</text>
+<text class="muted num" x="516" y="569.0">1</text>
+<text class="fg num" x="582" y="569.0">—</text>
+<text class="fg num" x="634" y="569.0">—</text>
+<text class="muted num" x="686" y="569.0">1</text>
+<text class="muted" x="700" y="569.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="578" y2="578" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="595.0">SniProxy</text>
+<text class="fg num" x="412" y="595.0">—</text>
+<text class="fg num" x="464" y="595.0">—</text>
+<text class="muted num" x="516" y="595.0">1</text>
+<text class="fg num" x="582" y="595.0">—</text>
+<text class="fg num" x="634" y="595.0">—</text>
+<text class="muted num" x="686" y="595.0">1</text>
+<text class="muted" x="700" y="595.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="604" y2="604" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="621.0">VK TURN Proxy</text>
+<text class="fg num" x="412" y="621.0">—</text>
+<text class="fg num" x="464" y="621.0">—</text>
+<text class="muted num" x="516" y="621.0">1</text>
+<text class="fg num" x="582" y="621.0">—</text>
+<text class="fg num" x="634" y="621.0">—</text>
+<text class="muted num" x="686" y="621.0">1</text>
+<text class="muted" x="700" y="621.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="630" y2="630" stroke-opacity="0.5"/>
+<text class="fg" x="16" y="647.0">Hailo Daemon</text>
+<text class="muted mid" x="446.0" y="647.0" font-size="11">not built</text>
+<text class="fg num" x="582" y="647.0">—</text>
+<text class="fg num" x="634" y="647.0">—</text>
+<text class="muted num" x="686" y="647.0">1</text>
+<text class="muted" x="700" y="647.0">collecting…</text>
+<line class="grid" x1="16" x2="820" y1="656" y2="656" stroke-opacity="0.5"/>
+<text class="muted" x="16" y="682" font-size="11">red = no downloads in 30 days (app name: on every arch) · * = less history than the window (since 2026-11-28)</text>
+</svg>
